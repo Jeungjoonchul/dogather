@@ -7,6 +7,6 @@
 <title>테스트</title>
 </head>
 <body>
-	테스트 중 입니다.
+
 </body>
 </html>
