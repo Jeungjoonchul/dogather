@@ -1,0 +1,2 @@
+220728 mybatis 설정
+220728 UserDTO alias 설정
