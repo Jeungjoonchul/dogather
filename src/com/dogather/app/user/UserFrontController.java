@@ -9,19 +9,19 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.dogather.action.ActionTo;
 
-public class UserFrontController extends HttpServlet{
+public class UserFrontController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		doProcess(req,resp);
+		doProcess(req, resp);
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
-		doProcess(req,resp);
+		doProcess(req, resp);
 	}
 
 	protected void doProcess(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -29,17 +29,21 @@ public class UserFrontController extends HttpServlet{
 		String contextPath = req.getContextPath(); // ????(module명)
 		String command = requestURI.substring(contextPath.length()); // /board/boardmain.do
 		System.out.println(command);
-		
+
 		ActionTo transfer = null;
-		switch(command) {
-		
+		switch (command) {
+		case "":
+			transfer=new ActionTo();
+			transfer.setPath("/dogather");
+			transfer.setRedirect(false);
+			break;
 		}
-		
-		//전송 일괄처리
-		if(transfer!=null) {
-			if(transfer.isRedirect()) {
+
+		// 전송 일괄처리
+		if (transfer != null) {
+			if (transfer.isRedirect()) {
 				resp.sendRedirect(transfer.getPath());
-			}else {
+			} else {
 				req.getRequestDispatcher(transfer.getPath()).forward(req, resp);
 			}
 		}
