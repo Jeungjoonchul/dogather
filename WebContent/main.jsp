@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Doːgather</title>
 </head>
 <body>
-
+메인
 </body>
 </html>
