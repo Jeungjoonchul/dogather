@@ -32,13 +32,14 @@ public class UserFrontController extends HttpServlet {
 
 		ActionTo transfer = null;
 		switch (command) {
-		case "":
+		case "/user/user_logout.us":
 			transfer=new ActionTo();
-			transfer.setPath("/dogather");
-			transfer.setRedirect(false);
+			transfer.setPath(req.getContextPath());
+			
+			transfer.setRedirect(true);
 			break;
 		}
-
+		System.out.println("cp:"+req.getContextPath());
 		// 전송 일괄처리
 		if (transfer != null) {
 			if (transfer.isRedirect()) {

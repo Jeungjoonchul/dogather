@@ -12,5 +12,6 @@
 </head>
 <body>
 메인
+<a href="${cp}/user/user_logout.us">로그아웃</a>
 </body>
 </html>
