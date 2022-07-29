@@ -25,14 +25,18 @@ public class UserFrontController extends HttpServlet{
 	}
 
 	protected void doProcess(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String requestURI = req.getRequestURI(); // ????/board/boardmain.do
+		String requestURI = req.getRequestURI(); // ????/user/userjoin.us : 사용자가 요청한 URI
 		String contextPath = req.getContextPath(); // ????(module명)
-		String command = requestURI.substring(contextPath.length()); // /board/boardmain.do
+		String command = requestURI.substring(contextPath.length()); // /user/usermain.us
 		System.out.println(command);
-		
 		ActionTo transfer = null;
-		switch(command) {
 		
+		switch(command) {
+		case "/user/userjoin.us":
+			transfer = new ActionTo();
+			transfer.setPath("/app/user/joinview.jsp");
+			transfer.setRedirect(false);
+			break;
 		}
 		
 		//전송 일괄처리
