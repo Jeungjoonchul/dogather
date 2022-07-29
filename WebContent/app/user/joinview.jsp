@@ -98,80 +98,27 @@
 					<td id="result" colspan="2">&nbsp;</td>
 				</tr>
 				<tr>
-					<th><label for="userid">아이디</label></th>
-					<td><input type="text" name="userid" id="userid"><input
+					<th><label for="userid">이메일</label></th>
+					<td><input type="text" name="user_email" id="user_email"><input
 						type="button" value="중복검사" onclick="checkId()"></td>
 				</tr>
 				<tr>
 					<th><label for="userpw">비밀번호</label></th>
-					<td><input type="password" name="userpw" id="userpw"></td>
+					<td><input type="password" name="user_password" id="user_password"></td>
 				</tr>
 				<tr>
 					<th><label for="userpw_re">비밀번호 확인</label></th>
-					<td><input type="password" name="userpw_re" id="userpw_re"></td>
+					<td><input type="password" name="user_password_re" id="user_password_re"></td>
 				</tr>
 				<tr>
 					<th><label for="username">이름</label></th>
-					<td><input type="text" name="username" id="username"></td>
+					<td><input type="text" name="user_name" id="user_name"></td>
 				</tr>
 				<tr class="gender_area">
 					<th>성별</th>
 					<td><label>남자 <input checked type="radio"
 							name="usergender" value="M"></label> <label>여자 <input
-							type="radio" name="usergender" value="W"></label></td>
-				</tr>
-				<tr class="zipcode_area">
-					<th>우편번호</th>
-					<td><input readonly name="zipcode" type="text"
-						id="sample6_postcode" placeholder="우편번호"><input
-						type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
-					</td>
-				</tr>
-				<tr class="addr_area">
-					<th>주소</th>
-					<td><input readonly name="addr" type="text"
-						id="sample6_address" placeholder="주소"></td>
-				</tr>
-				<tr>
-					<th>상세주소</th>
-					<td><input name="addrdetail" type="text"
-						id="sample6_detailAddress" placeholder="상세주소"></td>
-				</tr>
-				<tr>
-					<th>참고항목</th>
-					<td><input readonly name="addretc" type="text"
-						id="sample6_extraAddress" placeholder="참고항목"></td>
-				</tr>
-				<tr class="hobby_area">
-					<th>취미</th>
-					<td>
-						<div>
-							<div>
-								<label><input type="checkbox" name="userhobby"
-									value="게임"> 게임하기</label>
-							</div>
-							<div>
-								<label><input type="checkbox" name="userhobby"
-									value="그림"> 그림그리기</label>
-							</div>
-							<div>
-								<label><input type="checkbox" name="userhobby"
-									value="영화"> 영화보기</label><br>
-							</div>
-							<div>
-								<label><input type="checkbox" name="userhobby"
-									value="운동"> 운동하기</label>
-							</div>
-							<div>
-								<label><input type="checkbox" name="userhobby"
-									value="노래"> 노래부르기</label>
-							</div>
-							<div>
-								<label><input type="checkbox" name="userhobby"
-									value="코딩"> 코딩하기</label>
-							</div>
-						</div>
-					</td>
+							type="radio" name="user_gender" value="W"></label></td>
 				</tr>
 				<tr>
 					<th colspan="2"><input type="submit" value="가입 완료"></th>
