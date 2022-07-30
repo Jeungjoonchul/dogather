@@ -15,19 +15,18 @@ public class UserFrontController extends HttpServlet{
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		doProcess(req,resp);
+		doProcess(req, resp);
 	}
-
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.setCharacterEncoding("UTF-8");
-		doProcess(req,resp);
+		doProcess(req, resp);
 	}
-
+	
 	protected void doProcess(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String requestURI = req.getRequestURI(); // ????/user/userjoin.us : 사용자가 요청한 URI
-		String contextPath = req.getContextPath(); // ????(module명)
-		String command = requestURI.substring(contextPath.length()); // /user/usermain.us
+		// 길을 나누는 코드
+		String requestURI = req.getRequestURI(); // 사용자가 요청한 URI : ??????/user/userjoin.us
+		String contextPath = req.getContextPath(); // 사용자가 요쳥한 경로 명 : ??????(module명) 
+		String command = requestURI.substring(contextPath.length()); // 사용자가 요청한 URI를 나눈 코드 // /user/userjoin.us
 		System.out.println(command);
 		ActionTo transfer = null;
 		
@@ -37,16 +36,33 @@ public class UserFrontController extends HttpServlet{
 			transfer.setPath("/app/user/joinview.jsp");
 			transfer.setRedirect(false);
 			break;
+		case "/user/userlogin.us":
+			transfer = new ActionTo();
+			transfer.setPath("/app/user/loginview.jsp");
+			transfer.setRedirect(false);
+			break;
 		}
-		
-		//전송 일괄처리
-		if(transfer!=null) {
+	
 			if(transfer.isRedirect()) {
 				resp.sendRedirect(transfer.getPath());
-			}else {
+			}
+			else {
 				req.getRequestDispatcher(transfer.getPath()).forward(req, resp);
 			}
 		}
 	}
 
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

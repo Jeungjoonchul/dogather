@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper
- PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
- "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
- <mapper namespace="User">
-
- </mapper>
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="User">
+	<insert id="join" parameterType="userdto">
+		insert into t_user (user_email,user_nickname,user_name,user_password,user_phone,user_gender,user_birth_date)
+		values(#{user_email},#{user_nickname},#{user_name},#{user_password},#{user_phone},#{user_gender},#{user_birth_date})
+	</insert>
+	<select id="checkEmail" parameterType="string" resultType="_int">
+		select count(*) from t_user where user_ = #{user_email}
+	</select>
+	<select id="login" parameterType="hashmap" resultType="_int">
+		select count(*) from t_user where user_email=#{user_email} and user_pw=#{user_pw}
+	</select>
+</mapper>

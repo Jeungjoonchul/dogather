@@ -7,6 +7,8 @@
 <title>Doːgather</title>
 </head>
 <body>
-인덱스
+	<h2>메인</h2>
+	<a href="${pageContext.request.contextPath}/user/userjoin.us">회원가입</a><br>
+	<a href="">로그인</a>
 </body>
 </html>
