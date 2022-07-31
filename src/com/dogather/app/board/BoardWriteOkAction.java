@@ -34,7 +34,6 @@ public class BoardWriteOkAction implements Action {
 		System.out.println("작성자 : " + user_id + "(유저 인덱스 : " + user_index + ")");
 
 		String tb_title = req.getParameter("tb_title");
-		
 		newPost.setTb_title(tb_title);
 		System.out.println("게시글 제목 : " + tb_title);
 
@@ -43,10 +42,27 @@ public class BoardWriteOkAction implements Action {
 		newPost.setTb_contents(tb_contents);
 		System.out.println("게시글 내용 : " + tb_contents);
 
-		String img_sysName = req.getParameter("img_sysName");
-		System.out.println(img_sysName);
-		img_sysName = img_sysName.substring(0, img_sysName.lastIndexOf(","));
-		String[] img_sysNames = img_sysName.split(",");
+		String sysName = req.getParameter("sysName");
+		String orgName = req.getParameter("orgName");
+
+		System.out.println(sysName);
+		System.out.println(orgName);
+		
+		
+		//제일 마지막 ',' 자르는 코드
+		sysName = sysName.substring(0, sysName.lastIndexOf(","));
+		String[] sysNames = sysName.split(",");
+		orgName = orgName.substring(0, orgName.lastIndexOf(","));
+		String[] orgNames = orgName.split(",");
+		
+		String tb_files = "";
+		for (int i = 0; i < orgNames.length; i++) {
+			tb_files+=orgNames[i]+":";
+			tb_files+=sysNames[i]+"/";
+		}
+		System.out.println(tb_files);
+		newPost.setTb_files(tb_files);
+		
 		System.out.println("파일 임시 저장 경로 : " + req.getServletContext().getRealPath("temp") + "\\");
 		System.out.println("파일 최종 저장 경로 : " + req.getServletContext().getRealPath("upload") + "\\images\\");
 
@@ -57,14 +73,18 @@ public class BoardWriteOkAction implements Action {
 		if (bdao.insert(newPost)) {
 			// 게시글에 등록한 파일 하나씩 꺼내기
 			System.out.println("게시글 db 등록 성공");
-			for (int i = 0; i < img_sysNames.length; i++) {
+			for (int i = 0; i < sysNames.length; i++) {
 
 				// 임시 폴더에 저장한 파일 객체 생성
-				File temp_file = new File(req.getServletContext().getRealPath("temp") + "\\" + img_sysNames[i]);
+				//temp/uuid
+				//getContextPath = /dogather
+				//
+				File temp_file = new File(req.getServletContext().getRealPath("temp") + "\\" + sysNames[i]);
 
 				// images폴더에 저장할 파일 객체 생성
+				//upload/images/uuid
 				File new_file = new File(
-						req.getServletContext().getRealPath("upload") + "\\images\\" + img_sysNames[i]);
+						req.getServletContext().getRealPath("upload") + "\\images\\" + sysNames[i]);
 
 				// images폴더에 동일한 파일명의 파일이 없다면
 				if (!new_file.exists()) {

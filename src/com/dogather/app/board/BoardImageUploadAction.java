@@ -40,7 +40,7 @@ public class BoardImageUploadAction implements Action {
 		File newFile = new File(saveDirectory+"\\"+uuid);
 		file.renameTo(newFile);
 		
-		out.print(uuid);
+		out.print(orgName+","+uuid);
 		System.out.println(uuid);
 		out.close();
 		

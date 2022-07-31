@@ -12,7 +12,9 @@
 <table>
 	<tr>
 		<th>내용</th>
-		<td><p>asdf<img src="/dogather/upload/images/05398c51-4d63-4459-998f-253585a423f5" style="width: 168.531px; height: 126.925px;"></p><p>xczvzxcv<img src="/dogather/upload/images/909e62f2-4b78-42ec-99ca-a55bc54b4726" style="width: 25%;"></p></td>
+		<td>
+		<h1><b><u><font color="#00ffff">안녕하세요</font></u></b></h1><h1><img style="width: 25%;" src="/dogather/upload/images/368f40ef-819c-4b7b-97b3-8c6d47ff6bce"><b><u><font color="#00ffff"><br></font></u></b></h1><h1><b><u><font color="#00ffff"><br></font></u></b></h1><blockquote><p><font color="#00ffff" style="background-color: rgb(255, 0, 0);">반갑습니다.</font></p></blockquote><p><img style="width: 25%;" src="/dogather/upload/images/91869f77-ace7-4dba-ad45-0669767b70f5"><br></p>
+		</td>
 	</tr>
 </table>
 </body>

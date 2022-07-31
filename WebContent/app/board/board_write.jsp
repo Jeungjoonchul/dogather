@@ -29,7 +29,7 @@
 
 
 <script>
-const img='';
+	const img = '';
 	$(document).ready(function() {
 		//여기 아래 부분
 		$('#summernote').summernote({
@@ -42,56 +42,61 @@ const img='';
 			callbacks : {
 				onImageUpload : function(files, editor, welEditable) {
 					for (var i = files.length - 1; i >= 0; i--) {
-		            	sendFile(files[i], this);
-		            }
+						sendFile(files[i], this);
+					}
 				}
 			}
-			
+
 		});
 	});
 
 	/* function sendFile(file,el) {
 		var form_data = new FormData();
 		var image_name = document.
-      	form_data.append('file', file);
-      	$.ajax({
-        	data: form_data,
-        	type: "POST",
-        	url : '${cp}/board/board_imageUpload.bo',
-        	cache: false,
-        	contentType: false,
-        	processData: false,
-        	enctype: 'multipart/form-data',
-        	success: function(img_url) {
-        		alert(img_url);
-        		$(el).summernote('editor.insertImage','${cp}/temp/'+img_url);
-        		var image = new 
-        	}
-      	});
-    } */
-    
-    function sendFile(file,el) {
-      var form_data = new FormData();
-          form_data.append('file', file);
-          $.ajax({
-            data: form_data,
-            type: "POST",
-            url : '${cp}/board/board_imageUpload.bo',
-            cache: false,
-            contentType: false,
-            processData: false,
-            enctype: 'multipart/form-data',
-            success: function(img_systemName) {
-              alert(img_systemName);
-              $(el).summernote('editor.insertImage','${cp}/temp/'+img_systemName);
-              $('#img_sysName').append(img_systemName+',');
-            }
-          });
-      }
+	  	form_data.append('file', file);
+	  	$.ajax({
+	    	data: form_data,
+	    	type: "POST",
+	    	url : '${cp}/board/board_imageUpload.bo',
+	    	cache: false,
+	    	contentType: false,
+	    	processData: false,
+	    	enctype: 'multipart/form-data',
+	    	success: function(img_url) {
+	    		alert(img_url);
+	    		$(el).summernote('editor.insertImage','${cp}/temp/'+img_url);
+	    		var image = new 
+	    	}
+	  	});
+	} */
+
+	function sendFile(file, el) {
+		var form_data = new FormData();
+		form_data.append('file', file);
+		$
+				.ajax({
+					data : form_data,
+					type : "POST",
+					url : '${cp}/board/board_imageUpload.bo',
+					cache : false,
+					contentType : false,
+					processData : false,
+					enctype : 'multipart/form-data',
+					success : function(img_systemName) {
+						var orgName = img_systemName.split(',')[0];
+						var sysName = img_systemName.split(',')[1];
+						$(el).summernote('editor.insertImage',
+								'${cp}/temp/' + sysName);
+						$('#sysName').append(sysName + ',');
+						$('#orgName').append(orgName + ',');
+					}
+				});
+	}
 </script>
 </head>
 <body>
-	<form method="post" action="${cp}/board/board_write.bo" id="board_editor" name="board_editor">
+	<form method="post" action="${cp}/board/board_write.bo"
+		id="board_editor" name="board_editor">
 		<table>
 			<tr>
 				<td>제목</td>
@@ -107,7 +112,8 @@ const img='';
 			</tr>
 		</table>
 		<input type="submit" value="전송">
-		<textarea name = "img_sysName" id="img_sysName" style="display: none;"></textarea>
+		<textarea name="orgName" id="orgName" style="display: none;"></textarea>
+		<textarea name="sysName" id="sysName" style="display: none;"></textarea>
 	</form>
 </body>
 </html>

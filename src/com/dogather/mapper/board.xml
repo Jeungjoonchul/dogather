@@ -11,7 +11,7 @@
 		select * from t_test_board order by tb_index desc limit #{startRow}, #{pageSize}
 	</select>
 	<insert id="insert" parameterType="boardDTO">
-		insert into t_test_board(user_index, tb_title, tb_contents) values(#{user_index}, #{tb_title}, #{tb_contents}) 
+		insert into t_test_board(user_index, tb_title, tb_contents, tb_files) values(#{user_index}, #{tb_title}, #{tb_contents},#{tb_files}) 
 	</insert>
 	<delete id="delete" parameterType="_int">
 		delete from t_test_board where tb_index=#{tb_index}
