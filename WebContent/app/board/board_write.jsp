@@ -91,14 +91,18 @@ const img='';
 </script>
 </head>
 <body>
-	<form method="post" action="${cp}/board/board_imageUpload.bo" id="board_editor">
+	<form method="post" action="${cp}/board/board_write.bo" id="board_editor" name="board_editor">
 		<table>
 			<tr>
 				<td>제목</td>
-				<td><input type="text" name="subject"></td>
+				<td><input type="text" name="tb_title"></td>
 			</tr>
 			<tr>
-				<td colspan="2"><textarea id="summernote" name="memo"></textarea>
+				<td>작성자</td>
+				<td><input type="text" name="user_id"></td>
+			</tr>
+			<tr>
+				<td colspan="2"><textarea id="summernote" name="tb_contents"></textarea>
 				</td>
 			</tr>
 		</table>

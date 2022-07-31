@@ -35,9 +35,13 @@ public class BoardImageUploadAction implements Action {
 		String filePath = saveDirectory+"\\"+sysName;
 		System.out.println("파일 경로 : "+filePath);
 		
+		UUID uuid = UUID.randomUUID();
+		File file = new File(saveDirectory+"\\"+sysName);
+		File newFile = new File(saveDirectory+"\\"+uuid);
+		file.renameTo(newFile);
 		
-		out.print(sysName);
-		System.out.println(sysName);
+		out.print(uuid);
+		System.out.println(uuid);
 		out.close();
 		
 		return null;

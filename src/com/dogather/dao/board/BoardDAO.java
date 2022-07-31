@@ -29,4 +29,16 @@ public class BoardDAO {
 			
 			return sqlSession.selectList("Board.getBoardList", datas);
 		}
+
+		public int getLastIndex(int user_index) {
+			return sqlSession.selectOne("Board.getLastIndex",user_index);
+		}
+
+		public boolean insert(BoardDTO newPost) {
+			return sqlSession.insert("Board.insert",newPost)==1;
+		}
+
+		public void delete(int tb_index) {
+			sqlSession.delete("Board.delete",tb_index);			
+		}
 }

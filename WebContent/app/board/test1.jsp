@@ -12,7 +12,7 @@
 <table>
 	<tr>
 		<th>내용</th>
-		<td><p>ㅁㅁㅁㅁ<img src="${cp}/temp/4.sm.webp" style="width: 320px;" data-filename="4.sm.webp"></p><p>ㄴㄴㄴㄴ</p></td>
+		<td><p>asdf<img src="/dogather/upload/images/05398c51-4d63-4459-998f-253585a423f5" style="width: 168.531px; height: 126.925px;"></p><p>xczvzxcv<img src="/dogather/upload/images/909e62f2-4b78-42ec-99ca-a55bc54b4726" style="width: 25%;"></p></td>
 	</tr>
 </table>
 </body>

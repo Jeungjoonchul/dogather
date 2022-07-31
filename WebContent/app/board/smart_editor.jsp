@@ -20,7 +20,7 @@
 				oAppRef : oEditors,
 				elPlaceHolder : "form-control",
 				sSkinURI : "${cp}/smarteditor2/SmartEditor2Skin.html",
-				fCreator : "createSEditor2"
+				fCreator : "createSEditor2",
 			});
 	      }
 		smartEditorIFrame();

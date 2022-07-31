@@ -1,7 +1,6 @@
 package com.dogather.app.board;
 
 import java.io.IOException;
-import java.util.UUID;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -41,10 +40,26 @@ public class BoardFrontController extends HttpServlet{
 			}
 			break;
 		case "/board/board_write.bo":
-			transfer=new BoardWriteActionOk().execute(req,resp);
+			try {
+				transfer=new BoardWriteOkAction().execute(req,resp);
+			} catch (ServletException e) {
+				// TODO Auto-generated catch block
+				System.out.println(e);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				System.out.println(e);
+			}
 			break;
 		case "/board/board_imageUpload.bo":
-			transfer=new BoardImageUploadAction().execute(req, resp);
+			try {
+				transfer=new BoardImageUploadAction().execute(req, resp);
+			} catch (ServletException e) {
+				// TODO Auto-generated catch block
+				System.out.println(e);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				System.out.println(e);
+			}
 			break;
 		}
 		//전송 일괄처리
