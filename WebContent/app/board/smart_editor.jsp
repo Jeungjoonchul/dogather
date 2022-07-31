@@ -9,26 +9,26 @@
 <title>Insert title here</title>
 </head>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="${cp }/smarteditor2-2.8.2.3/js/HuskyEZCreator" charset="utf-8"></script>
-<script>
-	let oEditors=[];
-	
-	smartEditor = function(){
-		nhn.husky.EZCreator.createInIFrame({
-			oAppRef:oEditors,
-			elPlaceHolder:"editorTxt",
-			sSkinURI:"${cp }/smarteditor2-2.8.2.3/SmartEditor2Skin.html",
-			fCreator:"createSEditor2"
-		});
-	}
-	
-	$(document).ready(function(){
-		smartEditor();
+<script src="${cp }/smarteditor2/js/HuskyEZCreator.js" charset="utf-8"></script>
+	<script>
+	$(document).ready(function () {
+			
+		var oEditors = [];
+		function smartEditorIFrame() {
+			
+			nhn.husky.EZCreator.createInIFrame({
+				oAppRef : oEditors,
+				elPlaceHolder : "form-control",
+				sSkinURI : "${cp}/smarteditor2/SmartEditor2Skin.html",
+				fCreator : "createSEditor2"
+			});
+	      }
+		smartEditorIFrame();
 	});
 </script>
 <body>
 	<form action="">
-		<textarea name = "editorTxt" id="editorTxt">asdf</textarea>
+		<textarea name="form-control" id="form-control">asdf</textarea>
 	</form>
 </body>
 </html>

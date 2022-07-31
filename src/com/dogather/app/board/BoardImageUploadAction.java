@@ -36,8 +36,8 @@ public class BoardImageUploadAction implements Action {
 		System.out.println("파일 경로 : "+filePath);
 		
 		
-		out.print("/temp/"+sysName);
-		System.out.println("/temp/"+sysName);
+		out.print(sysName);
+		System.out.println(sysName);
 		out.close();
 		
 		return null;

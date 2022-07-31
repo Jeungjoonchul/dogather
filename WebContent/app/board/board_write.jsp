@@ -50,8 +50,9 @@ const img='';
 		});
 	});
 
-	function sendFile(file,el) {
+	/* function sendFile(file,el) {
 		var form_data = new FormData();
+		var image_name = document.
       	form_data.append('file', file);
       	$.ajax({
         	data: form_data,
@@ -63,14 +64,34 @@ const img='';
         	enctype: 'multipart/form-data',
         	success: function(img_url) {
         		alert(img_url);
-        		$(el).summernote('editor.insertImage','${cp}'+img_url);
+        		$(el).summernote('editor.insertImage','${cp}/temp/'+img_url);
+        		var image = new 
         	}
       	});
-    }
+    } */
+    
+    function sendFile(file,el) {
+      var form_data = new FormData();
+          form_data.append('file', file);
+          $.ajax({
+            data: form_data,
+            type: "POST",
+            url : '${cp}/board/board_imageUpload.bo',
+            cache: false,
+            contentType: false,
+            processData: false,
+            enctype: 'multipart/form-data',
+            success: function(img_systemName) {
+              alert(img_systemName);
+              $(el).summernote('editor.insertImage','${cp}/temp/'+img_systemName);
+              $('#img_sysName').append(img_systemName+',');
+            }
+          });
+      }
 </script>
 </head>
 <body>
-	<form method="post" action="${cp}/board/board_imageUpload.bo">
+	<form method="post" action="${cp}/board/board_imageUpload.bo" id="board_editor">
 		<table>
 			<tr>
 				<td>제목</td>
@@ -82,6 +103,7 @@ const img='';
 			</tr>
 		</table>
 		<input type="submit" value="전송">
+		<textarea name = "img_sysName" id="img_sysName" style="display: none;"></textarea>
 	</form>
 </body>
 </html>
