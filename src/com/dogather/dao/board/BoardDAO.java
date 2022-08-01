@@ -22,12 +22,12 @@ public class BoardDAO {
 			
 		}
 
-		public List<BoardDTO> getBoardList(int startRow, int pageSize) {
+		public List<BoardDTO> selectList(int startRow, int pageSize) {
 			HashMap<String, Integer> datas = new HashMap<String, Integer>();
 			datas.put("startRow", startRow);
 			datas.put("pageSize", pageSize);
 			
-			return sqlSession.selectList("Board.getBoardList", datas);
+			return sqlSession.selectList("Board.selectList", datas);
 		}
 
 		public int getLastIndex(int user_index) {
@@ -40,5 +40,13 @@ public class BoardDAO {
 
 		public void delete(int tb_index) {
 			sqlSession.delete("Board.delete",tb_index);			
+		}
+
+		public BoardDTO selectOne(int tb_index) {
+			return sqlSession.selectOne("Board.selectOne", tb_index);
+		}
+
+		public void updateHits(int tb_index) {
+			sqlSession.update("Board.updateHits",tb_index);
 		}
 }

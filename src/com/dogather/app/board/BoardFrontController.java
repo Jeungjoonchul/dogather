@@ -43,22 +43,27 @@ public class BoardFrontController extends HttpServlet{
 			try {
 				transfer=new BoardWriteOkAction().execute(req,resp);
 			} catch (ServletException e) {
-				// TODO Auto-generated catch block
-				System.out.println(e);
+				System.out.println("/board/board_write.bo"+e);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				System.out.println(e);
+				System.out.println("/board/board_write.bo"+e);
 			}
 			break;
 		case "/board/board_imageUpload.bo":
 			try {
 				transfer=new BoardImageUploadAction().execute(req, resp);
 			} catch (ServletException e) {
-				// TODO Auto-generated catch block
-				System.out.println(e);
+				System.out.println("/board/board_imageUpload.bo"+e);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				System.out.println(e);
+				System.out.println("/board/board_imageUpload.bo"+e);
+			}
+			break;
+		case "/board/board_view.bo":
+			try {
+				transfer = new BoardViewAction().execute(req,resp);
+			} catch (ServletException e) {
+				System.out.println("/board/boardview.bo"+e);
+			} catch (IOException e) {
+				System.out.println("/board/boardview.bo"+e);
 			}
 			break;
 		}

@@ -7,7 +7,7 @@
 	<select id="getBoardCnt" resultType="_int">
 		select count(*) from t_test_board
 	</select>
-	<select id="getBoardList" parameterType="hashmap" resultType="BoardDTO">
+	<select id="selectList" parameterType="hashmap" resultType="BoardDTO">
 		select * from t_test_board order by tb_index desc limit #{startRow}, #{pageSize}
 	</select>
 	<insert id="insert" parameterType="boardDTO">
@@ -16,4 +16,10 @@
 	<delete id="delete" parameterType="_int">
 		delete from t_test_board where tb_index=#{tb_index}
 	</delete>
+	<select id="selectOne" parameterType="_int" resultType="BoardDTO">
+		select * from t_test_board where tb_index=#{tb_index}
+	</select>
+	<update id="updateHits" parameterType="_int">
+		update t_test_board set tb_hits=tb_hits+1 where tb_index=#{tb_index}
+	</update>
  </mapper>

@@ -32,7 +32,21 @@ public class UserFrontController extends HttpServlet{
 		
 		ActionTo transfer = null;
 		switch(command) {
-		
+		case "/user/user_join_depth1.us":
+			try {
+				transfer=new UserJoinDepth1Action().execute(req,resp);
+			} catch (ServletException e) {
+				// TODO Auto-generated catch block
+				System.out.println("/user/user_join_depth1.us"+e);
+			} catch (IOException e) {
+				System.out.println("/user/user_join_depth1.us"+e);
+			}
+			break;
+		case "/user/user_join_depth2.us":
+			transfer=new ActionTo();
+			transfer.setRedirect(false);
+			transfer.setPath("/app/user/user_join_depth2.jsp");
+			break;
 		}
 		
 		//전송 일괄처리

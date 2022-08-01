@@ -6,4 +6,7 @@
 	<select id="selectUser" parameterType="string" resultType="_int">
 		select user_index from t_test_user where user_id = #{user_id}
 	</select>
+	<select id="getTermsList" resultType="TermsDTO">
+		
+	</select>
  </mapper>

@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="cp" value="${pageContext.request.contextPath}"></c:set>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,8 +10,6 @@
 <title>board_list</title>
 </head>
 <body>
-
-
 	<div style="margin: 0 auto; width: 1000px;">
 		<!-- 타이틀과 글 개수 띄워주는 테이블 -->
 		<table class="title">
@@ -38,8 +37,7 @@
 					<c:if test="${board.tb_inactive==false}">
 						<tr>
 							<td>${board.tb_index}</td>
-							<td><a
-								href="${cp}/board/boardview.bo?boardnum=${board.tb_index}&page=${page}">${board.tb_title}</a></td>
+							<td><a href="${cp}/board/board_view.bo?tb_index=${board.tb_index}&page=${page}">${board.tb_title}</a></td>
 							<td>${board.user_index}</td>
 							<td>${board.tb_reg_date}<c:if
 									test="${board.tb_reg_date!=board.tb_update_date}">(수정됨)</c:if></td>

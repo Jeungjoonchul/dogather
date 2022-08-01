@@ -16,5 +16,4 @@ public class UserDAO {
 		return sqlSession.selectOne("User.selectUser",user_id);
 	}
 	
-	
 }
