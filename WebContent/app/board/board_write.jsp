@@ -53,8 +53,7 @@
 	function sendFile(file, el) {
 		var form_data = new FormData();
 		form_data.append('file', file);
-		$
-				.ajax({
+		$.ajax({
 					data : form_data,
 					type : "POST",
 					url : '${cp}/board/board_imageUpload.bo',
