@@ -11,6 +11,5 @@ ${param.user_terms_type1}
 ${param.user_terms_type2}
 ${param.user_terms_type3}
 ${param.user_terms_type4}
-
 </body>
 </html>
