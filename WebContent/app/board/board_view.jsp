@@ -25,7 +25,6 @@
 
 </head>
 <body>
-
 		<table>
 			<tr>
 				<th>제목</th>
@@ -40,7 +39,6 @@
 				<td><div>${tb.tb_contents }</div></td>
 			</tr>
 		</table>
-
 </body>
 </body>
 </html>

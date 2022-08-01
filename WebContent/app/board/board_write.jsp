@@ -49,25 +49,6 @@
 		});
 	});
 
-	/* function sendFile(file,el) {
-		var form_data = new FormData();
-		var image_name = document.
-	  	form_data.append('file', file);
-	  	$.ajax({
-	    	data: form_data,
-	    	type: "POST",
-	    	url : '${cp}/board/board_imageUpload.bo',
-	    	cache: false,
-	    	contentType: false,
-	    	processData: false,
-	    	enctype: 'multipart/form-data',
-	    	success: function(img_url) {
-	    		alert(img_url);
-	    		$(el).summernote('editor.insertImage','${cp}/temp/'+img_url);
-	    		var image = new 
-	    	}
-	  	});
-	} */
 
 	function sendFile(file, el) {
 		var form_data = new FormData();
