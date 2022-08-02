@@ -27,28 +27,28 @@ public class BoardViewAction implements Action {
 		System.out.println(tb.getUser_index());
 		System.out.println(tb.getTb_contents());
 
-		
-		String checkCookies= req.getHeader("Cookie");
-
 		boolean flag = true;
 		// 쿠기가 있다면
 		if(tb.getUser_index()!=loginUser) {
-			if (checkCookies!= null) {
-				
+			
 				// 쿠키들을 cookies에 저장
 				Cookie[] cookies = req.getCookies();
 				
 				// cookies를 하나씩 확인
 				for (Cookie cookie : cookies) {
-					if (cookie.getName().equals("board-" + tb_index)) {
+					
+					//"tb-게시판번호-유저 인덱스" 쿠키가 있다면 flag를 false로 변경
+					if (cookie.getName().equals("tb-" + tb_index+"-"+loginUser)) {
 						flag = false;
 					}
 				}
-			}
+			
+			//flag==true : cookie가 없다는 뜻이므로 조회수 1 증가 및 db에 저장 후 쿠키 생성(1일뒤 자동 삭제됨)
+			//flag==false : 이미 조회수를 증가 시켰으므로 조회수 증가 없음
 			if (flag) {
 				tb.setTb_hits(tb.getTb_hits()+1);
 				bdao.updateHits(tb_index);
-				Cookie hits = new Cookie("board-" + tb_index, "hit");
+				Cookie hits = new Cookie("tb-" + tb_index+"-"+loginUser, "hit");
 				hits.setMaxAge(60*60*24);
 				resp.addCookie(hits);
 			}

@@ -11,6 +11,7 @@
 <body>
 	<form name="terms_form" onsubmit="return sendit()" action="${cp}/user/user_join_depth2.us" method="get">
 		<c:forEach var="terms" items="${terms_list}">
+		
 		<tr>
 		<td class="terms_${terms.terms_index}_${terms.terms_type}">
 			<div>

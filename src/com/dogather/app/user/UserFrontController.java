@@ -36,7 +36,6 @@ public class UserFrontController extends HttpServlet{
 			try {
 				transfer=new UserJoinDepth1Action().execute(req,resp);
 			} catch (ServletException e) {
-				// TODO Auto-generated catch block
 				System.out.println("/user/user_join_depth1.us"+e);
 			} catch (IOException e) {
 				System.out.println("/user/user_join_depth1.us"+e);
