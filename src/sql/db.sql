@@ -17,6 +17,7 @@ create table t_terms(
     terms_contents text,
     terms_type enum('essential','selective')
 );
+insert into t_terms values(1,'이용 약관','이용 약관 내용','essential'),(2,'개인 정보 약관','개인 정보 약관 내용','essential'),(3,'선택 약관1','선택 약관 1 내용','selective'),(3,'선택 약관 2','선택 약관 2 내용','selective');
 
 create table t_user(
 	#회원 가입 시 입력 받아야할 내용들(필수 입력 항목)
@@ -36,7 +37,7 @@ create table t_user(
     #회원 가입 완료 후 설정
     user_public_scope enum('all','buddy','none') default 'all' #유저 정보 공개 범위(ex : 'none' / none일 경우 아무도 회원 정보 조회 불가)
 );
-
+insert into t_user(user_email,user_nickname,user_name,user_password,user_phone,user_gender,user_birth_date) values('apple@apple.com','애플킴','김사과','asdf1234A!','01011111111','female','2002-06-10');
 create table t_user_profile(
 	user_index int,
     user_profile_original_name varchar(300), #유저 프로필 사진 원본 파일이름
@@ -55,7 +56,9 @@ create table t_user_terms_agreement(
     user_term_selective2_reg_date datetime default now(),
     constraint userTermsAgreement_user_fk foreign key(user_index) references t_user(user_index)
 );
-
+insert into t_user_info values(1,now(),now(),null,false);
+insert into t_user_terms_agreement values(1,true,true,true,now(),true,now());
+insert into t_user_address values(1,'06236','서울시','강남구','역삼동','테헤란로 146','3층 코리아 IT 아카데미','(역삼동)');
 create table t_user_info(
 	user_index int,
     user_reg_date datetime default now(), #유저 가입날짜(yyyy-MM-dd / ex : 2022-07-25)
