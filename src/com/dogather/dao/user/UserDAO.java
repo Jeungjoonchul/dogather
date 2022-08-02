@@ -11,9 +11,8 @@ public class UserDAO {
 		sqlSession = SqlMapConfig.getFactory().openSession(true);
 	}
 
-	public int selectUser(String user_id) {
-		// TODO Auto-generated method stub
-		return sqlSession.selectOne("User.selectUser",user_id);
+	public boolean checkEmail(String user_email) {
+		return (Integer)sqlSession.selectOne("User.checkEmail",user_email)==0;
 	}
 	
 }

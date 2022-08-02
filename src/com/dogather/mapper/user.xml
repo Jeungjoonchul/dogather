@@ -3,10 +3,7 @@
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="User">
-	<select id="selectUser" parameterType="string" resultType="_int">
-		select user_index from t_test_user where user_id = #{user_id}
-	</select>
-	<select id="getTermsList" resultType="TermsDTO">
-		
+	<select id="checkEmail" parameterType="string" resultType="_int">
+		select count(*) from t_user where user_email=#{user_email}
 	</select>
  </mapper>

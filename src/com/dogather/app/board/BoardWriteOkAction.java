@@ -29,9 +29,9 @@ public class BoardWriteOkAction implements Action {
 		PrintWriter out = resp.getWriter();
 		
 		String user_id = req.getParameter("user_id");
-		int user_index = udao.selectUser(user_id);
-		newPost.setUser_index(user_index);
-		System.out.println("작성자 : " + user_id + "(유저 인덱스 : " + user_index + ")");
+		//int user_index = udao.selectUser(user_id);
+		//newPost.setUser_index(user_index);
+		//System.out.println("작성자 : " + user_id + "(유저 인덱스 : " + user_index + ")");
 
 		String tb_title = req.getParameter("tb_title");
 		newPost.setTb_title(tb_title);

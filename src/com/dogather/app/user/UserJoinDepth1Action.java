@@ -17,7 +17,6 @@ public class UserJoinDepth1Action implements Action {
 
 	@Override
 	public ActionTo execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
 		//db에 t_terms에 접근하기 위한 DAO 
 		TermsDAO tdao = new TermsDAO();
 		

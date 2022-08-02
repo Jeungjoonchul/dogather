@@ -46,6 +46,21 @@ public class UserFrontController extends HttpServlet{
 			transfer.setRedirect(false);
 			transfer.setPath("/app/user/user_join_depth2.jsp");
 			break;
+		case "/user/user_check_email.us":
+			try {
+				transfer = new UserCheckEmailAction().execute(req,resp);
+			} catch (Exception e) {
+				System.out.println("/user/user_check_email.us"+e);
+			}
+			break;
+		case "/user/user_join_ok.us":
+			try {
+				transfer = new UserJoinOkAction().execute(req,resp);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				System.out.println("/user/user_join_ok.us"+e);
+			}
+			break;
 		}
 		
 		//전송 일괄처리
