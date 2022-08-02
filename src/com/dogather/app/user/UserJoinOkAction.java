@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.dogather.action.Action;
 import com.dogather.action.ActionTo;
+import com.dogather.dao.user.UserDAO;
 import com.dogather.dto.user.UserDTO;
 
 public class UserJoinOkAction implements Action {
@@ -86,6 +87,10 @@ public class UserJoinOkAction implements Action {
 		user.setAddress_detail(address_detail);
 		user.setAddress_extra(address_extra);
 
+		
+		UserDAO udao = new UserDAO();
+		
+		udao.insertUser(user);
 		//유효성검사, 중복검사(닉네임), 보따리(UserDTO)들고 DAO -> mapper
 		
 		return null;
