@@ -86,7 +86,7 @@ public class UserJoinOkAction implements Action {
 		user.setAddress4(address4);
 		user.setAddress_detail(address_detail);
 		user.setAddress_extra(address_extra);
-		
+		System.out.println();
 		
 		UserDAO udao=new UserDAO();
 		ActionTo transfer = new ActionTo();
