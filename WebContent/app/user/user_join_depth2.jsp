@@ -13,6 +13,9 @@
 	<form action="${cp}/user/user_join_ok.us" method="post">
 		<table>
 			<tr>
+				<td colspan="2"><h4>필수 입력 사항</h4></td>
+			</tr>
+			<tr>
 				<th>이메일</th>
 				<td><input type="text" name="user_email" id="user_email" onkeyup="checkEmail('${cp}');" onblur="emailStatus();" placeholder='이메일을 입력하세요'></td>
 			</tr>
@@ -88,24 +91,25 @@
 			
 			<tr>
 				<th>우편번호</th>
-				<td><input type="text" name="zip_code" id="zip_code" readonly><input
-					type="button" onclick="daumPostcode()" value="우편번호 찾기"></td>
+				<td><input type="text" name="zip_code" id="zip_code" readonly onclick="daumPostcode()" placeholder="우편 번호를 입력하세요"></td>
 			</tr>
 			<tr>
 				<th>주소</th>
-				<td><input type="text" name="address" id="address" readonly></td>
+				<td><input type="text" name="address" id="address" readonly onclick="daumPostcode()"placeholder="주소를 입력하세요"></td>
 			</tr>
 			<tr>
 				<th>상세주소</th>
 				<td><input type="text" name="address_detail"
-					id="address_detail"></td>
+					id="address_detail" placeholder="상세 주소를 입력하세요"></td>
 			</tr>
 			<tr>
 				<th>참고항목</th>
 				<td><input type="text" name="address_extra" id="address_extra"
 					readonly></td>
 			</tr>
-			
+			<tr>
+				<td colspan="2"><h4>선택 입력 사항</h4></td>
+			</tr>
 			<tr>
 				<th>관심사</th>
 				<td><label><input type="checkbox" name="user_interest"
