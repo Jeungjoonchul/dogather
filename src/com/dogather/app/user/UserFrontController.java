@@ -1,6 +1,7 @@
 package com.dogather.app.user;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -60,6 +61,18 @@ public class UserFrontController extends HttpServlet{
 				// TODO Auto-generated catch block
 				System.out.println("/user/user_join_ok.us"+e);
 			}
+			break;
+		case "/user/user_logout.us":
+			req.getSession().invalidate();
+			PrintWriter out = resp.getWriter();
+			out.print("<script>alert('로그아웃되었습니다');");
+			out.print("location.href='${cp}");
+			out.print("</script>");
+			break;
+		case "/user/user_login.us":
+			transfer=new ActionTo();
+			transfer.setPath("/app/user/user_login.jsp");
+			transfer.setRedirect(false);
 			break;
 		}
 		

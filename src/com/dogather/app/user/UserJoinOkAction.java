@@ -86,7 +86,7 @@ public class UserJoinOkAction implements Action {
 		user.setAddress4(address4);
 		user.setAddress_detail(address_detail);
 		user.setAddress_extra(address_extra);
-		System.out.println();
+		
 		
 		UserDAO udao=new UserDAO();
 		ActionTo transfer = new ActionTo();
@@ -94,11 +94,14 @@ public class UserJoinOkAction implements Action {
 		if(udao.insertUser(user)) {
 			//회원가입 성공
 			//경로, 전송방법 설정
+			transfer.setPath(req.getContextPath()+"/user/user_login.us?user_email="+user_email);
 		}else {
 			//회원가입 실패
 			//경로, 전송방법 설정
+			transfer.setPath(req.getContextPath());
 		}
-		//유효성검사, 중복검사(닉네임), 보따리(UserDTO)들고 DAO -> mapper
+		//테스트, 유효성, 중복검사, 로그인(세션 범위)
+		//유효성 검사+중복 검사 백 프론트 합치는 방법(태그 등등,,)
 		
 		return transfer;
 	}
