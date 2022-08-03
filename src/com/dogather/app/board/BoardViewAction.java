@@ -33,7 +33,7 @@ public class BoardViewAction implements Action {
 			
 				// 쿠키들을 cookies에 저장
 				Cookie[] cookies = req.getCookies();
-				
+
 				// cookies를 하나씩 확인
 				for (Cookie cookie : cookies) {
 					

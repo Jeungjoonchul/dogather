@@ -21,34 +21,57 @@ public class UserJoinOkAction implements Action {
 		//user_email, user_nickname, user_name, user_password, user_phone
 		//user_gender, user_birth_date, user_interest, user_interest_etc, user_intro
 		//zip_code, address(address1, address2, address3, address4), address_detail, address_extra
-		String s_user_term_selective1=req.getParameter("user_term_selective1");
-		int user_term_selective1=s_user_term_selective1.equalsIgnoreCase("true")?1:0;
-		String s_user_term_selective2=req.getParameter("user_term_selective2");
-		int user_term_selective2=s_user_term_selective2.equalsIgnoreCase("true")?1:0;
+		String s_user_term_selective1=req.getParameter("user_terms_type3");
+		int user_term_selective1=s_user_term_selective1!=null?1:0;
+		System.out.println("선택약관1:"+s_user_term_selective1+"("+user_term_selective1+")");
+		String s_user_term_selective2=req.getParameter("user_terms_type4");
+		int user_term_selective2=s_user_term_selective2!=null?1:0;
+		System.out.println("선택약관2:"+s_user_term_selective2+"("+user_term_selective2+")");
 		
 		String user_email=req.getParameter("user_email");
+		System.out.println("이메일 : "+user_email);
 		String user_nickname=req.getParameter("user_nickname");
+		System.out.println("닉네임 : "+user_nickname);
 		String user_name=req.getParameter("user_name");
+		System.out.println("이름 : "+user_name);
 		String user_password=req.getParameter("user_password");
+		System.out.println("비밀번호 : "+user_password);
 		String user_phone=req.getParameter("user_phone");
+		String[] user_phone_arr=user_phone.split("-");
+		user_phone="";
+		for (int i = 0; i < user_phone_arr.length; i++) {
+			user_phone+=user_phone_arr[i];
+		}
+		System.out.println("휴대폰 : "+user_phone);
 		String user_gender=req.getParameter("user_gender");
+		System.out.println("성별 : "+user_gender);
 		String user_birth_date=req.getParameter("user_birth_date");
-		
+		System.out.println("생년월일 : "+user_birth_date);
 		String[] user_interest_arr=req.getParameterValues("user_interest");
 		String user_interest_etc=req.getParameter("user_interest_etc");
 		String user_interest ="";
-		for (int i = 0; i < user_interest_arr.length; i++) {
-			user_interest+=user_interest_arr[i]+",";
-		}
-
-		if(user_interest_etc==null||user_interest_etc.equals("")) {
-			user_interest.substring(0, user_interest.length()-1);
+		if(user_interest_arr==null&&(user_interest_etc==null||user_interest_etc.equals(""))){
+			user_interest=null;
 		}else {
-			user_interest+=user_interest_etc;
+			if(user_interest_arr!=null) {
+				for (int i = 0; i < user_interest_arr.length; i++) {
+					user_interest+=user_interest_arr[i]+",";
+				}
+			}
+			if(user_interest_etc==null||user_interest_etc.equals("")) {
+				user_interest.substring(0, user_interest.length()-1);
+			}else {
+				user_interest+=user_interest_etc;
+			}
 		}
-		
+		System.out.println("관심사 : "+user_interest);
 		String user_intro=req.getParameter("user_intro");
+		if(user_intro==null||user_intro.equals("")) {
+			user_intro=null;
+		}
+		System.out.println("자기 소개 : "+user_intro);
 		String zip_code=req.getParameter("zip_code");
+		System.out.println("우편번호 : "+zip_code);
 		String[] address=req.getParameter("address").split(" ");
 
 		String address1=address[0];
@@ -66,10 +89,18 @@ public class UserJoinOkAction implements Action {
 			}
 			address4+=address[i]+" ";
 		}
+		if(address3==null||address3.equals("")) {
+			address3=null;
+		}
 		address4=address4.trim();
-
+		System.out.println("주소 : "+address1+" "+address2+" "+address3+" "+address4);
 		String address_detail=req.getParameter("address_detail");
+		System.out.println("상세 주소 : "+address_detail);
 		String address_extra=req.getParameter("address_extra");
+		if(address_extra==null||address_extra.equals("")) {
+			address_extra=null;
+		}
+		System.out.println("상세 주소 : "+address_extra);
 		
 		UserDTO user = new UserDTO();
 		user.setUser_term_selective1(user_term_selective1);
@@ -105,5 +136,6 @@ public class UserJoinOkAction implements Action {
 			transfer.setPath(req.getContextPath());
 		}
 		return transfer;
+
 	}
 }

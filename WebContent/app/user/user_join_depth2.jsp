@@ -8,6 +8,9 @@
 <meta charset="UTF-8">
 <title>Doːgather 회원가입</title>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script
+	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
 </head>
 <body>
 	<form action="${cp}/user/user_join_ok.us" method="post">
@@ -17,7 +20,7 @@
 			</tr>
 			<tr>
 				<th>이메일</th>
-				<td><input type="text" name="user_email" id="user_email" onkeyup="checkEmail('${cp}');" onblur="emailStatus();" placeholder='이메일을 입력하세요'></td>
+				<td><input type="text" name="user_email" id="user_email" onkeyup="checkEmail('${cp}');" onblur="emailStatus();" placeholder='이메일을 입력해주세요'></td>
 			</tr>
 			<tr>
 				<td><span style="display: none;">null</span></td>
@@ -26,7 +29,7 @@
 
 			<tr>
 				<th>닉네임</th>
-				<td><input type="text" name="user_nickname" id="user_nickname" onkeyup="checkNickname('${cp}');" onblur="nicknameStatus();" placeholder='닉네임을 입력하세요'></td>
+				<td><input type="text" name="user_nickname" id="user_nickname" onkeyup="checkNickname('${cp}');" onblur="nicknameStatus();" placeholder='닉네임을 입력해주세요'></td>
 			</tr>
 			<tr>
 				<td><span style="display: none;">null</span></td>
@@ -36,7 +39,7 @@
 			<tr>
 				<th>비밀번호</th>
 				<td><input type="password" name="user_password"
-					id="user_password" placeholder='비밀번호를 입력하세요'></td>
+					id="user_password" placeholder='비밀번호를 입력해주세요' onkeyup="checkPassword(); checkPasswordDetail();" onblur="passwordStatus()" maxlength="24"></td>
 			</tr>
 			<tr>
 				<td><span style="display: none;">null</span></td>
@@ -46,7 +49,7 @@
 			<tr>
 				<th>비밀번호 확인</th>
 				<td><input type="password" name="user_password_re"
-					id="user_password_re" placeholder='비밀번호 확인'></td>
+					id="user_password_re" placeholder='비밀번호 확인' onkeyup="checkPassword_re();" onblur="password_reStatus();"></td>
 			</tr>
 			<tr>
 				<td><span style="display: none;">null</span></td>
@@ -55,7 +58,7 @@
 			
 			<tr>
 				<th>이름</th>
-				<td><input type="text" name="user_name" id="user_name" placeholder='이름을 입력하세요'></td>
+				<td><input type="text" name="user_name" id="user_name" placeholder='이름을 입력해주세요' onkeyup="checkName();" onblur="nameStatus();"></td>
 			</tr>
 			<tr>
 				<td><span style="display: none;">null</span></td>
@@ -64,7 +67,7 @@
 			
 			<tr>
 				<th>휴대폰</th>
-				<td><input type="tel" name="user_phone" id="user_phone" placeholder='휴대전화번호를 입력하세요'></td>
+				<td><input type="tel" name="user_phone" id="user_phone" placeholder='휴대전화번호를 입력해주세요' maxlength="13" onkeyup="autoHypenPhone(); checkPhone();" onblur="phoneStatus();"></td>
 			</tr>
 			<tr>
 				<td><span style="display: none;">null</span></td>
@@ -81,8 +84,8 @@
 			
 			<tr>
 				<th>생년월일</th>
-				<td><input type="date" name="user_birth_date"
-					id="user_birth_date"></td>
+				<td><input type="text" name="user_birth_date"
+					id="user_birth_date" placeholder="생년월일 8자리를 입력해주세요" maxlength="10" onkeyup="autoHypenDate(); checkBirthDate();" onblur="birthDateStatus()"></td>
 			</tr>
 			<tr>
 				<td><span style="display: none;">null</span></td>
@@ -91,16 +94,16 @@
 			
 			<tr>
 				<th>우편번호</th>
-				<td><input type="text" name="zip_code" id="zip_code" readonly onclick="daumPostcode()" placeholder="우편 번호를 입력하세요"></td>
+				<td><input type="text" name="zip_code" id="zip_code" readonly onclick="daumPostcode()" placeholder="우편 번호를 입력해주세요"></td>
 			</tr>
 			<tr>
 				<th>주소</th>
-				<td><input type="text" name="address" id="address" readonly onclick="daumPostcode()"placeholder="주소를 입력하세요"></td>
+				<td><input type="text" name="address" id="address" readonly onclick="daumPostcode()"placeholder="주소를 입력해주세요"></td>
 			</tr>
 			<tr>
 				<th>상세주소</th>
 				<td><input type="text" name="address_detail"
-					id="address_detail" placeholder="상세 주소를 입력하세요"></td>
+					id="address_detail" placeholder="상세 주소를 입력해주세요"></td>
 			</tr>
 			<tr>
 				<th>참고항목</th>
@@ -120,14 +123,14 @@
 						type="checkbox" name="user_interest" class="user_interest"
 						value="4">습관</label> <label><input type="checkbox"
 						name="user_interest" class="user_interest" value="5">경제</label> <label>기타<input
-						type="text" name="user_interest_etc" id="user_interest_etc" placeholder='그 외 관심사를 입력하세요(ex: 코딩)'></label>
+						type="text" name="user_interest_etc" id="user_interest_etc" placeholder='그 외 관심사를 입력해주세요(ex: 코딩)'></label>
 				</td>
 			</tr>
 
 			<tr>
 				<th>자기소개</th>
 				<td><textarea rows="15" cols="60" name="user_intro"
-						id="user_intro" style="resize: none;" placeholder="자기소개를 입력하세요"></textarea>
+						id="user_intro" style="resize: none;" placeholder="자기소개를 입력해주세요"></textarea>
 				</td>
 			</tr>
 			<input type="hidden" name="user_term_selective1"
@@ -141,7 +144,5 @@
 		<input type="submit" value="회원 가입 완료">
 	</form>
 </body>
-<script
-	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="${cp}/resources/js/join.js"></script>
 </html>

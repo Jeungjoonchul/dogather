@@ -17,7 +17,6 @@ public class UserCheckEmailAction implements Action {
 	public ActionTo execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		//수집된 user_email
 		String user_email=req.getParameter("user_email");
-		
 		//DB에 접근할 DAO 설정
 		UserDAO udao = new UserDAO();
 		
