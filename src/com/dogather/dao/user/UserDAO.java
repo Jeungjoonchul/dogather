@@ -63,5 +63,9 @@ public class UserDAO {
 	public boolean deleteUserAddress(String user_email) {
 		return sqlSession.delete("User.deleteUserAddress",user_email)==1;
 	}
+
+	public boolean checkNickname(String user_nickname) {
+		return (Integer)sqlSession.selectOne("User.checkNickname",user_nickname)==0;
+	}
 	
 }

@@ -9,7 +9,7 @@
 <title>Doːgather 이용약관</title>
 </head>
 <body>
-	<form name="terms_form" onsubmit="return sendit()" action="${cp}/user/user_join_depth2.us" method="get">
+	<form name="terms_form" onsubmit="return sendit_terms()" action="${cp}/user/user_join_depth2.us" method="get">
 		<c:forEach var="terms" items="${terms_list}">
 		
 		<tr>
@@ -37,28 +37,5 @@
 		<input type="submit">
 	</form>
 </body>
-<script>
-	function sendit(){
-		var terms_form = document.terms_form;
-		const user_terms_essential1 = terms_form.user_terms_type1;
-		const user_terms_essential2 = terms_form.user_terms_type2;
-		const user_terms_selective1 = terms_form.user_terms_type3;
-		const user_terms_selective2 = terms_form.user_terms_type4;
-		if(!user_terms_essential1.checked){
-			alert('이용 약관에 미동의');
-			return false;
-		}
-		if(!user_terms_essential2.checked){
-			alert('개인 정보 제공에 미동의');
-			return false;
-		}
-		if(user_terms_selective1.checked){
-			user_terms_selective1.value=true;
-		}
-		if(user_terms_selective2.checked){
-			user_terms_selective2.value=true;
-		}
-		return true;
-	}
-</script>
+<script src="${cp}/resources/js/join.js"></script>
 </html>

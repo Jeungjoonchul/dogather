@@ -30,7 +30,6 @@ public class UserFrontController extends HttpServlet{
 		String contextPath = req.getContextPath(); // ????(module명)
 		String command = requestURI.substring(contextPath.length()); // /board/boardmain.do
 		System.out.println(command);
-		
 		ActionTo transfer = null;
 		switch(command) {
 		case "/user/user_join_depth1.us":
@@ -73,6 +72,13 @@ public class UserFrontController extends HttpServlet{
 			transfer=new ActionTo();
 			transfer.setPath("/app/user/user_login.jsp");
 			transfer.setRedirect(false);
+			break;
+		case "/user/user_check_nickname.us":
+			try {
+				transfer = new UserCheckNicknameAction().execute(req,resp);
+			} catch (Exception e) {
+				System.out.println("/user/user_check_nickname.us"+e);
+			}
 			break;
 		}
 		

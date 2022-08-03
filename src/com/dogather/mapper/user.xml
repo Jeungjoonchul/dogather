@@ -6,12 +6,15 @@
 	<select id="checkEmail" parameterType="string" resultType="_int">
 		select count(*) from t_user where user_email=#{user_email}
 	</select>
+	
+	<select id="checkNickname" parameterType="string" resultType="_int">
+		select count(*) from t_user where user_nickname=#{user_nickname}
+	</select>
 
 	<select id="selectUser" parameterType="string"
 		resultType="UserDTO">
 		select * from t_user where user_email=#{user_email}
 	</select>
-
 
 
 	<insert id="insertUser" parameterType="UserDTO">

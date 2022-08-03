@@ -10,6 +10,7 @@
 </head>
 <body>
 로그인 성공
-<c:if test="${!empty user_email}">${user_email}</c:if>
+
+<c:if test="${!empty param.user}">${param.user}</c:if>
 </body>
 </html>

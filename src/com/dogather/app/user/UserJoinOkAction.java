@@ -40,8 +40,12 @@ public class UserJoinOkAction implements Action {
 		for (int i = 0; i < user_interest_arr.length; i++) {
 			user_interest+=user_interest_arr[i]+",";
 		}
-		
-		user_interest+=user_interest_etc;
+
+		if(user_interest_etc==null||user_interest_etc.equals("")) {
+			user_interest.substring(0, user_interest.length()-1);
+		}else {
+			user_interest+=user_interest_etc;
+		}
 		
 		String user_intro=req.getParameter("user_intro");
 		String zip_code=req.getParameter("zip_code");
@@ -94,15 +98,12 @@ public class UserJoinOkAction implements Action {
 		if(udao.insertUser(user)) {
 			//회원가입 성공
 			//경로, 전송방법 설정
-			transfer.setPath(req.getContextPath()+"/user/user_login.us?user_email="+user_email);
+			transfer.setPath(req.getContextPath()+"/user/user_login.us?user="+user_email);
 		}else {
 			//회원가입 실패
 			//경로, 전송방법 설정
 			transfer.setPath(req.getContextPath());
 		}
-		//테스트, 유효성, 중복검사, 로그인(세션 범위)
-		//유효성 검사+중복 검사 백 프론트 합치는 방법(태그 등등,,)
-		
 		return transfer;
 	}
 }
