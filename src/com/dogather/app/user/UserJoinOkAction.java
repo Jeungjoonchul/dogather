@@ -58,8 +58,9 @@ public class UserJoinOkAction implements Action {
 					user_interest+=user_interest_arr[i]+",";
 				}
 			}
+		
 			if(user_interest_etc==null||user_interest_etc.equals("")) {
-				user_interest.substring(0, user_interest.length()-1);
+				user_interest=user_interest.substring(0, user_interest.length()-1);
 			}else {
 				user_interest+=user_interest_etc;
 			}
@@ -100,8 +101,8 @@ public class UserJoinOkAction implements Action {
 		if(address_extra==null||address_extra.equals("")) {
 			address_extra=null;
 		}
-		System.out.println("상세 주소 : "+address_extra);
-		
+		System.out.println("참고 주소 : "+address_extra);
+				
 		UserDTO user = new UserDTO();
 		user.setUser_term_selective1(user_term_selective1);
 		user.setUser_term_selective2(user_term_selective2);
@@ -121,6 +122,8 @@ public class UserJoinOkAction implements Action {
 		user.setAddress4(address4);
 		user.setAddress_detail(address_detail);
 		user.setAddress_extra(address_extra);
+		user.setUser_buddies("");
+		user.setUser_block_list("");
 		
 		
 		UserDAO udao=new UserDAO();

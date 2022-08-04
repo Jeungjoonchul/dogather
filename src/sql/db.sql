@@ -86,15 +86,23 @@ create table t_user_address(
 #유저 친구 현황
 create table t_user_buddies(
 	user_index int, #(ex : 1)
-    user_buddies varchar(1000), #유저의 친구, 친구인 user_index를 ','로 구분하여 append(ex : 2,3,4,5,...)
+    user_buddies text, #유저의 친구, 친구인 user_index를 ','로 구분하여 append(ex : 2,3,4,5,...)
     constraint userBuddies_user_fk foreign key(user_index) references t_user(user_index)
 );
+
 
 #유저 차단 현황
 create table t_user_block(
 	user_index int, #(ex : 1)
     user_block_list text, #유저가 차단한 유저 현황(ex : 6,7,8,9,10,...)
     constraint userBlock_user_fk foreign key(user_index) references t_user(user_index)
+);
+
+#유저 쪽지 범위
+create table t_user_note_scope(
+	user_index int, #유저(ex: 1)
+    note_scope enum('all','buddy','none') default 'all', #쪽지 수신 여부 확인(ex : 'buddy' / 친구 쪽지만 수신 가능)
+    constraint userNoteScope_user_fk foreign key(user_index) references t_user(user_index)
 );
 
 #유저 친구 상태 현황
@@ -106,6 +114,7 @@ create table t_buddy_request(
     buddy_request_status enum('request','accept','deny'), #요청 상태(요청, 수락, 거절 / ex : 'request')
     constraint buddyRequest_user_fk foreign key(user_index) references t_user(user_index)
 );
+
 
 #유저 받은 쪽지함
 create table t_user_send_note(
@@ -128,12 +137,8 @@ create table t_user_receive_note(
     constraint userReceiveNote_user_fk foreign key(user_index) references t_user(user_index)
 );
 
-#유저 쪽지 범위
-create table t_user_note_scope(
-	user_index int, #유저(ex: 1)
-    note_scope enum('all','buddy','none'), #쪽지 수신 여부 확인(ex : 'buddy' / 친구 쪽지만 수신 가능)
-    constraint userNoteScope_user_fk foreign key(user_index) references t_user(user_index)
-);
+
+
 
 #자유게시판
 create table t_free_board(

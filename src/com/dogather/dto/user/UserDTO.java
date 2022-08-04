@@ -33,6 +33,12 @@ public class UserDTO {
 	private String address_detail;
 	private String address_extra;
 	
+	private String user_buddies;
+	
+	private String user_block_list;
+	
+	private String note_scope;
+	
 	public int getUser_index() {
 		return user_index;
 	}
@@ -200,6 +206,24 @@ public class UserDTO {
 	}
 	public void setAddress_extra(String address_extra) {
 		this.address_extra = address_extra;
+	}
+	public String getUser_buddies() {
+		return user_buddies;
+	}
+	public void setUser_buddies(String user_buddies) {
+		this.user_buddies = user_buddies;
+	}
+	public String getUser_block_list() {
+		return user_block_list;
+	}
+	public void setUser_block_list(String user_block_list) {
+		this.user_block_list = user_block_list;
+	}
+	public String getNote_scope() {
+		return note_scope;
+	}
+	public void setNote_scope(String note_scope) {
+		this.note_scope = note_scope;
 	}
 	
 }

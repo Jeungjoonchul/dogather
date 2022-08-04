@@ -5,9 +5,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>DoGather - 회원가입</title>
 <link rel="stylesheet" href="${cp }/resources/css/join.css" />
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -19,7 +19,7 @@
 		<div id="head">
 
 			<p class="center">
-				<a href="./main.html"> <img
+				<a href="#"> <img
 					src="${cp}/resources/images/dogather_logo.png" alt="" width="350px">
 				</a>
 			</p>
@@ -71,8 +71,8 @@
        -->
 							<c:forEach var="terms" items="${terms_list}">
 
-								<tr>
-									<td class="terms_${terms.terms_index}_${terms.terms_type}">
+								<div>
+									<div class="terms_${terms.terms_index}_${terms.terms_type}">
 										<div>
 											<span>${terms.terms_title}</span>
 											<c:choose>
@@ -89,8 +89,8 @@
 											<input type="checkbox"
 												name="user_terms_type${terms.terms_index}" value="true">
 										</div>
-									</td>
-								</tr>
+									</div>
+								</div>
 							</c:forEach>
 							<BR> <input type="button" value="Next" onclick="next1()">
 							<input type="button" value="Back" onclick="back1()">
@@ -195,7 +195,7 @@
 								<tr>
 									<th>상세주소</th>
 									<td><input type="text" name="address_detail"
-										id="address_detail" placeholder="상세 주소를 입력해주세요"></td>
+										id="address_detail" placeholder="상세 주소를 입력해주세요" maxlength="300"></td>
 								</tr>
 								<tr>
 									<td><span style="display: none;" class="status">null</span></td>

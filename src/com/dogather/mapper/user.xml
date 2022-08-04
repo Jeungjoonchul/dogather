@@ -40,19 +40,43 @@
 		values(#{user_index},#{zip_code},#{address1},#{address2},#{address3},#{address4},#{address_detail},#{address_extra})
 	</insert>
 	
-	<delete id="deletetUser" parameterType="string">
-		delete from t_user where user_email=#{user_email}
+	<insert id="insertUserBuddies" parameterType="UserDTO">
+		insert into t_user_buddies values(#{user_index},#{user_buddies})
+	</insert>
+	
+	<insert id="insertUserBlock" parameterType="UserDTO">
+	insert into t_user_block values(#{user_index},#{user_block_list})
+	</insert>
+	
+	<insert id="insertUserNoteScope" parameterType="UserDTO">
+	insert into t_user_note_scope(user_index) values(#{user_index})
+	</insert>
+	
+	<delete id="deletetUser" parameterType="_int">
+		delete from t_user where user_index=#{user_index}
 	</delete>
 	
-	<delete id="deleteUserTermsAgreement" parameterType="string">
-	delete from t_user_terms_agreement where user_email=#{user_email}
+	<delete id="deleteUserTermsAgreement" parameterType="_int">
+	delete from t_user_terms_agreement where user_index=#{user_index}
 	</delete>
 	
-	<delete id="deleteUserInfo" parameterType="string">
-	delete from t_user_info where user_email=#{user_email}
+	<delete id="deleteUserInfo" parameterType="_int">
+	delete from t_user_info where user_index=#{user_index}
 	</delete>
 	
-	<delete id="deleteUserAddress" parameterType="string">
-	delete from t_user_address where user_email=#{user_email}
+	<delete id="deleteUserAddress" parameterType="_int">
+	delete from t_user_address where user_index=#{user_index}
+	</delete>
+	
+	<delete id="deleteUserBuddies" parameterType="_int">
+		delete from t_user_buddies where user_index=#{user_index}
+	</delete>
+	
+	<delete id="deleteUserBlock" parameterType="_int">
+		delete from t_user_block where user_index=#{user_index}
+	</delete>
+	
+	<delete id="deleteUserNoteScope" parameterType="_int">
+		delete from t_user_note_scope where user_index=#{user_index}
 	</delete>
 </mapper>

@@ -105,19 +105,19 @@ $('#user_password').on('keyup',function(){
 	resultText.append(sl);
 	resultText.append(sl_chk);
 	if (user_password.length >= 8) {
-		len_chk.text('✔')
+		len_chk.text('✓  ');
 		len_chk.css("color", "deepskyblue");
 	}
 	if (regPW_n.test(user_password)) {
-		n_chk.text('✔')
+		n_chk.text('✓  ');
 		n_chk.css("color", "deepskyblue");
 	}
 	if (regPW_l.test(user_password)) {
-		l_chk.text('✔')
+		l_chk.text('✓  ');
 		l_chk.css("color", "deepskyblue");
 	}
 	if (regPW_sl.test(user_password)) {
-		sl_chk.text('✔')
+		sl_chk.text('✓  ');
 		sl_chk.css("color", "deepskyblue");
 	}
 });
@@ -364,6 +364,7 @@ function sendit(){
      });
 	return flag;
 }
+
 
 //페이지 넘기기
 const btn1 = document.getElementById('join1');

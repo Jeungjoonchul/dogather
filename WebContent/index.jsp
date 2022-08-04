@@ -9,7 +9,7 @@
 <title>Doːgather</title>
 </head>
 <body>
-<a href="${cp}/user/user_join.us">회원가입</a>
-<a href="${cp}/user/user_login.us">로그인</a>
+인덱스
+<a href="${cp}/main.jsp">메인으로 가기</a>
 </body>
 </html>

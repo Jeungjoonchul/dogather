@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="cp" value="${pageContext.request.contextPath }"/>
 <c:set var="loginUser" scope="session" value="${loginUser }"/>
 <!DOCTYPE html>
@@ -16,7 +16,7 @@
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;600;700;800;900&display=swap"
       rel="stylesheet"
     />
-    <link rel="shortcut icon" href="${cp}/resources/images/favicon.png" />
+    <link rel="shortcut icon" href="./img/favicon.png" />
     <title>DoGather</title>
   </head>
   <body>
@@ -29,29 +29,19 @@
             </a>
           </div>
           <div class="center">
-            <img src="${cp }/resources/images/dogather_logo.png" alt="" width="175px" />
+            <img src="./img/dogather_logo.png" alt="" width="175px" />
           </div>
           <div class="right">
-          <c:choose>
-          	<c:when test="${empty loginUser}">
-          	
-            <a href="${cp}/user/user_login.us">
+            <a href="./login.html">
               <span> 로그인 </span>
             </a>
-            <a href="${cp}/user/user_join.us">
+            <a href="./joinmain.html">
               <span> 회원가입 </span>
             </a>
-          	</c:when>
-          	<c:otherwise>
-          	<a href="#">
-              <span> 마이페이지 </span>
-            </a>
-          	</c:otherwise>
-          </c:choose>
-          <a href="#">
+            <a href="">
               <span> 고객센터 </span>
             </a>
-           </div>
+          </div>
         </div>
       </div>
       <div id="body">
@@ -63,17 +53,17 @@
               </a>
               <ul class="submenu">
                 <li>
-                  <a href="#">
+                  <a href="">
                     <span class="span">회사 소개</span>
                   </a>
                 </li>
                 <li>
-                  <a href="#">
+                  <a href="">
                     <span class="span">이용 방법</span>
                   </a>
                 </li>
                 <li>
-                  <a href="#">
+                  <a href="">
                     <span class="span">인재 채용</span>
                   </a>
                 </li>
@@ -85,59 +75,59 @@
               </a>
               <ul class="submenu">
                 <li>
-                  <a href="#">
+                  <a href="">
                     <span class="span">진행 중 두게더</span>
                   </a>
                 </li>
                 <li>
-                  <a href="#">
+                  <a href="">
                     <span class="span">종료 된 두게더</span>
                   </a>
                 </li>
                 <li>
-                  <a href="#">
+                  <a href="">
                     <span class="span">인증/후기 게시판</span>
                   </a>
                 </li>
               </ul>
             </li>
             <li>
-              <a href="#">
+              <a href="./communitymain.html">
                 <span> 커뮤니티 </span>
               </a>
               <ul class="submenu">
                 <li>
-                  <a href="#">
+                  <a href="">
                     <span class="span">자유게시판</span>
                   </a>
                 </li>
                 <li>
-                  <a href="#">
+                  <a href="">
                     <span class="span">정보게시판</span>
                   </a>
                 </li>
                 <li>
-                  <span>&nbsp;</span>
+                  <span>&nbsp</span>
                 </li>
               </ul>
             </li>
             <li>
-              <a href="#">
+              <a href="./eventmain.html">
                 <span> 이벤트 </span>
               </a>
               <ul class="submenu">
                 <li>
-                  <a href="#">
+                  <a href="">
                     <span class="span">콜라보레이션</span>
                   </a>
                 </li>
                 <li>
-                  <a href="#">
+                  <a href="">
                     <span class="span">이벤트</span>
                   </a>
                 </li>
                 <li>
-                  <span>&nbsp;</span>
+                  <span>&nbsp</span>
                 </li>
               </ul>
             </li>
@@ -150,21 +140,21 @@
           <div class="slidewrap">
             <ul class="slidelist">
               <li>
-                <a href="#">
+                <a href="">
                   <label for="slide3" class="s-left">&lt;</label>
-                  <img src="${cp }/resources/images/버거메인이미지1.png" alt="이미지1" />
+                  <img src="./img/버거메인이미지1.png" alt="이미지1" />
                   <label for="slide2" class="s-right">&gt;</label>
                 </a>
               </li>
               <li>
-                <a href="#">
+                <a href="">
                   <label for="slide1" class="s-left">&lt;</label>
-                  <img src="${cp }/resources/images/bg.JPG" height="215.2px" alt="이미지2" />
+                  <img src="./img/bg.JPG" height="215.2px" alt="이미지2" />
                   <label for="slide3 class=s-right">&gt;</label>
                 </a>
               </li>
               <li>
-                <a href="#">
+                <a href="">
                   <label for="slide2" class="s-left">&lt;</label>
                   <img src="" alt="이미지3" />
                   <label for="slide1" class="s-right">&gt;</label>
@@ -382,8 +372,8 @@
                   <a href="#">
                     <div class="cap gray">유머</div>
                     <div class="tit">
-                      	유머 게시물
-                      	내용하나둘셋하나둘셋하나둘셋하나둘셋하나둘셋하나둘셋하나둘셋
+                      유머 게시물
+                      내용하나둘셋하나둘셋하나둘셋하나둘셋하나둘셋하나둘셋하나둘셋
                     </div>
                     <div class="comm red">[댓글수]</div>
                     <div class="icon">
@@ -469,7 +459,7 @@
         <div id="review_img_area">
           <div class="review_img">
             <a href="#">
-              <img src="${cp }/resources/images/review_img.jpg" alt="" />
+              <img src="./img/review_img.jpg" alt="" />
             </a>
           </div>
         </div>
@@ -532,10 +522,10 @@
                 href="https://www.facebook.com"
                 target="_blank"
                 class="facebook"
-                ><img src="${cp }/resources/images/small_facebook.png" alt=""
+                ><img src="./img/small_facebook.png" alt=""
               /></a>
               <a href="https://www.instagram.com" target="_blank" class="insta"
-                ><img src="${cp }/resources/images/small_instagram.png" alt=""
+                ><img src="./img/small_instagram.png" alt=""
               /></a>
             </div>
           </div>
