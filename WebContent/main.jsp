@@ -46,6 +46,9 @@
           	<a href="#">
               <span> 마이페이지 </span>
             </a>
+            <a href="#">
+              <span> 로그아웃 </span>
+            </a>
           	</c:otherwise>
           </c:choose>
           <a href="#">

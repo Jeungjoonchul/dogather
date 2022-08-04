@@ -42,21 +42,7 @@ public class UserFrontController extends HttpServlet {
 				System.out.println("/user/user_join.us" + e);
 			}
 			break;
-
-//		case "/user/user_join_depth1.us":
-//			try {
-//				transfer=new UserJoinDepth1Action().execute(req,resp);
-//			} catch (ServletException e) {
-//				System.out.println("/user/user_join_depth1.us"+e);
-//			} catch (IOException e) {
-//				System.out.println("/user/user_join_depth1.us"+e);
-//			}
-//			break;
-//		case "/user/user_join_depth2.us":
-//			transfer=new ActionTo();
-//			transfer.setRedirect(false);
-//			transfer.setPath("/app/user/user_join_depth2.jsp");
-//			break;
+			
 		case "/user/user_check_email.us":
 			try {
 				transfer = new UserCheckEmailAction().execute(req, resp);
@@ -64,6 +50,7 @@ public class UserFrontController extends HttpServlet {
 				System.out.println("/user/user_check_email.us" + e);
 			}
 			break;
+			
 		case "/user/user_join_ok.us":
 			try {
 				transfer = new UserJoinOkAction().execute(req, resp);
@@ -72,7 +59,6 @@ public class UserFrontController extends HttpServlet {
 				System.out.println("/user/user_join_ok.us" + e);
 				e.printStackTrace();
 			}
-
 			break;
 
 		case "/user/user_logout.us":
@@ -82,16 +68,26 @@ public class UserFrontController extends HttpServlet {
 			out.print("location.href='${cp}");
 			out.print("</script>");
 			break;
+			
 		case "/user/user_login.us":
 			transfer = new ActionTo();
 			transfer.setPath("/app/user/user_login.jsp");
 			transfer.setRedirect(false);
 			break;
+			
 		case "/user/user_check_nickname.us":
 			try {
 				transfer = new UserCheckNicknameAction().execute(req, resp);
 			} catch (Exception e) {
 				System.out.println("/user/user_check_nickname.us" + e);
+			}
+			break;
+			
+		case "/user/user_login_ok.us":
+			try {
+				transfer=new UserLoginOkAction().execute(req,resp);
+			} catch (Exception e) {
+				System.out.println("/user/user_login_ok.us"+e);
 			}
 			break;
 		}

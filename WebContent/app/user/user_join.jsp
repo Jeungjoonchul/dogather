@@ -7,7 +7,7 @@
 <head>
  <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>DoGather - 회원가입</title>
 <link rel="stylesheet" href="${cp }/resources/css/join.css" />
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -109,7 +109,7 @@
 									<td><input type="text" name="user_email" id="user_email" placeholder='이메일을 입력해주세요'></td>
 								</tr>
 								<tr>
-									<td><span style="display: none;" class="status">null</span></td>
+									<th><span style="display: none;" class="status">null</span></th>
 									<td><span>&nbsp;</span></td>
 								</tr>
 
@@ -118,7 +118,7 @@
 									<td><input type="text" name="user_nickname" id="user_nickname" placeholder='닉네임을 입력해주세요' maxlength="10"></td>
 								</tr>
 								<tr>
-									<td><span style="display: none;" class="status">null</span></td>
+									<th><span style="display: none;" class="status">null</span></th>
 									<td><span>&nbsp;</span></td>
 								</tr>
 
@@ -129,7 +129,7 @@
 										id="user_password" placeholder='비밀번호를 입력해주세요' maxlength="24"></td>
 								</tr>
 								<tr>
-									<td><span style="display: none;" class="status">null</span></td>
+									<th><span style="display: none;" class="status">null</span></th>
 									<td><span>&nbsp;</span></td>
 								</tr>
 
@@ -139,7 +139,7 @@
 										id="user_password_re" placeholder='비밀번호 확인' maxlength="24"></td>
 								</tr>
 								<tr>
-									<td><span style="display: none;" class="status">null</span></td>
+									<th><span style="display: none;" class="status">null</span></th>
 									<td><span>&nbsp;</span></td>
 								</tr>
 
@@ -149,7 +149,7 @@
 										placeholder='이름을 입력해주세요' maxlength="17"></td>
 								</tr>
 								<tr>
-									<td><span style="display: none;" class="status">null</span></td>
+									<th><span style="display: none;" class="status">null</span></th>
 									<td><span>&nbsp;</span></td>
 								</tr>
 
@@ -159,7 +159,7 @@
 										placeholder='휴대전화번호를 입력해주세요' maxlength="13"></td>
 								</tr>
 								<tr>
-									<td><span style="display: none;" class="status">null</span></td>
+									<th><span style="display: none;" class="status">null</span></th>
 									<td><span>&nbsp;</span></td>
 								</tr>
 
@@ -178,7 +178,7 @@
 										maxlength="10"></td>
 								</tr>
 								<tr>
-									<td><span style="display: none;" class="status">null</span></td>
+									<th><span style="display: none;" class="status">null</span></th>
 									<td><span>&nbsp;</span></td>
 								</tr>
 
@@ -198,7 +198,7 @@
 										id="address_detail" placeholder="상세 주소를 입력해주세요" maxlength="300"></td>
 								</tr>
 								<tr>
-									<td><span style="display: none;" class="status">null</span></td>
+									<th><span style="display: none;" class="status">null</span></th>
 									<td><span>&nbsp;</span></td>
 								</tr>
 								<tr>
@@ -214,12 +214,15 @@
 									<td><label><input type="checkbox"
 											name="user_interest" class="user_interest" value="1">건강</label>
 										<label><input type="checkbox" name="user_interest"
-											class="user_interest" value="2">학습</label> <label><input
+											class="user_interest" value="2">학습</label> 
+											<label><input
 											type="checkbox" name="user_interest" class="user_interest"
-											value="3">교양</label> <label><input type="checkbox"
+											value="3">교양</label> 
+											<label><input type="checkbox"
 											name="user_interest" class="user_interest" value="4">습관</label>
 										<label><input type="checkbox" name="user_interest"
-											class="user_interest" value="5">경제</label> <label>기타<input
+											class="user_interest" value="5">경제</label> 
+											<label>기타<input
 											type="text" name="user_interest_etc" id="user_interest_etc"
 											placeholder='그 외 관심사를 입력해주세요(ex: 코딩)'></label></td>
 								</tr>

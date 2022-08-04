@@ -142,7 +142,7 @@
         <div id="login_area">
           <div class="login_top">
             <h3>로그인</h3>
-            <form action="post" id="login" name="LoginForm">
+            <form method="post" id="login" name="LoginForm" action="${cp}/user/user_login_ok.us">
               <div class="user_email">
                 <c:choose>
                 	<c:when test="${empty param.user}">
@@ -158,13 +158,7 @@
               </div>
               <div class="login_keep_wrap">
                 <div class="keep_check">
-                  <input
-                    type="checkbox"
-                    name="keep"
-                    id="keep"
-                    class="input_keep"
-                    value="off"
-                  />
+                  <input type="checkbox" name="keep" id="keep" class="input_keep" value="on"/>
                   <label for="keep" class="keep_text"> 자동로그인 </label>
                 </div>
                 <div class="find_id">

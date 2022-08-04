@@ -1,5 +1,7 @@
 package com.dogather.dao.user;
 
+import java.util.HashMap;
+
 import org.apache.ibatis.session.SqlSession;
 
 import com.dogather.dto.user.UserDTO;
@@ -23,7 +25,15 @@ public class UserDAO {
 	public UserDTO selectUser(String user_email) {
 		return sqlSession.selectOne("User.selectUser", user_email);
 	}
-
+	
+	public UserDTO loginUser(String user_email, String user_password) {
+		//user_email = dbrlgus@naver.com
+		//user_password = asdf1234!
+		HashMap<String, String> datas = new HashMap<String, String>();
+		datas.put("user_email", user_email);
+		datas.put("user_password", user_password);
+		return sqlSession.selectOne("User.loginUser", datas);
+	}
 	public boolean insertUser(UserDTO user) {
 		if(sqlSession.insert("User.insertUser",user)==1) {
 			int user_index=selectUser(user.getUser_email()).getUser_index();
@@ -90,6 +100,8 @@ public class UserDAO {
 	public boolean deleteUserNoteScope(int user_index) {
 		return sqlSession.delete("User.deleteUserNoteScope",user_index)==1;
 	}
+
+	
 	
 	
 }

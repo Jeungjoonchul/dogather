@@ -15,7 +15,11 @@
 		resultType="UserDTO">
 		select * from t_user where user_email=#{user_email}
 	</select>
-
+	
+	<select id="loginUser" parameterType="hashmap"
+		resultType="UserDTO">
+		select * from t_user where user_email=#{user_email} and user_password=#{user_password}
+	</select>
 
 	<insert id="insertUser" parameterType="UserDTO">
 		insert into
