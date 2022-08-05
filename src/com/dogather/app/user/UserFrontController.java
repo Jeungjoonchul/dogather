@@ -64,7 +64,7 @@ public class UserFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 			break;
-//    /dogather -> null -> /dogather/user => /dogather  /dogather/user
+//    /dogather -> null -> /dogather => /dogather  
 		case "/user/user_logout.us":
 			Cookie[] cookies = req.getCookies();
 			for (Cookie cookie : cookies) {
