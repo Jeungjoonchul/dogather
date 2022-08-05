@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -65,11 +66,28 @@ public class UserFrontController extends HttpServlet {
 			break;
 
 		case "/user/user_logout.us":
-			req.getSession().invalidate();
-			PrintWriter out = resp.getWriter();
-			out.print("<script>alert('로그아웃되었습니다');");
-			out.print("location.href='"+req.getContextPath()+"/main'");
-			out.print("</script>");
+//			Cookie[] cookies = req.getCookies();
+//			Cookie c = null;
+//			for (Cookie cookie : cookies) {
+//				if(cookie.getName().equals("autoLogin_check")) {
+//					cookie.setMaxAge(-1);
+//					c=cookie;
+//					break;
+//				}
+//			}			
+//			req.getSession().invalidate();
+//			PrintWriter out = resp.getWriter();
+//			out.print("<script>alert('로그아웃되었습니다');");
+//			out.print("location.href='"+req.getContextPath()+"/main'");
+//			out.print("</script>");
+//			resp.addCookie(c);
+			try {
+				new UserLogoutAction().execute(req,resp);
+			} catch (ServletException e) {
+				System.out.println("/user/user_logout.us"+e);
+			} catch (IOException e) {
+				System.out.println("/user/user_logout.us"+e);
+			}
 			break;
 			
 		case "/user/user_login.us":

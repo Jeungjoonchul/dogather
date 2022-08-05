@@ -20,10 +20,9 @@
     <title>DoGather</title>
   </head>
   <body>
-
-  <p>${cookie.autoLogin_check.name } : ${cookie.autoLogin_check.value }</p>
-
-  
+	<p>${cookie.autoLogin_check.name } : ${cookie.autoLogin_check.value }</p>
+	<p>${loginUser.user_email}</p>
+  	
     <div id="main">
       <div id="head">
         <div>
@@ -37,24 +36,22 @@
           </div>
           <div class="right">
           <c:choose>
-          	<c:when test="${empty loginUser}">
+          	<c:when test="${empty loginUser}"><!-- 세션이 없다면 -->
           	<a href="${cp}/user/user_login.us">
               <span> 로그인 </span>
             </a>
-            <a href="${cp}/user/user_join.us">
+            <a href="${cp }/app/user/user.jsp">
               <span> 회원가입 </span>
             </a>
 
           	</c:when>
-          	<c:otherwise>
-          	
+          	<c:otherwise><!-- 세션이 있다면 -->
               <a href="#?user_index=${loginUser.user_index}">
               <span> 마이페이지 </span>
             </a>
             <a href="${cp}/user/user_logout.us">
               <span> 로그아웃 </span>
             </a>
-
           	</c:otherwise>
           </c:choose>
           <a href="#">

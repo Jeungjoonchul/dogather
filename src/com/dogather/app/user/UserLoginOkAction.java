@@ -26,24 +26,26 @@ public class UserLoginOkAction implements Action {
 		System.out.println(user_email);
 		System.out.println(user_password);
 		String keep = req.getParameter("keep");
-		boolean al = keep == null ? false : true;
+		boolean al = keep != null ? true : false;
 		System.out.println("쿠키 : "+al);
 		UserDAO udao = new UserDAO();
 		UserDTO user = udao.loginUser(user_email, user_password);
+		req.getSession().setAttribute("loginUser", user);
 		resp.setCharacterEncoding("utf-8");
 		resp.setContentType("text/html charset=utf-8");
 		PrintWriter out = resp.getWriter();
 
 		// 출입증(session)
 		// request객체에서 세션을 가져옴 -> 세션을 세팅(key,value)
-		req.getSession().setAttribute("loginUser", user);
 		
 		// 자동로그인(쿠키)
 		if (al) {
 			
-			Cookie autoLogin_check = new Cookie("autoLogin_check", "on");
-			autoLogin_check.setMaxAge(60 * 60 * 24 * 30);
+			//자동 로그인 체크 시 쿠키
+			Cookie autoLogin_check = new Cookie("autoLogin_check", user_email);
+			//누구인지 확인하기 위해 이메일 주소 저장용 쿠키
 			autoLogin_check.setPath(req.getContextPath());
+			//사용자의 컴퓨터에 쿠키를 저장
 			resp.addCookie(autoLogin_check);
 		}
 		out.print("<script>");
