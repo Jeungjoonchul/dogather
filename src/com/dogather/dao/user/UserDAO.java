@@ -22,13 +22,19 @@ public class UserDAO {
 		return (Integer)sqlSession.selectOne("User.checkNickname",user_nickname)==0;
 	}
 	
-	public UserDTO selectUser(String user_email) {
-		return sqlSession.selectOne("User.selectUser", user_email);
+	public UserDTO selectUserWithUserEmail(String user_email) {
+		return sqlSession.selectOne("User.selectUserWithUserEmail", user_email);
 	}
 	
+	public boolean selectUserWithUserInfo(String user_email, String user_password) {
+		HashMap<String, String> datas = new HashMap<String, String>();
+		datas.put("user_email", user_email);
+		datas.put("user_password", user_password);
+		return (Integer)sqlSession.selectOne("User.selectUserWithUserInfo", datas)==1;
+	}
+
+	
 	public UserDTO loginUser(String user_email, String user_password) {
-		//user_email = dbrlgus@naver.com
-		//user_password = asdf1234!
 		HashMap<String, String> datas = new HashMap<String, String>();
 		datas.put("user_email", user_email);
 		datas.put("user_password", user_password);
@@ -36,7 +42,7 @@ public class UserDAO {
 	}
 	public boolean insertUser(UserDTO user) {
 		if(sqlSession.insert("User.insertUser",user)==1) {
-			int user_index=selectUser(user.getUser_email()).getUser_index();
+			int user_index=selectUserWithUserEmail(user.getUser_email()).getUser_index();
 			user.setUser_index(user_index);
 			boolean result1=insertUserTermsAgreement(user);
 			boolean result2=insertUserInfo(user);
@@ -101,6 +107,7 @@ public class UserDAO {
 		return sqlSession.delete("User.deleteUserNoteScope",user_index)==1;
 	}
 
+	
 	
 	
 	

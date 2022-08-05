@@ -10,6 +10,15 @@
 </head>
 <body>
 인덱스
-<a href="${cp}/main.jsp">메인으로 가기</a>
+<a href="${cp}/main" >메인으로 가기</a>
+<form>
+<input type="checkbox" name="skip_intro" value="skip"/>
+</form>
+<p id="test"></p>
 </body>
+<script>
+	$('input').change({
+		$()
+	});
+</script>
 </html>

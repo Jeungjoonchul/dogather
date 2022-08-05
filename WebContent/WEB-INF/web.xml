@@ -28,4 +28,12 @@
 		<servlet-name>BoardFrontController</servlet-name>
 		<url-pattern>*.bo</url-pattern>
 	</servlet-mapping>
+		<servlet>
+		<servlet-name>MainFrontController</servlet-name>
+		<servlet-class>com.dogather.app.main.MainFrontController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MainFrontController</servlet-name>
+		<url-pattern>/main</url-pattern>
+	</servlet-mapping>
 </web-app>

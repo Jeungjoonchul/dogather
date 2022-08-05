@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="cp" value="${pageContext.request.contextPath }"/>
-<c:set var="loginUser" scope="session" value="${loginUser }"/>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -20,6 +20,10 @@
     <title>DoGather</title>
   </head>
   <body>
+
+  <p>${cookie.autoLogin_check.name } : ${cookie.autoLogin_check.value }</p>
+
+  
     <div id="main">
       <div id="head">
         <div>
@@ -34,21 +38,23 @@
           <div class="right">
           <c:choose>
           	<c:when test="${empty loginUser}">
-          	
-            <a href="${cp}/user/user_login.us">
+          	<a href="${cp}/user/user_login.us">
               <span> 로그인 </span>
             </a>
             <a href="${cp}/user/user_join.us">
               <span> 회원가입 </span>
             </a>
+
           	</c:when>
           	<c:otherwise>
-          	<a href="#">
+          	
+              <a href="#?user_index=${loginUser.user_index}">
               <span> 마이페이지 </span>
             </a>
-            <a href="#">
+            <a href="${cp}/user/user_logout.us">
               <span> 로그아웃 </span>
             </a>
+
           	</c:otherwise>
           </c:choose>
           <a href="#">
@@ -302,7 +308,7 @@
                   <a href="#">
                     <div class="cap gray">이벤트</div>
                     <div class="tit">
-                      이벤트 게시물 내용하나둘셋하나둘셋하나둘
+                      	이벤트 게시물 내용하나둘셋하나둘셋하나둘
                     </div>
                     <div class="comm red">[댓글수]</div>
                     <div class="icon">

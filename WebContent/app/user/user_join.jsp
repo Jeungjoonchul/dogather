@@ -210,23 +210,27 @@
 									<td colspan="2"><h4>선택 입력 사항</h4></td>
 								</tr>
 								<tr>
-									<th>관심사</th>
-									<td><label><input type="checkbox"
-											name="user_interest" class="user_interest" value="1">건강</label>
-										<label><input type="checkbox" name="user_interest"
-											class="user_interest" value="2">학습</label> 
-											<label><input
-											type="checkbox" name="user_interest" class="user_interest"
-											value="3">교양</label> 
-											<label><input type="checkbox"
-											name="user_interest" class="user_interest" value="4">습관</label>
-										<label><input type="checkbox" name="user_interest"
-											class="user_interest" value="5">경제</label> 
-											<label>기타<input
-											type="text" name="user_interest_etc" id="user_interest_etc"
-											placeholder='그 외 관심사를 입력해주세요(ex: 코딩)'></label></td>
+									<th>관심사</th><td>&nbsp;</td>
+									
 								</tr>
-
+								<tr>
+									<th>&nbsp;</th>
+									<td>
+									<label><input type="checkbox" name="user_interest" class="user_interest" value="1">건강</label>
+									<label><input type="checkbox" name="user_interest" class="user_interest" value="2">학습</label> 
+									<label><input type="checkbox" name="user_interest" class="user_interest" value="3">교양</label> 
+									<label><input type="checkbox" name="user_interest" class="user_interest" value="4">습관</label>
+									<label><input type="checkbox" name="user_interest" class="user_interest" value="5">경제</label> 
+									</td>
+								</tr>
+								<tr>
+									<th>&nbsp;</th>
+									<td>
+									<label>기타<input
+											type="text" name="user_interest_etc" id="user_interest_etc"
+											placeholder='그 외 관심사를 입력해주세요(ex: 코딩)'></label>
+											</td>
+								</tr>
 								<tr>
 									<th>자기소개</th>
 									<td><textarea rows="15" cols="60" name="user_intro"

@@ -10,12 +10,7 @@
 </head>
 <body>
 <table>
-	<tr>
-		<th>내용</th>
-		<td>
-		<h1><b><u><font color="#00ffff">안녕하세요</font></u></b></h1><h1><img style="width: 25%;" src="/dogather/upload/images/368f40ef-819c-4b7b-97b3-8c6d47ff6bce"><b><u><font color="#00ffff"><br></font></u></b></h1><h1><b><u><font color="#00ffff"><br></font></u></b></h1><blockquote><p><font color="#00ffff" style="background-color: rgb(255, 0, 0);">반갑습니다.</font></p></blockquote><p><img style="width: 25%;" src="/dogather/upload/images/91869f77-ace7-4dba-ad45-0669767b70f5"><br></p>
-		</td>
-	</tr>
+	<div><p>첫번째 사진은 이겁니다</p><p><img src="/dogather/temp/bad860fd-f8ef-44b9-8454-7036ff008717" style="width: 25%;"></p><p><br></p><h1>두번째 사진은 인스타그램 로고</h1><p><img src="/dogather/temp/a07b3720-2b68-4024-aa48-1e7c5875385e" style="width: 25%;"><br></p></div>
 </table>
 </body>
 </html>

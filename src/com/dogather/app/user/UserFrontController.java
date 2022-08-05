@@ -26,6 +26,9 @@ public class UserFrontController extends HttpServlet {
 	}
 
 	protected void doProcess(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		resp.setCharacterEncoding("utf-8");
+		resp.setContentType("text/html charset=utf-8");
+		
 		String requestURI = req.getRequestURI(); // ????/board/boardmain.do
 		String contextPath = req.getContextPath(); // ????(module명)
 		String command = requestURI.substring(contextPath.length()); // /board/boardmain.do
@@ -65,7 +68,7 @@ public class UserFrontController extends HttpServlet {
 			req.getSession().invalidate();
 			PrintWriter out = resp.getWriter();
 			out.print("<script>alert('로그아웃되었습니다');");
-			out.print("location.href='${cp}");
+			out.print("location.href='"+req.getContextPath()+"/main'");
 			out.print("</script>");
 			break;
 			
@@ -88,6 +91,15 @@ public class UserFrontController extends HttpServlet {
 				transfer=new UserLoginOkAction().execute(req,resp);
 			} catch (Exception e) {
 				System.out.println("/user/user_login_ok.us"+e);
+			}
+			break;
+			
+		case "/user/user_login_check.us":
+			try {
+				transfer=new UserLoginCheckAction().execute(req,resp);
+			} catch (Exception e) {
+				System.out.println("/user/user_login_check.us"+e);
+				e.printStackTrace();
 			}
 			break;
 		}

@@ -16,6 +16,7 @@
       rel="stylesheet"
     />
     <link rel="shortcut icon" href="${cp}/resources/images/favicon.png" />
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <title>DoGather</title>
   </head>
   <body>
@@ -142,19 +143,22 @@
         <div id="login_area">
           <div class="login_top">
             <h3>로그인</h3>
-            <form method="post" id="login" name="LoginForm" action="${cp}/user/user_login_ok.us">
+            <form method="post" id="login" name="LoginForm" action="${cp }/user/user_login_ok.us">
               <div class="user_email">
                 <c:choose>
                 	<c:when test="${empty param.user}">
-                		<input type="email" name="user_email" placeholder="이메일 주소 입력"/>
+                		<input type="email" name="user_email" id="user_email" placeholder="이메일 주소 입력"/>
                 	</c:when>
                 	<c:otherwise>
-                		<input type="email" name="user_email" value="${param.user}"/>
+                		<input type="email" name="user_email" id="user_email" value="${param.user}"/>
                 	</c:otherwise>
                 </c:choose>
               </div>
               <div class="userpw_area">
-                <input type="password" name="user_password" placeholder="비밀번호" />
+                <input type="password" name="user_password" id="user_password" placeholder="비밀번호" />
+              </div>
+              <div>
+              	<span id="login_status">&nbsp;</span>
               </div>
               <div class="login_keep_wrap">
                 <div class="keep_check">
@@ -261,4 +265,5 @@
       </div>
     </div>
   </body>
+  <script src="${cp }/resources/js/login.js"></script>
 </html>
