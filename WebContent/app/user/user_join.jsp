@@ -19,7 +19,7 @@
 		<div id="head">
 
 			<p class="center">
-				<a href="#"> <img
+				<a href="${cp }/main"> <img
 					src="${cp}/resources/images/dogather_logo.png" alt="" width="350px">
 				</a>
 			</p>

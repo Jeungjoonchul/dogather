@@ -31,20 +31,24 @@ public class MainAction implements Action {
 		}
 
 		// 자동 로그인 체크 여부
-		String user_email = "";
+		String user_email = null;
+
 		Cookie[] cookies = req.getCookies();
+
 		for (Cookie c : cookies) {
 			if (c.getName().equals("autoLogin_check")) {
 				user_email = c.getValue();
+				System.out.println("쿠키값 : "+user_email);
 				break;
 			}
 		}
-
-System.out.println(((UserDTO)req.getSession().getAttribute("loginUser")).getUser_email());
-		UserDAO udao = new UserDAO();
-		if (req.getSession() == null) {
-			if (!user_email.equals("") || user_email != null) {
-				req.getSession().setAttribute("loginUser", udao.selectUserWithUserEmail(user_email));
+		//user_email = apple@apple.com
+		if (req.getSession().getAttribute("loginUser") == null) {
+			if (user_email != null) {
+				UserDAO udao = new UserDAO();
+				UserDTO user = udao.selectUserWithUserEmail(user_email);
+				System.out.println("세션값 : "+user.getUser_email());
+				req.getSession().setAttribute("loginUser", user);
 			}
 		}
 

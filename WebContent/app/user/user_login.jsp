@@ -30,7 +30,7 @@
             </a>
           </p>
           <p class="center">
-            <a href="/main.html">
+            <a href="${cp }/main">
               <img src="${cp}/resources/images/dogather_logo.png" alt="" width="350px" />
             </a>
           </p>
@@ -189,7 +189,7 @@
                     </li>
                     <li>
                         <a href="">
-                            <img src="${cp}/resources/images/KakaoTalk_logo.svg.png" alt="네이버 아이콘">
+                            <img src="${cp}/resources/images/KakaoTalk_logo.svg.png" alt="카카오 아이콘">
                         </a>
                     </li>
                    
@@ -198,7 +198,7 @@
             </div>
             <div class="join_container">
                 <div class="join_area">
-                    <a href="" class="join"><p>
+                    <a href="${cp }/app/user/user_join.jsp" class="join"><p>
                         이메일로 회원가입
                     </p>
                 </a>

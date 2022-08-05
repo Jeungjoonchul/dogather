@@ -15,25 +15,28 @@ public class UserLogoutAction implements Action {
 
 	@Override
 	public ActionTo execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		Cookie[] cookies = req.getCookies();
-		Cookie c = null;
-		for (Cookie cookie : cookies) {
-			if(cookie.getName().equals("autoLogin_check")) {
-				cookie.setMaxAge(0);
-				c=cookie;
-				break;
-			}
-		}			
+		System.out.println("여기");
+		
+		String check = req.getHeader("cookie");
+		System.out.println(check);
+		if(check!=null) {
+			Cookie[] cookies = req.getCookies();
+			for (Cookie cookie : cookies) {
+				if(cookie.getName().equals("autoLogin_check")) {
+					cookie.setValue(null);
+					cookie.setMaxAge(0);
+					resp.addCookie(cookie);
+					break;
+				}
+			}		
+		}
 		req.getSession().invalidate();
-		resp.addCookie(c);
-//		PrintWriter out = resp.getWriter();
-//		out.print("<script>alert('로그아웃되었습니다');");
-//		out.print("location.href='"+req.getContextPath()+"/main'");
-//		out.print("</script>");
-		ActionTo transfer = new ActionTo();
-		transfer.setRedirect(false);
-		transfer.setPath(req.getContextPath()+"/main");
-		return transfer;
+		
+		PrintWriter out = resp.getWriter();
+		out.print("<script>alert('로그아웃되었습니다');");
+		out.print("location.href='"+req.getContextPath()+"/main'");
+		out.print("</script>");
+		return null;
 	}
 
 }

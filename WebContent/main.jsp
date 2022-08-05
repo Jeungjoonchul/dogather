@@ -19,15 +19,12 @@
     <link rel="shortcut icon" href="${cp}/resources/images/favicon.png" />
     <title>DoGather</title>
   </head>
-  <body>
-	<p>${cookie.autoLogin_check.name } : ${cookie.autoLogin_check.value }</p>
-	<p>${loginUser.user_email}</p>
-  	
+  <body>	
     <div id="main">
       <div id="head">
         <div>
           <div class="left">
-            <a href="#">
+            <a href="">
               <span>메인화면</span>
             </a>
           </div>
@@ -40,7 +37,7 @@
           	<a href="${cp}/user/user_login.us">
               <span> 로그인 </span>
             </a>
-            <a href="${cp }/app/user/user.jsp">
+            <a href="${cp}/app/user/user_join.jsp">
               <span> 회원가입 </span>
             </a>
 

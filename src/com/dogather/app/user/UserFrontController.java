@@ -64,30 +64,24 @@ public class UserFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 			break;
-
+//    /dogather -> null -> /dogather/user => /dogather  /dogather/user
 		case "/user/user_logout.us":
-//			Cookie[] cookies = req.getCookies();
-//			Cookie c = null;
-//			for (Cookie cookie : cookies) {
-//				if(cookie.getName().equals("autoLogin_check")) {
-//					cookie.setMaxAge(-1);
-//					c=cookie;
-//					break;
-//				}
-//			}			
-//			req.getSession().invalidate();
-//			PrintWriter out = resp.getWriter();
-//			out.print("<script>alert('로그아웃되었습니다');");
-//			out.print("location.href='"+req.getContextPath()+"/main'");
-//			out.print("</script>");
-//			resp.addCookie(c);
-			try {
-				new UserLogoutAction().execute(req,resp);
-			} catch (ServletException e) {
-				System.out.println("/user/user_logout.us"+e);
-			} catch (IOException e) {
-				System.out.println("/user/user_logout.us"+e);
-			}
+			Cookie[] cookies = req.getCookies();
+			for (Cookie cookie : cookies) {
+				if(cookie.getName().equals("autoLogin_check")) {
+					cookie.setMaxAge(0);
+					System.out.println(cookie.getPath());
+					cookie.setPath(req.getContextPath());
+					resp.addCookie(cookie);
+					break;
+				}
+			}			
+			req.getSession().invalidate();
+			PrintWriter out = resp.getWriter();
+			out.print("<script>alert('로그아웃되었습니다');");
+			out.print("location.href='"+req.getContextPath()+"/main'");
+			out.print("</script>");
+		
 			break;
 			
 		case "/user/user_login.us":
