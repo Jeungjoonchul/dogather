@@ -16,8 +16,8 @@
 		select * from t_user where user_email=#{user_email}
 	</select>
 	
-	<select id="selectUserWithUserInfo" parameterType="hashmap" resultType="_int">
-		select count(*) from t_user where user_email=#{user_email} and binary(user_password)=#{user_password}
+	<select id="selectUserWithUserInfo" parameterType="hashmap" resultType="UserDTO">
+		select * from t_user where user_email=#{user_email} and binary(user_password)=#{user_password}
 	</select>
 		
 	<select id="loginUser" parameterType="hashmap"
@@ -25,66 +25,17 @@
 		select * from t_user where user_email=#{user_email} and binary(user_password)=#{user_password}
 	</select>
 
+
+
 	<insert id="insertUser" parameterType="UserDTO">
-		insert into
-		t_user(user_email,user_nickname,user_name,user_password,user_phone,user_gender,user_birth_date,user_interest,user_intro)
-		values(#{user_email},#{user_nickname},#{user_name},#{user_password},#{user_phone},#{user_gender},#{user_birth_date},#{user_interest},#{user_intro})
+		insert into 
+		t_user(user_email,user_nickname,user_name,user_password,user_phone,user_gender,user_birth_date,user_interest,user_intro,user_term_selective1,user_term_selective2) 
+		values(#{user_email},#{user_nickname},#{user_name},#{user_password},#{user_phone},#{user_gender},#{user_birth_date},#{user_interest},#{user_intro},#{user_term_selective1},#{user_term_selective2})
 	</insert>
 	
-	<insert id="insertUserTermsAgreement" parameterType="UserDTO">
-		insert into
-		t_user_terms_agreement(user_index,user_term_selective1,user_term_selective2)
-		values(#{user_index},#{user_term_selective1},#{user_term_selective2})
-	</insert>
-
-	<insert id="insertUserInfo" parameterType="UserDTO">
-		insert into
-		t_user_info(user_index) values(#{user_index})
-	</insert>
-
-	<insert id="insertUserAddress" parameterType="UserDTO">
-		insert into
-		t_user_address
-		values(#{user_index},#{zip_code},#{address1},#{address2},#{address3},#{address4},#{address_detail},#{address_extra})
-	</insert>
 	
-	<insert id="insertUserBuddies" parameterType="UserDTO">
-		insert into t_user_buddies values(#{user_index},#{user_buddies})
-	</insert>
 	
-	<insert id="insertUserBlock" parameterType="UserDTO">
-	insert into t_user_block values(#{user_index},#{user_block_list})
-	</insert>
-	
-	<insert id="insertUserNoteScope" parameterType="UserDTO">
-	insert into t_user_note_scope(user_index) values(#{user_index})
-	</insert>
-	
-	<delete id="deletetUser" parameterType="_int">
-		delete from t_user where user_index=#{user_index}
-	</delete>
-	
-	<delete id="deleteUserTermsAgreement" parameterType="_int">
-	delete from t_user_terms_agreement where user_index=#{user_index}
-	</delete>
-	
-	<delete id="deleteUserInfo" parameterType="_int">
-	delete from t_user_info where user_index=#{user_index}
-	</delete>
-	
-	<delete id="deleteUserAddress" parameterType="_int">
-	delete from t_user_address where user_index=#{user_index}
-	</delete>
-	
-	<delete id="deleteUserBuddies" parameterType="_int">
-		delete from t_user_buddies where user_index=#{user_index}
-	</delete>
-	
-	<delete id="deleteUserBlock" parameterType="_int">
-		delete from t_user_block where user_index=#{user_index}
-	</delete>
-	
-	<delete id="deleteUserNoteScope" parameterType="_int">
-		delete from t_user_note_scope where user_index=#{user_index}
-	</delete>
+	<update id="updateLastLogin" parameterType="_int">
+		update t_user set user_last_login=now() where user_index=#{user_index}
+	</update>
 </mapper>

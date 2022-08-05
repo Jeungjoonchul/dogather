@@ -37,7 +37,7 @@
           	<a href="${cp}/user/user_login.us">
               <span> 로그인 </span>
             </a>
-            <a href="${cp}/app/user/user_join.jsp">
+            <a href="${cp}/user/user_join.us">
               <span> 회원가입 </span>
             </a>
 

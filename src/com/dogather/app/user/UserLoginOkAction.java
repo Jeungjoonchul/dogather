@@ -30,11 +30,20 @@ public class UserLoginOkAction implements Action {
 		System.out.println("쿠키 : "+al);
 		UserDAO udao = new UserDAO();
 		UserDTO user = udao.loginUser(user_email, user_password);
+		
+		boolean user_inactive=user.isUser_inactive();
+		ActionTo transfer = null;
+		if(user_inactive) {
+			transfer = new ActionTo();
+			transfer.setRedirect(false);
+			transfer.setPath("/app/user/user_active.jsp");
+		}else {
+		
 		req.getSession().setAttribute("loginUser", user);
 		resp.setCharacterEncoding("utf-8");
 		resp.setContentType("text/html charset=utf-8");
 		PrintWriter out = resp.getWriter();
-
+		
 		// 출입증(session)
 		// request객체에서 세션을 가져옴 -> 세션을 세팅(key,value)
 		
@@ -52,7 +61,7 @@ public class UserLoginOkAction implements Action {
 		out.print("alert('" + user.getUser_nickname() + "님 환영합니다!');");
 		out.print("location.href='" + req.getContextPath() + "/main';");
 		out.print("</script>");
-
-		return null;
+		}
+		return transfer;
 	}
 }

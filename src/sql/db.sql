@@ -1,24 +1,4 @@
-drop database dg_db;
-create database dg_db;
-use dg_db;
-
-#(admin에서 관리하는 테이블 / user 입력 X)
-#카테고리 테이블
-create table t_category(
-	category_index int primary key, #카테고리 번호
-    category_name varchar(300)
-);
-insert into t_category values(1,'건강'),(2,'학습'),(3,'교양'),(4,'습관'),(5,'경제');
-
-#약관 테이블
-create table t_terms(
-	terms_index int primary key,
-    terms_title varchar(1000),
-    terms_contents text,
-    terms_type enum('essential','selective')
-);
-insert into t_terms values(1,'이용 약관','이용 약관 내용','essential'),(2,'개인 정보 약관','개인 정보 약관 내용','essential'),(3,'선택 약관1','선택 약관 1 내용','selective'),(3,'선택 약관 2','선택 약관 2 내용','selective');
-
+##########################################################################################################################
 create table t_user(
 	#회원 가입 시 입력 받아야할 내용들(필수 입력 항목)
 	user_index int primary key auto_increment, #유저 고유 번호(ex : 1)
@@ -37,7 +17,7 @@ create table t_user(
     #회원 가입 완료 후 설정
     user_public_scope enum('all','buddy','none') default 'all' #유저 정보 공개 범위(ex : 'none' / none일 경우 아무도 회원 정보 조회 불가)
 );
-insert into t_user(user_email,user_nickname,user_name,user_password,user_phone,user_gender,user_birth_date) values('apple@apple.com','애플킴','김사과','asdf1234A!','01011111111','female','2002-06-10');
+
 create table t_user_profile(
 	user_index int,
     user_profile_original_name varchar(300), #유저 프로필 사진 원본 파일이름
@@ -56,15 +36,15 @@ create table t_user_terms_agreement(
     user_term_selective2_reg_date datetime default now(),
     constraint userTermsAgreement_user_fk foreign key(user_index) references t_user(user_index)
 );
-insert into t_user_info values(1,now(),now(),null,false);
-insert into t_user_terms_agreement values(1,true,true,true,now(),true,now());
-insert into t_user_address values(1,'06236','서울시','강남구','역삼동','테헤란로 146','3층 코리아 IT 아카데미','(역삼동)');
+
 create table t_user_info(
 	user_index int,
     user_reg_date datetime default now(), #유저 가입날짜(yyyy-MM-dd / ex : 2022-07-25)
     user_password_set_date datetime default now(), #비밀번호 마지막으로 설정한 시간 (비밀번호 교체 권유용 / ex : 2022-07-25)
     user_inactive_date datetime, #비활성화 날짜(yyyy-MM-dd / ex : 2022-07-26)
     user_inactive boolean default false not null, #비활성화 여부 (ex : 'f' / f일 경우 활성화 상태, t일 경우 비활성화 상태)
+    user_inactive enum('withdrawal','dormancy'),
+    user_last_login datetime,
     constraint userInfo_user_fk foreign key(user_index) references t_user(user_index)
 );
 
@@ -103,6 +83,75 @@ create table t_user_note_scope(
 	user_index int, #유저(ex: 1)
     note_scope enum('all','buddy','none') default 'all', #쪽지 수신 여부 확인(ex : 'buddy' / 친구 쪽지만 수신 가능)
     constraint userNoteScope_user_fk foreign key(user_index) references t_user(user_index)
+);
+##########################################################################################################################
+
+
+drop database dg_db;
+create database dg_db;
+use dg_db;
+
+#(admin에서 관리하는 테이블 / user 입력 X)
+#카테고리 테이블
+create table t_category(
+	category_index int primary key, #카테고리 번호
+    category_name varchar(300)
+);
+insert into t_category values(1,'건강'),(2,'학습'),(3,'교양'),(4,'습관'),(5,'경제');
+
+#약관 테이블
+create table t_terms(
+	terms_index int primary key,
+    terms_title varchar(1000),
+    terms_contents text,
+    terms_type enum('essential','selective')
+);
+insert into t_terms values(1,'이용 약관','이용 약관 내용','essential'),(2,'개인 정보 약관','개인 정보 약관 내용','essential'),(3,'선택 약관1','선택 약관 1 내용','selective'),(4,'선택 약관 2','선택 약관 2 내용','selective');
+
+create table t_user(
+	#회원 가입 시 입력 받아야할 내용들(필수 입력 항목)
+	user_index int primary key auto_increment, #유저 고유 번호(ex : 1)
+	user_email varchar(767) not null unique, #정규식 적용 필요(email 정규식 / ex : apple@naver.com)
+    user_nickname varchar(30) not null unique, #정규식 적용 필요(영문자,한글,숫자, 2~10자리, 중복 불가 / ex : Apple킴)
+    user_name varchar(51) not null, #정규식 적용 필요(한글, 2~17자 리 / ex : 김사과)
+    user_password varchar(16) not null, #정규식 적용 필요(비밀번호 형식 : 영문자+숫자+특수문자, 8~16자리 / ex : asdf1234!)
+	user_phone varchar(11) not null, #정규식 적용 필요(10~11자리, 01로 시작 / ex : 0198479384)
+    user_gender enum('male','female') not null, #value는 mail, femail (ex : mail)
+    user_birth_date date not null, #입력 형식 확인(yyyy-MM-dd / ex : 2002-06-10)
+	
+    #선택 입력 항목
+    user_interest varchar(1000), #유저의 관심사, 반정규화 (check 박스 / ex : 1,2,3,4,5,기타/코딩) 관심 카테고리 없으면 정보제공X
+    user_intro text, #자기소개(1000자)
+    
+    #회원 가입 완료 후 설정
+   
+	user_profile_original_name varchar(300), #유저 프로필 사진 원본 파일이름
+    user_profile_system_name varchar(300), #유저 프로필 사진 시스템 파일이름
+
+	user_term_essential1 boolean default true not null, #필수약관 1 동의 여부(기본 't' / ex : 't')
+    user_term_essential2 boolean default true not null, #필수약관 2 동의 여부(기본 't' / ex : 't')
+    user_term_selective1 boolean not null, #선택약관 1 동의 여부(ex : 'f')
+    user_term_selective1_reg_date datetime default now(),
+    user_term_selective2 boolean not null, #선택약관 2 동의 여부(ex : 't')
+    user_term_selective2_reg_date datetime default now(),
+
+	user_public_scope enum('all','buddy','none') default 'all', #유저 정보 공개 범위(ex : 'none' / none일 경우 아무도 회원 정보 조회 불가)
+	user_reg_date datetime default now(), #유저 가입날짜(yyyy-MM-dd / ex : 2022-07-25)
+    user_password_set_date datetime default now(), #비밀번호 마지막으로 설정한 시간 (비밀번호 교체 권유용 / ex : 2022-07-25)
+	user_last_login datetime,
+    user_inactive_date datetime, #비활성화 날짜(yyyy-MM-dd / ex : 2022-07-26)
+    user_inactive boolean default false not null, #비활성화 여부 (ex : 0 / 0일 경우 활성화 상태, 1일 경우 비활성화 상태)
+    user_inactive_reason enum('withdrawal','dormancy'),
+
+	zip_code varchar(5), #우편번호(ex : 06236)
+    address_default varchar(1000), #기본주소
+    address_detail varchar(1000), #상세주소(ex : 3층 코리아IT아카데미)
+    address_extra varchar(300), #참고사항 / address_refer -> address_extra 220721 (ex : (역삼동))
+    
+	user_buddies text, #유저의 친구, 친구인 user_index를 ','로 구분하여 append(ex : 2,3,4,5,...)
+	user_block_list text, #유저가 차단한 유저 현황(ex : 6,7,8,9,10,...)
+    
+	note_scope enum('all','buddy','none') default 'all' #쪽지 수신 여부 확인(ex : 'buddy' / 친구 쪽지만 수신 가능)
 );
 
 #유저 친구 상태 현황

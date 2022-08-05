@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.dogather.action.Action;
 import com.dogather.action.ActionTo;
 import com.dogather.dao.user.UserDAO;
+import com.dogather.dto.user.UserDTO;
 
 public class UserLoginCheckAction implements Action {
 
@@ -22,14 +23,18 @@ public class UserLoginCheckAction implements Action {
 		UserDAO udao = new UserDAO();
 		
 		PrintWriter out = resp.getWriter();
+		UserDTO user = udao.selectUserWithUserInfo(user_email,user_password);
 		
-		if(udao.selectUserWithUserInfo(user_email,user_password)) {
-			out.print("O");
-			System.out.println("O");
-		}else {
+		if(user==null) {
 			out.print("X");
-			System.out.println("X");
+		}else {
+			if(user.getUser_inactive_reason().equals("withdrawal")) {
+				out.print("X");
+			}else {
+				out.print("O");
+			}
 		}
+		
 		return null;
 	}
 }

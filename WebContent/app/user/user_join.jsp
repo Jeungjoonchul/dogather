@@ -189,7 +189,7 @@
 								</tr>
 								<tr>
 									<th>주소</th>
-									<td><input type="text" name="address" id="address"
+									<td><input type="text" name="address_default" id="address_default"
 										readonly onclick="daumPostcode()" placeholder="주소를 입력해주세요"></td>
 								</tr>
 								<tr>

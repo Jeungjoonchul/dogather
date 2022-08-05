@@ -26,89 +26,27 @@ public class UserDAO {
 		return sqlSession.selectOne("User.selectUserWithUserEmail", user_email);
 	}
 	
-	public boolean selectUserWithUserInfo(String user_email, String user_password) {
+	public UserDTO selectUserWithUserInfo(String user_email, String user_password) {
 		HashMap<String, String> datas = new HashMap<String, String>();
 		datas.put("user_email", user_email);
 		datas.put("user_password", user_password);
-		return (Integer)sqlSession.selectOne("User.selectUserWithUserInfo", datas)==1;
+		return sqlSession.selectOne("User.selectUserWithUserInfo", datas);
 	}
 
-	
 	public UserDTO loginUser(String user_email, String user_password) {
 		HashMap<String, String> datas = new HashMap<String, String>();
 		datas.put("user_email", user_email);
 		datas.put("user_password", user_password);
 		return sqlSession.selectOne("User.loginUser", datas);
 	}
+	
 	public boolean insertUser(UserDTO user) {
-		if(sqlSession.insert("User.insertUser",user)==1) {
-			int user_index=selectUserWithUserEmail(user.getUser_email()).getUser_index();
-			user.setUser_index(user_index);
-			boolean result1=insertUserTermsAgreement(user);
-			boolean result2=insertUserInfo(user);
-			boolean result3=insertUserAddress(user);
-			boolean result4=insertUserBuddies(user);
-			boolean result5=insertUserBlock(user);
-			boolean result6=insertUserNoteScope(user);
-			if(!(result1&&result2&&result3&&result4&&result5&&result6)) {
-				deleteUser(user.getUser_index());
-				deleteUserTermsAgreement(user.getUser_index());
-				deleteUserInfo(user.getUser_index());
-				deleteUserAddress(user.getUser_index());
-				deleteUserBuddies(user.getUser_index());
-				deleteUserBlock(user.getUser_index());
-				deleteUserNoteScope(user.getUser_index());
-				return false;
-			}
-		}else {
-			return false;
-		}
-		return true;
-	}
-	public boolean insertUserTermsAgreement(UserDTO user) {
-		return sqlSession.insert("User.insertUserTermsAgreement",user)==1;
-	}
-	public boolean insertUserInfo(UserDTO user) {
-		return sqlSession.insert("User.insertUserInfo",user)==1;
-	}
-	public boolean insertUserAddress(UserDTO user) {
-		return sqlSession.insert("User.insertUserAddress",user)==1;
-	}
-	public boolean insertUserBuddies(UserDTO user) {
-		return sqlSession.insert("User.insertUserBuddies",user)==1;
-	}
-	public boolean insertUserBlock(UserDTO user) {
-		return sqlSession.insert("User.insertUserBlock",user)==1;
-	}
-	public boolean insertUserNoteScope(UserDTO user) {
-		return sqlSession.insert("User.insertUserNoteScope",user)==1;
+		return sqlSession.insert("User.insertUser", user)==1;
 	}
 
-	
-	public boolean deleteUser(int user_index) {
-		return sqlSession.delete("User.deleteUserTermsAgreement",user_index)==1;
+	public void updateLastLogin(int user_index) {
+		sqlSession.update("User.updateLastLogin",user_index);
 	}
-	public boolean deleteUserTermsAgreement(int user_index) {
-		return sqlSession.delete("User.deleteUserTermsAgreement",user_index)==1;
-	}
-	public boolean deleteUserInfo(int user_index) {
-		return sqlSession.delete("User.deleteUserInfo",user_index)==1;
-	}
-	public boolean deleteUserAddress(int user_index) {
-		return sqlSession.delete("User.deleteUserAddress",user_index)==1;
-	}
-	public boolean deleteUserBuddies(int user_index) {
-		return sqlSession.delete("User.deleteUserBuddies",user_index)==1;
-	}
-	public boolean deleteUserBlock(int user_index) {
-		return sqlSession.delete("User.deleteUserBlock",user_index)==1;
-	}
-	public boolean deleteUserNoteScope(int user_index) {
-		return sqlSession.delete("User.deleteUserNoteScope",user_index)==1;
-	}
-
-	
-	
 	
 	
 }

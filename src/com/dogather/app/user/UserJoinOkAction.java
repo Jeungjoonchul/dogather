@@ -73,28 +73,8 @@ public class UserJoinOkAction implements Action {
 		System.out.println("자기 소개 : "+user_intro);
 		String zip_code=req.getParameter("zip_code");
 		System.out.println("우편번호 : "+zip_code);
-		String[] address=req.getParameter("address").split(" ");
-
-		String address1=address[0];
-		String address2="";
-		String address3="";
-		String address4="";
-		for (int i = 1; i < address.length; i++) {
-			if(Pattern.matches("^[가-힣0-9]+[시군구]{1}$", address[i])) {
-				address2=address[i];
-				continue;
-			}
-			if(Pattern.matches("^[가-힣0-9]+[읍면동]{1}$", address[i])) {
-				address3=address[i];
-				continue;
-			}
-			address4+=address[i]+" ";
-		}
-		if(address3==null||address3.equals("")) {
-			address3=null;
-		}
-		address4=address4.trim();
-		System.out.println("주소 : "+address1+" "+address2+" "+address3+" "+address4);
+		String address_default=req.getParameter("address_default");
+		System.out.println("기본 주소 : "+address_default);
 		String address_detail=req.getParameter("address_detail");
 		System.out.println("상세 주소 : "+address_detail);
 		String address_extra=req.getParameter("address_extra");
@@ -116,10 +96,7 @@ public class UserJoinOkAction implements Action {
 		user.setUser_interest(user_interest);
 		user.setUser_intro(user_intro);
 		user.setZip_code(zip_code);
-		user.setAddress1(address1);
-		user.setAddress2(address2);
-		user.setAddress3(address3);
-		user.setAddress4(address4);
+		user.setAddress_default(address_default);
 		user.setAddress_detail(address_detail);
 		user.setAddress_extra(address_extra);
 		user.setUser_buddies("");

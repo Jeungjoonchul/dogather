@@ -21,7 +21,7 @@ public class UserJoinAction implements Action {
 
 		// selectList라는 메소드를 호출하여 t_terms에 있는 데이터를 가져와서 각 행 별로TermsDTO 객체로 포장 후 List에 담기
 		List<TermsDTO> terms_list = tdao.selectList();
-
+		
 		// 가져온 terms_list 데이터를 "terms_list"
 		req.setAttribute("terms_list", terms_list);
 

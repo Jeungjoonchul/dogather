@@ -51,7 +51,12 @@ public class MainAction implements Action {
 				req.getSession().setAttribute("loginUser", user);
 			}
 		}
-
+		
+		if(req.getSession().getAttribute("loginUser") != null) {
+			UserDAO udao = new UserDAO();
+			int user_index = ((UserDTO)req.getSession().getAttribute("loginUser")).getUser_index();
+			udao.updateLastLogin(user_index);
+		}
 		transfer.setRedirect(false);
 		transfer.setPath("/main.jsp");
 		return transfer;
