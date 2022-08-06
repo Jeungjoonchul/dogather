@@ -28,9 +28,9 @@ public class UserLoginCheckAction implements Action {
 		if(user==null) {
 			out.print("X");
 		}else {
-			if(user.getUser_inactive_reason().equals("withdrawal")) {
+			if(user.isUser_inactive()==true&&user.getUser_inactive_reason().equals("withdrawal")) {				
 				out.print("X");
-			}else {
+			}else if(user.isUser_inactive()==false){
 				out.print("O");
 			}
 		}

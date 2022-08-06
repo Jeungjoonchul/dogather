@@ -17,17 +17,17 @@ public class BoardDAO {
 		}
 		
 		//전체 게시글 개수
-		public int getBoardCnt() {
-			return sqlSession.selectOne("Board.getBoardCnt");
-			
+		public int getBoardCnt(String boardName) {
+			return sqlSession.selectOne("Board.getBoardCnt",boardName);
 		}
 
-		public List<BoardDTO> selectList(int startRow, int pageSize) {
-			HashMap<String, Integer> datas = new HashMap<String, Integer>();
+		public List<BoardDTO> getBoardList(int startRow, int pageSize,String boardName) {
+			HashMap<String, Object> datas = new HashMap<String, Object>();
 			datas.put("startRow", startRow);
 			datas.put("pageSize", pageSize);
+			datas.put("boardName",boardName);
 			
-			return sqlSession.selectList("Board.selectList", datas);
+			return sqlSession.selectList("Board.getBoardList", datas);
 		}
 
 		public int getLastIndex(int user_index) {
@@ -49,4 +49,9 @@ public class BoardDAO {
 		public void updateHits(int tb_index) {
 			sqlSession.update("Board.updateHits",tb_index);
 		}
+		
+		
+		public List<BoardDTO> getFreeBoardListOnMain(){
+			return sqlSession.selectList("Board.getFreeBoardListOnMain");
+		}		
 }

@@ -25,7 +25,7 @@ public class BoardViewAction implements Action {
 		System.out.println(loginUser);
 		BoardDTO tb = bdao.selectOne(tb_index);
 		System.out.println(tb.getUser_index());
-		System.out.println(tb.getTb_contents());
+		System.out.println(tb.getB_contents());
 
 		boolean flag = true;
 		// 쿠기가 있다면
@@ -46,7 +46,7 @@ public class BoardViewAction implements Action {
 			//flag==true : cookie가 없다는 뜻이므로 조회수 1 증가 및 db에 저장 후 쿠키 생성(1일뒤 자동 삭제됨)
 			//flag==false : 이미 조회수를 증가 시켰으므로 조회수 증가 없음
 			if (flag) {
-				tb.setTb_hits(tb.getTb_hits()+1);
+				tb.setB_hits(tb.getB_hits()+1);
 				bdao.updateHits(tb_index);
 				Cookie hits = new Cookie("tb-" + tb_index+"-"+loginUser, "hit");
 				hits.setMaxAge(60*60*24);

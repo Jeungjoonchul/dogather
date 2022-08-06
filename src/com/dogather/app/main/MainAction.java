@@ -1,6 +1,7 @@
 package com.dogather.app.main;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -9,7 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.dogather.action.Action;
 import com.dogather.action.ActionTo;
+import com.dogather.dao.board.BoardDAO;
 import com.dogather.dao.user.UserDAO;
+import com.dogather.dto.board.BoardDTO;
 import com.dogather.dto.user.UserDTO;
 
 public class MainAction implements Action {
@@ -29,7 +32,12 @@ public class MainAction implements Action {
 			// 사용자의 컴퓨터에 쿠키 저장(응답)
 			resp.addCookie(c1);
 		}
-
+		
+		//자유게시판 게시글 6개 가져오기
+		BoardDAO bdao=new BoardDAO();
+		List<BoardDTO> fb_list = bdao.getFreeBoardListOnMain();
+		req.setAttribute("fb_list", fb_list);
+		
 		// 자동 로그인 체크 여부
 		String user_email = null;
 

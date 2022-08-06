@@ -13,24 +13,25 @@ import com.dogather.dao.board.BoardDAO;
 import com.dogather.dto.board.BoardDTO;
 import com.dogather.util.Paging;
 
-public class BoardListAction implements Action{
+public class FreeBoardListAction implements Action {
 
 	@Override
 	public ActionTo execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		BoardDAO bdao = new BoardDAO();
 		
-		//현재 페이지(int로 변환할 필요 없음)
+		//현재 페이지
 		String temp = req.getParameter("page");
-		String boardName = "t_test_board";
+		
+		String boardName = "t_free_board";
 		//페이징 구하는 util, 매개변수는 현재 페이지(null도 가능), 전체 게시글 개수 
 		Paging paging = new Paging(temp, bdao.getBoardCnt(boardName));
-		System.out.println(bdao.getBoardCnt(boardName));
+
 		//paging 객체의 startRow와 pageSize로 전체 게시글 목록 얻음
-		List<BoardDTO> list = bdao.getBoardList(paging.getStartRow(),paging.getPageSize(),boardName);
-		
+		List<BoardDTO> fb_list = bdao.getBoardList(paging.getStartRow(),paging.getPageSize(),boardName);
+		System.out.println("여기까지 옴");
 		//전송을 위한 set
-		req.setAttribute("list", list);
+		req.setAttribute("fb_list", fb_list);
 		req.setAttribute("totalPage", paging.getTotalPage());
 		req.setAttribute("totalCnt", paging.getTotalCnt());
 		req.setAttribute("startPage", paging.getStartPage());
@@ -41,6 +42,7 @@ public class BoardListAction implements Action{
 		ActionTo transfer=new ActionTo();
 		transfer.setRedirect(false);
 		transfer.setPath("/app/board/free_board/list.jsp");
+		System.out.println("여긴 왔나?");
 		return transfer;
 	}
 

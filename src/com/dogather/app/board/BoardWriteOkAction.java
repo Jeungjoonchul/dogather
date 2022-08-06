@@ -34,12 +34,12 @@ public class BoardWriteOkAction implements Action {
 		//System.out.println("작성자 : " + user_id + "(유저 인덱스 : " + user_index + ")");
 
 		String tb_title = req.getParameter("tb_title");
-		newPost.setTb_title(tb_title);
+		newPost.setB_title(tb_title);
 		System.out.println("게시글 제목 : " + tb_title);
 
 		String tb_contents = req.getParameter("tb_contents");
 		tb_contents = tb_contents.replaceAll("/temp", "/upload/images");
-		newPost.setTb_contents(tb_contents);
+		newPost.setB_contents(tb_contents);
 		System.out.println("게시글 내용 : " + tb_contents);
 
 		String sysName = req.getParameter("sysName");
@@ -61,7 +61,7 @@ public class BoardWriteOkAction implements Action {
 			tb_files+=sysNames[i]+"/";
 		}
 		System.out.println(tb_files);
-		newPost.setTb_files(tb_files);
+		newPost.setB_files(tb_files);
 		
 		System.out.println("파일 임시 저장 경로 : " + req.getServletContext().getRealPath("temp") + "\\");
 		System.out.println("파일 최종 저장 경로 : " + req.getServletContext().getRealPath("upload") + "\\images\\");

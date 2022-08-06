@@ -66,6 +66,13 @@ public class BoardFrontController extends HttpServlet{
 				System.out.println("/board/boardview.bo"+e);
 			}
 			break;
+		case "/board/free_board/list.bo":
+			try {
+				transfer=new FreeBoardListAction().execute(req,resp);
+			} catch (Exception e) {
+				System.out.println("/board/free_board/list.bo"+e);
+			}
+			break;
 		}
 		//전송 일괄처리
 		if(transfer!=null) {

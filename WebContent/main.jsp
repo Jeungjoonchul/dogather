@@ -110,7 +110,7 @@
               </a>
               <ul class="submenu">
                 <li>
-                  <a href="#">
+                  <a href="${cp }/board/free_board/list.bo">
                     <span class="span">자유게시판</span>
                   </a>
                 </li>
@@ -375,90 +375,36 @@
           </div>
           <div id="community_border">
             <div class="community title">
-              <a href="">
+              <a href="${cp }/board/free_board/list.bo">
                 <span class="purple">자유 </span><span>게시판</span>
               </a>
             </div>
             <div class="community border">
               <ul>
-                <li>
+              <c:choose>
+              <c:when test="${fb_list.size()>0 and fb_list!= null }">
+              <c:forEach var="fb_list" items="${fb_list}">
+              	<li>
                   <a href="#">
-                    <div class="cap gray">유머</div>
+                    <div class="cap gray">${fb_list.b_subject}</div>
+                    
                     <div class="tit">
-                      	유머 게시물
-                      	내용하나둘셋하나둘셋하나둘셋하나둘셋하나둘셋하나둘셋하나둘셋
+                      	${fb_list.b_title }
                     </div>
+                    
                     <div class="comm red">[댓글수]</div>
                     <div class="icon">
                       <p class="new">N</p>
                     </div>
                   </a>
                 </li>
-                <li>
-                  <a href="#">
-                    <div class="cap gray">팁</div>
-                    <div class="tit">
-                      유머 게시물
-                      내용하나둘셋하나둘셋하나둘셋하나둘셋하나둘셋하나둘셋하나둘셋
-                    </div>
-                    <div class="comm red">[댓글수]</div>
-                    <div class="icon">
-                      <p class="new">N</p>
-                    </div>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <div class="cap gray">유머</div>
-                    <div class="tit">
-                      유머 게시물
-                      내용하나둘셋하나둘셋하나둘셋하나둘셋하나둘셋하나둘셋하나둘셋
-                    </div>
-                    <div class="comm red">[댓글수]</div>
-                    <div class="icon">
-                      <p class="new">N</p>
-                    </div>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <div class="cap gray">유머</div>
-                    <div class="tit">
-                      유머 게시물
-                      내용하나둘셋하나둘셋하나둘셋하나둘셋하나둘셋하나둘셋하나둘셋
-                    </div>
-                    <div class="comm red">[댓글수]</div>
-                    <div class="icon">
-                      <p class="new">N</p>
-                    </div>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <div class="cap gray">유머</div>
-                    <div class="tit">
-                      유머 게시물
-                      내용하나둘셋하나둘셋하나둘셋하나둘셋하나둘셋하나둘셋하나둘셋
-                    </div>
-                    <div class="comm red">[댓글수]</div>
-                    <div class="icon">
-                      <p class="new">N</p>
-                    </div>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <div class="cap gray">유머</div>
-                    <div class="tit">
-                      유머 게시물
-                      내용하나둘셋하나둘셋하나둘셋하나둘셋하나둘셋하나둘셋하나둘셋
-                    </div>
-                    <div class="comm red">[댓글수]</div>
-                    <div class="icon">
-                      <p class="new">N</p>
-                    </div>
-                  </a>
-                </li>
+              </c:forEach>
+              </c:when>
+              <c:otherwise>
+              	<p>게시글이 없습니다.</p>
+              </c:otherwise>
+              </c:choose>
+
               </ul>
             </div>
           </div>
