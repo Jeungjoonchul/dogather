@@ -27,7 +27,7 @@ public class UserJoinAction implements Action {
 
 		ActionTo transfer = new ActionTo();
 		transfer.setRedirect(false);
-		transfer.setPath("/app/user/user_join.jsp");
+		transfer.setPath("/app/user/join.jsp");
 
 		return transfer;
 	}

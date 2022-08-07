@@ -109,7 +109,7 @@ public class UserJoinOkAction implements Action {
 		if(udao.insertUser(user)) {
 			//회원가입 성공
 			//경로, 전송방법 설정
-			transfer.setPath(req.getContextPath()+"/user/user_login.us?user="+user_email);
+			transfer.setPath(req.getContextPath()+"/user/login.us?user="+user_email);
 		}else {
 			//회원가입 실패
 			//경로, 전송방법 설정

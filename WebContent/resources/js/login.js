@@ -10,7 +10,7 @@ $('#login').submit(function(event) {
 	event.preventDefault();
 	var isSubmit = false;
 	$.ajax({
-		url : cp + '/user/user_login_check.us',
+		url : cp + '/user/login_check.us',
 		type : 'post',
 		data : $('#login').serialize(),
 		dataType : 'text',

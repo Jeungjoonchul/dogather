@@ -140,7 +140,7 @@ create table t_user(
     user_password_set_date datetime default now(), #비밀번호 마지막으로 설정한 시간 (비밀번호 교체 권유용 / ex : 2022-07-25)
 	user_last_login datetime,
     user_inactive_date datetime, #비활성화 날짜(yyyy-MM-dd / ex : 2022-07-26)
-    user_inactive boolean default false not null, #비활성화 여부 (ex : 0 / 0일 경우 활성화 상태, 1일 경우 비활성화 상태)
+    user_t_categoryinactive boolean default false not null, #비활성화 여부 (ex : 0 / 0일 경우 활성화 상태, 1일 경우 비활성화 상태)
     user_inactive_reason enum('withdrawal','dormancy'),
 
 	zip_code varchar(5), #우편번호(ex : 06236)
@@ -191,60 +191,60 @@ create table t_user_receive_note(
 
 #자유게시판
 create table t_free_board(
-	fb_index int primary key auto_increment, #게시글 번호(ex : 1)
+	b_index int primary key auto_increment, #게시글 번호(ex : 1)
     user_index int, #게시글 작성자(ex : 1)
-    fb_reg_date datetime default now(), #게시글 등록일(ex : 2022-07-25)
-    fb_update_date datetime default now(), #게시글 수정일(ex : 2022-07-25)
-    fb_subject enum('유머','잡담','기타') not null, #게시판 말머리(ex : '유머')
-    fb_title varchar(1000) not null, #게시글 제목(ex : '나 이별했어')
-    fb_contents text not null, #게시글 내용(blob 타입 확인 필요 / ex : '진짜임')
-    fb_hits int default 0, #게시글 조회수(ex : 10)
-    fb_like_user_index text, #좋아요 누른 사람(ex : 2,3,4,5,...)
-    fb_inactive boolean default false not null, #게시글 삭제 여부(ex : 'f')
-    fb_files text, #원본 파일명+저장 파일명(ex : 원본파일명.jpg:저장파일명/원본파일명.png:저장파일명)
+    b_reg_date datetime default now(), #게시글 등록일(ex : 2022-07-25)
+    b_update_date datetime default now(), #게시글 수정일(ex : 2022-07-25)
+    b_subject enum('유머','잡담','기타') not null, #게시판 말머리(ex : '유머')
+    b_title varchar(1000) not null, #게시글 제목(ex : '나 이별했어')
+    b_contents text not null, #게시글 내용(blob 타입 확인 필요 / ex : '진짜임')
+    b_hits int default 0, #게시글 조회수(ex : 10)
+    b_like_user_index text, #좋아요 누른 사람(ex : 2,3,4,5,...)
+    b_inactive boolean default false not null, #게시글 삭제 여부(ex : 'f')
+    b_files varchar(1000),
     constraint freeBoard_user_fk foreign key(user_index) references t_user(user_index)
 );
 
 #자유게시판 댓글
 create table t_fb_reply(
-	fb_index int, #게시글 번호(ex : 1)
+	b_index int, #게시글 번호(ex : 1)
     user_index int, #댓글 작성자(ex : 2)
-    fbr_reg_date datetime default now(), #댓글 작성 시간(ex : 2022-07-25)
-    fbr_update_date datetime default now(), #댓글 수정 시간(ex : 2022-07-25)
-    fbr_contents text, #댓글 내용(ex : '너무 웃겨요')
-    fbr_inactive boolean default false not null, #댓글 삭제 여부(ex : 'f')
+    r_reg_date datetime default now(), #댓글 작성 시간(ex : 2022-07-25)
+    r_update_date datetime default now(), #댓글 수정 시간(ex : 2022-07-25)
+    r_contents text, #댓글 내용(ex : '너무 웃겨요')
+    r_inactive boolean default false not null, #댓글 삭제 여부(ex : 'f')
     constraint fbReply_freeBoard_fk foreign key(fb_index) references t_free_board(fb_index),
     constraint fbReply_user_fk foreign key(user_index) references t_user(user_index)
 );
 
 #이벤트(adminMode에서 crud 가능 / userMode에서는 r만 가능)
 create table t_event_board(
-	eb_index int primary key auto_increment, #게시글 번호(ex : 1)
-    eb_writer varchar(300) default 'admin', #게시글 작성자(default admin)
-	eb_reg_date datetime default now(), #게시글 등록일(ex : 2022-07-26)
-    eb_update_date datetime default now(), #게시글 수정일(ex : 2022-07-27)
-    eb_subject varchar(300) not null, #콜라보, 진행중, 종료(ex : 진행중)
-    eb_title varchar(1000) not null, #게시글 제목(ex : 3일만에 50kg감량 시 1000만원!!)
-    eb_contents text not null, #게시글 내용(blob 타입 확인 필요)
-    eb_hits int default 0, #게시글 조회수(ex : 50000)
-    eb_like_user_index text, #좋아요 누른 사람(ex : 1,3,4,5,6,10,11,...)
-    eb_inactive boolean default false not null, #게시글 삭제여부(ex : 'f')
-    eb_files text #원본 파일명+저장 파일명(ex : 원본파일명.jpg:저장파일명/원본파일명.png:저장파일명)
+	b_index int primary key auto_increment, #게시글 번호(ex : 1)
+    user_index varchar(300) default -1, #게시글 작성자(default admin)
+	b_reg_date datetime default now(), #게시글 등록일(ex : 2022-07-26)
+    b_update_date datetime default now(), #게시글 수정일(ex : 2022-07-27)
+    b_subject varchar(300) not null, #콜라보, 진행중, 종료(ex : 진행중)
+    b_title varchar(1000) not null, #게시글 제목(ex : 3일만에 50kg감량 시 1000만원!!)
+    b_contents text not null, #게시글 내용(blob 타입 확인 필요)
+    b_hits int default 0, #게시글 조회수(ex : 50000)
+    b_like_user_index text, #좋아요 누른 사람(ex : 1,3,4,5,6,10,11,...)
+    b_inactive boolean default false not null, #게시글 삭제여부(ex : 'f')
+    b_files varchar(1000)
 );
 
 #공지사항(adminMode에서 crud 가능 / userMode에서는 r만 가능)
 create table t_notice_board(
-	nb_index int primary key auto_increment, #게시글 번호(ex : 1)
-    nb_writer varchar(300) default 'admin', #게시글 작성자(default admin)
-	nb_reg_date datetime default now(), #게시글 등록일(ex : 2022-07-26)
-    nb_update_date datetime default now(), #게시글 수정일(ex : 2022-07-27)
-	nb_subject varchar(300) not null, #전체, 자유게시판, 카테고리 게시판(ex : 전체)
-    nb_title varchar(1000) not null, #게시글 제목(ex : 광고 피드 작성 시 회원 탈퇴)
-    nb_contents text not null, #게시글 내용(blob 타입 확인 필요)
-    nb_hits int default 0, #게시글 조회수(ex : 10)
-    nb_like_user_index text, #좋아요 누른 사람(ex : 1,4,6,23,67,100,...)
-    nb_inactive boolean default false not null, #게시글 삭제여부(ex : 'f')
-    nb_files text #원본 파일명+저장 파일명(ex : 원본파일명.jpg:저장파일명/원본파일명.png:저장파일명)
+	b_index int primary key auto_increment, #게시글 번호(ex : 1)
+    user_index varchar(300) default '-1', #게시글 작성자(default admin)
+	b_reg_date datetime default now(), #게시글 등록일(ex : 2022-07-26)
+    b_update_date datetime default now(), #게시글 수정일(ex : 2022-07-27)
+	b_subject varchar(300) not null, #전체, 자유게시판, 카테고리 게시판(ex : 전체)
+    b_title varchar(1000) not null, #게시글 제목(ex : 광고 피드 작성 시 회원 탈퇴)
+    b_contents text not null, #게시글 내용(blob 타입 확인 필요)
+    b_hits int default 0, #게시글 조회수(ex : 10)
+    b_like_user_index text, #좋아요 누른 사람(ex : 1,4,6,23,67,100,...)
+    b_inactive boolean default false not null, #게시글 삭제여부(ex : 'f')
+    b_files varchar(1000)
 );
 
 #dogater
@@ -342,29 +342,30 @@ create table t_df_reply(
 
 #############################################################################################
 #게시판 틀
-create table t_sBoard(
-	sb_index int primary key auto_increment, #게시글 번호
+create table t_s_board(
+	b_index int primary key auto_increment, #게시글 번호
     user_index int, #게시글 작성자
-    sb_reg_date datetime default now(), #게시글 등록일
-    sb_update_date datetime default now(), #게시글 수정일
-    sb_title varchar(1000) not null, #게시글 제목
-    sb_contents text not null, #게시글 내용(blob 타입 확인 필요)
-    sb_hits int default 0, #게시글 조회수
-    sb_like_user_index text, #좋아요 누른 사람
-    sb_inactive boolean default false not null, #게시글 삭제여부
-    sb_files text, #원본 파일명+저장 파일명(ex : 원본파일명.jpg:저장파일명/원본파일명.png:저장파일명)
+    b_reg_date datetime default now(), #게시글 등록일
+    b_update_date datetime default now(), #게시글 수정일
+    b_subject varchar(300) not null, #전체, 자유게시판, 카테고리 게시판(ex : 전체)
+    b_title varchar(1000) not null, #게시글 제목
+    b_contents text not null, #게시글 내용(blob 타입 확인 필요)
+    b_hits int default 0, #게시글 조회수
+    b_like_user_index text, #좋아요 누른 사람
+    b_inactive boolean default false not null, #게시글 삭제여부
+    b_files varchar(1000),
     constraint user_sBoard_fk foreign key(user_index) references user(user_index)
 );
 #게시판 댓글 틀
-create table t_sbReply(
-	sb_index int, #게시판 번호
+create table t_sb_reply(
+	b_index int, #게시판 번호
     user_index int, #댓글 작성자
-    sbr_reg_date datetime default now(), #댓글 작성 시간
-    sbr_update_date datetime default now(), #댓글 수정 시간
-    sbr_contents text, #댓글 내용
-    sbr_inactive boolean default false not null, #댓글 삭제 여부
-    constraint freeBoard_sbReply_fk foreign key(sb_index) references user(sb_index),
-    constraint user_sbReply_fk foreign key(user_index) references user(user_index)
+    r_reg_date datetime default now(), #댓글 작성 시간
+    r_update_date datetime default now(), #댓글 수정 시간
+    r_contents text, #댓글 내용
+    r_inactive boolean default false not null, #댓글 삭제 여부
+    constraint free_board_reply_fk foreign key(b_index) references user(b_index),
+    constraint user_reply_fk foreign key(user_index) references user(user_index)
 );
 #############################################################################################
 

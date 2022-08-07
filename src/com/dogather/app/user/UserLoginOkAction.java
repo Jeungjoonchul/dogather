@@ -27,7 +27,7 @@ public class UserLoginOkAction implements Action {
 		System.out.println(user_password);
 		String keep = req.getParameter("keep");
 		boolean al = keep != null ? true : false;
-		System.out.println("쿠키 : "+al);
+
 		UserDAO udao = new UserDAO();
 		UserDTO user = udao.loginUser(user_email, user_password);
 		
@@ -36,7 +36,7 @@ public class UserLoginOkAction implements Action {
 		if(user_inactive) {
 			transfer = new ActionTo();
 			transfer.setRedirect(false);
-			transfer.setPath("/app/user/user_active.jsp");
+			transfer.setPath("/app/user/release_dormancy.jsp");
 		}else {
 		
 		req.getSession().setAttribute("loginUser", user);

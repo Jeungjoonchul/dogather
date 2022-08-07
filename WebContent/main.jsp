@@ -34,10 +34,10 @@
           <div class="right">
           <c:choose>
           	<c:when test="${empty loginUser}"><!-- 세션이 없다면 -->
-          	<a href="${cp}/user/user_login.us">
+          	<a href="${cp}/user/login.us">
               <span> 로그인 </span>
             </a>
-            <a href="${cp}/user/user_join.us">
+            <a href="${cp}/user/join.us">
               <span> 회원가입 </span>
             </a>
 
@@ -46,7 +46,7 @@
               <a href="#?user_index=${loginUser.user_index}">
               <span> 마이페이지 </span>
             </a>
-            <a href="${cp}/user/user_logout.us">
+            <a href="${cp}/user/logout.us">
               <span> 로그아웃 </span>
             </a>
           	</c:otherwise>

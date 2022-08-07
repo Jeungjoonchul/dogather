@@ -32,22 +32,7 @@ public class BoardFrontController extends HttpServlet{
 		
 		ActionTo transfer = null;
 		switch(command) {
-		case "/board/board_list.bo":
-			try {
-				transfer = new BoardListAction().execute(req,resp);
-			} catch (ServletException e) {
-				System.out.println("/board/board_list.bo : "+e);
-			}
-			break;
-		case "/board/board_write.bo":
-			try {
-				transfer=new BoardWriteOkAction().execute(req,resp);
-			} catch (ServletException e) {
-				System.out.println("/board/board_write.bo"+e);
-			} catch (IOException e) {
-				System.out.println("/board/board_write.bo"+e);
-			}
-			break;
+
 		case "/board/board_imageUpload.bo":
 			try {
 				transfer=new BoardImageUploadAction().execute(req, resp);
@@ -57,21 +42,19 @@ public class BoardFrontController extends HttpServlet{
 				System.out.println("/board/board_imageUpload.bo"+e);
 			}
 			break;
-		case "/board/board_view.bo":
-			try {
-				transfer = new BoardViewAction().execute(req,resp);
-			} catch (ServletException e) {
-				System.out.println("/board/boardview.bo"+e);
-			} catch (IOException e) {
-				System.out.println("/board/boardview.bo"+e);
-			}
-			break;
+
 		case "/board/free_board/list.bo":
 			try {
 				transfer=new FreeBoardListAction().execute(req,resp);
 			} catch (Exception e) {
 				System.out.println("/board/free_board/list.bo"+e);
 			}
+			break;
+			
+		case "/board/free_board/write.bo":
+			transfer = new ActionTo();
+			transfer.setRedirect(false);
+			transfer.setPath("/app/board/free_board/write.jsp");
 			break;
 		}
 		//전송 일괄처리

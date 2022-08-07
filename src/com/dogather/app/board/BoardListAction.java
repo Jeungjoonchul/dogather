@@ -22,10 +22,11 @@ public class BoardListAction implements Action{
 		
 		//현재 페이지(int로 변환할 필요 없음)
 		String temp = req.getParameter("page");
-		String boardName = "t_test_board";
+		String boardName = "테이블 명";
+		
 		//페이징 구하는 util, 매개변수는 현재 페이지(null도 가능), 전체 게시글 개수 
 		Paging paging = new Paging(temp, bdao.getBoardCnt(boardName));
-		System.out.println(bdao.getBoardCnt(boardName));
+		
 		//paging 객체의 startRow와 pageSize로 전체 게시글 목록 얻음
 		List<BoardDTO> list = bdao.getBoardList(paging.getStartRow(),paging.getPageSize(),boardName);
 		
@@ -40,7 +41,7 @@ public class BoardListAction implements Action{
 		//path 및 redirect 설정(forward 방식)
 		ActionTo transfer=new ActionTo();
 		transfer.setRedirect(false);
-		transfer.setPath("/app/board/free_board/list.jsp");
+		transfer.setPath("");
 		return transfer;
 	}
 

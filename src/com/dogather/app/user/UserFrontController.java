@@ -37,34 +37,41 @@ public class UserFrontController extends HttpServlet {
 
 		ActionTo transfer = null;
 		switch (command) {
-		case "/user/user_join.us":
+		case "/user/join.us":
 			try {
 				transfer = new UserJoinAction().execute(req, resp);
 			} catch (ServletException e) {
-				System.out.println("/user/user_join.us" + e);
+				System.out.println(command+" : "+e);
 			} catch (IOException e) {
-				System.out.println("/user/user_join.us" + e);
+				System.out.println(command+" : "+e);
 			}
 			break;
 			
-		case "/user/user_check_email.us":
+		case "/user/check_email.us":
 			try {
 				transfer = new UserCheckEmailAction().execute(req, resp);
 			} catch (Exception e) {
-				System.out.println("/user/user_check_email.us" + e);
+				System.out.println(command+" : "+e);
 			}
 			break;
 			
-		case "/user/user_join_ok.us":
+			
+		case "/user/check_nickname.us":
+			try {
+				transfer = new UserCheckNicknameAction().execute(req, resp);
+			} catch (Exception e) {
+				System.out.println(command+" : "+e);
+			}
+			break;
+			
+		case "/user/join_ok.us":
 			try {
 				transfer = new UserJoinOkAction().execute(req, resp);
 			} catch (Exception e) {
-				System.out.println(req.getParameter("user_terms_type3"));
-				System.out.println("/user/user_join_ok.us" + e);
-				e.printStackTrace();
+				System.out.println(command+" : "+e);
 			}
 			break;
-		case "/user/user_logout.us":
+		case "/user/logout.us":
 			Cookie[] cookies = req.getCookies();
 			for (Cookie cookie : cookies) {
 				if(cookie.getName().equals("autoLogin_check")) {
@@ -83,34 +90,26 @@ public class UserFrontController extends HttpServlet {
 		
 			break;
 			
-		case "/user/user_login.us":
+		case "/user/login.us":
 			transfer = new ActionTo();
-			transfer.setPath("/app/user/user_login.jsp");
+			transfer.setPath("/app/user/login.jsp");
 			transfer.setRedirect(false);
 			break;
 			
-		case "/user/user_check_nickname.us":
-			try {
-				transfer = new UserCheckNicknameAction().execute(req, resp);
-			} catch (Exception e) {
-				System.out.println("/user/user_check_nickname.us" + e);
-			}
-			break;
-			
-		case "/user/user_login_ok.us":
+					
+		case "/user/login_ok.us":
 			try {
 				transfer=new UserLoginOkAction().execute(req,resp);
 			} catch (Exception e) {
-				System.out.println("/user/user_login_ok.us"+e);
+				System.out.println(command+" : "+e);
 			}
 			break;
 			
-		case "/user/user_login_check.us":
+		case "/user/login_check.us":
 			try {
 				transfer=new UserLoginCheckAction().execute(req,resp);
 			} catch (Exception e) {
-				System.out.println("/user/user_login_check.us"+e);
-				e.printStackTrace();
+				System.out.println(command+" : "+e);
 			}
 			break;
 		}

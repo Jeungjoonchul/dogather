@@ -29,7 +29,7 @@ public class FreeBoardListAction implements Action {
 
 		//paging 객체의 startRow와 pageSize로 전체 게시글 목록 얻음
 		List<BoardDTO> fb_list = bdao.getBoardList(paging.getStartRow(),paging.getPageSize(),boardName);
-		System.out.println("여기까지 옴");
+
 		//전송을 위한 set
 		req.setAttribute("fb_list", fb_list);
 		req.setAttribute("totalPage", paging.getTotalPage());
@@ -42,7 +42,7 @@ public class FreeBoardListAction implements Action {
 		ActionTo transfer=new ActionTo();
 		transfer.setRedirect(false);
 		transfer.setPath("/app/board/free_board/list.jsp");
-		System.out.println("여긴 왔나?");
+
 		return transfer;
 	}
 
