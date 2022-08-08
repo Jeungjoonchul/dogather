@@ -26,11 +26,13 @@ public class UserLoginOkAction implements Action {
 		System.out.println(user_email);
 		System.out.println(user_password);
 		String keep = req.getParameter("keep");
+
 		boolean al = keep != null ? true : false;
 
 		UserDAO udao = new UserDAO();
 		UserDTO user = udao.loginUser(user_email, user_password);
-		
+	
+
 		boolean user_inactive=user.isUser_inactive();
 		ActionTo transfer = null;
 		if(user_inactive) {
@@ -57,11 +59,17 @@ public class UserLoginOkAction implements Action {
 			//사용자의 컴퓨터에 쿠키를 저장
 			resp.addCookie(autoLogin_check);
 		}
+
+		String prev=req.getParameter("prev_page");
+		String cp = req.getContextPath();
+		String cmd = prev.substring(cp.length()+prev.indexOf(cp));
+
 		out.print("<script>");
 		out.print("alert('" + user.getUser_nickname() + "님 환영합니다!');");
-		out.print("location.href='" + req.getContextPath() + "/main';");
+		out.print("location.href='" + req.getContextPath() + cmd+"'");
 		out.print("</script>");
 		}
 		return transfer;
 	}
+
 }

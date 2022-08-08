@@ -28,7 +28,7 @@ public class BoardListAction implements Action{
 		Paging paging = new Paging(temp, bdao.getBoardCnt(boardName));
 		
 		//paging 객체의 startRow와 pageSize로 전체 게시글 목록 얻음
-		List<BoardDTO> list = bdao.getBoardList(paging.getStartRow(),paging.getPageSize(),boardName);
+		List<BoardDTO> list = bdao.getBoard(paging.getStartRow(),paging.getPageSize(),boardName);
 		
 		//전송을 위한 set
 		req.setAttribute("list", list);

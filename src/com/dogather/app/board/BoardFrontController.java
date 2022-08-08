@@ -37,9 +37,10 @@ public class BoardFrontController extends HttpServlet{
 			try {
 				transfer=new BoardImageUploadAction().execute(req, resp);
 			} catch (ServletException e) {
-				System.out.println("/board/board_imageUpload.bo"+e);
+				System.out.println(command+" : "+e);
 			} catch (IOException e) {
-				System.out.println("/board/board_imageUpload.bo"+e);
+				System.out.println(command+" : "+e);
+				e.printStackTrace();
 			}
 			break;
 
@@ -47,7 +48,8 @@ public class BoardFrontController extends HttpServlet{
 			try {
 				transfer=new FreeBoardListAction().execute(req,resp);
 			} catch (Exception e) {
-				System.out.println("/board/free_board/list.bo"+e);
+				System.out.println(command+" : "+e);
+				e.printStackTrace();
 			}
 			break;
 			
@@ -55,6 +57,22 @@ public class BoardFrontController extends HttpServlet{
 			transfer = new ActionTo();
 			transfer.setRedirect(false);
 			transfer.setPath("/app/board/free_board/write.jsp");
+			break;
+		case "/board/free_board/write_ok.bo":
+			try {
+				transfer = new FreeBoardWriteOkAction().execute(req,resp);
+			} catch (Exception e) {
+				System.out.println(command+" : "+e);
+				e.printStackTrace();
+			}
+			break;
+		case "/board/free_board/view.bo":
+			try {
+				transfer = new FreeBoardViewAction().execute(req,resp);
+			} catch (Exception e) {
+				System.out.println(command+" : "+e);
+				e.printStackTrace();
+			}
 			break;
 		}
 		//전송 일괄처리

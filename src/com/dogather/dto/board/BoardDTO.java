@@ -13,6 +13,8 @@ public class BoardDTO {
 	private String b_like_user_index;
 	private boolean b_inactive;
 	private String b_files;
+	private String b_name;
+	
 	public int getB_index() {
 		return b_index;
 	}
@@ -85,5 +87,10 @@ public class BoardDTO {
 	public void setB_files(String b_files) {
 		this.b_files = b_files;
 	}
-	
+	public String getB_name() {
+		return b_name;
+	}
+	public void setB_name(String b_name) {
+		this.b_name = b_name;
+	}
 }

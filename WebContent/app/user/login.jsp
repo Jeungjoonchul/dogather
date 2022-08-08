@@ -144,6 +144,7 @@
           <div class="login_top">
             <h3>로그인</h3>
             <form method="post" id="login" name="LoginForm" action="${cp }/user/login_ok.us">
+            <input type="hidden" name ="prev_page" value="${prev_page }"/>
               <div class="user_email">
                 <c:choose>
                 	<c:when test="${empty param.user}">

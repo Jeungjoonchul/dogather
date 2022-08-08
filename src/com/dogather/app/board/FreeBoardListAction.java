@@ -23,12 +23,12 @@ public class FreeBoardListAction implements Action {
 		//현재 페이지
 		String temp = req.getParameter("page");
 		
-		String boardName = "t_free_board";
+		String b_name = "t_free_board";
 		//페이징 구하는 util, 매개변수는 현재 페이지(null도 가능), 전체 게시글 개수 
-		Paging paging = new Paging(temp, bdao.getBoardCnt(boardName));
+		Paging paging = new Paging(temp, bdao.getBoardCnt(b_name));
 
 		//paging 객체의 startRow와 pageSize로 전체 게시글 목록 얻음
-		List<BoardDTO> fb_list = bdao.getBoardList(paging.getStartRow(),paging.getPageSize(),boardName);
+		List<BoardDTO> fb_list = bdao.getBoard(paging.getStartRow(),paging.getPageSize(),b_name);
 
 		//전송을 위한 set
 		req.setAttribute("fb_list", fb_list);

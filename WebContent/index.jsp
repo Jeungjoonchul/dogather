@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="shortcut icon" href="${cp}/resources/images/favicon.png" />
 <title>Doːgather</title>
 <style>
 	body{

@@ -35,8 +35,13 @@ public class MainAction implements Action {
 		
 		//자유게시판 게시글 6개 가져오기
 		BoardDAO bdao=new BoardDAO();
-		List<BoardDTO> fb_list = bdao.getFreeBoardListOnMain();
+		String fb = "t_free_board";
+		List<BoardDTO> fb_list = bdao.getBoardListOnMain(fb);
 		req.setAttribute("fb_list", fb_list);
+		
+		String eb = "t_event_board";
+		List<BoardDTO> eb_list = bdao.getBoardListOnMain(eb);
+		req.setAttribute("eb_list", eb_list);
 		
 		// 자동 로그인 체크 여부
 		String user_email = null;

@@ -10,6 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="${cp }/resources/css/mainStyle.css" />
+    <link rel="stylesheet" href="${cp }/resources/css/include.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com/" />
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
     <link
@@ -20,132 +21,10 @@
     <title>DoGather</title>
   </head>
   <body>	
-    <div id="main">
-      <div id="head">
-        <div>
-          <div class="left">
-            <a href="">
-              <span>메인화면</span>
-            </a>
-          </div>
-          <div class="center">
-            <img src="${cp }/resources/images/dogather_logo.png" alt="" width="175px" />
-          </div>
-          <div class="right">
-          <c:choose>
-          	<c:when test="${empty loginUser}"><!-- 세션이 없다면 -->
-          	<a href="${cp}/user/login.us">
-              <span> 로그인 </span>
-            </a>
-            <a href="${cp}/user/join.us">
-              <span> 회원가입 </span>
-            </a>
-
-          	</c:when>
-          	<c:otherwise><!-- 세션이 있다면 -->
-              <a href="#?user_index=${loginUser.user_index}">
-              <span> 마이페이지 </span>
-            </a>
-            <a href="${cp}/user/logout.us">
-              <span> 로그아웃 </span>
-            </a>
-          	</c:otherwise>
-          </c:choose>
-          <a href="#">
-              <span> 고객센터 </span>
-            </a>
-           </div>
-        </div>
-      </div>
+  <%@include file="/header.jsp"%>
+    
       <div id="body">
-        <div class="category">
-          <ul class="menubar">
-            <li>
-              <a href="#">
-                <span> 서비스소개 </span>
-              </a>
-              <ul class="submenu">
-                <li>
-                  <a href="#">
-                    <span class="span">회사 소개</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <span class="span">이용 방법</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <span class="span">인재 채용</span>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a href="#">
-                <span> 두게더 </span>
-              </a>
-              <ul class="submenu">
-                <li>
-                  <a href="#">
-                    <span class="span">진행 중 두게더</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <span class="span">종료 된 두게더</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <span class="span">인증/후기 게시판</span>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a href="#">
-                <span> 커뮤니티 </span>
-              </a>
-              <ul class="submenu">
-                <li>
-                  <a href="${cp }/board/free_board/list.bo">
-                    <span class="span">자유게시판</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <span class="span">정보게시판</span>
-                  </a>
-                </li>
-                <li>
-                  <span>&nbsp;</span>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a href="#">
-                <span> 이벤트 </span>
-              </a>
-              <ul class="submenu">
-                <li>
-                  <a href="#">
-                    <span class="span">콜라보레이션</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <span class="span">이벤트</span>
-                  </a>
-                </li>
-                <li>
-                  <span>&nbsp;</span>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </div>
+        
         <div class="section">
           <input type="radio" name="slide" id="slide1" checked />
           <input type="radio" name="slide" id="slide2" />
@@ -292,84 +171,35 @@
         <div id="event_community">
           <div id="event_border">
             <div class="event title">
-              <a href="">
+              <a href="1#">
                 <span class="purple">Event</span><span> 게시판</span>
               </a>
             </div>
             <div class="event border">
               <ul>
-                <li>
+                <c:choose>
+              <c:when test="${eb_list.size()>0 and eb_list!= null }">
+              <c:forEach var="fb_list" items="${eb_list}">
+              	<li>
                   <a href="#">
-                    <div class="cap gray">이벤트</div>
+                    <div class="cap gray">${eb_list.b_subject}</div>
+                    
                     <div class="tit">
-                      	이벤트 게시물 내용하나둘셋하나둘셋하나둘
+                      ${eb_list.b_title }
                     </div>
+                    
                     <div class="comm red">[댓글수]</div>
                     <div class="icon">
                       <p class="new">N</p>
                     </div>
                   </a>
                 </li>
-                <li>
-                  <a href="#">
-                    <div class="cap gray">이벤트</div>
-                    <div class="tit">
-                      이벤트 게시물 내용하나둘셋하나둘셋하나둘
-                    </div>
-                    <div class="comm red">[댓글수]</div>
-                    <div class="icon">
-                      <p class="new">N</p>
-                    </div>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <div class="cap gray">이벤트</div>
-                    <div class="tit">
-                      이벤트 게시물 내용하나둘셋하나둘셋하나둘
-                    </div>
-                    <div class="comm red">[댓글수]</div>
-                    <div class="icon">
-                      <p class="new">N</p>
-                    </div>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <div class="cap gray">이벤트</div>
-                    <div class="tit">
-                      이벤트 게시물 내용하나둘셋하나둘셋하나둘
-                    </div>
-                    <div class="comm red">[댓글수]</div>
-                    <div class="icon">
-                      <p class="new">N</p>
-                    </div>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <div class="cap gray">이벤트</div>
-                    <div class="tit">
-                      이벤트 게시물 내용하나둘셋하나둘셋하나둘
-                    </div>
-                    <div class="comm red">[댓글수]</div>
-                    <div class="icon">
-                      <p class="new">N</p>
-                    </div>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <div class="cap gray">이벤트</div>
-                    <div class="tit">
-                      이벤트 게시물 내용하나둘셋하나둘셋하나둘
-                    </div>
-                    <div class="comm red">[댓글수]</div>
-                    <div class="icon">
-                      <p class="new">N</p>
-                    </div>
-                  </a>
-                </li>
+              </c:forEach>
+              </c:when>
+              <c:otherwise>
+              	<p>게시글이 없습니다.</p>
+              </c:otherwise>
+              </c:choose>
               </ul>
             </div>
           </div>
@@ -385,8 +215,8 @@
               <c:when test="${fb_list.size()>0 and fb_list!= null }">
               <c:forEach var="fb_list" items="${fb_list}">
               	<li>
-                  <a href="#">
-                    <div class="cap gray">${fb_list.b_subject}</div>
+                  <a href="${cp}/board/free_board/view.bo?b_index=${fb_list.b_index}">
+                    <div class="cap gray"><span>${fb_list.b_subject}</span></div>
                     
                     <div class="tit">
                       	${fb_list.b_title }
@@ -434,62 +264,8 @@
             </span>
           </a>
         </div>
-      </div>
-      <div id="footer">
-        <div class="web_container">
-          <div class="footer_menu">
-            <ul>
-              <li>
-                <a>
-                  <span>이용약관</span>
-                </a>
-              </li>
-              <li>
-                <a>
-                  <span>개인정보취급방침</span>
-                </a>
-              </li>
-              <li>
-                <a>
-                  <span>법적고지</span>
-                </a>
-              </li>
-            </ul>
-            <div class="footer_btn">
-              <a>
-                <span>인재채용</span>
-              </a>
-              <a>
-                <span>가맹점모집</span>
-              </a>
-            </div>
-          </div>
-
-          <div class="copyright">
-            <p>
-              서울 강남구 테헤란로 146 <span class="footer_line"></span>전화문의
-              010-5287-3610
-            </p>
-            <p>
-              사업자 등록번호 101-86-76277
-              <span class="footer_line"></span>(주)DGT 대표이사 양형모
-            </p>
-
-            <p>Copyright 2022 DGT Co., Ltd. All right Reserved</p>
-            <div class="sns">
-              <a
-                href="https://www.facebook.com"
-                target="_blank"
-                class="facebook"
-                ><img src="${cp }/resources/images/small_facebook.png" alt=""
-              /></a>
-              <a href="https://www.instagram.com" target="_blank" class="insta"
-                ><img src="${cp }/resources/images/small_instagram.png" alt=""
-              /></a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+      </div>  
+      
+    <%@include file="footer.jsp" %>
   </body>
 </html>

@@ -6,49 +6,54 @@
 	<!-- 전체 게시글 개수 -->
 	<select id="getBoardCnt" parameterType="string"
 		resultType="_int">
-		select count(*) from ${boardName}
+		select count(*) from ${b_name}
 	</select>
-	<select id="getBoardList" parameterType="hashmap"
+	<select id="getBoard" parameterType="hashmap"
 		resultType="BoardDTO">
 		select
-		fb.b_index,
-		fb.b_reg_date,
-		fb.b_update_date,
-		fb.b_subject,
-		fb.b_title,
-		fb.b_contents,
-		fb.b_hits,
-		fb.b_like_user_index,
-		fb.b_inactive,
+		b.b_index,
+		b.b_reg_date,
+		b.b_update_date,
+		b.b_subject,
+		b.b_title,
+		b.b_contents,
+		b.b_hits,
+		b.b_like_user_index,
+		b.b_inactive,
 		u.user_index,
 		u.user_nickname
-		from t_free_board fb
+		from ${b_name} b
 		join t_user u
-		on fb.user_index=u.user_index
+		on b.user_index=u.user_index
+		where b.b_inactive = 0 
 		order by 1 desc
 		limit #{startRow}, #{pageSize}
 	</select>
 
-	<insert id="insert" parameterType="boardDTO">
+	<insert id="postOn" parameterType="boardDTO">
 		insert into
-		t_test_board(user_index, tb_title, tb_contents, tb_files)
-		values(#{user_index}, #{tb_title}, #{tb_contents},#{tb_files})
+		${b_name}(user_index, b_title, b_contents, b_files)
+		values(#{user_index}, #{b_title}, #{b_contents},#{b_files})
 	</insert>
-	<delete id="delete" parameterType="_int">
-		delete from t_test_board where
-		tb_index=#{tb_index}
+	<delete id="postOff" parameterType="hashmap">
+		delete from ${b_name} where
+		b_index=#{b_index}
 	</delete>
-	<select id="selectOne" parameterType="_int"
+	<select id="getPost" parameterType="hashmap"
 		resultType="BoardDTO">
-		select * from t_test_board where tb_index=#{tb_index}
+		select b.b_index,b.b_reg_date,b.b_update_date,b.b_subject,b.b_title,b.b_contents,b.b_hits,b.b_like_user_index,b.b_inactive,b.b_files,u.user_index,u.user_nickname 
+		from ${b_name} b 
+		join t_user u 
+		on b.user_index=u.user_index
+		where b.b_index=#{b_index};
 	</select>
-	<update id="updateHits" parameterType="_int">
-		update t_test_board set
-		tb_hits=tb_hits+1 where tb_index=#{tb_index}
+	<update id="updateHits" parameterType="hashmap">
+		update ${b_name} set
+		b_hits=b_hits+1 where b_index=#{b_index}
 	</update>
 
-	<select id="getFreeBoardListOnMain" resultType="BoardDTO">
+	<select id="getBoardListOnMain" parameterType="string" resultType="BoardDTO">
 		select * from
-		t_free_board order by 1 desc limit 0,6
+		${b_name} order by 1 desc limit 0,6
 	</select>
 </mapper>

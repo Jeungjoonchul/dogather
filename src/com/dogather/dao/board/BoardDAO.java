@@ -17,41 +17,50 @@ public class BoardDAO {
 		}
 		
 		//전체 게시글 개수
-		public int getBoardCnt(String boardName) {
-			return sqlSession.selectOne("Board.getBoardCnt",boardName);
+		public int getBoardCnt(String b_name) {
+			return sqlSession.selectOne("Board.getBoardCnt",b_name);
 		}
 
-		public List<BoardDTO> getBoardList(int startRow, int pageSize,String boardName) {
+		public List<BoardDTO> getBoard(int startRow, int pageSize,String b_name) {
 			HashMap<String, Object> datas = new HashMap<String, Object>();
 			datas.put("startRow", startRow);
 			datas.put("pageSize", pageSize);
-			datas.put("boardName",boardName);
+			datas.put("b_name",b_name);
 			
-			return sqlSession.selectList("Board.getBoardList", datas);
+			return sqlSession.selectList("Board.getBoard", datas);
 		}
 
 		public int getLastIndex(int user_index) {
 			return sqlSession.selectOne("Board.getLastIndex",user_index);
 		}
 
-		public boolean insert(BoardDTO newPost) {
-			return sqlSession.insert("Board.insert",newPost)==1;
+		public boolean postOn(BoardDTO newPost) {
+			return sqlSession.insert("Board.postOn",newPost)==1;
 		}
 
-		public void delete(int tb_index) {
-			sqlSession.delete("Board.delete",tb_index);			
+		public void postOff(int b_index,String b_name) {
+			HashMap<String, Object> datas = new HashMap<String, Object>();
+			datas.put("b_index",b_index);
+			datas.put("b_name",b_name);
+			sqlSession.delete("Board.postOff",datas);			
 		}
 
-		public BoardDTO selectOne(int tb_index) {
-			return sqlSession.selectOne("Board.selectOne", tb_index);
+		public BoardDTO getPost(int b_index, String b_name) {
+			HashMap<String, Object> datas = new HashMap<String, Object>();
+			datas.put("b_index",b_index);
+			datas.put("b_name",b_name);
+			return sqlSession.selectOne("Board.getPost", datas);
 		}
 
-		public void updateHits(int tb_index) {
-			sqlSession.update("Board.updateHits",tb_index);
+		public void updateHits(int b_index,String b_name) {
+			HashMap<String, Object> datas = new HashMap<String, Object>();
+			datas.put("b_index",b_index);
+			datas.put("b_name",b_name);
+			sqlSession.update("Board.updateHits",datas);
 		}
 		
 		
-		public List<BoardDTO> getFreeBoardListOnMain(){
-			return sqlSession.selectList("Board.getFreeBoardListOnMain");
-		}		
+		public List<BoardDTO> getBoardListOnMain(String b_name){
+			return sqlSession.selectList("Board.getBoardListOnMain",b_name);
+		}
 }

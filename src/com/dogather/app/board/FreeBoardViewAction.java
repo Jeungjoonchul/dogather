@@ -13,33 +13,31 @@ import com.dogather.dao.board.BoardDAO;
 import com.dogather.dto.board.BoardDTO;
 import com.dogather.dto.user.UserDTO;
 
-public class BoardViewAction implements Action {
+public class FreeBoardViewAction implements Action {
 
 	@Override
 	public ActionTo execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		int b_index = Integer.parseInt(req.getParameter("b_index"));
-		String b_name = "게시판 이름";
+		String b_name = "t_free_board";
 
 		BoardDAO bdao = new BoardDAO();
+		UserDTO loginUser = (UserDTO) req.getSession().getAttribute("loginUser");
+		int user_index = loginUser != null ? loginUser.getUser_index() : 0;
+		BoardDTO fb = bdao.getPost(b_index, b_name);
 
-		
-		int user_index = ((UserDTO)req.getSession().getAttribute("loginUser")).getUser_index();
+		if (user_index != 0) {
+			if (fb.getUser_index() != user_index) {
+				fb.setB_hits(fb.getB_hits() + 1);
+				bdao.updateHits(b_index, b_name);
 
-		BoardDTO tb = bdao.getPost(b_index,b_name);
-
-
-		if(tb.getUser_index()!=user_index) {
-			tb.setB_hits(tb.getB_hits() + 1);
-			bdao.updateHits(b_index,b_name);
+			}
 		}
+		req.setAttribute("fb", fb);
 
-		
-		req.setAttribute("tb", tb);
-		
 		ActionTo transfer = new ActionTo();
 		transfer.setRedirect(false);
-		transfer.setPath("경로");
+		transfer.setPath("/app/board/free_board/view.jsp");
 		return transfer;
-	}
 
+	}
 }

@@ -12,4 +12,5 @@ public interface Action {
 	// 로직을 수행했다면 결과로 "어디로","어떻게" 이동할지가 나오기 때문에
 	// 그 두 정보를 가지고 있는 ActionTo 객체를 만들어서 리턴하도록 설계를 한다.
 	ActionTo execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException;
+	
 }

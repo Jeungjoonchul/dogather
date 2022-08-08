@@ -76,22 +76,27 @@ public class UserFrontController extends HttpServlet {
 			for (Cookie cookie : cookies) {
 				if(cookie.getName().equals("autoLogin_check")) {
 					cookie.setMaxAge(0);
-					System.out.println(cookie.getPath());
+
 					cookie.setPath(req.getContextPath());
 					resp.addCookie(cookie);
 					break;
 				}
 			}			
+			String prev = req.getHeader("referer");
+
+			String cmd = prev.substring(contextPath.length()+prev.indexOf(contextPath));
+
 			req.getSession().invalidate();
 			PrintWriter out = resp.getWriter();
 			out.print("<script>alert('로그아웃되었습니다');");
-			out.print("location.href='"+req.getContextPath()+"/main'");
+			out.print("location.href='"+req.getContextPath()+cmd+"'");
 			out.print("</script>");
 		
 			break;
 			
 		case "/user/login.us":
 			transfer = new ActionTo();
+			req.setAttribute("prev_page", req.getHeader("referer"));
 			transfer.setPath("/app/user/login.jsp");
 			transfer.setRedirect(false);
 			break;
