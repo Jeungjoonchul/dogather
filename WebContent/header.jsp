@@ -4,8 +4,8 @@
 <c:set var="cp" value="${pageContext.request.contextPath }"/>
       <div id="head">
         <div>
-          <div class="left">
-            
+          <div class="left" style="text-indent: -999px">
+            메인화면
           </div>
           <div class="center">
             <a href="${cp }/main"><img src="${cp}/resources/images/dogather_logo.png" alt="" width="175px" /></a>

@@ -1,36 +1,40 @@
 * {
-	font-family: "Noto Sans KR", sans-serif;
-	/* div영역 */
-}
+    font-family: "Noto Sans KR", sans-serif;
+    /* div영역 */
+    
+  }
+  
+  body{
+    width: 100%;
+    height: 100%;
+  
+  }
+  
+  #head div,#footer div {
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    box-sizing: border-box;
+    
+  }
+  
+  #head {
+    width: 80%;
+    position: relative;
+    margin-top: 50px;
+    height: 200px;
+    
+  }
+  
 
-body {
-	width: 100%;
-	margin: 0;
-}
-
-#head {
-	width: 80%;
-	position: relative;
-	margin:0 auto;
-	height: 200px;
-}
-
-
-/* div:not(#body){
-	width: 100%;
-	margin: 0 auto;
-	text-align: center;
-	box-sizing: border-box;
-} */
-
-.left, .center, .right {
-	float: left;
-	width: 33% !important;
-}
-.left{
-	height:10px;
-}
-/* .left{
+  .left,
+  .center,
+  .right {
+    float: left;
+    width: 33.33% !important;
+    
+  }
+  /* .left{
     width: 300px;
   }
   .center{
@@ -39,185 +43,168 @@ body {
   .right{
     width: 300px;
   } */
-.left>a, .right>a {
-	font-weight: 100;
-	font-size: 0.7rem;
-}
+  .left > a,
+  .right > a {
+    font-weight: 100;
+    font-size: 0.7rem;
+  }
+  .left > a:hover{
+    color:purple;
+    font-size:0.85rem;
+  }
+  .right > a:hover{
+    color: purple;
+    font-size:0.85rem;
+  }
+  ul {
+    padding-inline-start: 0px;
+  }
+  
+  a {
+    text-decoration: none;
+    color: #141414;
+    /* margin: 0 auto; */
+  }
+  li {
+    display: block;
+    list-style: none;
+    text-align: center;
+  }
+  
+  
+  .category {
+      float: left;
+    width: 100%;
+    border: 0;
+    padding: 0;
+    position: relative;
+    padding-bottom: 70px;
+  }
+  .menubar {
+    
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: 500;
+    width: 100%;
+    border: 0;
+    padding: 0;
+    z-index: 100;
+  }
+  .menubar > li {
+    float: left;
+    width: 25%;
+  }
+  
+  .submenu {
+    display: none;
+    position: absolute;
+    font-weight: 200;
+  
+    font-size: 0.75rem;
+  }
+  
+  .category :hover .submenu {
+    display: block;
+    background-color: #ffffff;
+    width: 25%;
+    height: 100px;
+    padding-top: 5px;
+    border-bottom: 1px solid #ffffff;
+    z-index: 100;
+  }
+  
+  .span:hover {
+    color: purple;
+    font-size: 1rem;
+  }
+  #main{
+    width: 80%;
+    margin:0 auto;
+  }
 
-.left>a:hover {
-	color: purple;
-	font-size: 0.85rem;
-}
-
-.right>a:hover {
-	color: purple;
-	font-size: 0.85rem;
-}
-
-ul {
-	padding-inline-start: 0px;
-}
-
-a {
-	text-decoration: none;
-	color: #141414;
-	/* margin: 0 auto; */
-}
-
-li {
-	display: block;
-	list-style: none;
-	text-align: center;
-}
-
-.category {
-	float: left;
-	width: 100%;
-	border: 0;
-	padding: 0;
-	position: relative;
-	padding-bottom: 70px;
-}
-
-.menubar {
-	text-align: center;
-	font-size: 1.25rem;
-	font-weight: 500;
-	width: 100%;
-	border: 0;
-	padding: 0;
-	z-index: 100;
-}
-
-.menubar>li {
-	float: left;
-	width: 25%;
-}
-
-.submenu {
-	display: none;
-	position: absolute;
-	font-weight: 200;
-	font-size: 0.75rem;
-}
-
-.category :hover .submenu {
-	display: block;
-	background-color: #ffffff;
-	width: 25%;
-	height: 100px;
-	padding-top: 5px;
-	border-bottom: 1px solid #ffffff;
-	z-index: 100;
-}
-
-.span:hover {
-	color: purple;
-	font-size: 1rem;
-}
-/* #head div{
-	width: 100%;
-	margin: 0 auto;
-	text-align: center;
-	box-sizing: border-box;
-} */
-#body {
-	width: 100%;
-	float: left;
-	position: relative;
-}
-
-
-
-
-#footer {
-	width: 100%;
-	border-top: 1px solid #141414;
-	height: 272px;
-	font-size: 0.875rem;
-	color: #141414;
-	clear: both;
-	background-color: RGB(245, 246, 247);
-}
-
-#footer .web_container {
-	position: relative;
-	width: 80%;
-	padding: 47px 0;
-	clear: both;
-	margin :0 auto;
-}
-
-.footer_menu {
-	position: absolute;
-	top: 42px;
-	right: 0;
-	clear: both;
-	width: 100%;
-}
-
-.footer_menu ul {
-	list-style: none;
-	margin: 0;
-	padding: 0;
-	float: right;
-}
-
-.footer_menu li {
-	padding-left: 0px;
-	float: left;
-}
-
-.footer_menu ul a {
-	position: relative;
-	color: RGB(100, 100, 100);
-	cursor: pointer;
-	padding: 5px 10px;
-	display: inline-block;
-	overflow: hidden;
-	white-space: nowrap;
-}
-
-.footer_menu .footer_btn {
-	float: right;
-	text-align: right;
-	overflow: hidden;
-	white-space: nowrap;
-}
-
-.footer_menu .footer_btn a {
-	display: inline-block;
-	margin: 12px 0 0 3px;
-	padding: 0 32px;
-	color: RGB(100, 100, 100);
-	border: 1px solid rgba(100, 100, 100, 100);
-	border-radius: 16px;
-	line-height: 30px;
-	cursor: pointer;
-	text-decoration: none;
-	outline: none;
-}
-
-.copyright p {
-	line-height: 170%;
-	text-align: left;
-}
-
-.copyright .footer_line {
-	display: inline-block;
-	margin: 0 6px;
-	width: 1px;
-	height: 12px;
-	vertical-align: middle;
-}
-
-.copyright .sns {
-	margin: top 20px;
-}
-
-.copyright .sns a {
-	width: 25px;
-	height: 25px;
-	margin-right: 6px;
-	float: left;
-}
+  
+  #footer {
+    width: 100%;
+    border-top: 1px solid #141414;
+    height: 272px;
+    font-size: 0.875rem;
+    color: #141414;
+    clear: both;
+    background-color: RGB(245, 246, 247);
+    
+  }
+  #footer .web_container {
+    position: relative;
+    width: 80%;
+    padding: 47px 0;
+    clear: both;
+  }
+  
+  .footer_menu {
+    position: absolute;
+    top: 42px;
+    right: 0;
+    clear: both;
+    width: 100%;
+  }
+  .footer_menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    float: right;
+    
+  }
+  .footer_menu li {
+    padding-left: 0px;
+    float: left;
+    
+  }
+  .footer_menu ul a {
+    position: relative;
+    color: RGB(100, 100, 100);
+    cursor: pointer;
+    padding: 5px 10px;
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .footer_menu .footer_btn {
+    float: right;
+    text-align: right;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .footer_menu .footer_btn a {
+    display: inline-block;
+    margin: 12px 0 0 3px;
+    padding: 0 32px;
+    color: RGB(100, 100, 100);
+    border: 1px solid rgba(100, 100, 100, 100);
+    border-radius: 16px;
+    line-height: 30px;
+    cursor: pointer;
+    text-decoration: none;
+    outline: none;
+    
+  }
+  
+  .copyright p {
+    line-height: 170%;
+    text-align: left;
+  }
+  .copyright .footer_line {
+    display: inline-block;
+    margin: 0 6px;
+    width: 1px;
+    height: 12px;
+    vertical-align: middle;
+  }
+  .copyright .sns {
+    margin: top 20px;
+  }
+  .copyright .sns a {
+    width: 25px;
+    height: 25px;
+    margin-right: 6px;
+    float: left;
+  }

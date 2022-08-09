@@ -44,6 +44,7 @@ public class FreeBoardListAction implements Action {
 		transfer.setPath("/app/board/free_board/list.jsp");
 
 		return transfer;
+
 	}
 
 }

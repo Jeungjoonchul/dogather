@@ -23,25 +23,22 @@ public class BoardImageUploadAction implements Action {
 		resp.setContentType("text/html; charset=utf-8");
 		PrintWriter out = resp.getWriter();
 		String saveDirectory = req.getServletContext().getRealPath("temp");
-		System.out.println(saveDirectory);
+		System.out.println("임시 저장 장소 : "+saveDirectory);
 		int maxPostSize = 1024*1024*5;
 		
 		MultipartRequest multi = new MultipartRequest(req, saveDirectory, maxPostSize, "utf-8",new DefaultFileRenamePolicy());
 		String orgName = (String)multi.getOriginalFileName("file");
 		String sysName = (String)multi.getFilesystemName("file");
-		System.out.println("원본 파일명 : "+orgName);
-		System.out.println("저장할 파일명 : "+sysName);
-		
-		String filePath = saveDirectory+"\\"+sysName;
-		System.out.println("파일 경로 : "+filePath);
-		
 		UUID uuid = UUID.randomUUID();
+		System.out.println("원본 파일명 : "+orgName);
+		System.out.println("저장 파일명 : "+uuid);
+				
 		File file = new File(saveDirectory+"\\"+sysName);
 		File newFile = new File(saveDirectory+"\\"+uuid);
 		file.renameTo(newFile);
+		System.out.println("파일 경로 : "+saveDirectory+"\\"+uuid);
 		
 		out.print(orgName+","+uuid);
-		System.out.println(uuid);
 		out.close();
 		
 		return null;

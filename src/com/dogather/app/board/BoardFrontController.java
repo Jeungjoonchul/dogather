@@ -74,6 +74,30 @@ public class BoardFrontController extends HttpServlet{
 				e.printStackTrace();
 			}
 			break;
+		case "/board/free_board/delete.bo":
+			try {
+				transfer = new FreeBoardDeleteOkAction().execute(req,resp);
+			} catch (Exception e) {
+				System.out.println(command+" : "+e);
+				e.printStackTrace();
+			}
+			break;
+		case "/board/free_board/update.bo":
+			try {
+				transfer = new FreeBoardUpdateAction().execute(req,resp);
+			} catch (Exception e) {
+				System.out.println(command+" : "+e);
+				e.printStackTrace();
+			}
+			break;
+		case "/board/free_board/update_ok.bo":
+			try {
+				transfer=new FreeBoardUpdateOkAction().execute(req,resp);
+			} catch (Exception e) {
+				System.out.println(command+" : "+e);
+				e.printStackTrace();
+			}
+			break;
 		}
 		//전송 일괄처리
 		if(transfer!=null) {

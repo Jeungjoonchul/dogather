@@ -77,7 +77,7 @@ public class Paging {
 	//파라미터로 page번호와 전체 게시글의 개수를 받아 새로운 페이징 정보 생성
 	//전체 게시글 개수는 BoardDAO에 getBoardCnt 메소드로 얻음
 	public Paging(String paramPage,int totalCnt) {
-		page=paramPage==null?1:Integer.parseInt(paramPage);
+		page=(paramPage==(null))||(paramPage.equals(""))?1:Integer.parseInt(paramPage);
 		this.totalCnt=totalCnt;
 		startPage=(page-1)/10*10+1;
 		endPage = startPage+9;

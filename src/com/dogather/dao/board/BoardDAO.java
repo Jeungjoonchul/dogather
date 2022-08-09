@@ -38,11 +38,11 @@ public class BoardDAO {
 			return sqlSession.insert("Board.postOn",newPost)==1;
 		}
 
-		public void postOff(int b_index,String b_name) {
+		public boolean postOff(int b_index,String b_name) {
 			HashMap<String, Object> datas = new HashMap<String, Object>();
 			datas.put("b_index",b_index);
 			datas.put("b_name",b_name);
-			sqlSession.delete("Board.postOff",datas);			
+			return sqlSession.delete("Board.postOff",datas)==1;			
 		}
 
 		public BoardDTO getPost(int b_index, String b_name) {
@@ -52,15 +52,20 @@ public class BoardDAO {
 			return sqlSession.selectOne("Board.getPost", datas);
 		}
 
-		public void updateHits(int b_index,String b_name) {
+		public boolean updateHits(int b_index,String b_name) {
 			HashMap<String, Object> datas = new HashMap<String, Object>();
 			datas.put("b_index",b_index);
 			datas.put("b_name",b_name);
-			sqlSession.update("Board.updateHits",datas);
+			return sqlSession.update("Board.updateHits",datas) ==1;
 		}
 		
 		
 		public List<BoardDTO> getBoardListOnMain(String b_name){
 			return sqlSession.selectList("Board.getBoardListOnMain",b_name);
 		}
+
+		public boolean updatePost(BoardDTO post) {
+			return sqlSession.update("Board.updatePost", post)==1;
+		}
+		
 }

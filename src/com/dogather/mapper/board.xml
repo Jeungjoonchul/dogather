@@ -36,8 +36,8 @@
 		values(#{user_index}, #{b_title}, #{b_contents},#{b_files})
 	</insert>
 	<delete id="postOff" parameterType="hashmap">
-		delete from ${b_name} where
-		b_index=#{b_index}
+		update ${b_name} set b_inactive=true,b_update_date=now() 
+		where b_index=#{b_index}
 	</delete>
 	<select id="getPost" parameterType="hashmap"
 		resultType="BoardDTO">
@@ -47,13 +47,21 @@
 		on b.user_index=u.user_index
 		where b.b_index=#{b_index};
 	</select>
-	<update id="updateHits" parameterType="hashmap">
-		update ${b_name} set
-		b_hits=b_hits+1 where b_index=#{b_index}
-	</update>
-
+	
 	<select id="getBoardListOnMain" parameterType="string" resultType="BoardDTO">
 		select * from
 		${b_name} order by 1 desc limit 0,6
 	</select>
+	
+	<update id="updateHits" parameterType="hashmap">
+		update ${b_name} 
+		set b_hits=b_hits+1 
+		where b_index=#{b_index}
+	</update>
+
+	<update id="updatePost" parameterType="BoardDTO">
+		update ${b_name} 
+		set b_update_date=now(), b_subject=#{b_subject}, b_title=#{b_title},b_contents=#{b_contents},b_files=#{b_files} 
+		where b_index=#{b_index}
+	</update>
 </mapper>

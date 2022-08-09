@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <c:set var="cp" value="${pageContext.request.contextPath }"/>
 
 <!DOCTYPE html>
@@ -9,6 +10,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="${cp}/resources/js/cp.js"></script>
     <link rel="stylesheet" href="${cp }/resources/css/mainStyle.css" />
     <link rel="stylesheet" href="${cp }/resources/css/include.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com/" />
@@ -169,6 +171,8 @@
         </div>
         <!-- 이벤트&커뮤니티 게시판 -->
         <div id="event_community">
+        <c:set var="today" value="<%=new java.util.Date() %>"></c:set>
+        <c:set var="today"><fmt:formatDate value="${today }" pattern="yyyyMMdd"/></c:set>
           <div id="event_border">
             <div class="event title">
               <a href="1#">
@@ -214,6 +218,8 @@
               <c:choose>
               <c:when test="${fb_list.size()>0 and fb_list!= null }">
               <c:forEach var="fb_list" items="${fb_list}">
+              <fmt:parseDate var="date" value="${fb_list.b_reg_date }" pattern="yyyy-MM-dd HH:mm:ss"/>
+              <c:set var="date"><fmt:formatDate value="${date }" pattern="yyyyMMdd"/></c:set>
               	<li>
                   <a href="${cp}/board/free_board/view.bo?b_index=${fb_list.b_index}">
                     <div class="cap gray"><span>${fb_list.b_subject}</span></div>
@@ -224,7 +230,10 @@
                     
                     <div class="comm red">[댓글수]</div>
                     <div class="icon">
-                      <p class="new">N</p>
+                      <p class="new">
+
+                      	<c:if test="${today-date <=1}">N</c:if>
+                      </p>
                     </div>
                   </a>
                 </li>

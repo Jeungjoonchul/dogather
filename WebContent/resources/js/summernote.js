@@ -1,10 +1,3 @@
-function contextPath(){
-	var hostIndex = location.href.indexOf(location.host) + location.host.length;
-	var contextPath = location.href.substring(hostIndex, location.href.indexOf('/',hostIndex+1));
-		return contextPath;
-}
-const cp = contextPath();
-	
 $(document).ready(function() {
 	//여기 아래 부분
 	$('#summernote').summernote({
@@ -39,9 +32,9 @@ function sendFile(file, el) {
 				contentType : false,
 				processData : false,
 				enctype : 'multipart/form-data',
-				success : function(img_systemName) {
-					var orgName = img_systemName.split(',')[0];
-					var sysName = img_systemName.split(',')[1];
+				success : function(img) {
+					var orgName = img.split(',')[0];
+					var sysName = img.split(',')[1];
 					$(el).summernote('editor.insertImage',
 							cp+'/temp/' + sysName);
 					$('#sysName').append(sysName + ',');
