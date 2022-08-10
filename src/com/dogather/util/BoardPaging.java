@@ -1,6 +1,6 @@
 package com.dogather.util;
 
-public class Paging {
+public class BoardPaging {
 	//현재 페이지 번호
 	private int page;
 	//전체 게시글 개수
@@ -76,7 +76,7 @@ public class Paging {
 
 	//파라미터로 page번호와 전체 게시글의 개수를 받아 새로운 페이징 정보 생성
 	//전체 게시글 개수는 BoardDAO에 getBoardCnt 메소드로 얻음
-	public Paging(String paramPage,int totalCnt) {
+	public BoardPaging(String paramPage,int totalCnt) {
 		page=(paramPage==(null))||(paramPage.equals(""))?1:Integer.parseInt(paramPage);
 		this.totalCnt=totalCnt;
 		startPage=(page-1)/10*10+1;
@@ -85,6 +85,4 @@ public class Paging {
 		endPage=endPage>totalPage?totalPage:endPage;
 		startRow=(page-1)*pageSize;
 	}
-
-
 }

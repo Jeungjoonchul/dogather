@@ -1,6 +1,6 @@
 function loginCheck(loginUser){
 		if(loginUser){
-			location.href= cp+"/board/free_board/write.bo";
+			location.href= cp+"/board/free_board/post_write.bo";
 		}else{
 			alert('로그인 후 이용 가능합니다');
 			location.href=cp+"/user/login.us"
@@ -10,7 +10,7 @@ function loginCheck(loginUser){
 	function delete_check(b_index){
 		var check = confirm('정말 삭제하시겠습니까?');
 		if(check){
-			location.href=cp+"/board/free_board/delete.bo?b_index="+b_index;
+			location.href=cp+"/board/free_board/post_delete.bo?b_index="+b_index;
 		}
 	}
 

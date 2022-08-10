@@ -11,7 +11,7 @@ import com.dogather.action.Action;
 import com.dogather.action.ActionTo;
 import com.dogather.dao.board.BoardDAO;
 import com.dogather.dto.board.BoardDTO;
-import com.dogather.util.Paging;
+import com.dogather.util.BoardPaging;
 
 public class BoardListAction implements Action{
 
@@ -23,12 +23,13 @@ public class BoardListAction implements Action{
 		//현재 페이지(int로 변환할 필요 없음)
 		String temp = req.getParameter("page");
 		String boardName = "테이블 명";
+		String r_name = "리플 테이블명";
 		
 		//페이징 구하는 util, 매개변수는 현재 페이지(null도 가능), 전체 게시글 개수 
-		Paging paging = new Paging(temp, bdao.getBoardCnt(boardName));
+		BoardPaging paging = new BoardPaging(temp, bdao.getBoardCnt(boardName));
 		
 		//paging 객체의 startRow와 pageSize로 전체 게시글 목록 얻음
-		List<BoardDTO> list = bdao.getBoard(paging.getStartRow(),paging.getPageSize(),boardName);
+		List<BoardDTO> list = bdao.getBoard(paging.getStartRow(),paging.getPageSize(),boardName,r_name);
 		
 		//전송을 위한 set
 		req.setAttribute("list", list);

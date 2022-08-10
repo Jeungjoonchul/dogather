@@ -6,7 +6,7 @@
 	<!-- 전체 게시글 개수 -->
 	<select id="getBoardCnt" parameterType="string"
 		resultType="_int">
-		select count(*) from ${b_name}
+		select count(*) from ${b_name} where b_inactive=0
 	</select>
 	<select id="getBoard" parameterType="hashmap"
 		resultType="BoardDTO">
@@ -21,10 +21,13 @@
 		b.b_like_user_index,
 		b.b_inactive,
 		u.user_index,
-		u.user_nickname
+		u.user_nickname,
+		r.b_reply_cnt
 		from ${b_name} b
 		join t_user u
 		on b.user_index=u.user_index
+		left join(select b_index,count(r_index) as b_reply_cnt from ${r_name} where r_inactive=0 group by b_index) as r
+		on b.b_index=r.b_index
 		where b.b_inactive = 0 
 		order by 1 desc
 		limit #{startRow}, #{pageSize}
@@ -48,9 +51,12 @@
 		where b.b_index=#{b_index};
 	</select>
 	
-	<select id="getBoardListOnMain" parameterType="string" resultType="BoardDTO">
-		select * from
-		${b_name} order by 1 desc limit 0,6
+	<select id="getBoardListOnMain" parameterType="hashmap" resultType="BoardDTO">
+		select b.b_index,b.b_reg_date,b.b_subject,b.b_title,r.b_reply_cnt 
+		from ${b_name} as b 
+		left join(select b_index,count(r_index) as b_reply_cnt from ${r_name} where r_inactive=0 group by b_index) as r 
+		on b.b_index=r.b_index 
+		where b_inactive=0 order by 1 desc limit 0,6
 	</select>
 	
 	<update id="updateHits" parameterType="hashmap">

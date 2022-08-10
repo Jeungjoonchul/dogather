@@ -5,11 +5,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>글쓰기</title>
-<script src="${cp}/resources/js/cp.js"></script>
-<link rel="stylesheet" href="${cp }/resources/css/include.css" />
-<!-- include libraries(jQuery, bootstrap) -->
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="${cp}/resources/js/cp.js"></script>
+    <link rel="stylesheet" href="${cp }/resources/css/include.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com/" />
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="shortcut icon" href="${cp}/resources/images/favicon.png" />
+    <!-- include libraries(jQuery, bootstrap) -->
 <link
 	href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -25,15 +33,8 @@
 	src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 <script
 	src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/lang/summernote-ko-KR.min.js"></script>
+<title>글쓰기</title>
 <script src="${cp}/resources/js/summernote.js"></script>
-
-<link rel="stylesheet" href="${cp }/resources/css/include.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com/" />
-    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;600;700;800;900&display=swap"
-      rel="stylesheet"
-    />
 </head>
 <body>
 	<c:if test="${empty loginUser }">
@@ -46,7 +47,7 @@
 
 		<%@include file="../../../header.jsp"%>
 		<div id="body">
-			<form method="post" action="${cp}/board/free_board/write_ok.bo"
+			<form method="post" action="${cp}/board/free_board/post_write_ok.bo"
 				id="post_editor" name="post_editor">
 				<table style="margin: 0 auto;">
 					<tr>

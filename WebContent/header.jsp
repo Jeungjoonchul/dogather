@@ -83,7 +83,7 @@
 			  </a>
 			  <ul class="submenu">
 				<li>
-				  <a href="${cp }/board/free_board/list.bo">
+				  <a href="${cp }/board/free_board/post_list.bo">
 					<span class="span">자유게시판</span>
 				  </a>
 				</li>

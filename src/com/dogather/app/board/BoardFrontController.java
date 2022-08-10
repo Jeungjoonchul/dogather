@@ -44,7 +44,7 @@ public class BoardFrontController extends HttpServlet{
 			}
 			break;
 
-		case "/board/free_board/list.bo":
+		case "/board/free_board/post_list.bo":
 			try {
 				transfer=new FreeBoardListAction().execute(req,resp);
 			} catch (Exception e) {
@@ -53,12 +53,12 @@ public class BoardFrontController extends HttpServlet{
 			}
 			break;
 			
-		case "/board/free_board/write.bo":
+		case "/board/free_board/post_write.bo":
 			transfer = new ActionTo();
 			transfer.setRedirect(false);
 			transfer.setPath("/app/board/free_board/write.jsp");
 			break;
-		case "/board/free_board/write_ok.bo":
+		case "/board/free_board/post_write_ok.bo":
 			try {
 				transfer = new FreeBoardWriteOkAction().execute(req,resp);
 			} catch (Exception e) {
@@ -66,7 +66,7 @@ public class BoardFrontController extends HttpServlet{
 				e.printStackTrace();
 			}
 			break;
-		case "/board/free_board/view.bo":
+		case "/board/free_board/post_view.bo":
 			try {
 				transfer = new FreeBoardViewAction().execute(req,resp);
 			} catch (Exception e) {
@@ -74,7 +74,7 @@ public class BoardFrontController extends HttpServlet{
 				e.printStackTrace();
 			}
 			break;
-		case "/board/free_board/delete.bo":
+		case "/board/free_board/post_delete.bo":
 			try {
 				transfer = new FreeBoardDeleteOkAction().execute(req,resp);
 			} catch (Exception e) {
@@ -82,7 +82,7 @@ public class BoardFrontController extends HttpServlet{
 				e.printStackTrace();
 			}
 			break;
-		case "/board/free_board/update.bo":
+		case "/board/free_board/post_update.bo":
 			try {
 				transfer = new FreeBoardUpdateAction().execute(req,resp);
 			} catch (Exception e) {
@@ -90,7 +90,7 @@ public class BoardFrontController extends HttpServlet{
 				e.printStackTrace();
 			}
 			break;
-		case "/board/free_board/update_ok.bo":
+		case "/board/free_board/post_update_ok.bo":
 			try {
 				transfer=new FreeBoardUpdateOkAction().execute(req,resp);
 			} catch (Exception e) {
@@ -98,7 +98,20 @@ public class BoardFrontController extends HttpServlet{
 				e.printStackTrace();
 			}
 			break;
+			
+			
+		//테스트
+		case "/board/reply_ok.bo":
+			try {
+				transfer= new ReplyOkAction().execute(req,resp);
+			} catch (Exception e) {
+				System.out.println(command+" : "+e);
+				e.printStackTrace();
+			}
+			break;
 		}
+		
+		
 		//전송 일괄처리
 		if(transfer!=null) {
 			if(transfer.isRedirect()) {

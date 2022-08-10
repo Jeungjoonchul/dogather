@@ -34,7 +34,7 @@ public class UserLoginCheckAction implements Action {
 				out.print("O");
 			}
 		}
-		
+		out.close();
 		return null;
 	}
 }

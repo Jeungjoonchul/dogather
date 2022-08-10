@@ -1,92 +1,3 @@
-##########################################################################################################################
-create table t_user(
-	#회원 가입 시 입력 받아야할 내용들(필수 입력 항목)
-	user_index int primary key auto_increment, #유저 고유 번호(ex : 1)
-	user_email varchar(767) not null unique, #정규식 적용 필요(email 정규식 / ex : apple@naver.com)
-    user_nickname varchar(30) not null unique, #정규식 적용 필요(영문자,한글,숫자, 2~10자리, 중복 불가 / ex : Apple킴)
-    user_name varchar(51) not null, #정규식 적용 필요(한글, 2~17자 리 / ex : 김사과)
-    user_password varchar(16) not null, #정규식 적용 필요(비밀번호 형식 : 영문자+숫자+특수문자, 8~16자리 / ex : asdf1234!)
-	user_phone varchar(11) not null, #정규식 적용 필요(10~11자리, 01로 시작 / ex : 0198479384)
-    user_gender enum('male','female') not null, #value는 mail, femail (ex : mail)
-    user_birth_date date not null, #입력 형식 확인(yyyy-MM-dd / ex : 2002-06-10)
-	
-    #선택 입력 항목
-    user_interest varchar(1000), #유저의 관심사, 반정규화 (check 박스 / ex : 1,2,3,4,5,기타/코딩) 관심 카테고리 없으면 정보제공X
-    user_intro text, #자기소개(1000자)
-    
-    #회원 가입 완료 후 설정
-    user_public_scope enum('all','buddy','none') default 'all' #유저 정보 공개 범위(ex : 'none' / none일 경우 아무도 회원 정보 조회 불가)
-);
-
-create table t_user_profile(
-	user_index int,
-    user_profile_original_name varchar(300), #유저 프로필 사진 원본 파일이름
-    user_profile_system_name varchar(300), #유저 프로필 사진 시스템 파일이름
-    constraint userProfile_user_fk foreign key(user_index) references t_user(user_index)
-);
-
-#약관 동의 여부
-create table t_user_terms_agreement(
-	user_index int,
-    user_term_essential1 boolean default true not null, #필수약관 1 동의 여부(기본 't' / ex : 't')
-    user_term_essential2 boolean default true not null, #필수약관 2 동의 여부(기본 't' / ex : 't')
-    user_term_selective1 boolean not null, #선택약관 1 동의 여부(ex : 'f')
-    user_term_selective1_reg_date datetime default now(),
-    user_term_selective2 boolean not null, #선택약관 2 동의 여부(ex : 't')
-    user_term_selective2_reg_date datetime default now(),
-    constraint userTermsAgreement_user_fk foreign key(user_index) references t_user(user_index)
-);
-
-create table t_user_info(
-	user_index int,
-    user_reg_date datetime default now(), #유저 가입날짜(yyyy-MM-dd / ex : 2022-07-25)
-    user_password_set_date datetime default now(), #비밀번호 마지막으로 설정한 시간 (비밀번호 교체 권유용 / ex : 2022-07-25)
-    user_inactive_date datetime, #비활성화 날짜(yyyy-MM-dd / ex : 2022-07-26)
-    user_inactive boolean default false not null, #비활성화 여부 (ex : 'f' / f일 경우 활성화 상태, t일 경우 비활성화 상태)
-    user_inactive enum('withdrawal','dormancy'),
-    user_last_login datetime,
-    constraint userInfo_user_fk foreign key(user_index) references t_user(user_index)
-);
-
-#유저 주소(회원 가입 시 필수 입력 항목)
-create table t_user_address(
-	user_index int, #유저 고유 번호 (ex : 1)
-	zip_code varchar(5), #우편번호(ex : 06236)
-    address1 varchar(300), #주소 최상위(ex : 서울시)
-    address2 varchar(300), #시군구(ex : 강남구)
-    address3 varchar(300), #읍면동(ex : 역삼동)
-    address4 varchar(300), #나머지 주소(도로명 또는 지번 / ex : 테헤란로 146)
-    address_detail varchar(1000), #상세주소(ex : 3층 코리아IT아카데미)
-    address_extra varchar(300), #참고사항 / address_refer -> address_extra 220721 (ex : (역삼동))
-	constraint userAddress_user_fk foreign key(user_index) references t_user(user_index)
-);
-
-
-
-#유저 친구 현황
-create table t_user_buddies(
-	user_index int, #(ex : 1)
-    user_buddies text, #유저의 친구, 친구인 user_index를 ','로 구분하여 append(ex : 2,3,4,5,...)
-    constraint userBuddies_user_fk foreign key(user_index) references t_user(user_index)
-);
-
-
-#유저 차단 현황
-create table t_user_block(
-	user_index int, #(ex : 1)
-    user_block_list text, #유저가 차단한 유저 현황(ex : 6,7,8,9,10,...)
-    constraint userBlock_user_fk foreign key(user_index) references t_user(user_index)
-);
-
-#유저 쪽지 범위
-create table t_user_note_scope(
-	user_index int, #유저(ex: 1)
-    note_scope enum('all','buddy','none') default 'all', #쪽지 수신 여부 확인(ex : 'buddy' / 친구 쪽지만 수신 가능)
-    constraint userNoteScope_user_fk foreign key(user_index) references t_user(user_index)
-);
-##########################################################################################################################
-
-
 drop database dg_db;
 create database dg_db;
 use dg_db;
@@ -140,7 +51,7 @@ create table t_user(
     user_password_set_date datetime default now(), #비밀번호 마지막으로 설정한 시간 (비밀번호 교체 권유용 / ex : 2022-07-25)
 	user_last_login datetime,
     user_inactive_date datetime, #비활성화 날짜(yyyy-MM-dd / ex : 2022-07-26)
-    user_t_categoryinactive boolean default false not null, #비활성화 여부 (ex : 0 / 0일 경우 활성화 상태, 1일 경우 비활성화 상태)
+    user_t_inactive boolean default false not null, #비활성화 여부 (ex : 0 / 0일 경우 활성화 상태, 1일 경우 비활성화 상태)
     user_inactive_reason enum('withdrawal','dormancy'),
 
 	zip_code varchar(5), #우편번호(ex : 06236)
@@ -153,6 +64,13 @@ create table t_user(
     
 	note_scope enum('all','buddy','none') default 'all' #쪽지 수신 여부 확인(ex : 'buddy' / 친구 쪽지만 수신 가능)
 );
+insert into t_user(user_email,user_nickname,user_name,user_password,user_phone,user_gender,user_birth_date,user_interest,user_intro,user_term_selective1,user_term_selective2,zip_code,address_default,address_detail) 
+values('apple@apple.com','김사과','김사과','asdf1234!','01011111111','male','1999-01-01','1,2,3,4,5','안녕하세요','true','false','06236','서울 강남구 역삼동 736-6','3층'),
+('banana@banana.com','바나나','바나나','asdf1234!','01011111111','male','1999-01-01','1,2,3,4,5','안녕하세요','true','false','06236','서울 강남구 역삼동 736-6','3층'),
+('cherry@cherry.com','박체리','박체리','asdf1234!','01011111111','male','1999-01-01','1,2,3,4,5','안녕하세요','true','false','06236','서울 강남구 역삼동 736-6','3층'),
+('durian@durian.com','차두리','차두리','asdf1234!','01011111111','male','1999-01-01','1,2,3,4,5','안녕하세요','true','false','06236','서울 강남구 역삼동 736-6','3층');
+
+
 
 #유저 친구 상태 현황
 create table t_buddy_request(
@@ -205,17 +123,27 @@ create table t_free_board(
     constraint freeBoard_user_fk foreign key(user_index) references t_user(user_index)
 );
 
+insert into t_free_board(user_index,b_subject,b_title,b_contents)
+values(1,'유머','유머 테스트','<p>웃긴 유머</p>'),(2,'잡담','잡담 테스트','<p>그냥 잡담</p>'),(3,'기타','기타 테스트','<p>기타 연주</p>'),(4,'유머','유우머','<p>유우우머</p>');
+
+
 #자유게시판 댓글
 create table t_fb_reply(
+	r_index int primary key auto_increment,
 	b_index int, #게시글 번호(ex : 1)
     user_index int, #댓글 작성자(ex : 2)
     r_reg_date datetime default now(), #댓글 작성 시간(ex : 2022-07-25)
     r_update_date datetime default now(), #댓글 수정 시간(ex : 2022-07-25)
     r_contents text, #댓글 내용(ex : '너무 웃겨요')
+    r_like_user_index text,
     r_inactive boolean default false not null, #댓글 삭제 여부(ex : 'f')
-    constraint fbReply_freeBoard_fk foreign key(fb_index) references t_free_board(fb_index),
+    constraint fbReply_freeBoard_fk foreign key(b_index) references t_free_board(b_index),
     constraint fbReply_user_fk foreign key(user_index) references t_user(user_index)
 );
+
+###아래 146번 인서트문  0을 최근 게시물 번호로 수정 후 더미 데이터 생성
+
+insert into t_fb_reply(b_index,user_index,r_contents) values(0,1,'사과의 댓글'),(0,2,'바나나의 댓글'),(0,3,'체리의 댓글'),(0,4,'두리안의 댓글');
 
 #이벤트(adminMode에서 crud 가능 / userMode에서는 r만 가능)
 create table t_event_board(
@@ -230,6 +158,19 @@ create table t_event_board(
     b_like_user_index text, #좋아요 누른 사람(ex : 1,3,4,5,6,10,11,...)
     b_inactive boolean default false not null, #게시글 삭제여부(ex : 'f')
     b_files varchar(1000)
+);
+
+#이벤트게시판 댓글
+create table t_eb_reply(
+	r_index int primary key auto_increment,
+	b_index int, #게시글 번호(ex : 1)
+    user_index int, #댓글 작성자(ex : 2)
+    r_reg_date datetime default now(), #댓글 작성 시간(ex : 2022-07-25)
+    r_update_date datetime default now(), #댓글 수정 시간(ex : 2022-07-25)
+    r_contents text, #댓글 내용(ex : '너무 웃겨요')
+    r_like_user_index text,
+    r_inactive boolean default false not null, #댓글 삭제 여부(ex : 'f')
+    constraint ebReply_eventBoard_fk foreign key(b_index) references t_event_board(b_index)
 );
 
 #공지사항(adminMode에서 crud 가능 / userMode에서는 r만 가능)
@@ -295,7 +236,7 @@ create table t_dogather_do(
     dd_contents text, #작성 내용(ex : 오늘도 해냈다)
     dd_inactive boolean default false not null, #삭제 여부(ex : 'f')
     dd_like_user_index text, #인증 글에 좋아요 누른 유저(ex : 2,4,6,7,...)
-    dd_image1 text, #인증 사진1
+    dd_image1 text, #인증 사진1t_free_board
     dd_image2 text, #인증 사진2
     dd_image3 text, #인증 사진3
     constraint dogatherDo_dogather_fk foreign key(dg_index) references t_dogather(dg_index),
@@ -354,44 +295,22 @@ create table t_s_board(
     b_like_user_index text, #좋아요 누른 사람
     b_inactive boolean default false not null, #게시글 삭제여부
     b_files varchar(1000),
-    constraint user_sBoard_fk foreign key(user_index) references user(user_index)
+    constraint sBoard_user_fk foreign key(user_index) references user(user_index)
 );
 #게시판 댓글 틀
 create table t_sb_reply(
+	r_index int primary key auto_increment,
 	b_index int, #게시판 번호
     user_index int, #댓글 작성자
     r_reg_date datetime default now(), #댓글 작성 시간
     r_update_date datetime default now(), #댓글 수정 시간
     r_contents text, #댓글 내용
+    r_like_user_index text,
     r_inactive boolean default false not null, #댓글 삭제 여부
-    constraint free_board_reply_fk foreign key(b_index) references user(b_index),
-    constraint user_reply_fk foreign key(user_index) references user(user_index)
+    constraint sbReply_sBoard_fk foreign key(b_index) references user(b_index),
+    constraint sbReply_user_fk foreign key(user_index) references user(user_index)
 );
 #############################################################################################
-
-create table t_testBoard(
-	tb_index int primary key auto_increment, #게시글 번호
-    user_index int, #게시글 작성자
-    tb_reg_date datetime default now(), #게시글 등록일
-    tb_update_date datetime default now(), #게시글 수정일
-    tb_title varchar(1000) not null, #게시글 제목
-    tb_contents text not null, #게시글 내용(blob 타입 확인 필요)
-    tb_hits int default 0, #게시글 조회수
-    tb_like_user_index text, #좋아요 누른 사람
-    tb_inactive boolean default false not null, #게시글 삭제여부
-    tb_files text #원본 파일명+저장 파일명(ex : 원본파일명.jpg:저장파일명/원본파일명.png:저장파일명)
-);
-
-#게시판 댓글 틀
-create table t_tb_reply(
-	tb_index int, #게시판 번호
-    user_index int, #댓글 작성자
-    tbr_reg_date datetime default now(), #댓글 작성 시간
-    tbr_update_date datetime default now(), #댓글 수정 시간
-    tbr_contents text, #댓글 내용
-    tbr_inactive boolean default false not null #댓글 삭제 여부
-);
-
 
 
 #기능

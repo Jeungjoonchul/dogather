@@ -14,6 +14,8 @@ public class BoardDTO {
 	private boolean b_inactive;
 	private String b_files;
 	private String b_name;
+	private int b_reply_cnt;
+	private String r_name;
 	
 	public int getB_index() {
 		return b_index;
@@ -92,5 +94,17 @@ public class BoardDTO {
 	}
 	public void setB_name(String b_name) {
 		this.b_name = b_name;
+	}
+	public int getB_reply_cnt() {
+		return b_reply_cnt;
+	}
+	public void setB_reply_cnt(int b_reply_cnt) {
+		this.b_reply_cnt = b_reply_cnt;
+	}
+	public String getR_name() {
+		return r_name;
+	}
+	public void setR_name(String r_name) {
+		this.r_name = r_name;
 	}
 }

@@ -11,7 +11,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="${cp}/resources/js/cp.js"></script>
-    <link rel="stylesheet" href="${cp }/resources/css/mainStyle.css" />
     <link rel="stylesheet" href="${cp }/resources/css/include.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com/" />
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
@@ -20,7 +19,16 @@
       rel="stylesheet"
     />
     <link rel="shortcut icon" href="${cp}/resources/images/favicon.png" />
+    <!-- include libraries(jQuery, bootstrap) -->
+<link
+	href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+	rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
     <title>DoGather</title>
+        <link rel="stylesheet" href="${cp }/resources/css/mainStyle.css" />
   </head>
   <body>	
   <%@include file="/header.jsp"%>
@@ -209,7 +217,7 @@
           </div>
           <div id="community_border">
             <div class="community title">
-              <a href="${cp }/board/free_board/list.bo">
+              <a href="${cp }/board/free_board/post_list.bo">
                 <span class="purple">자유 </span><span>게시판</span>
               </a>
             </div>
@@ -221,18 +229,20 @@
               <fmt:parseDate var="date" value="${fb_list.b_reg_date }" pattern="yyyy-MM-dd HH:mm:ss"/>
               <c:set var="date"><fmt:formatDate value="${date }" pattern="yyyyMMdd"/></c:set>
               	<li>
-                  <a href="${cp}/board/free_board/view.bo?b_index=${fb_list.b_index}">
+                  	<a href="${cp}/board/free_board/post_view.bo?b_index=${fb_list.b_index}">
                     <div class="cap gray"><span>${fb_list.b_subject}</span></div>
                     
                     <div class="tit">
-                      	${fb_list.b_title }
+                      ${fb_list.b_title }
                     </div>
                     
-                    <div class="comm red">[댓글수]</div>
+                    <div class="comm red">[${fb_list.b_reply_cnt}]</div>
                     <div class="icon">
                       <p class="new">
-
-                      	<c:if test="${today-date <=1}">N</c:if>
+						<c:choose>
+                      	<c:when test="${today-date <=1}">N</c:when>
+                      	<c:otherwise>&nbsp;</c:otherwise>
+                      	</c:choose>
                       </p>
                     </div>
                   </a>

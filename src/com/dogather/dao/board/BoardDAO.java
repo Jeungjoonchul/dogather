@@ -21,11 +21,12 @@ public class BoardDAO {
 			return sqlSession.selectOne("Board.getBoardCnt",b_name);
 		}
 
-		public List<BoardDTO> getBoard(int startRow, int pageSize,String b_name) {
+		public List<BoardDTO> getBoard(int startRow, int pageSize,String b_name,String r_name) {
 			HashMap<String, Object> datas = new HashMap<String, Object>();
 			datas.put("startRow", startRow);
 			datas.put("pageSize", pageSize);
 			datas.put("b_name",b_name);
+			datas.put("r_name",r_name);
 			
 			return sqlSession.selectList("Board.getBoard", datas);
 		}
@@ -60,8 +61,11 @@ public class BoardDAO {
 		}
 		
 		
-		public List<BoardDTO> getBoardListOnMain(String b_name){
-			return sqlSession.selectList("Board.getBoardListOnMain",b_name);
+		public List<BoardDTO> getBoardListOnMain(String b_name,String r_name){
+			HashMap<String, String> datas = new HashMap<String, String>();
+			datas.put("b_name",b_name);
+			datas.put("r_name",r_name);
+			return sqlSession.selectList("Board.getBoardListOnMain",datas);
 		}
 
 		public boolean updatePost(BoardDTO post) {

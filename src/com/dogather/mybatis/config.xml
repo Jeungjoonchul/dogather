@@ -7,6 +7,7 @@
 		<typeAlias type="com.dogather.dto.user.UserDTO" alias="UserDTO"/>
 		<typeAlias type="com.dogather.dto.terms.TermsDTO" alias="TermsDTO"/>
 		<typeAlias type="com.dogather.dto.board.BoardDTO" alias="BoardDTO"/>
+		<typeAlias type="com.dogather.dto.board.ReplyDTO" alias="ReplyDTO"/>
 	</typeAliases>
 	<environments default="development">
 		<environment id="development">
@@ -23,5 +24,6 @@
 	<mapper resource="com/dogather/mapper/user.xml"/>
 	<mapper resource="com/dogather/mapper/board.xml"/>
 	<mapper resource="com/dogather/mapper/terms.xml"/>
+	<mapper resource="com/dogather/mapper/reply.xml"/>
 	</mappers>
 </configuration>

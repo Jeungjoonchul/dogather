@@ -24,15 +24,16 @@ public class FreeBoardDeleteOkAction implements Action {
 		if(bdao.postOff(b_index,b_name)) {
 			transfer = new ActionTo();
 			transfer.setRedirect(true);
-			transfer.setPath(req.getContextPath()+"/board/free_board/list.bo");
+			transfer.setPath(req.getContextPath()+"/board/free_board/post_list.bo");
 		}else {
 			resp.setCharacterEncoding("utf-8");
 			resp.setContentType("text/html; charset=utf-8");
 			PrintWriter out = resp.getWriter();
 			out.print("<script>");
 			out.print("alert('게시글 삭제에 실패했습니다');");
-			out.print("location.href='"+req.getContextPath()+"/board/free_board/view.bo?b_index="+b_index+"';");
+			out.print("location.href='"+req.getContextPath()+"/board/free_board/post_view.bo?b_index="+b_index+"';");
 			out.print("</script>");
+			out.close();
 		}
 		return transfer;
 	}

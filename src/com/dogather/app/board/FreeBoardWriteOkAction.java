@@ -112,7 +112,7 @@ public class FreeBoardWriteOkAction implements Action {
 			
 			
 		}
-		out.write("location.href='" + req.getContextPath() + "/board/free_board/list.bo?page=1';");
+		out.write("location.href='" + req.getContextPath() + "/board/free_board/post_list.bo?page=1';");
 		out.write("</script>");
 		out.close();
 		return null;

@@ -10,19 +10,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<script src="${cp}/resources/js/cp.js"></script>
-<link rel="stylesheet" href="${cp }/resources/css/board.css" />
-<link rel="stylesheet" href="${cp }/resources/css/include.css" />
-<link rel="preconnect" href="https://fonts.googleapis.com/" />
-<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="${cp}/resources/js/cp.js"></script>
+    <link rel="stylesheet" href="${cp }/resources/css/include.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com/" />
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="shortcut icon" href="${cp}/resources/images/favicon.png" />
+    <!-- include libraries(jQuery, bootstrap) -->
 <link
-	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;600;700;800;900&display=swap"
-	rel="stylesheet" />
-<link rel="shortcut icon" href="${cp }/resources/images/favicon.png" />
+	href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+	rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<!-- include summernote css/js -->
+<link
+	href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css"
+	rel="stylesheet">
+<script
+	src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/lang/summernote-ko-KR.min.js"></script>
 <title>DoGather</title>
+<link rel="stylesheet" href="${cp }/resources/css/board.css" />
 </head>
 <body>
 
@@ -53,7 +70,7 @@
 									<tr>
 											<td>${list.b_index}</td>
 											<td><a
-												href="${cp}/board/free_board/view.bo?b_index=${list.b_index}&page=${page}">${list.b_title}</a></td>
+												href="${cp}/board/free_board/post_view.bo?b_index=${list.b_index}&page=${page}"><span>${list.b_title}</span><span>[${list.b_reply_cnt }]</span></a></td>
 											<td><a href="#">${list.user_nickname}</a></td>
 											<td><fmt:parseDate value="${list.b_reg_date}"
 													pattern="yyyy-MM-dd HH:mm:ss" var="datetime" /> <c:set
@@ -79,18 +96,18 @@
 						<tfoot>
 							<tr>
 								<td colspan="5"><c:if test="${startPage!=1 }">
-										<a href="${cp }/board/free_board/list.bo?page=${startPage-1}">&lt;</a>
+										<a href="${cp }/board/free_board/post_list.bo?page=${startPage-1}">&lt;</a>
 									</c:if> <c:forEach begin="${startPage }" end="${endPage }" var="i">
 										<c:choose>
 											<c:when test="${page==i }">
 												<span class="nowPage">${i }</span>
 											</c:when>
 											<c:otherwise>
-												<a href="${cp}/board/free_board/list.bo?page=${i}">${i}</a>
+												<a href="${cp}/board/free_board/post_list.bo?page=${i}">${i}</a>
 											</c:otherwise>
 										</c:choose>
 									</c:forEach> <c:if test="${endPage!=totalPage }">
-										<a href="${cp }/board/free_board/list.bo?page=${endPage+1}">&gt;</a>
+										<a href="${cp }/board/free_board/post_list.bo?page=${endPage+1}">&gt;</a>
 									</c:if></td>
 							</tr>
 						</tfoot>
