@@ -92,10 +92,10 @@ public class UserFrontController extends HttpServlet {
 			
 		case "/user/login.us":
 			transfer = new ActionTo();
-			transfer.setPath("/app/user/login.jsp");
+			transfer.setPath
+			("/app/user/login.jsp");
 			transfer.setRedirect(false);
 			break;
-			
 					
 		case "/user/login_ok.us":
 			try {
@@ -108,6 +108,26 @@ public class UserFrontController extends HttpServlet {
 		case "/user/login_check.us":
 			try {
 				transfer=new UserLoginCheckAction().execute(req,resp);
+			} catch (Exception e) {
+				System.out.println(command+" : "+e);
+			}
+			break;
+			
+		case "/user/myPage.us":
+			transfer = new ActionTo();
+			transfer.setPath("/app/user/user_myPage.jsp");
+			transfer.setRedirect(false);
+			break;
+			
+		case "/user_myPage_modifyMyImfor.us":
+			transfer = new ActionTo();
+			transfer.setPath("/app/user/user_myPage_modifyMyImfor.jsp");
+			transfer.setRedirect(false);
+			break;
+		
+		case "/user/userInforAction.us":
+			try {
+				transfer = new UserImforAction().execute(req, resp);			
 			} catch (Exception e) {
 				System.out.println(command+" : "+e);
 			}

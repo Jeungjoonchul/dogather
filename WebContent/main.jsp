@@ -19,7 +19,7 @@
     <link rel="shortcut icon" href="${cp}/resources/images/favicon.png" />
     <title>DoGather</title>
   </head>
-  <body>	
+  <body>
     <div id="main">
       <div id="head">
         <div>
@@ -43,7 +43,7 @@
 
           	</c:when>
           	<c:otherwise><!-- 세션이 있다면 -->
-              <a href="#?user_index=${loginUser.user_index}">
+              <a href="${cp}/user/myPage.us">
               <span> 마이페이지 </span>
             </a>
             <a href="${cp}/user/logout.us">

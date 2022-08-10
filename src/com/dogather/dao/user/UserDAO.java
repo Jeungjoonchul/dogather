@@ -47,6 +47,11 @@ public class UserDAO {
 	public void updateLastLogin(int user_index) {
 		sqlSession.update("User.updateLastLogin",user_index);
 	}
+
+	public void getUserInfor(String user_id) {
+		//작업중
+	}
+	
 	
 	
 }

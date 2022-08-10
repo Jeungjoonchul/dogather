@@ -11,8 +11,7 @@
 		select count(*) from t_user where user_nickname=#{user_nickname}
 	</select>
 
-	<select id="selectUserWithUserEmail" parameterType="string"
-		resultType="UserDTO">
+	<select id="selectUserWithUserEmail" parameterType="string" resultType="UserDTO">
 		select * from t_user where user_email=#{user_email}
 	</select>
 	
@@ -20,11 +19,9 @@
 		select * from t_user where user_email=#{user_email} and binary(user_password)=#{user_password}
 	</select>
 		
-	<select id="loginUser" parameterType="hashmap"
-		resultType="UserDTO">
+	<select id="loginUser" parameterType="hashmap" resultType="UserDTO">
 		select * from t_user where user_email=#{user_email} and binary(user_password)=#{user_password}
 	</select>
-
 
 
 	<insert id="insertUser" parameterType="UserDTO">
@@ -33,9 +30,13 @@
 		values(#{user_email},#{user_nickname},#{user_name},#{user_password},#{user_phone},#{user_gender},#{user_birth_date},#{user_interest},#{user_intro},#{user_term_selective1},#{user_term_selective2})
 	</insert>
 	
-	
-	
 	<update id="updateLastLogin" parameterType="_int">
 		update t_user set user_last_login=now() where user_index=#{user_index}
 	</update>
+	
+	<select id="getUserInfor" parameterType="String" resultType="UserDTO">
+		select * from t_user where user_email=#{user_email}
+		<!-- 작업중 -->
+	</select>
+	
 </mapper>
