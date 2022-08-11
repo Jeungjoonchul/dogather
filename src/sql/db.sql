@@ -65,10 +65,10 @@ create table t_user(
 	note_scope enum('all','buddy','none') default 'all' #쪽지 수신 여부 확인(ex : 'buddy' / 친구 쪽지만 수신 가능)
 );
 insert into t_user(user_email,user_nickname,user_name,user_password,user_phone,user_gender,user_birth_date,user_interest,user_intro,user_term_selective1,user_term_selective2,zip_code,address_default,address_detail) 
-values('apple@apple.com','김사과','김사과','asdf1234!','01011111111','male','1999-01-01','1,2,3,4,5','안녕하세요','true','false','06236','서울 강남구 역삼동 736-6','3층'),
-('banana@banana.com','바나나','바나나','asdf1234!','01011111111','male','1999-01-01','1,2,3,4,5','안녕하세요','true','false','06236','서울 강남구 역삼동 736-6','3층'),
-('cherry@cherry.com','박체리','박체리','asdf1234!','01011111111','male','1999-01-01','1,2,3,4,5','안녕하세요','true','false','06236','서울 강남구 역삼동 736-6','3층'),
-('durian@durian.com','차두리','차두리','asdf1234!','01011111111','male','1999-01-01','1,2,3,4,5','안녕하세요','true','false','06236','서울 강남구 역삼동 736-6','3층');
+values('apple@apple.com','김사과','김사과','asdf1234!','01011111111','male','1999-01-01','1,2,3,4,5','안녕하세요',true,false,'06236','서울 강남구 역삼동 736-6','3층'),
+('banana@banana.com','바나나','바나나','asdf1234!','01011111111','male','1999-01-01','1,2,3,4,5','안녕하세요',true,false,'06236','서울 강남구 역삼동 736-6','3층'),
+('cherry@cherry.com','박체리','박체리','asdf1234!','01011111111','male','1999-01-01','1,2,3,4,5','안녕하세요',true,false,'06236','서울 강남구 역삼동 736-6','3층'),
+('durian@durian.com','차두리','차두리','asdf1234!','01011111111','male','1999-01-01','1,2,3,4,5','안녕하세요',true,false,'06236','서울 강남구 역삼동 736-6','3층');
 
 
 

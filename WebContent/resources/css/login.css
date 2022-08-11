@@ -127,9 +127,9 @@
   /* 로그인 */
   
   #login_container {
-    padding-top: 250px;
+    padding-top: 50px;
     width: 80%;
-    height: 1100px;
+    /* height: 1100px; */
     /* border: 1px solid red; */
   }
   /* 로그인창영역 크기조절 */

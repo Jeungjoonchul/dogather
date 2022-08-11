@@ -4,7 +4,7 @@
 <c:set var="cp" value="${pageContext.request.contextPath }"/>
       <div id="head">
         <div>
-          <div class="left" style="text-indent: -999px">
+          <div class="left" style="text-indent: -99999px">
             메인화면
           </div>
           <div class="center">

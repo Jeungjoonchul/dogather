@@ -1,6 +1,12 @@
 * {
     font-family: "Noto Sans KR", sans-serif;
     /* div영역 */
+    font-size : 16px;
+  }
+div{
+    width: 100%;
+    margin: 0 auto;
+    box-sizing: border-box;
     
   }
   
@@ -10,20 +16,12 @@
   
   }
   
-  #head div,#footer div {
-    width: 100%;
-    margin: 0 auto;
-    text-align: center;
-    box-sizing: border-box;
-    
-  }
-  
   #head {
     width: 80%;
     position: relative;
     margin-top: 50px;
     height: 200px;
-    
+    text-align: center;
   }
   
 
@@ -31,7 +29,7 @@
   .center,
   .right {
     float: left;
-    width: 33.33% !important;
+    width: 33% !important;
     
   }
   /* .left{
@@ -117,9 +115,8 @@
     color: purple;
     font-size: 1rem;
   }
-  #main{
-    width: 80%;
-    margin:0 auto;
+  #body{
+    width: 100%;
   }
 
   

@@ -3,14 +3,12 @@
 * {
   font-family: "Noto Sans KR", sans-serif;
   /* div영역 */
-  
 }
 div {
   width: 100%;
   margin: 0 auto;
   text-align: center;
   box-sizing: border-box;
-  
 }
 
 #main {
@@ -20,7 +18,6 @@ div {
 #head {
   width: 66%;
   position: relative;
-  
 }
 
 #body {
@@ -59,7 +56,6 @@ div {
 .right {
   float: left;
   width: 33% !important;
-  
 }
 /* .left{
   width: 300px;
@@ -75,13 +71,13 @@ div {
   font-weight: 100;
   font-size: 0.7rem;
 }
-.left > a:hover{
-  color:purple;
-  font-size:0.85rem;
-}
-.right > a:hover{
+.left > a:hover {
   color: purple;
-  font-size:0.85rem;
+  font-size: 0.85rem;
+}
+.right > a:hover {
+  color: purple;
+  font-size: 0.85rem;
 }
 ul {
   padding-inline-start: 0px;
@@ -97,6 +93,7 @@ li {
   list-style: none;
   text-align: center;
 }
+
 /*body*/
 
 /*category*/
@@ -108,7 +105,6 @@ li {
   padding-bottom: 70px;
 }
 .menubar {
-  
   text-align: center;
   font-size: 1.25rem;
   font-weight: 500;
@@ -253,7 +249,6 @@ li {
   position: relative;
   width: 45%;
   height: 300px;
-  display: inline-block;
   /* border: 1px solid #141414; */
 }
 #community_border {
@@ -261,7 +256,6 @@ li {
   margin: 0 20px;
   height: 300px;
   width: 45%;
-  display: inline-block;
   /* border: 1px solid #141414; */
 }
 #event_community div div.title {
@@ -282,25 +276,21 @@ li {
 }
 #event_community .border ul li {
   /* border: 1px solid red; */
+  display: flex;
   height: 15px;
   padding: 10px 0;
 }
-#event_community .border ul li a div {
+#event_community .border ul li div {
+  display: inline;
+  height: 30px;
   vertical-align: middle;
   /* border: 1px solid red; */
 }
-#event_community .border ul li a {
-  margin-top: 10px;
-  /* border: 1px solid red; */
-  overflow: hidden;
-  display: inline-flex;
-  width: 100%;
-}
-#event_community .border ul li a .cap {
+#event_community .border ul li .cap {
   font-size: 15px;
   width: 10%;
 }
-#event_community .border ul li a .tit {
+#event_community .border ul li .tit {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -308,17 +298,16 @@ li {
   width: 50%;
   text-align: left;
 }
-#event_community .border ul li a .comm {
+#event_community .border ul li .comm {
   font-size: 11px;
-  margin-right: 5px;
   width: 10%;
 }
-#event_community .border ul li a .icon {
-  display: flex;
+#event_community .border ul li .icon {
   color: #006df3;
   position: relative;
-  top: -10px;
-  margin: 0 5px 0 0;
+  top: -20px;
+  left: -10px;
+  text-align: left;
   font-size: 10px;
   font-weight: bold;
   width: 30%;
@@ -387,7 +376,7 @@ li {
 
 /* 이벤트 */
 
-#eventwrap{
+#eventwrap {
   padding-top: 100px;
   width: 80%;
   overflow: hidden;
@@ -395,39 +384,35 @@ li {
   position: relative;
 
   margin-bottom: 100px;
-  
 }
-#eventhead{
+#eventhead {
   width: 100%;
   border-bottom: 1px solid black;
-  
 }
-#eventhead> table {
+#eventhead > table {
   width: 100%;
-  
 }
-#colabo{
+#colabo {
   width: 100%;
-  border-bottom:1px solid black;
+  border-bottom: 1px solid black;
   position: relative;
-
 }
 
-td,th{
+td,
+th {
   width: 50%;
 }
-th{
+th {
   text-align: left;
-  padding-left:20px;
+  padding-left: 20px;
   font-size: 1.7rem;
 }
-td{
+td {
   text-align: right;
   padding-right: 20px;
-  
 }
 
-.e-type{
+.e-type {
   width: 100px;
   background-color: #666666;
   color: #fff;
@@ -436,52 +421,49 @@ td{
   text-align: center;
   height: 40px;
   padding-top: 17px;
-  
 }
-.e-type >input[type=button]{
+.e-type > input[type="button"] {
   background-color: #666666;
   color: #fff;
-  border:none;
+  border: none;
   cursor: pointer;
   width: 100%;
   height: 100%;
 }
-.e-type1{
+.e-type1 {
   background-color: #666666;
   height: 40px;
   display: none;
-
 }
 
-.e-type1>input[type=button]{
-  background-color:#666666;
+.e-type1 > input[type="button"] {
+  background-color: #666666;
   color: #fff;
   border: none;
-  
+
   cursor: pointer;
   width: 100%;
   height: 100%;
-  
 }
 
-.e-type:hover .e-type1{
+.e-type:hover .e-type1 {
   display: block;
 }
-.e-type1>input[type=button]:hover{
+.e-type1 > input[type="button"]:hover {
   background-color: black;
 }
-#now span,#past span{
-  float:left;
+#now span,
+#past span {
+  float: left;
   margin-left: 45px;
   font-size: 1.25rem;
-  
 }
 
-#eventlist{
-  margin-top:40px;
+#eventlist {
+  margin-top: 40px;
   width: 100%;
 }
-.e-list{
+.e-list {
   height: 200px;
   width: 250px;
   display: inline-block;
@@ -489,23 +471,19 @@ td{
   border-radius: 3px;
   margin-right: 5px;
   margin-bottom: 15px;
-  
 }
-#colabolist{
+#colabolist {
   width: 100%;
   padding-top: 30px;
-
 }
 
-.c-list{
+.c-list {
   height: 200px;
   width: 250px;
   border: 1px solid black;
   display: inline-block;
-  
-  white-space: nowrap;
 
-  
+  white-space: nowrap;
 }
 
 /* footer */
@@ -517,7 +495,6 @@ td{
   color: #141414;
   clear: both;
   background-color: RGB(245, 246, 247);
-  
 }
 #footer .web_container {
   position: relative;
@@ -538,12 +515,10 @@ td{
   margin: 0;
   padding: 0;
   float: right;
-  
 }
 .footer_menu li {
   padding-left: 0px;
   float: left;
-  
 }
 .footer_menu ul a {
   position: relative;
@@ -571,7 +546,6 @@ td{
   cursor: pointer;
   text-decoration: none;
   outline: none;
-  
 }
 
 .copyright p {

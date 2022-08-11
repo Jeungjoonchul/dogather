@@ -10,42 +10,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="${cp}/resources/js/cp.js"></script>
-    <link rel="stylesheet" href="${cp }/resources/css/include.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com/" />
-    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;600;700;800;900&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="shortcut icon" href="${cp}/resources/images/favicon.png" />
-    <!-- include libraries(jQuery, bootstrap) -->
-<link
-	href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
-	rel="stylesheet">
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script
-	src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script src="${cp}/resources/js/cp.js"></script>
 
-<!-- include summernote css/js -->
+<link rel="preconnect" href="https://fonts.googleapis.com/" />
+<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
 <link
-	href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css"
+	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;600;700;800;900&display=swap"
+	rel="stylesheet" />
+<link rel="shortcut icon" href="${cp}/resources/images/favicon.png" />
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+	integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+	crossorigin="anonymous"></script>
+<link
+	href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css"
 	rel="stylesheet">
 <script
-	src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/lang/summernote-ko-KR.min.js"></script>
+	src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+<script src="${cp }/resources/js/summernote.js"></script>
 <title>DoGather</title>
+<link rel="stylesheet" href="${cp }/resources/css/include.css" />
 <link rel="stylesheet" href="${cp }/resources/css/board.css" />
 </head>
 <body>
 
 
 	<%@include file="../../../header.jsp"%>
-	<div id="main">
+	<div id="body">
 
 		<!-- 이벤트&커뮤니티 게시판 -->
 		<div id="boardcontainer">
@@ -66,8 +59,8 @@
 							<c:choose>
 								<c:when test="${fb_list.size()>0 and fb_list!=null }">
 									<c:forEach var="list" items="${fb_list}">
-									
-									<tr>
+
+										<tr>
 											<td>${list.b_index}</td>
 											<td><a
 												href="${cp}/board/free_board/post_view.bo?b_index=${list.b_index}&page=${page}"><span>${list.b_title}</span><span>[${list.b_reply_cnt }]</span></a></td>
@@ -83,7 +76,7 @@
 											</td>
 											<td>${list.b_hits}</td>
 										</tr>
-										
+
 									</c:forEach>
 								</c:when>
 								<c:otherwise>
@@ -96,7 +89,8 @@
 						<tfoot>
 							<tr>
 								<td colspan="5"><c:if test="${startPage!=1 }">
-										<a href="${cp }/board/free_board/post_list.bo?page=${startPage-1}">&lt;</a>
+										<a
+											href="${cp }/board/free_board/post_list.bo?page=${startPage-1}">&lt;</a>
 									</c:if> <c:forEach begin="${startPage }" end="${endPage }" var="i">
 										<c:choose>
 											<c:when test="${page==i }">
@@ -107,7 +101,8 @@
 											</c:otherwise>
 										</c:choose>
 									</c:forEach> <c:if test="${endPage!=totalPage }">
-										<a href="${cp }/board/free_board/post_list.bo?page=${endPage+1}">&gt;</a>
+										<a
+											href="${cp }/board/free_board/post_list.bo?page=${endPage+1}">&gt;</a>
 									</c:if></td>
 							</tr>
 						</tfoot>

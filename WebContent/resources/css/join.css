@@ -17,6 +17,8 @@
   #head {
     width: 66%;
     position: relative;
+        display: flex;
+    justify-content: center;
     
   }
   #body {
@@ -158,13 +160,13 @@
   /* 버튼 클릭스 나타는 페이지 */
   
   #join_header{
-    width: 363.3px;
+    width: 400px;
     text-align: left;
     
   }
   #bg_area{
     font-weight: bold;
-    float: left;
+    text-align: center;
 
   }
   #join1{
@@ -189,7 +191,7 @@
     
    
   }
-  input[type="email"] ,[type="password"],[type="text"],[type="date"]{
+  input[type="email"] ,[type="password"],[type="text"],[type="date"],[type="tel"]{
     outline: none;
     border: 0px;
     border-bottom: 1px  solid #141414;
@@ -197,7 +199,7 @@
     height: 30px;
     
   }
-  input[type="email"]:focus ,[type="password"]:focus,[type="text"]:focus,[type="date"]:focus{
+  input[type="email"]:focus ,[type="password"]:focus,[type="text"]:focus,[type="date"],[type="tel"]:focus{
 
     border-bottom: 1px solid blue;
   }
@@ -221,6 +223,12 @@
   input[type="button"]:hover,[type="submit"]:hover{
     background-color: #141414;
   }
+  #user_intro{
+    width: 348px;
+  }
+  .choose{
+    height: 50px;
+  }
   
   .joinstart{
     background-color: #666666;
@@ -237,7 +245,12 @@
 
     background-color: #141414;
   }
-
+  ol>li{
+    display: inline-block;
+  }
+  #user_interest_etc{
+    width: 317px;
+  }
   /* footer */
 
   #footer {

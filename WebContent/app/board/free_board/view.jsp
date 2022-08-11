@@ -5,29 +5,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="${cp}/resources/js/cp.js"></script>
-    <link rel="stylesheet" href="${cp }/resources/css/include.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com/" />
-    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;600;700;800;900&display=swap"
-      rel="stylesheet"/>
-    <link rel="shortcut icon" href="${cp}/resources/images/favicon.png" />
-    <!-- include libraries(jQuery, bootstrap) -->
-<link
-	href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
-	rel="stylesheet">
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script
-	src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script src="${cp}/resources/js/cp.js"></script>
 
-<!-- include summernote css/js -->
-<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/lang/summernote-ko-KR.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com/" />
+<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+<link
+	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;600;700;800;900&display=swap"
+	rel="stylesheet" />
+<link rel="shortcut icon" href="${cp}/resources/images/favicon.png" />
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+	integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+	crossorigin="anonymous"></script>
+<link
+	href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css"
+	rel="stylesheet">
+<script
+	src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+<script src="${cp }/resources/js/summernote.js"></script>
+
 <title>게시글 보기</title>
+<link rel="stylesheet" href="${cp }/resources/css/include.css" />
 </head>
 <body>
 	<%@include file="../../../header.jsp"%>
@@ -70,19 +71,22 @@
 								<a
 									href="${cp}/board/free_board/post_update.bo?b_index=${fb.b_index}&page=${param.page}">수정</a>
 								<a href="javascript:delete_check(${fb.b_index});">삭제</a>
-							</c:if> <a href="${cp }/board/free_board/post_list.bo?page=${param.page}">목록</a>
+							</c:if> <a
+							href="${cp }/board/free_board/post_list.bo?page=${param.page}">목록</a>
 						</td>
 					</tr>
 				</table>
 			</form>
 		</div>
 		<div id="reply">
-			<form name="reply_form" action="${cp }/board/free_board/reply_write.bo">
-					<input type="hidden" name="b_index" value="${fb.b_index }"/>
+			<form name="reply_form"
+				action="${cp }/board/free_board/reply_write.bo">
+				<input type="hidden" name="b_index" value="${fb.b_index }" />
 				<table>
 					<tr>
 						<th>댓글</th>
-						<td><textarea name="r_contents"></textarea><a href="javascript:replyOn()">등록</a></td>
+						<td><textarea name="r_contents"></textarea><a
+							href="javascript:replyOn()">등록</a></td>
 					</tr>
 				</table>
 			</form>
