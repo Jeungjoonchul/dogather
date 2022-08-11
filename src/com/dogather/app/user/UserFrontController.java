@@ -114,6 +114,14 @@ public class UserFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 			break;
+		case "/user/user_password_check.us":
+			try {
+				transfer=new UserPasswordCheckAction().execute(req,resp);
+			} catch (Exception e) {
+				System.out.println("/user/user_password_update.us"+e);
+				e.printStackTrace();
+			}
+			break;
 		}
 
 		// 전송 일괄처리
@@ -125,5 +133,4 @@ public class UserFrontController extends HttpServlet {
 			}
 		}
 	}
-
 }

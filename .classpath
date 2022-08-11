@@ -19,5 +19,6 @@
 	<classpathentry kind="lib" path="D:/web-project/resource/jars/mybatis-3.5.10.jar"/>
 	<classpathentry kind="lib" path="D:/web-project/resource/jars/mysql-connector-java-8.0.29.jar"/>
 	<classpathentry kind="lib" path="D:/web-project/resource/jars/standard.jar"/>
+	<classpathentry kind="lib" path="D:/web-project/resource/jars/gson-2.8.7.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

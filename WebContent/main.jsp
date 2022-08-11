@@ -43,7 +43,7 @@
 
           	</c:when>
           	<c:otherwise><!-- 세션이 있다면 -->
-              <a href="#?user_index=${loginUser.user_index}">
+              <a href="${cp}/user/user_password_update.us">
               <span> 마이페이지 </span>
             </a>
             <a href="${cp}/user/user_logout.us">

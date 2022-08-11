@@ -43,10 +43,31 @@ public class UserDAO {
 	public boolean insertUser(UserDTO user) {
 		return sqlSession.insert("User.insertUser", user)==1;
 	}
+	
+
+
+
 
 	public void updateLastLogin(int user_index) {
 		sqlSession.update("User.updateLastLogin",user_index);
 	}
+
+	public boolean updatePassword(int user_index, String user_new_password) {
+		HashMap<String, Object> values = new HashMap<String, Object>();
+		values.put("user_index", user_index);
+		values.put("user_new_password", user_new_password);
+		return sqlSession.update("User.updatePassword", values) == 1;
+	}
+
+	public String selectUserPassword(int user_index) {
+		return (String)sqlSession.selectOne("User.selectUserPassword", user_index);
+		
+	}
+ 
+	
+
+
+
 	
 	
 }
