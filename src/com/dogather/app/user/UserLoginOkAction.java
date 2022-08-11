@@ -25,8 +25,7 @@ public class UserLoginOkAction implements Action {
 		// 데이터 null 일 경우
 		String user_email = req.getParameter("user_email");
 		String user_password = req.getParameter("user_password");
-		System.out.println(user_email);
-		System.out.println(user_password);
+
 		String keep = req.getParameter("keep");
 
 		boolean al = keep != null ? true : false;

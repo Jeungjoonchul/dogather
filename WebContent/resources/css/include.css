@@ -1,9 +1,14 @@
 * {
     font-family: "Noto Sans KR", sans-serif;
     /* div영역 */
-    font-size : 16px;
   }
-div{
+/* div:not(#body div){
+    width: 100%;
+    margin: 0 auto;
+    box-sizing: border-box;
+    
+  } */
+  div:not(#body div){
     width: 100%;
     margin: 0 auto;
     box-sizing: border-box;
@@ -54,16 +59,16 @@ div{
     color: purple;
     font-size:0.85rem;
   }
-  ul {
+  #head ul,#footer ul{
     padding-inline-start: 0px;
   }
   
-  a {
+  #head a,#footer a{
     text-decoration: none;
     color: #141414;
     /* margin: 0 auto; */
   }
-  li {
+  #head li,#footer li{
     display: block;
     list-style: none;
     text-align: center;

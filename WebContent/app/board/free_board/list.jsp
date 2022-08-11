@@ -21,9 +21,10 @@
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;600;700;800;900&display=swap"
 	rel="stylesheet" />
 <link rel="shortcut icon" href="${cp}/resources/images/favicon.png" />
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+<!-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
 	integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-	crossorigin="anonymous"></script>
+	crossorigin="anonymous"></script> -->
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <link
 	href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css"
 	rel="stylesheet">
@@ -65,14 +66,11 @@
 											<td><a
 												href="${cp}/board/free_board/post_view.bo?b_index=${list.b_index}&page=${page}"><span>${list.b_title}</span><span>[${list.b_reply_cnt }]</span></a></td>
 											<td><a href="#">${list.user_nickname}</a></td>
-											<td><fmt:parseDate value="${list.b_reg_date}"
-													pattern="yyyy-MM-dd HH:mm:ss" var="datetime" /> <c:set
-													var="date">
-													<fmt:formatDate value="${datetime }" pattern="yyyy-MM-dd" />
-												</c:set> <c:set var="time">
-													<fmt:formatDate value="${datetime }" pattern="HH:mm" />
-												</c:set> <span>${now eq date ? time:date }</span> <span><c:if
-														test="${list.b_reg_date!=list.b_update_date}">(수정됨)</c:if></span>
+											<td><fmt:parseDate value="${list.b_reg_date}" pattern="yyyy-MM-dd HH:mm:ss" var="datetime" /> 
+											<c:set var="date"> <fmt:formatDate value="${datetime }" pattern="yyyy-MM-dd" /></c:set> 
+											<c:set var="time"> <fmt:formatDate value="${datetime }" pattern="HH:mm" /></c:set> 
+											<span>${now eq date ? time:date }</span> 
+											<span><c:if test="${list.b_reg_date!=list.b_update_date}">(수정됨)</c:if></span>
 											</td>
 											<td>${list.b_hits}</td>
 										</tr>
@@ -110,7 +108,7 @@
 					<table class="writing">
 						<tr>
 							<td><a class="write"
-								href="javascript:loginCheck(${loginUser!=null?true:false})">글쓰기</a></td>
+								href="javascript:loginCheck(${loginUser!=null?true:false},${page })">글쓰기</a></td>
 						</tr>
 					</table>
 					<div class="search_area">

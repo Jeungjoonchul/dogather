@@ -99,6 +99,17 @@ public class BoardFrontController extends HttpServlet{
 			}
 			break;
 			
+		case "/board/reply_list.bo":
+			try {
+				transfer=new ReplyListAction().execute(req, resp);
+			} catch (ServletException e) {
+				System.out.println(command+" : "+e);
+				e.printStackTrace();
+			} catch (IOException e) {
+				System.out.println(command+" : "+e);
+				e.printStackTrace();
+			}
+			break;
 			
 		//테스트
 		case "/board/reply_ok.bo":

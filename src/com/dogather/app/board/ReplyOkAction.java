@@ -1,11 +1,8 @@
 package com.dogather.app.board;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -15,18 +12,18 @@ import com.dogather.action.Action;
 import com.dogather.action.ActionTo;
 import com.dogather.dao.board.ReplyDAO;
 import com.dogather.dto.board.ReplyDTO;
+import com.dogather.dto.user.UserDTO;
 import com.google.gson.Gson;
-import com.mysql.cj.xdevapi.JsonArray;
 
 public class ReplyOkAction implements Action {
 
 	@Override
 	public ActionTo execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		int user_index = Integer.parseInt(req.getParameter("user_index"));
+		int user_index = ((UserDTO)req.getSession().getAttribute("loginUser")).getUser_index();
 		int b_index = Integer.parseInt(req.getParameter("b_index"));
 		String r_contents = req.getParameter("r_contents");
-		String r_name = "t_fb_reply";
+		String r_name = req.getParameter("r_name");
 
 		ReplyDTO reply = new ReplyDTO();
 		reply.setUser_index(user_index);
@@ -35,17 +32,18 @@ public class ReplyOkAction implements Action {
 		reply.setR_name(r_name);
 		
 		ReplyDAO rdao = new ReplyDAO();
-		List<ReplyDTO> result = new ArrayList<ReplyDTO>();
-		if (rdao.replyOn(reply)) {
-			result = rdao.getReplies(r_name);
-
-		}
-		Gson gson = new Gson();
-		String jsonStr = gson.toJson(result);
-		
 		resp.setCharacterEncoding("utf-8");
+
+		if (rdao.replyOn(reply)) {
+			resp.getWriter().print("O");
+
+		}else {
+			resp.getWriter().print("X");
+		}
+
 		
-		resp.getWriter().print(jsonStr);
+		
+		
 		resp.getWriter().close();
 		return null;
 	}

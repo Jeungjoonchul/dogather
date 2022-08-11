@@ -7,7 +7,10 @@
 		insert into ${r_name}(b_index,user_index,r_contents) values(#{b_index},#{user_index},#{r_contents})
 	</insert>
 	
-	<select id="getReplies" parameterType="string" resultType="ReplyDTO">
+	<select id="getReplyCntOnPost" parameterType="hashmap" resultType="_int">
+		select count(*) from ${r_name} where b_index=#{b_index};
+	</select>
+	<select id="getReplies" parameterType="hashmap" resultType="ReplyDTO">
 		select
 		r.r_index,
 		r.b_index,
@@ -21,6 +24,7 @@
 		from ${r_name} r 
 		join t_user u 
 		on r.user_index=u.user_index 
-		order by 1 desc
+		where b_index=#{b_index}
+		order by 1 asc limit #{startRow},#{pageSize}
 	</select>
 </mapper>

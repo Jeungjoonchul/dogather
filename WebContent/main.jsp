@@ -187,22 +187,29 @@
             </div>
             <div class="event border">
               <ul>
-                <c:choose>
+              <c:choose>
               <c:when test="${eb_list.size()>0 and eb_list!= null }">
               <c:forEach var="fb_list" items="${eb_list}">
+              <fmt:parseDate var="date" value="${eb_list.b_reg_date }" pattern="yyyy-MM-dd HH:mm:ss"/>
+              <c:set var="date"><fmt:formatDate value="${date }" pattern="yyyyMMdd"/></c:set>
               	<li>
-                  <a href="#">
-                    <div class="cap gray">${eb_list.b_subject}</div>
+               
+                    <div class="cap gray"><span>${eb_list.b_subject}</span></div>
                     
                     <div class="tit">
-                      ${eb_list.b_title }
+                      	  <a href="${cp}/board/event_board/post_view.bo?b_index=${eb_list.b_index}"> ${eb_list.b_title } </a> 
                     </div>
                     
-                    <div class="comm red">[댓글수]</div>
+                    <div class="comm red">[${eb_list.b_reply_cnt}]</div>
                     <div class="icon">
-                      <p class="new">N</p>
+                      <p class="new">
+						<c:choose>
+                      	<c:when test="${today-date <=1}">N</c:when>
+                      	<c:otherwise>&nbsp;</c:otherwise>
+                      	</c:choose>
+                      </p>
                     </div>
-                  </a>
+                
                 </li>
               </c:forEach>
               </c:when>
@@ -210,6 +217,7 @@
               	<p>게시글이 없습니다.</p>
               </c:otherwise>
               </c:choose>
+
               </ul>
             </div>
           </div>

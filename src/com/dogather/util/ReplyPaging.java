@@ -6,7 +6,7 @@ public class ReplyPaging {
 	//전체 게시글 개수
 	private int totalCnt;
 	//한 페이지에서 보여줄 개시글의 개수
-	private int pageSize=10;
+	private int pageSize=20;
 	//아래쪽 페이징 처리 부분에 보여질 첫번째 페이지 번호
 	private int startPage;
 	//아래쪽 페이징 처리 부분에 보여질 마지막 페이지 번호
