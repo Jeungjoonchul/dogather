@@ -442,3 +442,4 @@ function back1() {
 		document.getElementById('join_step1').style.color = "blue";
 	}
 }
+

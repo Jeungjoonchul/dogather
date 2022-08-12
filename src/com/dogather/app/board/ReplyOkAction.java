@@ -13,6 +13,7 @@ import com.dogather.action.ActionTo;
 import com.dogather.dao.board.ReplyDAO;
 import com.dogather.dto.board.ReplyDTO;
 import com.dogather.dto.user.UserDTO;
+import com.dogather.util.ReplyPaging;
 import com.google.gson.Gson;
 
 public class ReplyOkAction implements Action {
@@ -24,7 +25,10 @@ public class ReplyOkAction implements Action {
 		int b_index = Integer.parseInt(req.getParameter("b_index"));
 		String r_contents = req.getParameter("r_contents");
 		String r_name = req.getParameter("r_name");
-
+		String page = req.getParameter("page");
+		
+		
+		
 		ReplyDTO reply = new ReplyDTO();
 		reply.setUser_index(user_index);
 		reply.setB_index(b_index);
@@ -35,15 +39,14 @@ public class ReplyOkAction implements Action {
 		resp.setCharacterEncoding("utf-8");
 
 		if (rdao.replyOn(reply)) {
-			resp.getWriter().print("O");
-
+			int totalCnt=rdao.getReplyCntOnPost(r_name, b_index);
+			ReplyPaging r = new ReplyPaging(page, totalCnt);
+			resp.getWriter().print(r.getTotalPage());
+			
 		}else {
 			resp.getWriter().print("X");
 		}
 
-		
-		
-		
 		resp.getWriter().close();
 		return null;
 	}

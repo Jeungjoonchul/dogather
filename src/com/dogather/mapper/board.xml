@@ -44,11 +44,12 @@
 	</delete>
 	<select id="getPost" parameterType="hashmap"
 		resultType="BoardDTO">
-		select b.b_index,b.b_reg_date,b.b_update_date,b.b_subject,b.b_title,b.b_contents,b.b_hits,b.b_like_user_index,b.b_inactive,b.b_files,u.user_index,u.user_nickname 
-		from ${b_name} b 
+		select b.b_index,b.b_reg_date,b.b_update_date,b.b_subject,b.b_title,b.b_contents,b.b_hits,b.b_like_user_index,b.b_inactive,b.b_files,u.user_index,u.user_nickname, r.b_reply_cnt 
+		from ${b_name} b
 		join t_user u 
-		on b.user_index=u.user_index
-		where b.b_index=#{b_index};
+		on b.user_index=u.user_index 
+        left join (select count(*) as b_reply_cnt,b_index from ${r_name} where b_index=#{b_index} and r_inactive=0) r on r.b_index=b.b_index 
+		where b.b_index=#{b_index}
 	</select>
 	
 	<select id="getBoardListOnMain" parameterType="hashmap" resultType="BoardDTO">

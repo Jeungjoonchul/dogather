@@ -27,7 +27,7 @@ public class FreeBoardViewAction implements Action {
 		
 		//게시글 가져오기
 		BoardDAO bdao = new BoardDAO();
-		BoardDTO fb = bdao.getPost(b_index, b_name);
+		BoardDTO fb = bdao.getPost(b_index, b_name,r_name);
 		
 		//조회수
 		UserDTO loginUser = (UserDTO) req.getSession().getAttribute("loginUser");

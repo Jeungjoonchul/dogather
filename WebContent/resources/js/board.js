@@ -1,3 +1,4 @@
+
 function loginCheck(loginUser, page) {
 	if (loginUser) {
 		location.href = cp + "/board/free_board/post_write.bo?page=" + page;
@@ -33,12 +34,11 @@ function postOn() {
 	post.submit();
 }
 
-function replyOn(user_check,rn,bi,un) {
-	var r_name = rn;
-	var b_index=bi;
-	var user_nickname=un;
-	if(user_check){
+$(document).on('click','#reply_on',function(){
+	var user_nickname=$('#loginUser_nickname').val();
+	if(user_nickname==null||user_nickname==''){
 		alert('로그인 후 댓글 작성 가능합니다');
+		location.href=cp+'/user/login.us';
 		return false; 
 	}
 	if($('#r_contents').val()==''){
@@ -46,7 +46,6 @@ function replyOn(user_check,rn,bi,un) {
 		$('#r_contents').focus();
 		return false;
 	}
-	
 	var form= $('#reply_write');
 	$.ajax({
 		url : cp+'/board/reply_ok.bo',
@@ -55,29 +54,70 @@ function replyOn(user_check,rn,bi,un) {
 		dataType : 'text',
 		async: false,
 		success : function(data) {
-			if(data=='O'){
-				alert('댓글이 등록되었습니다');
-				replyList(null,r_name,b_index,user_nickname);				
-			}else{
+			if(data=='X'){
 				alert('댓글 등록에 실패했습니다');
 				return false;
+			}else{
+				alert('댓글이 등록되었습니다');
+				$('#r_contents').val('');
+				getList(data);
 			}
 		}
 	});
-}
+});
 
 
-//매개변수 
-//< : $("#startPage").val()-1,$("#r_name").val(),$("#b_index").val(),${empty loginUser?null:loginUser.user_index}
-//> : parseInt($("#endPage").val())+1,$("#r_name").val(),$("#b_index").val(),${empty loginUser?null:loginUser.user_index}
-//페이지 번호 : ${i },$("#r_name").val(),$("#b_index").val(),${empty loginUser?null:loginUser.user_index}
-function replyList(pn, rn, bi,un) {
-	var tbody = $('#reply_contents');
-	var page = pn;
-	var r_name = rn;
-	var b_index = bi;
-	var user_nickname=un;
-	console.log(user_nickname);
+$('#reply_area_toggle').on('click',function(){
+	if($('#reply_area_toggle').val()=='접기'){
+		$('#reply_area_toggle').val('펼쳐보기');
+		$("#reply_area").hide('slow');
+	}else{
+		$('#reply_area_toggle').val('접기');
+		$("#reply_area").show('slow');
+	}
+});
+
+var replyUpdateFlag=true;
+$(document).on('click','.reply_update',function(e){
+	var target = $(e.target);
+
+	if(replyUpdateFlag){
+		target.hide();
+		target.next().show();
+		replyUpdateFlag=false;
+		var textarea=target.parent().parent().next().children();
+		textarea.removeAttr('readonly');
+		textarea.css('background-color','#fffde7');
+		textarea.css('border','0.5px solid #e0e0e0');
+		textarea.focus();
+	}else{
+		alert('수정중인 댓글이 있습니다');
+	}
+	
+});
+
+$(document).on('click','.reply_update_submit',function(e){
+	//여기 할 차례
+});
+
+
+$(document).on('click','.reply_page_btn',function(e){
+	var page = $(e.target).val();
+	getList(page);
+});
+
+	
+var getList=function(page){
+	if(page=='>'){
+		page=parseInt($('#endPage').val())+1;
+	}
+	if(page=='<'){
+		page=parseInt($('#startPage').val())-1;
+	}
+	
+	var r_name = $('#r_name').val();
+	var b_index = $('#b_index').val();
+	var user_nickname=$('#loginUser_nickname').val();
 	$
 			.ajax({
 				url : cp + '/board/reply_list.bo',
@@ -88,24 +128,30 @@ function replyList(pn, rn, bi,un) {
 					"b_index" : b_index
 				},
 				dataType : 'json',
+				async:false,
 				success : function(data) {
-					$('#reply_contents tr').remove();
+					$('#reply_area div').remove();
 					for (var i = 0; i < data.list.length; i++) {
-						var tr = $('<tr class="replies"></tr>');
-						var td1 = $('<td></td>');
-						var nick = $('<span></span>').text(
+						// 리뷰 담을 div
+						var reply_area = $('<div class="reply_area"></div>');
+						
+						// 리뷰의 첫번째 줄
+						var reply_header = $(' <div class="reply_header"></div>');
+						
+						// 리뷰의 첫줄의 왼쪽 닉네임
+						var reply_header_left = $('<div class="reply_header_left"></div>').text(
 								data.list[i].user_nickname);
-						td1.append(nick);
-						tr.append(td1);
-
-						var td2 = $('<td></td>');
-						var con = $('<textarea rows="2" cols="10" readonly style="resize:none;outline:none;border:none;"></textarea>');
-						con.val(data.list[i].r_contents);
-						td2.append(con);
-						tr.append(td2);
-
-						var td3 = $('<td></td>');
+						
+						// 첫줄에 왼쪽 닉네임 추가
+						reply_header.append(reply_header_left);
+						
+						// 리뷰 첫줄의 오른쪽 날짜와 버튼
+						var reply_header_right = $('<div class="reply_header_right"></div>');
+						
+						// 날짜 담을 span
 						var date = $('<span></span>');
+
+						// 오늘 작성된 리뷰라면 시간으로 표시/아니라면 날짜로 표시
 						var r_date = data.list[i].r_reg_date.split(' ')[0];
 						var r_time = data.list[i].r_reg_date.split(' ')[1];
 						var now = new Date();
@@ -118,74 +164,67 @@ function replyList(pn, rn, bi,un) {
 						} else {
 							date.text(r_date);
 						}
+						
+						// 수정여부 확인 후 수정표시
 						if (data.list[i].r_reg_date != data.list[i].r_update_date) {
 							date.text(date.text() + '(수정됨)');
 						}
-						td3.append(date);
-						tr.append(td3);
-						var td4 = $('<td></td>');
-										
-						if(user_nickname==data.list[i].user_nickname){
+						
+						// 첫줄 오른쪽에 날짜 추가
+						reply_header_right.append(date);
 							
-							var btn1 = $('<a>수정</a>');
-							var btn2 = $('<a style="display:none;">수정완료</a>');
-							var btn3 = $('<a>삭제</a>');
-							btn1.attr('href', '#');
-							btn2.attr('href', '#');
-							btn3.attr('href', '#');
-							td4.append(btn1);
-							td4.append(btn2);
-							td4.append(btn3);
+						
+						// 첫줄 오른쪽 날짜 옆에 버튼 추가
+						if(user_nickname==data.list[i].user_nickname){
+							var btn_update = $('<input type="button" class="reply_btns reply_update" value="수정"/>');
+							var btn_update_complete = $('<input type="button" class="reply_btns reply_update_submit" value="수정 완료" style="display: none;"/>');
+							var btn_delete = $('<input type="button" class="reply_btns reply_delete" value="삭제"/>');
+							reply_header_right.append(btn_update);
+							reply_header_right.append(btn_update_complete);
+							reply_header_right.append(btn_delete);
 						}else{
-							var btn4=$('<a>신고</a>');
-							btn4.attr('href','#');
-							td4.append(btn4);
+							var btn_report = $('<input type="button" class="reply_btns reply_delete" value="신고"/>');
+							reply_header_right.append(btn_report);
 						}
-						tr.append(td4);
-
-						tbody.append(tr);
+						
+						// 왼쪽 완성 후 첫줄에 추가
+						reply_header.append(reply_header_right);
+						
+						// 첫줄 완성 후 reply_area에 추가
+						reply_area.append(reply_header);
+						
+						// 두번째 줄에 댓글 내용 담을 div 및 textarea 생성
+						var reply_content = $('<div class="reply_content"></div>');
+						var replyTXT = $('<textarea readonly></textarea>');
+						replyTXT.val(data.list[i].r_contents);
+						reply_content.append(replyTXT);
+						reply_area.append(reply_content);
+						$('#reply_area').append(reply_area);
 					}
 					$('#totalPage').val(data.totalPage);
 					$('#totalCnt').val(data.totalCnt);
 					$('#startPage').val(data.startPage);
 					$('#endPage').val(data.endPage);
 					$('#page').val(data.page);
-					$('#list_selector tr').remove();
-					var ftr = $('<tr></tr>');
-					var ftd = $('<td colspan="4"></td>');
+					var reply_page=$('<div id="reply_page_selector"></div>');
 					if (data.startPage != 1) {
-						var sbtn = $('<a>&lt;</a>');
-						sbtn
-								.attr(
-										'href',
-										'javascript:replyList($("#startPage").val()-1,$("#r_name").val(),$("#b_index").val(),"'+user_nickname+'")')
-						ftd.append(sbtn);
+						var sbtn = $('<input type="button" class="reply_page_btn" value="&lt;"/>');
+						reply_page.append(sbtn);
 					}
 					for (var i = data.startPage; i <= data.endPage; i++) {
 						if (data.page == i) {
-							var nowPage = $('<span>' + i + '</span>');
-							ftd.append(nowPage);
+							var nowPage = $('<span class="nowPage">' + i + '</span>');
+							reply_page.append(nowPage);
 						} else {
-							var otherPage = $('<a>' + i + '</a>');
-							otherPage
-									.attr(
-											'href',
-											'javascript:replyList('
-													+ i
-													+ ',$("#r_name").val(),$("#b_index").val(),"'+user_nickname+'")');
-							ftd.append(otherPage);
+							var otherPage = $('<input type="button" class="reply_page_btn" value="'+i+'"/>');
+							reply_page.append(otherPage);
 						}
 					}
 					if (data.endPage != data.totalPage) {
-						var ebtn = $('<a>&gt;</a>');
-						ebtn
-								.attr(
-										'href',
-										'javascript:replyList(parseInt($("#endPage").val())+1,$("#r_name").val(),$("#b_index").val(),"'+user_nickname+'")')
-						ftd.append(ebtn);
+						var ebtn = $('<input type="button" class="reply_page_btn" value="&gt;"/>');
+						reply_page.append(ebtn);
 					}
-					ftr.append(ftd);
-					$('#list_selector').append(ftr);
+					$('#reply_area').append(reply_page);
 				}
 			});
 

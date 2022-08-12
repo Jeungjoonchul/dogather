@@ -46,10 +46,11 @@ public class BoardDAO {
 			return sqlSession.delete("Board.postOff",datas)==1;			
 		}
 
-		public BoardDTO getPost(int b_index, String b_name) {
+		public BoardDTO getPost(int b_index, String b_name,String r_name) {
 			HashMap<String, Object> datas = new HashMap<String, Object>();
 			datas.put("b_index",b_index);
 			datas.put("b_name",b_name);
+			datas.put("r_name",r_name);
 			return sqlSession.selectOne("Board.getPost", datas);
 		}
 
@@ -71,5 +72,4 @@ public class BoardDAO {
 		public boolean updatePost(BoardDTO post) {
 			return sqlSession.update("Board.updatePost", post)==1;
 		}
-		
 }

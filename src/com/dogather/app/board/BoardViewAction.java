@@ -19,13 +19,13 @@ public class BoardViewAction implements Action {
 	public ActionTo execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		int b_index = Integer.parseInt(req.getParameter("b_index"));
 		String b_name = "게시판 이름";
-
+		String r_name = "댓글 이름";
 		BoardDAO bdao = new BoardDAO();
 
 		
 		int user_index = ((UserDTO)req.getSession().getAttribute("loginUser")).getUser_index();
 
-		BoardDTO tb = bdao.getPost(b_index,b_name);
+		BoardDTO tb = bdao.getPost(b_index,b_name,r_name);
 
 
 		if(tb.getUser_index()!=user_index) {

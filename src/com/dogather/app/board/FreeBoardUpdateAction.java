@@ -17,9 +17,9 @@ public class FreeBoardUpdateAction implements Action {
 	public ActionTo execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		int b_index = Integer.parseInt(req.getParameter("b_index"));
 		String b_name = "t_free_board";
-		
+		String r_name = "t_fb_reply";
 		BoardDAO bdao = new BoardDAO();
-		BoardDTO fb = bdao.getPost(b_index, b_name);
+		BoardDTO fb = bdao.getPost(b_index, b_name,r_name);
 		req.setAttribute("fb", fb);
 		
 		ActionTo transfer = new ActionTo();
