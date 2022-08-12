@@ -32,8 +32,8 @@
 	src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 <script src="${cp }/resources/js/summernote.js"></script>
 <title>DoGather</title>
-<link rel="stylesheet" href="${cp }/resources/css/include.css" />
 <link rel="stylesheet" href="${cp }/resources/css/board.css" />
+<link rel="stylesheet" href="${cp }/resources/css/include.css" />
 </head>
 <body>
 

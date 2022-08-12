@@ -25,18 +25,20 @@
 
 
     <title>DoGather</title>
-        <link rel="stylesheet" href="${cp }/resources/css/mainStyle.css" />
     <link rel="stylesheet" href="${cp }/resources/css/include.css" />
+        <link rel="stylesheet" href="${cp }/resources/css/mainStyle.css" />
   </head>
   <body>	
   <%@include file="/header.jsp"%>
-    
-      <div id="body">
+    <main>
+    <div id="main">
         
         <div class="section">
+        
           <input type="radio" name="slide" id="slide1" checked />
           <input type="radio" name="slide" id="slide2" />
           <input type="radio" name="slide" id="slide3" />
+        
           <div class="slidewrap">
             <ul class="slidelist">
               <li>
@@ -264,8 +266,7 @@
             </div>
           </div>
         </div>
-      </div>
-      <!-- 후기 인증 게시판 리스트 -->
+        <!-- 후기 인증 게시판 리스트 -->
       <div id="review_border">
         <div class="review title">
           <a href=""> <span class="purple">후기</span><span> 게시판</span> </a>
@@ -290,7 +291,9 @@
           </a>
         </div>
       </div>  
-      
+      </div>
+    </main>
+
     <%@include file="footer.jsp" %>
   </body>
 </html>

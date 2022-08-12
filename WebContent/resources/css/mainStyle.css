@@ -1,33 +1,13 @@
-/* div영역 */
-
-* {
-  font-family: "Noto Sans KR", sans-serif;
-  /* div영역 */
-}
-div {
-  width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  box-sizing: border-box;
+main{
+	width: 100%;
+	text-align: center;
 }
 
 #main {
-  width: 100%;
-  height: 100%;
-}
-#head {
-  width: 66%;
-  position: relative;
+  width: 80%;
+  margin: 0 auto
 }
 
-#body {
-  width: 100%;
-  float: left;
-  position: relative;
-}
-#footer {
-  width: 100%;
-}
 /* class 추가 */
 .purple {
   color: #621ae5;
@@ -49,36 +29,6 @@ div {
   color: #f94b4b;
 }
 
-/* head 영역 */
-
-.left,
-.center,
-.right {
-  float: left;
-  width: 33% !important;
-}
-/* .left{
-  width: 300px;
-}
-.center{
-  width: 300px;
-}
-.right{
-  width: 300px;
-} */
-.left > a,
-.right > a {
-  font-weight: 100;
-  font-size: 0.7rem;
-}
-.left > a:hover {
-  color: purple;
-  font-size: 0.85rem;
-}
-.right > a:hover {
-  color: purple;
-  font-size: 0.85rem;
-}
 ul {
   padding-inline-start: 0px;
 }
@@ -94,55 +44,9 @@ li {
   text-align: center;
 }
 
-/*body*/
-
-/*category*/
-.category {
-  width: 80%;
-  border: 0;
-  padding: 0;
-  position: relative;
-  padding-bottom: 70px;
-}
-.menubar {
-  text-align: center;
-  font-size: 1.25rem;
-  font-weight: 500;
-  width: 100%;
-  border: 0;
-  padding: 0;
-  z-index: 100;
-}
-.menubar > li {
-  float: left;
-  width: 25%;
-}
-
-.submenu {
-  display: none;
-  position: absolute;
-  font-weight: 200;
-
-  font-size: 0.75rem;
-}
-
-.category :hover .submenu {
-  display: block;
-  background-color: #ffffff;
-  width: 25%;
-  height: 100px;
-  padding-top: 5px;
-  border-bottom: 1px solid #ffffff;
-  z-index: 100;
-}
-
-.span:hover {
-  color: purple;
-  font-size: 1rem;
-}
 /* 이벤트 슬라이드 영역 */
 .section {
-  width: 80%;
+  width: 100%;
 }
 .section input[id="slide"] {
   display: none;
@@ -196,7 +100,7 @@ li {
 /* 두게더 리스트 */
 #dogather_list {
   position: relative;
-  width: 80%;
+  width: 100%;
 }
 #dogather_list .list_title {
   display: flex;
@@ -241,21 +145,22 @@ li {
 /* 이벤트&커뮤니티 게시판 */
 #event_community {
   position: relative;
-  width: 80%;
-  margin: 0 auto;
+  width: 100%;
   display: flex;
+  justify-content: space-between;
 }
 #event_border {
   position: relative;
   width: 45%;
   height: 300px;
+  padding-left: 50px;
   /* border: 1px solid #141414; */
 }
 #community_border {
   position: relative;
-  margin: 0 20px;
   height: 300px;
   width: 45%;
+  padding-left: 50px;
   /* border: 1px solid #141414; */
 }
 #event_community div div.title {
@@ -270,10 +175,7 @@ li {
 #event_community div div.title span {
   font-size: 24px;
 }
-#event_community .border ul {
-  height: 300px;
-  /* border: 1px solid green; */
-}
+
 #event_community .border ul li {
   /* border: 1px solid red; */
   display: flex;
@@ -482,89 +384,7 @@ td {
   width: 250px;
   border: 1px solid black;
   display: inline-block;
-
   white-space: nowrap;
 }
 
-/* footer */
-#footer {
-  width: 100%;
-  border-top: 1px solid #141414;
-  height: 272px;
-  font-size: 0.875rem;
-  color: #141414;
-  clear: both;
-  background-color: RGB(245, 246, 247);
-}
-#footer .web_container {
-  position: relative;
-  width: 80%;
-  padding: 47px 0;
-  clear: both;
-}
 
-.footer_menu {
-  position: absolute;
-  top: 42px;
-  right: 0;
-  clear: both;
-  width: 100%;
-}
-.footer_menu ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  float: right;
-}
-.footer_menu li {
-  padding-left: 0px;
-  float: left;
-}
-.footer_menu ul a {
-  position: relative;
-  color: RGB(100, 100, 100);
-  cursor: pointer;
-  padding: 5px 10px;
-  display: inline-block;
-  overflow: hidden;
-  white-space: nowrap;
-}
-.footer_menu .footer_btn {
-  float: right;
-  text-align: right;
-  overflow: hidden;
-  white-space: nowrap;
-}
-.footer_menu .footer_btn a {
-  display: inline-block;
-  margin: 12px 0 0 3px;
-  padding: 0 32px;
-  color: RGB(100, 100, 100);
-  border: 1px solid rgba(100, 100, 100, 100);
-  border-radius: 16px;
-  line-height: 30px;
-  cursor: pointer;
-  text-decoration: none;
-  outline: none;
-}
-
-.copyright p {
-  line-height: 170%;
-  text-align: left;
-}
-.copyright .footer_line {
-  display: inline-block;
-  margin: 0 6px;
-  width: 1px;
-  height: 12px;
-  vertical-align: middle;
-}
-.copyright .sns {
-  margin: top 20px;
-}
-.copyright .sns a {
-  width: 25px;
-  height: 25px;
-  margin-right: 6px;
-  float: left;
-}

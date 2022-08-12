@@ -2,8 +2,34 @@
     pageEncoding="UTF-8"%>
         <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="cp" value="${pageContext.request.contextPath }"/>
-  <div id="footer">
+<footer>
+<div id="footer">
         <div class="web_container">
+          
+          <div class="copyright">
+            <p>
+              서울 강남구 테헤란로 146 <span class="footer_line"></span>전화문의
+              010-5287-3610
+            </p>
+            <p>
+              사업자 등록번호 101-86-76277
+              <span class="footer_line"></span>(주)DGT 대표이사 양형모
+            </p>
+
+            <p>Copyright 2022 DGT Co., Ltd. All right Reserved</p>
+            <div class="sns">
+              <a
+                href="https://www.facebook.com"
+                target="_blank"
+                class="facebook"
+                ><img src="${cp}/resources/images/small_facebook.png" alt=""
+              /></a>
+              <a href="https://www.instagram.com" target="_blank" class="insta"
+                ><img src="${cp}/resources/images/small_instagram.png" alt=""
+              /></a>
+            </div>
+          </div>
+          
           <div class="footer_menu">
             <ul>
               <li>
@@ -31,29 +57,7 @@
               </a>
             </div>
           </div>
-
-          <div class="copyright">
-            <p>
-              서울 강남구 테헤란로 146 <span class="footer_line"></span>전화문의
-              010-5287-3610
-            </p>
-            <p>
-              사업자 등록번호 101-86-76277
-              <span class="footer_line"></span>(주)DGT 대표이사 양형모
-            </p>
-
-            <p>Copyright 2022 DGT Co., Ltd. All right Reserved</p>
-            <div class="sns">
-              <a
-                href="https://www.facebook.com"
-                target="_blank"
-                class="facebook"
-                ><img src="${cp}/resources/images/small_facebook.png" alt=""
-              /></a>
-              <a href="https://www.instagram.com" target="_blank" class="insta"
-                ><img src="${cp}/resources/images/small_instagram.png" alt=""
-              /></a>
-            </div>
-          </div>
         </div>
       </div>
+</footer>
+  
