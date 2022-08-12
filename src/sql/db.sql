@@ -141,7 +141,7 @@ create table t_fb_reply(
     constraint fbReply_user_fk foreign key(user_index) references t_user(user_index)
 );
 
-###아래 146번 인서트문  0을 최근 게시물 번호로 수정 후 더미 데이터 생성
+###아래 146번 쿼리문  0을 최근 게시물 번호로 수정 후 더미 데이터 생성
 
 insert into t_fb_reply(b_index,user_index,r_contents) values(0,1,'사과의 댓글'),(0,2,'바나나의 댓글'),(0,3,'체리의 댓글'),(0,4,'두리안의 댓글');
 

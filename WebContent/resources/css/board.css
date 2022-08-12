@@ -205,3 +205,8 @@ table tbody tr {
 .search_area [type="button"]:hover {
   background-color: #8757de;
 }
+
+.btns a{
+	text-decoration: none;
+	color : black;
+}
