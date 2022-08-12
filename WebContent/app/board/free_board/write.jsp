@@ -26,6 +26,34 @@
 <title>글쓰기</title>
 <link rel="stylesheet" href="${cp }/resources/css/include.css" />
 <script src="${cp }/resources/js/summernote.js"></script>
+<style>
+#body{
+	padding-top: 60px;
+	padding-bottom:60px;
+}
+#body table tr{
+text-align:left;
+}
+#body table tr a{
+ 	text-align:right;
+display: inline-block;
+    border-radius: 5px;
+	padding: 10px;
+	color: #fff;
+	background-color:#621ae5;
+	margin: 10px 5px 10px 0;
+	
+}
+#body table tr a:hover{
+background-color: #8757de;
+}
+.post_write{
+	margin: 0 auto;
+}
+.post_write>tbody>tr:last-child>td {
+	text-align: right;
+}
+</style>
 </head>
 <body>
 	<c:if test="${empty loginUser }">
@@ -38,13 +66,14 @@
 		<div id="body">
 			<form method="post" action="${cp}/board/free_board/post_write_ok.bo"
 				id="post_editor" name="post_editor">
-				<table style="margin: 0 auto;">
+				<table class="post_write">
+				<tbody>
 					<tr>
-						<th>제목</td>
+						<th>제목</th>
 						<td><input type="text" name="b_title" id="b_title"></td>
 					</tr>
 					<tr>
-						<th>작성자</td>
+						<th>작성자</th>
 						<td><input type="text" name="user_id"
 							value="${loginUser.user_nickname }" readonly></td>
 					</tr>
@@ -69,6 +98,7 @@
 							href="${cp }/board/free_board/post_list.bo?page=${param.page}">목록</a>
 						</td>
 					</tr>
+				</tbody>
 				</table>
 				<textarea name="orgName" id="orgName" style="display: none;"></textarea>
 				<textarea name="sysName" id="sysName" style="display: none;"></textarea>
@@ -78,7 +108,9 @@
 </body>
 <script src="${cp}/resources/js/board.js"></script>
 <script>
-$('#summernote').val('${fn:replace(productDetail.product_content,"\'","\\'")}');
-        $('#summernote').summernote(setting);
+$(document).ready(function(){
+	$('#summernote').val('${fn:replace(productDetail.product_content,"\'","\\'")}');
+	$('#summernote').summernote(setting);	
+});
 </script>
 </html>

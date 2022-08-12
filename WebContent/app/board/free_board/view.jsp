@@ -48,6 +48,7 @@
 		<div id="post">
 			<form>
 				<table>
+				<tbody>
 					<tr>
 						<th>제목</th>
 						<td><input type="text" name="b_title" value="${fb.b_title }"
@@ -87,6 +88,7 @@
 							href="${cp }/board/free_board/post_list.bo?page=${param.page}">목록</a>
 						</td>
 					</tr>
+				</tbody>
 				</table>
 			</form>
 		</div>

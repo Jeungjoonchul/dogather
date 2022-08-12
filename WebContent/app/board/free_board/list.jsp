@@ -85,7 +85,7 @@
 							</c:choose>
 						</tbody>
 						<tfoot>
-							<tr class="btns">
+							<tr class="page-btns">
 								<td colspan="5"><c:if test="${startPage!=1 }">
 										<a
 											href="${cp }/board/free_board/post_list.bo?page=${startPage-1}">&lt;</a>

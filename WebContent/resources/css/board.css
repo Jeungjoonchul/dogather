@@ -98,8 +98,12 @@ th{text-align: center;}
 /* 게시판 리스트 */
 #boardcontainer {
   width: 80%;
-  height: 500px;
+  height: 600px;
   margin: 0 auto;
+  
+}
+#boardcontainer a{
+text-decoration: none;	
 }
 /* 게시판 타이틀 */
 #boardmain .title {
@@ -206,7 +210,20 @@ table tbody tr {
   background-color: #8757de;
 }
 
-.btns a{
-	text-decoration: none;
+.page-btns a{
 	color : black;
+	margin: 0 2px;
+	padding: 1px;
+	padding: 0 3px;
+}
+.page-btns a:hover{
+	color:red;
+}
+.nowPage{
+	background-color:#dddddd;
+	/* border: 1px solid #141414; */
+	border-radius: 3px;
+	margin: 0 2px;
+	padding: 1px;
+	padding: 0 3px;
 }
