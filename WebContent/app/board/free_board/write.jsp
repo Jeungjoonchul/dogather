@@ -18,42 +18,14 @@
     />
     <link rel="shortcut icon" href="${cp}/resources/images/favicon.png" />
 
-   <!--  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script> -->
    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
     
 <title>글쓰기</title>
 <link rel="stylesheet" href="${cp }/resources/css/include.css" />
-<script src="${cp }/resources/js/summernote.js"></script>
-<style>
-#body{
-	padding-top: 60px;
-	padding-bottom:60px;
-}
-#body table tr{
-text-align:left;
-}
-#body table tr a{
- 	text-align:right;
-display: inline-block;
-    border-radius: 5px;
-	padding: 10px;
-	color: #fff;
-	background-color:#621ae5;
-	margin: 10px 5px 10px 0;
-	
-}
-#body table tr a:hover{
-background-color: #8757de;
-}
-.post_write{
-	margin: 0 auto;
-}
-.post_write>tbody>tr:last-child>td {
-	text-align: right;
-}
-</style>
+<link rel="stylesheet" href="${cp }/resources/css/boardWrite.css" />
+
 </head>
 <body>
 	<c:if test="${empty loginUser }">
@@ -63,7 +35,8 @@ background-color: #8757de;
 		</script>
 	</c:if>
 		<%@include file="../../../header.jsp"%>
-		<div id="body">
+		<main>
+		<div id="main">
 			<form method="post" action="${cp}/board/free_board/post_write_ok.bo"
 				id="post_editor" name="post_editor">
 				<table class="post_write">
@@ -104,13 +77,16 @@ background-color: #8757de;
 				<textarea name="sysName" id="sysName" style="display: none;"></textarea>
 			</form>
 		</div>
+		</main>
+		
 		<%@include file="../../../footer.jsp"%>
 </body>
+<script src="${cp }/resources/js/summernote.js"></script>
 <script src="${cp}/resources/js/board.js"></script>
 <script>
-$(document).ready(function(){
+/* $(document).ready(function(){
 	$('#summernote').val('${fn:replace(productDetail.product_content,"\'","\\'")}');
-	$('#summernote').summernote(setting);	
-});
+	$('#summernote').summernote(setting);
+}); */
 </script>
 </html>

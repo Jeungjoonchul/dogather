@@ -24,12 +24,13 @@ public class BoardListAction implements Action{
 		String temp = req.getParameter("page");
 		String boardName = "테이블 명";
 		String r_name = "리플 테이블명";
+		String keyword = req.getParameter("keyword");
 		
 		//페이징 구하는 util, 매개변수는 현재 페이지(null도 가능), 전체 게시글 개수 
-		BoardPaging paging = new BoardPaging(temp, bdao.getBoardCnt(boardName));
+		BoardPaging paging = new BoardPaging(temp, bdao.getBoardCnt(boardName,keyword));
 		
 		//paging 객체의 startRow와 pageSize로 전체 게시글 목록 얻음
-		List<BoardDTO> list = bdao.getBoard(paging.getStartRow(),paging.getPageSize(),boardName,r_name);
+		List<BoardDTO> list = bdao.getBoard(paging.getStartRow(),paging.getPageSize(),keyword,boardName,r_name);
 		
 		//전송을 위한 set
 		req.setAttribute("list", list);

@@ -9,10 +9,10 @@ function loginCheck(loginUser, page) {
 }
 
 //게시글 삭제
-function delete_check(b_index,page) {
+function delete_check(b_index,page,keyword) {
 	var check = confirm('정말 삭제하시겠습니까?');
 	if (check) {
-		location.href = cp + "/board/free_board/post_delete.bo?b_index="+ b_index+"&page="+page;
+		location.href = cp + "/board/free_board/post_delete.bo?b_index="+ b_index+"&page="+page+"&keyword="+keyword;
 	}
 }
 
@@ -33,6 +33,14 @@ function postOn() {
 		return false;
 	}
 	post.submit();
+}
+
+//게시글 검색
+function getPostListWithKeyword(){
+	var keyword = $('#post_query_keyword').val();
+
+	location.href=cp+'/board/free_board/post_list.bo?keyword='+keyword;
+	
 }
 
 

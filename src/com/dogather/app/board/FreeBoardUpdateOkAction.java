@@ -27,6 +27,8 @@ public class FreeBoardUpdateOkAction implements Action {
 		String b_name = "t_free_board";
 
 		String page = req.getParameter("page");
+		String keyword=req.getParameter("keyword");
+		
 		int b_index = Integer.parseInt(req.getParameter("b_index"));
 		String b_title = req.getParameter("b_title");
 		String b_subject = req.getParameter("b_subject");
@@ -178,7 +180,7 @@ public class FreeBoardUpdateOkAction implements Action {
 			out.print("alert('게시글이 수정에 실패했습니다');");
 		}
 		out.print("location.href='" + req.getContextPath() + "/board/free_board/post_view.bo?b_index=" + b_index
-				+ "&page=" + page + "';");
+				+ "&page=" + page + "&keyword="+keyword+"';");
 		out.print("</script>");
 		out.close();
 		return null;

@@ -4,9 +4,14 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Board">
 	<!-- 전체 게시글 개수 -->
-	<select id="getBoardCnt" parameterType="string"
+	<select id="getBoardCnt" parameterType="hashmap"
 		resultType="_int">
-		select count(*) from ${b_name} where b_inactive=0
+		select count(*) 
+		from ${b_name} b 
+		left join(select user_nickname,user_index from t_user) u 
+		on b.user_index=u.user_index 
+		where b.b_inactive=0 
+		and(b.b_title like('%${keyword}%') or b.b_contents like('%${keyword}%') or u.user_nickname like('%${keyword}%'))
 	</select>
 	<select id="getBoard" parameterType="hashmap"
 		resultType="BoardDTO">
@@ -22,14 +27,15 @@
 		b.b_inactive,
 		u.user_index,
 		u.user_nickname,
-		r.b_reply_cnt
-		from ${b_name} b
-		join t_user u
-		on b.user_index=u.user_index
-		left join(select b_index,count(r_index) as b_reply_cnt from ${r_name} where r_inactive=0 group by b_index) as r
-		on b.b_index=r.b_index
+		r.b_reply_cnt 
+		from ${b_name} b 
+		join t_user u 
+		on b.user_index=u.user_index 
+		left join(select b_index,count(r_index) as b_reply_cnt from ${r_name} where r_inactive=0 group by b_index) as r 
+		on b.b_index=r.b_index 
 		where b.b_inactive = 0 
-		order by 1 desc
+		and(b.b_title like('%${keyword}%') or b.b_contents like('%${keyword}%') or u.user_nickname like('%${keyword}%')) 
+		order by 1 desc 
 		limit #{startRow}, #{pageSize}
 	</select>
 

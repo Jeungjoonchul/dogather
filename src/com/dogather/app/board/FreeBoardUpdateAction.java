@@ -18,8 +18,14 @@ public class FreeBoardUpdateAction implements Action {
 		int b_index = Integer.parseInt(req.getParameter("b_index"));
 		String b_name = "t_free_board";
 		String r_name = "t_fb_reply";
+		int page= Integer.parseInt(req.getParameter("page"));
+		String keyword = req.getParameter("keyword");
+		
 		BoardDAO bdao = new BoardDAO();
 		BoardDTO fb = bdao.getPost(b_index, b_name,r_name);
+		
+		req.setAttribute("page", page);
+		req.setAttribute("keyword", keyword);
 		req.setAttribute("fb", fb);
 		
 		ActionTo transfer = new ActionTo();

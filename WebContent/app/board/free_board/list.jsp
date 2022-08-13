@@ -65,7 +65,7 @@
 										<tr>
 											<td>${list.b_index}</td>
 											<td><a
-												href="${cp}/board/free_board/post_view.bo?b_index=${list.b_index}&page=${page}"><span>${list.b_title}</span><span>[${list.b_reply_cnt }]</span></a></td>
+												href="${cp}/board/free_board/post_view.bo?b_index=${list.b_index}&page=${page}&keyword=${keyword}"><span>${list.b_title}</span><span>[${list.b_reply_cnt }]</span></a></td>
 											<td><a href="#">${list.user_nickname}</a></td>
 											<td><fmt:parseDate value="${list.b_reg_date}" pattern="yyyy-MM-dd HH:mm:ss" var="datetime" /> 
 											<c:set var="date"> <fmt:formatDate value="${datetime }" pattern="yyyy-MM-dd" /></c:set> 
@@ -89,19 +89,19 @@
 							<tr class="page-btns">
 								<td colspan="5"><c:if test="${startPage!=1 }">
 										<a
-											href="${cp }/board/free_board/post_list.bo?page=${startPage-1}">&lt;</a>
+											href="${cp }/board/free_board/post_list.bo?page=${startPage-1}&keyword=${keyword}">&lt;</a>
 									</c:if> <c:forEach begin="${startPage }" end="${endPage }" var="i">
 										<c:choose>
 											<c:when test="${page==i }">
 												<span class="nowPage">${i }</span>
 											</c:when>
 											<c:otherwise>
-												<a href="${cp}/board/free_board/post_list.bo?page=${i}">${i}</a>
+												<a href="${cp}/board/free_board/post_list.bo?page=${i}&keyword=${keyword}">${i}</a>
 											</c:otherwise>
 										</c:choose>
 									</c:forEach> <c:if test="${endPage!=totalPage }">
 										<a
-											href="${cp }/board/free_board/post_list.bo?page=${endPage+1}">&gt;</a>
+											href="${cp }/board/free_board/post_list.bo?page=${endPage+1}&keyword=${keyword}">&gt;</a>
 									</c:if></td>
 							</tr>
 						</tfoot>
@@ -113,8 +113,7 @@
 						</tr>
 					</table>
 					<div class="search_area">
-						<input type="search" id="q" /> <input type="button" value="검색"
-							onclick="search()" />
+						<input type="search" id="post_query_keyword" value="${keyword==null||keyword==''? '':keyword }"/><input type="button" id="post_query_btn" value="검색" onclick="getPostListWithKeyword(${page});"/>
 					</div>
 				</div>
 			</div>

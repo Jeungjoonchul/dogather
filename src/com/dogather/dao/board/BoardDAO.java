@@ -17,14 +17,19 @@ public class BoardDAO {
 		}
 		
 		//전체 게시글 개수
-		public int getBoardCnt(String b_name) {
-			return sqlSession.selectOne("Board.getBoardCnt",b_name);
+		public int getBoardCnt(String b_name,String keyword) {
+			HashMap<String, String> datas = new HashMap<String, String>();
+			datas.put("b_name", b_name);
+			datas.put("keyword", keyword);
+			
+			return sqlSession.selectOne("Board.getBoardCnt",datas);
 		}
 
-		public List<BoardDTO> getBoard(int startRow, int pageSize,String b_name,String r_name) {
+		public List<BoardDTO> getBoard(int startRow, int pageSize,String keyword,String b_name,String r_name) {
 			HashMap<String, Object> datas = new HashMap<String, Object>();
 			datas.put("startRow", startRow);
 			datas.put("pageSize", pageSize);
+			datas.put("keyword", keyword);
 			datas.put("b_name",b_name);
 			datas.put("r_name",r_name);
 			

@@ -20,16 +20,18 @@ public class FreeBoardListAction implements Action {
 
 		BoardDAO bdao = new BoardDAO();
 		
-		//현재 페이지
-		String temp = req.getParameter("page");
 		
-		String b_name = "t_free_board";
-		String r_name = "t_fb_reply";
+		String temp = req.getParameter("page");//현재 페이지
+		String b_name = "t_free_board";//게시판 테이블
+		String r_name = "t_fb_reply";//댓글 테이블
+		
+		String keyword=req.getParameter("keyword");//검색 키워드
+		
 		//페이징 구하는 util, 매개변수는 현재 페이지(null도 가능), 전체 게시글 개수 
-		BoardPaging paging = new BoardPaging(temp, bdao.getBoardCnt(b_name));
+		BoardPaging paging = new BoardPaging(temp, bdao.getBoardCnt(b_name,keyword));
 
 		//paging 객체의 startRow와 pageSize로 전체 게시글 목록 얻음
-		List<BoardDTO> fb_list = bdao.getBoard(paging.getStartRow(),paging.getPageSize(),b_name,r_name);
+		List<BoardDTO> fb_list = bdao.getBoard(paging.getStartRow(),paging.getPageSize(),keyword,b_name,r_name);
 
 		//전송을 위한 set
 		req.setAttribute("fb_list", fb_list);
@@ -38,6 +40,7 @@ public class FreeBoardListAction implements Action {
 		req.setAttribute("startPage", paging.getStartPage());
 		req.setAttribute("endPage", paging.getEndPage());
 		req.setAttribute("page", paging.getPage());
+		req.setAttribute("keyword", keyword);
 		
 		//path 및 redirect 설정(forward 방식)
 		ActionTo transfer=new ActionTo();

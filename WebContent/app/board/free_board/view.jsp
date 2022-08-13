@@ -76,12 +76,12 @@
           <div id="post_button">
             <c:if test="${loginUser.user_nickname==fb.user_nickname }">
               <a
-                href="${cp}/board/free_board/post_update.bo?b_index=${fb.b_index}&page=${param.page}"
+                href="${cp}/board/free_board/post_update.bo?b_index=${fb.b_index}&page=${param.page}&keyword=${param.keyword }"
                 >수정</a
               >
-              <a href="javascript:delete_check(${fb.b_index},${param.page });">삭제</a>
+              <a href="javascript:delete_check(${fb.b_index},${param.page },'${param.keyword }');">삭제</a>
             </c:if>
-            <a href="${cp }/board/free_board/post_list.bo?page=${param.page}"
+            <a href="${cp }/board/free_board/post_list.bo?page=${param.page}&keyword=${param.keyword }"
               >목록</a
             >
           </div>

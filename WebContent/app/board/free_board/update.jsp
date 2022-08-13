@@ -16,9 +16,6 @@
 	rel="stylesheet" />
 <link rel="shortcut icon" href="${cp}/resources/images/favicon.png" />
 
-<!-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-	integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-	crossorigin="anonymous"></script> -->
 	 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <link
 	href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css"
@@ -104,6 +101,8 @@
 			<input type="hidden" name="b_files" value="${fb.b_files }" /> <input
 				type="hidden" name="b_index" value="${fb.b_index }" /> <input
 				type="hidden" name="page" value="${param.page}" />
+				<input
+				type="hidden" name="keyword" value="${param.keyword}" />
 			<textarea name="orgName" id="orgName" style="display: none;"></textarea>
 			<textarea name="sysName" id="sysName" style="display: none;"></textarea>
 		</form>
