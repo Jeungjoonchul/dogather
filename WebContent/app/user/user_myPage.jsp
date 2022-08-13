@@ -12,5 +12,6 @@
 <body>
 	<a href="${cp}/">비밀번호 변경</a><br>
 	<a href="${cp}/user_myPage_modifyMyImfor.us">개인정보 변경</a>
+	
 </body>
 </html>
