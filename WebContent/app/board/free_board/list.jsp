@@ -32,14 +32,15 @@
 	src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 <script src="${cp }/resources/js/summernote.js"></script>
 <title>DoGather</title>
-<link rel="stylesheet" href="${cp }/resources/css/board.css" />
+<link rel="stylesheet" href="${cp }/resources/css/boardList.css" />
 <link rel="stylesheet" href="${cp }/resources/css/include.css" />
 </head>
 <body>
 
 
 	<%@include file="../../../header.jsp"%>
-	<div id="body">
+	<main>
+	<div id="main">
 
 		<!-- 이벤트&커뮤니티 게시판 -->
 		<div id="boardcontainer">
@@ -119,6 +120,7 @@
 			</div>
 		</div>
 	</div>
+	</main>
 	<%@include file="../../../footer.jsp"%>
 
 

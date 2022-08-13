@@ -189,3 +189,7 @@ text-align: center;
 	padding: 1px;
 	padding: 0 3px;
 }
+
+#summernote{
+	min-height:200px;
+}

@@ -111,10 +111,25 @@ public class BoardFrontController extends HttpServlet{
 			}
 			break;
 			
-		//테스트
-		case "/board/reply_ok.bo":
+		case "/board/reply_on.bo":
 			try {
-				transfer= new ReplyOkAction().execute(req,resp);
+				transfer= new ReplyOnAction().execute(req,resp);
+			} catch (Exception e) {
+				System.out.println(command+" : "+e);
+				e.printStackTrace();
+			}
+			break;
+		case "/board/reply_update.bo":
+			try {
+				transfer=new ReplyUpdateAction().execute(req,resp);
+			} catch (Exception e) {
+				System.out.println(command+" : "+e);
+				e.printStackTrace();
+			}
+			break;
+		case "/board/reply_delete.bo":
+			try {
+				transfer=new ReplyDeleteAction().execute(req,resp);
 			} catch (Exception e) {
 				System.out.println(command+" : "+e);
 				e.printStackTrace();

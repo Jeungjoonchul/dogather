@@ -79,7 +79,7 @@
                 href="${cp}/board/free_board/post_update.bo?b_index=${fb.b_index}&page=${param.page}"
                 >수정</a
               >
-              <a href="javascript:delete_check(${fb.b_index});">삭제</a>
+              <a href="javascript:delete_check(${fb.b_index},${param.page });">삭제</a>
             </c:if>
             <a href="${cp }/board/free_board/post_list.bo?page=${param.page}"
               >목록</a
@@ -91,7 +91,7 @@
       <div id="reply">
       <c:choose>
       	<c:when test="${fb_replies==null or fb_replies.size()==0 }">
-      	<div id="reply_list">
+      	<div id="reply_list" style="text-indent: 40px">
       		작성된 댓글이 없습니다.
       	</div>
       	</c:when>
@@ -120,17 +120,18 @@
 						<c:when test="${loginUser.user_index==reply.user_index }">
 						<input type="button" class="reply_btns reply_update" value="수정"/>
 						<input type="button" class="reply_btns reply_update_submit" value="수정 완료" style="display: none;"/>
-						<input type="hidden" class="r_index" value="${reply.r_index}"/>
 						<input type="button" class="reply_btns reply_delete" value="삭제"/>
+						
 						</c:when>
 						<c:otherwise>
 						<input type="button" class="reply_btns reply_delete" value="신고"/>
 						</c:otherwise>
 					</c:choose>
+					<input type="hidden" class="r_index" value="${reply.r_index}"/>
                   </div>
                 </div>
                 <div class="reply_content">
-                <textarea readonly>${reply.r_contents}</textarea>
+              		<textarea readonly spellcheck="false">${reply.r_contents}</textarea>
                 </div>
               </div>
               <c:set var="i" value="${i+1}"></c:set>
@@ -163,7 +164,14 @@
             <input type="hidden" id="r_name" name="r_name" value="t_fb_reply" />
             <input type="hidden" id="page" value="${page}">
             <div id="reply_write_input">
+            <c:choose>
+            	<c:when test="${fb.b_reply_cnt==0 }">
+              <textarea name="r_contents" id="r_contents" rows="4" cols="30" style="resize: none" placeholder="첫번째 댓글의 주인공이 되어보세요"></textarea>
+            	</c:when>
+            	<c:otherwise>
               <textarea name="r_contents" id="r_contents" rows="4" cols="30" style="resize: none" placeholder="아름다운 댓글을 작성해주세요"></textarea>
+            	</c:otherwise>
+            </c:choose>
             </div>
             <a id="reply_on"
               href=""

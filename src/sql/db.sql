@@ -196,9 +196,10 @@ create table t_dogather(
     category_index int not null, #카테고리(ex : 1)
     dg_title varchar(767) not null unique, #dogather 제목(ex : 살빼기dogather)
     dg_intro text, #dogather 소개(ex : 체중감량 같이해요!)
+    dg_intro_short varchar(60), #dogather 짧은 설명
     dg_banner text, #dogather 사진(로고)
     dg_public_scope enum('t','f'), #공개범위(ex : 't')
-    dg_capacity int check(dg_capacity<=50) default 50, #dogather 참여 가능 인원 수, dogather 점수에 따라 증가 가능, 점수 산정식은 미정, 최선:admin에서 설정해줌 / DB 자동화는 가능하면 하도록(ex : 50)
+    dg_capacity int default 50, #dogather 참여 가능 인원 수, dogather 점수에 따라 증가 가능, 점수 산정식은 미정, 최선:admin에서 설정해줌 / DB 자동화는 가능하면 하도록(ex : 50)
 	dg_limit_scope enum('unLimit','limit','impossible'), #가입 제한(ex : 'unLimit')
     #dg_likeUserIndex text #두개더에 좋아요 누른 유저(생각해 보고 넣기)
     dg_expire datetime, #전체 목표 완료 날짜(ex : 2022-12-26)

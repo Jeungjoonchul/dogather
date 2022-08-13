@@ -18,20 +18,20 @@ public class FreeBoardDeleteOkAction implements Action {
 		int b_index = Integer.parseInt(req.getParameter("b_index"));
 		String b_name = "t_free_board";
 		BoardDAO bdao = new BoardDAO();
-		
+		int page=Integer.parseInt(req.getParameter("page"));
 		ActionTo transfer = null;
 		
 		if(bdao.postOff(b_index,b_name)) {
 			transfer = new ActionTo();
 			transfer.setRedirect(true);
-			transfer.setPath(req.getContextPath()+"/board/free_board/post_list.bo");
+			transfer.setPath(req.getContextPath()+"/board/free_board/post_list.bo?page="+page);
 		}else {
 			resp.setCharacterEncoding("utf-8");
 			resp.setContentType("text/html; charset=utf-8");
 			PrintWriter out = resp.getWriter();
 			out.print("<script>");
 			out.print("alert('게시글 삭제에 실패했습니다');");
-			out.print("location.href='"+req.getContextPath()+"/board/free_board/post_view.bo?b_index="+b_index+"';");
+			out.print("location.href='"+req.getContextPath()+"/board/free_board/post_view.bo?b_index="+b_index+"page="+page+"';");
 			out.print("</script>");
 			out.close();
 		}

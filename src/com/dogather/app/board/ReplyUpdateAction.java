@@ -1,8 +1,6 @@
 package com.dogather.app.board;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -14,34 +12,22 @@ import com.dogather.dao.board.ReplyDAO;
 import com.dogather.dto.board.ReplyDTO;
 import com.dogather.dto.user.UserDTO;
 import com.dogather.util.ReplyPaging;
-import com.google.gson.Gson;
 
-public class ReplyOkAction implements Action {
+public class ReplyUpdateAction implements Action {
 
 	@Override
 	public ActionTo execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		int user_index = ((UserDTO)req.getSession().getAttribute("loginUser")).getUser_index();
-		int b_index = Integer.parseInt(req.getParameter("b_index"));
 		String r_contents = req.getParameter("r_contents");
 		String r_name = req.getParameter("r_name");
-		String page = req.getParameter("page");
-		
-		
-		
-		ReplyDTO reply = new ReplyDTO();
-		reply.setUser_index(user_index);
-		reply.setB_index(b_index);
-		reply.setR_contents(r_contents);
-		reply.setR_name(r_name);
-		
+		int r_index = Integer.parseInt(req.getParameter("r_index"));
+	
 		ReplyDAO rdao = new ReplyDAO();
 		resp.setCharacterEncoding("utf-8");
 
-		if (rdao.replyOn(reply)) {
-			int totalCnt=rdao.getReplyCntOnPost(r_name, b_index);
-			ReplyPaging r = new ReplyPaging(page, totalCnt);
-			resp.getWriter().print(r.getTotalPage());
+		if (rdao.updateReply(r_index,r_contents,r_name)) {
+
+			resp.getWriter().print("O");
 			
 		}else {
 			resp.getWriter().print("X");

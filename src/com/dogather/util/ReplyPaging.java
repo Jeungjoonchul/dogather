@@ -65,7 +65,7 @@ public class ReplyPaging {
 		public ReplyPaging(String paramPage,int totalCnt) {
 			this.totalCnt=totalCnt;
 			totalPage=(this.totalCnt-1)/pageSize+1;
-			page=(paramPage==(null))||(paramPage.equals(""))?totalPage:Integer.parseInt(paramPage);
+			page=(paramPage==(null))||(paramPage.equals(""))?totalPage:Integer.parseInt(paramPage)>totalPage?totalPage:Integer.parseInt(paramPage);
 			startPage=(page-1)/10*10+1;
 			endPage = startPage+9;
 			endPage=endPage>totalPage?totalPage:endPage;

@@ -34,5 +34,22 @@ public class ReplyDAO {
 		datas.put("b_index", b_index);
 		return sqlSession.selectOne("Reply.getReplyCntOnPost", datas);
 	}
+
+	public boolean updateReply(int r_index,String r_contents, String r_name) {
+		HashMap<String, Object> datas = new HashMap<String, Object>();
+		
+		datas.put("r_index", r_index);
+		datas.put("r_contents", r_contents);
+		datas.put("r_name", r_name);
+		return sqlSession.update("Reply.updateReply",datas)==1;
+	}
+
+	public boolean deleteReply(String r_index, String r_name) {
+		HashMap<String, Object> datas = new HashMap<String, Object>();
+		
+		datas.put("r_index", r_index);
+		datas.put("r_name", r_name);
+		return sqlSession.delete("Reply.deleteReply", datas)==1;
+	}
 	
 }
