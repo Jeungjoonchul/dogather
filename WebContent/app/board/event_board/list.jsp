@@ -46,7 +46,7 @@
 		<div id="boardcontainer">
 			<div id="boardmain">
 				<div class="board title">
-					<span class="purple">자유</span><span> 게시판</span>
+					<span class="purple">이벤트</span><span> 게시판</span>
 				</div>
 				<div class="board_list">
 					<table class="list">

@@ -31,10 +31,10 @@ public class FreeBoardListAction implements Action {
 		BoardPaging paging = new BoardPaging(temp, bdao.getBoardCnt(b_name,keyword));
 
 		//paging 객체의 startRow와 pageSize로 전체 게시글 목록 얻음
-		List<BoardDTO> fb_list = bdao.getBoard(paging.getStartRow(),paging.getPageSize(),keyword,b_name,r_name);
+		List<BoardDTO> b_list = bdao.getBoard(paging.getStartRow(),paging.getPageSize(),keyword,b_name,r_name);
 
 		//전송을 위한 set
-		req.setAttribute("fb_list", fb_list);
+		req.setAttribute("b_list", b_list);
 		req.setAttribute("totalPage", paging.getTotalPage());
 		req.setAttribute("totalCnt", paging.getTotalCnt());
 		req.setAttribute("startPage", paging.getStartPage());
