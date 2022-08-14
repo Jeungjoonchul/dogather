@@ -12,8 +12,8 @@ public class EventBoardListAction extends BoardListAction{
 
 	@Override
 	public ActionTo execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		return super.execute(req, resp);
+
+		return null;
 	}
 
 	

@@ -19,12 +19,12 @@ import com.google.gson.Gson;
 public class ReplyOnAction implements Action {
 
 	@Override
-	public ActionTo execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	public ActionTo execute(HttpServletRequest req, HttpServletResponse resp,String b_name,String r_name) throws ServletException, IOException {
 
 		int user_index = ((UserDTO)req.getSession().getAttribute("loginUser")).getUser_index();
 		int b_index = Integer.parseInt(req.getParameter("b_index"));
 		String r_contents = req.getParameter("r_contents");
-		String r_name = req.getParameter("r_name");
+
 		String page = req.getParameter("page");
 		
 		

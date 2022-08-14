@@ -58,7 +58,7 @@
 								<th class="boarddate">날짜</th>
 								<th class="boardview">조회수</th>
 							</tr>
-							<c:choose>
+							<c:choose> 
 								<c:when test="${b_list.size()>0 and b_list!=null }">
 									<c:forEach var="list" items="${b_list}">
 
@@ -114,6 +114,7 @@
 					</table>
 					<div class="search_area">
 						<input type="search" id="post_query_keyword" value="${keyword==null||keyword==''? '':keyword }"/><input type="button" id="post_query_btn" value="검색" onclick="getPostListWithKeyword(${page});"/>
+						<input type="hidden" id="b_path" value="free_board"/>
 					</div>
 				</div>
 			</div>

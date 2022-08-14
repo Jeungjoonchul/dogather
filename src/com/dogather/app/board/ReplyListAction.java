@@ -18,10 +18,8 @@ import com.google.gson.Gson;
 public class ReplyListAction implements Action {
 
 	@Override
-	public ActionTo execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	public ActionTo execute(HttpServletRequest req, HttpServletResponse resp,String b_name,String r_name) throws ServletException, IOException {
 		String page = req.getParameter("page");
-
-		String r_name = req.getParameter("r_name");
 
 		int b_index = Integer.parseInt(req.getParameter("b_index"));
 

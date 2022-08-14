@@ -39,7 +39,7 @@ function postOn() {
 function getPostListWithKeyword(){
 	var keyword = $('#post_query_keyword').val();
 
-	location.href=cp+'/board/free_board/post_list.bo?keyword='+keyword;
+	location.href=cp+'/board/'+$('#b_path').val()+'/post_list.bo?keyword='+keyword;
 	
 }
 
@@ -59,7 +59,7 @@ $(document).on('click','#reply_on',function(){
 	}
 	var form= $('#reply_write');
 	$.ajax({
-		url : cp+'/board/reply_on.bo',
+		url : cp+'/board/'+$('#r_path').val()+'/reply_on.bo',
 		type : 'post',
 		data : form.serialize(),
 		dataType : 'text',
@@ -117,16 +117,16 @@ $(document).on('click','.reply_update',function(e){
 $(document).on('click','.reply_update_submit',function(e){
 	var r_contents=$(e.target).parent().parent().next().children().val();
 	var r_index = $(e.target).next().next().val();
-	var r_name = $('#r_name').val();
+	
 	var page = $('#page').val();
 	if(reply_contents_before==r_contents){
 		alert('변경 사항이 없습니다')
 		return false;
 	}
 	$.ajax({
-		url : cp+'/board/reply_update.bo',
+		url : cp+'/board/'+$('#r_path').val()+'/reply_update.bo',
 		type : 'post',
-		data : {"r_contents":r_contents,"r_index":r_index,"r_name":r_name},
+		data : {"r_contents":r_contents,"r_index":r_index},
 		dataType : 'text',
 		async: false,
 		success : function(data) {
@@ -147,13 +147,12 @@ $(document).on('click','.reply_delete',function(e){
 	var check=confirm('댓글을 삭제하시겠습니까?');
 	if(check){
 		var r_index=$(e.target).next().val();
-		var r_name = $('#r_name').val();
 		var page = $('#page').val();
 		var b_index=$('#b_index').val();
 		$.ajax({
-			url : cp+'/board/reply_delete.bo',
+			url : cp+'/board/'+$('#r_path').val()+'/reply_delete.bo',
 			type : 'post',
-			data : {"r_index":r_index,"r_name":r_name,"page":page,"b_index":b_index},
+			data : {"r_index":r_index,"page":page,"b_index":b_index},
 			dataType : 'text',
 			async: false,
 			success : function(data) {
@@ -189,16 +188,14 @@ var getList=function(page){
 		page=parseInt($('#startPage').val())-1;
 	}
 	
-	var r_name = $('#r_name').val();
 	var b_index = $('#b_index').val();
 	var user_nickname=$('#loginUser_nickname').val();
 	$
 			.ajax({
-				url : cp + '/board/reply_list.bo',
+				url : cp+'/board/'+$('#r_path').val()+'/reply_list.bo',
 				type : 'post',
 				data : {
 					"page" : page,
-					"r_name" : r_name,
 					"b_index" : b_index
 				},
 				dataType : 'json',

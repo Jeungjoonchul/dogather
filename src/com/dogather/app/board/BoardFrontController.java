@@ -29,6 +29,14 @@ public class BoardFrontController extends HttpServlet{
 		String contextPath = req.getContextPath(); // ????(module명)
 		String command = requestURI.substring(contextPath.length()); // /board/boardmain.do
 		System.out.println(command);
+		String b_name="";
+		String r_name="";
+		if(!command.contains("Upload")) {
+			b_name="t_"+command.substring(7,command.lastIndexOf("/"));
+			System.out.println("게시판 : "+b_name);
+			r_name = b_name.substring(0, 3)+"b_reply";
+			System.out.println("댓글 : "+r_name);
+		}
 		
 		ActionTo transfer = null;
 		switch(command) {
@@ -43,65 +51,128 @@ public class BoardFrontController extends HttpServlet{
 				e.printStackTrace();
 			}
 			break;
-
+		
 		case "/board/free_board/post_list.bo":
 			try {
-				transfer=new FreeBoardListAction().execute(req,resp);
+				transfer=new BoardListAction().execute(req,resp,b_name,r_name);
 			} catch (Exception e) {
 				System.out.println(command+" : "+e);
 				e.printStackTrace();
 			}
 			break;
+		
+//			case "/board/free_board/post_list.bo":
+//			try {
+//				transfer=new FreeBoardListAction().execute(req,resp);
+//			} catch (Exception e) {
+//				System.out.println(command+" : "+e);
+//				e.printStackTrace();
+//			}
+//			break;
+			
+		case "/board/free_board/post_view.bo":
+			try {
+				transfer = new BoardViewAction().execute(req,resp,b_name,r_name);
+			} catch (Exception e) {
+				System.out.println(command+" : "+e);
+				e.printStackTrace();
+			}
+			break;
+
+//			case "/board/free_board/post_view.bo":
+//			try {
+//				transfer = new FreeBoardViewAction().execute(req,resp);
+//			} catch (Exception e) {
+//				System.out.println(command+" : "+e);
+//				e.printStackTrace();
+//			}
+//			break;
 			
 		case "/board/free_board/post_write.bo":
 			transfer = new ActionTo();
 			transfer.setRedirect(false);
-			transfer.setPath("/app/board/free_board/write.jsp");
+			b_name=b_name.substring(2);
+			transfer.setPath("/app/board/"+b_name+"/write.jsp");
 			break;
+			
+//		case "/board/free_board/post_write.bo":
+//			transfer = new ActionTo();
+//			transfer.setRedirect(false);
+//			transfer.setPath("/app/board/free_board/write.jsp");
+//			break;
+			
 		case "/board/free_board/post_write_ok.bo":
 			try {
-				transfer = new FreeBoardWriteOkAction().execute(req,resp);
-			} catch (Exception e) {
-				System.out.println(command+" : "+e);
-				e.printStackTrace();
-			}
-			break;
-		case "/board/free_board/post_view.bo":
-			try {
-				transfer = new FreeBoardViewAction().execute(req,resp);
-			} catch (Exception e) {
-				System.out.println(command+" : "+e);
-				e.printStackTrace();
-			}
-			break;
-		case "/board/free_board/post_delete.bo":
-			try {
-				transfer = new FreeBoardDeleteOkAction().execute(req,resp);
-			} catch (Exception e) {
-				System.out.println(command+" : "+e);
-				e.printStackTrace();
-			}
-			break;
-		case "/board/free_board/post_update.bo":
-			try {
-				transfer = new FreeBoardUpdateAction().execute(req,resp);
-			} catch (Exception e) {
-				System.out.println(command+" : "+e);
-				e.printStackTrace();
-			}
-			break;
-		case "/board/free_board/post_update_ok.bo":
-			try {
-				transfer=new FreeBoardUpdateOkAction().execute(req,resp);
+				transfer = new BoardWriteOkAction().execute(req,resp,b_name,r_name);
 			} catch (Exception e) {
 				System.out.println(command+" : "+e);
 				e.printStackTrace();
 			}
 			break;
 			
-		case "/board/reply_list.bo":
+//		case "/board/free_board/post_write_ok.bo":
+//			try {
+//				transfer = new FreeBoardWriteOkAction().execute(req,resp);
+//			} catch (Exception e) {
+//				System.out.println(command+" : "+e);
+//				e.printStackTrace();
+//			}
+//			break;
+		case "/board/free_board/post_delete.bo":
 			try {
-				transfer=new ReplyListAction().execute(req, resp);
+				transfer = new BoardDeleteOkAction().execute(req,resp,b_name,r_name);
+			} catch (Exception e) {
+				System.out.println(command+" : "+e);
+				e.printStackTrace();
+			}
+			break;
+//		case "/board/free_board/post_delete.bo":
+//			try {
+//				transfer = new FreeBoardDeleteOkAction().execute(req,resp);
+//			} catch (Exception e) {
+//				System.out.println(command+" : "+e);
+//				e.printStackTrace();
+//			}
+//			break;
+		case "/board/free_board/post_update.bo":
+			try {
+				transfer = new BoardUpdateAction().execute(req,resp,b_name,r_name);
+			} catch (Exception e) {
+				System.out.println(command+" : "+e);
+				e.printStackTrace();
+			}
+			break;
+			
+//		case "/board/free_board/post_update.bo":
+//			try {
+//				transfer = new FreeBoardUpdateAction().execute(req,resp);
+//			} catch (Exception e) {
+//				System.out.println(command+" : "+e);
+//				e.printStackTrace();
+//			}
+//			break;
+			
+		case "/board/free_board/post_update_ok.bo":
+			try {
+				transfer=new BoardUpdateOkAction().execute(req,resp,b_name,r_name);
+			} catch (Exception e) {
+				System.out.println(command+" : "+e);
+				e.printStackTrace();
+			}
+			break;
+			
+//		case "/board/free_board/post_update_ok.bo":
+//			try {
+//				transfer=new FreeBoardUpdateOkAction().execute(req,resp);
+//			} catch (Exception e) {
+//				System.out.println(command+" : "+e);
+//				e.printStackTrace();
+//			}
+//			break;
+			
+		case "/board/free_board/reply_list.bo":
+			try {
+				transfer=new ReplyListAction().execute(req, resp,b_name,r_name);
 			} catch (ServletException e) {
 				System.out.println(command+" : "+e);
 				e.printStackTrace();
@@ -111,25 +182,25 @@ public class BoardFrontController extends HttpServlet{
 			}
 			break;
 			
-		case "/board/reply_on.bo":
+		case "/board/free_board/reply_on.bo":
 			try {
-				transfer= new ReplyOnAction().execute(req,resp);
+				transfer= new ReplyOnAction().execute(req,resp,b_name,r_name);
 			} catch (Exception e) {
 				System.out.println(command+" : "+e);
 				e.printStackTrace();
 			}
 			break;
-		case "/board/reply_update.bo":
+		case "/board/free_board/reply_update.bo":
 			try {
-				transfer=new ReplyUpdateAction().execute(req,resp);
+				transfer=new ReplyUpdateAction().execute(req,resp,b_name,r_name);
 			} catch (Exception e) {
 				System.out.println(command+" : "+e);
 				e.printStackTrace();
 			}
 			break;
-		case "/board/reply_delete.bo":
+		case "/board/free_board/reply_delete.bo":
 			try {
-				transfer=new ReplyDeleteAction().execute(req,resp);
+				transfer=new ReplyDeleteAction().execute(req,resp,b_name,r_name);
 			} catch (Exception e) {
 				System.out.println(command+" : "+e);
 				e.printStackTrace();

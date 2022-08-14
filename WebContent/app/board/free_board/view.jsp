@@ -161,7 +161,7 @@
         <div id="reply_write_area">
           <form name="reply_write" id="reply_write">
             <input type="hidden" name="b_index" id="b_index" value="${fb.b_index }"/>
-            <input type="hidden" id="r_name" name="r_name" value="t_fb_reply" />
+            <input type="hidden" id="r_path" name="r_path" value="free_board" />
             <input type="hidden" id="page" value="${page}">
             <div id="reply_write_input">
             <c:choose>
