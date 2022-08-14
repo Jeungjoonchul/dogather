@@ -40,7 +40,7 @@ public class BoardFrontController extends HttpServlet{
 		
 		ActionTo transfer = null;
 		switch(command) {
-
+		//image 임시 업로드
 		case "/board/board_imageUpload.bo":
 			try {
 				transfer=new BoardImageUploadAction().execute(req, resp);
@@ -51,7 +51,8 @@ public class BoardFrontController extends HttpServlet{
 				e.printStackTrace();
 			}
 			break;
-		
+////////////////////////////////////////////////////////////////////////////////////
+		//자유 게시판
 		case "/board/free_board/post_list.bo":
 			try {
 				transfer=new BoardListAction().execute(req,resp,b_name,r_name);
@@ -60,16 +61,7 @@ public class BoardFrontController extends HttpServlet{
 				e.printStackTrace();
 			}
 			break;
-		
-//			case "/board/free_board/post_list.bo":
-//			try {
-//				transfer=new FreeBoardListAction().execute(req,resp);
-//			} catch (Exception e) {
-//				System.out.println(command+" : "+e);
-//				e.printStackTrace();
-//			}
-//			break;
-			
+
 		case "/board/free_board/post_view.bo":
 			try {
 				transfer = new BoardViewAction().execute(req,resp,b_name,r_name);
@@ -78,29 +70,14 @@ public class BoardFrontController extends HttpServlet{
 				e.printStackTrace();
 			}
 			break;
-
-//			case "/board/free_board/post_view.bo":
-//			try {
-//				transfer = new FreeBoardViewAction().execute(req,resp);
-//			} catch (Exception e) {
-//				System.out.println(command+" : "+e);
-//				e.printStackTrace();
-//			}
-//			break;
-			
+	
 		case "/board/free_board/post_write.bo":
 			transfer = new ActionTo();
 			transfer.setRedirect(false);
 			b_name=b_name.substring(2);
 			transfer.setPath("/app/board/"+b_name+"/write.jsp");
 			break;
-			
-//		case "/board/free_board/post_write.bo":
-//			transfer = new ActionTo();
-//			transfer.setRedirect(false);
-//			transfer.setPath("/app/board/free_board/write.jsp");
-//			break;
-			
+
 		case "/board/free_board/post_write_ok.bo":
 			try {
 				transfer = new BoardWriteOkAction().execute(req,resp,b_name,r_name);
@@ -110,14 +87,6 @@ public class BoardFrontController extends HttpServlet{
 			}
 			break;
 			
-//		case "/board/free_board/post_write_ok.bo":
-//			try {
-//				transfer = new FreeBoardWriteOkAction().execute(req,resp);
-//			} catch (Exception e) {
-//				System.out.println(command+" : "+e);
-//				e.printStackTrace();
-//			}
-//			break;
 		case "/board/free_board/post_delete.bo":
 			try {
 				transfer = new BoardDeleteOkAction().execute(req,resp,b_name,r_name);
@@ -126,14 +95,7 @@ public class BoardFrontController extends HttpServlet{
 				e.printStackTrace();
 			}
 			break;
-//		case "/board/free_board/post_delete.bo":
-//			try {
-//				transfer = new FreeBoardDeleteOkAction().execute(req,resp);
-//			} catch (Exception e) {
-//				System.out.println(command+" : "+e);
-//				e.printStackTrace();
-//			}
-//			break;
+
 		case "/board/free_board/post_update.bo":
 			try {
 				transfer = new BoardUpdateAction().execute(req,resp,b_name,r_name);
@@ -142,16 +104,7 @@ public class BoardFrontController extends HttpServlet{
 				e.printStackTrace();
 			}
 			break;
-			
-//		case "/board/free_board/post_update.bo":
-//			try {
-//				transfer = new FreeBoardUpdateAction().execute(req,resp);
-//			} catch (Exception e) {
-//				System.out.println(command+" : "+e);
-//				e.printStackTrace();
-//			}
-//			break;
-			
+						
 		case "/board/free_board/post_update_ok.bo":
 			try {
 				transfer=new BoardUpdateOkAction().execute(req,resp,b_name,r_name);
@@ -160,15 +113,6 @@ public class BoardFrontController extends HttpServlet{
 				e.printStackTrace();
 			}
 			break;
-			
-//		case "/board/free_board/post_update_ok.bo":
-//			try {
-//				transfer=new FreeBoardUpdateOkAction().execute(req,resp);
-//			} catch (Exception e) {
-//				System.out.println(command+" : "+e);
-//				e.printStackTrace();
-//			}
-//			break;
 			
 		case "/board/free_board/reply_list.bo":
 			try {
@@ -206,6 +150,107 @@ public class BoardFrontController extends HttpServlet{
 				e.printStackTrace();
 			}
 			break;
+//////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////
+			//이벤트 게시판
+		case "/board/event_board/post_list.bo":
+			try {
+				transfer=new BoardListAction().execute(req,resp,b_name,r_name);
+			} catch (Exception e) {
+				System.out.println(command+" : "+e);
+				e.printStackTrace();
+			}
+			break;
+
+		case "/board/event_board/post_view.bo":
+			try {
+				transfer = new BoardViewAction().execute(req,resp,b_name,r_name);
+			} catch (Exception e) {
+				System.out.println(command+" : "+e);
+				e.printStackTrace();
+			}
+			break;
+	
+		case "/board/event_board/post_write.bo":
+			transfer = new ActionTo();
+			transfer.setRedirect(false);
+			b_name=b_name.substring(2);
+			transfer.setPath("/app/board/"+b_name+"/write.jsp");
+			break;
+
+		case "/board/event_board/post_write_ok.bo":
+			try {
+				transfer = new BoardWriteOkAction().execute(req,resp,b_name,r_name);
+			} catch (Exception e) {
+				System.out.println(command+" : "+e);
+				e.printStackTrace();
+			}
+			break;
+			
+		case "/board/event_board/post_delete.bo":
+			try {
+				transfer = new BoardDeleteOkAction().execute(req,resp,b_name,r_name);
+			} catch (Exception e) {
+				System.out.println(command+" : "+e);
+				e.printStackTrace();
+			}
+			break;
+
+		case "/board/event_board/post_update.bo":
+			try {
+				transfer = new BoardUpdateAction().execute(req,resp,b_name,r_name);
+			} catch (Exception e) {
+				System.out.println(command+" : "+e);
+				e.printStackTrace();
+			}
+			break;
+						
+		case "/board/event_board/post_update_ok.bo":
+			try {
+				transfer=new BoardUpdateOkAction().execute(req,resp,b_name,r_name);
+			} catch (Exception e) {
+				System.out.println(command+" : "+e);
+				e.printStackTrace();
+			}
+			break;
+			
+		case "/board/event_board/reply_list.bo":
+			try {
+				transfer=new ReplyListAction().execute(req, resp,b_name,r_name);
+			} catch (ServletException e) {
+				System.out.println(command+" : "+e);
+				e.printStackTrace();
+			} catch (IOException e) {
+				System.out.println(command+" : "+e);
+				e.printStackTrace();
+			}
+			break;
+			
+		case "/board/event_board/reply_on.bo":
+			try {
+				transfer= new ReplyOnAction().execute(req,resp,b_name,r_name);
+			} catch (Exception e) {
+				System.out.println(command+" : "+e);
+				e.printStackTrace();
+			}
+			break;
+		case "/board/event_board/reply_update.bo":
+			try {
+				transfer=new ReplyUpdateAction().execute(req,resp,b_name,r_name);
+			} catch (Exception e) {
+				System.out.println(command+" : "+e);
+				e.printStackTrace();
+			}
+			break;
+		case "/board/event_board/reply_delete.bo":
+			try {
+				transfer=new ReplyDeleteAction().execute(req,resp,b_name,r_name);
+			} catch (Exception e) {
+				System.out.println(command+" : "+e);
+				e.printStackTrace();
+			}
+			break;
+////////////////////////////////////////////////////////////////////////////////////
 		}
 		
 		

@@ -3,7 +3,14 @@
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Board">
-	<!-- 전체 게시글 개수 -->
+	<insert id="postOn" parameterType="boardDTO">
+		insert into
+		${b_name}(user_index, b_title, b_contents, b_files)
+		values(#{user_index}, #{b_title}, #{b_contents},#{b_files})
+	</insert>
+	
+	
+	
 	<select id="getBoardCnt" parameterType="hashmap"
 		resultType="_int">
 		select count(*) 
@@ -13,6 +20,7 @@
 		where b.b_inactive=0 
 		and(b.b_title like('%${keyword}%') or b.b_contents like('%${keyword}%') or u.user_nickname like('%${keyword}%'))
 	</select>
+	
 	<select id="getBoard" parameterType="hashmap"
 		resultType="BoardDTO">
 		select
@@ -39,15 +47,6 @@
 		limit #{startRow}, #{pageSize}
 	</select>
 
-	<insert id="postOn" parameterType="boardDTO">
-		insert into
-		${b_name}(user_index, b_title, b_contents, b_files)
-		values(#{user_index}, #{b_title}, #{b_contents},#{b_files})
-	</insert>
-	<delete id="postOff" parameterType="hashmap">
-		update ${b_name} set b_inactive=true,b_update_date=now() 
-		where b_index=#{b_index}
-	</delete>
 	<select id="getPost" parameterType="hashmap"
 		resultType="BoardDTO">
 		select b.b_index,b.b_reg_date,b.b_update_date,b.b_subject,b.b_title,b.b_contents,b.b_hits,b.b_like_user_index,b.b_inactive,b.b_files,u.user_index,u.user_nickname, r.b_reply_cnt 
@@ -66,6 +65,12 @@
 		where b_inactive=0 order by 1 desc limit 0,6
 	</select>
 	
+	<select id="getLastIndexWithUserIndex" parameterType="hashmap" resultType="_int">
+		select b_index from ${b_name} where user_index=#{user_index} order by b_reg_date desc limit 0,1
+	</select>
+	
+	
+	
 	<update id="updateHits" parameterType="hashmap">
 		update ${b_name} 
 		set b_hits=b_hits+1 
@@ -77,4 +82,11 @@
 		set b_update_date=now(), b_subject=#{b_subject}, b_title=#{b_title},b_contents=#{b_contents},b_files=#{b_files} 
 		where b_index=#{b_index}
 	</update>
+	
+	
+	
+	<delete id="postOff" parameterType="hashmap">
+		update ${b_name} set b_inactive=true,b_update_date=now() 
+		where b_index=#{b_index}
+	</delete>
 </mapper>

@@ -79,6 +79,8 @@
 				</table>
 				<textarea name="orgName" id="orgName" style="display: none;"></textarea>
 				<textarea name="sysName" id="sysName" style="display: none;"></textarea>
+				<input type="hidden" id="page" name="page" value="${param.page}"/>
+				<input type="hidden" id="keyword" name="keyword" value="${param.keyword}"/>
 			</form>
 		</div>
 		</div>

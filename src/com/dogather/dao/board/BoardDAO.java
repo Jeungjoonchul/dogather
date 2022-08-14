@@ -77,4 +77,11 @@ public class BoardDAO {
 		public boolean updatePost(BoardDTO post) {
 			return sqlSession.update("Board.updatePost", post)==1;
 		}
+
+		public int getLastIndexWithUserIndex(String b_name, int user_index) {
+			HashMap<String, Object> datas = new HashMap<String, Object>();
+			datas.put("b_name",b_name);
+			datas.put("user_index",user_index);
+			return sqlSession.selectOne("Board.getLastIndexWithUserIndex",datas);
+		}
 }

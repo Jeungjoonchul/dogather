@@ -24,6 +24,10 @@ public class BoardWriteOkAction implements Action {
 		BoardDTO newPost = new BoardDTO();
 		BoardDAO bdao = new BoardDAO();
 
+		String page=req.getParameter("page");
+		String keyword=req.getParameter("keyword");
+
+		
 		newPost.setB_name(b_name);
 		String b_path = b_name.substring(2);
 
@@ -47,7 +51,7 @@ public class BoardWriteOkAction implements Action {
 		String[] sysNames = null;
 		String[] orgNames = null;
 
-		System.out.println("저장 파일명 : " + sysName+"("+sysName.length()+")");
+		System.out.println("저장 파일명 : " + sysName);
 		System.out.println("원본 파일명 : " + orgName);
 
 		// 제일 마지막 ',' 자르는 코드
@@ -102,14 +106,15 @@ public class BoardWriteOkAction implements Action {
 					}
 				}
 			}
+			int b_index = bdao.getLastIndexWithUserIndex(b_name,user_index);
 			System.out.println("게시글 db 등록 성공");
 			out.write("<script>");
 			out.write("alert('게시글이 등록되었습니다!');");
-
+			out.write("location.href='" + req.getContextPath() + "/board/"+b_path+"/post_view.bo?b_index="+b_index+"&page="+page+"&keyword="+keyword+"';");
 		} else {
 			out.write("<script>");
 			out.write("alert('게시글 등록에 실패했습니다');");
-			out.write("location.href='" + req.getContextPath() + "/board/"+b_path+"/post_list.bo?page=1';");
+			out.write("location.href='" + req.getContextPath() + "/board/"+b_path+"/post_list.bo?page="+page+"&keyword="+keyword+"';");
 		}
 		out.write("</script>");
 		out.close();
