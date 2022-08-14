@@ -25,12 +25,10 @@
   </head>
   <body>
     <div id="main">
-      <!-- 메뉴 -->
       <div id="head">
         <div>
           <p class="left">
             <a href="#">
-              <!-- <span>메인화면</span> -->
             </a>
           </p>
           <p class="center">
@@ -38,110 +36,8 @@
               <img src="${cp}/resources/images/dogather_logo.png" alt="" width="350px" />
             </a>
           </p>
-          <!-- <p class="right">
-            <a href="">
-              <span> 로그인 </span>
-            </a>
-            <a href="">
-              <span> 회원가입 </span>
-            </a>
-            <a href="">
-              <span> 고객센터 </span>
-            </a>
-          </p> -->
         </div>
       </div>
-      <!-- <div id="body">
-        <div class="category">
-          <ul class="menubar">
-            <li>
-              <a href="#">
-                <span> 서비스소개 </span>
-              </a>
-              <ul class="submenu">
-                <li>
-                  <a href="">
-                    <span class="span">회사 소개</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="">
-                    <span class="span">이용 방법</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="">
-                    <span class="span">인재 채용</span>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a href="#">
-                <span> 두게더 </span>
-              </a>
-              <ul class="submenu">
-                <li>
-                  <a href="">
-                    <span class="span">진행 중 두게더</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="">
-                    <span class="span">종료된 두게더</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="">
-                    <span class="span">인증/후기 게시판</span>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a href="#">
-                <span> 커뮤니티 </span>
-              </a>
-              <ul class="submenu">
-                <li>
-                  <a href="">
-                    <span class="span">자유게시판</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="">
-                    <span class="span">정보게시판</span>
-                  </a>
-                </li>
-                <li>
-                  <span>&nbsp</span>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a href="#">
-                <span> 이벤트 </span>
-              </a>
-              <ul class="submenu">
-                <li>
-                  <a href="">
-                    <span class="span">콜라보레이션</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="">
-                    <span class="span">이벤트</span>
-                  </a>
-                </li>
-                <li>
-                  <span>&nbsp</span>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </div> -->
-      <!-- 메뉴바 끝 -->
       <!-- 로그인 -->
       <div id="login_container">
         <div id="login_area">
@@ -160,7 +56,7 @@
                 </c:choose>
               </div>
               <div class="userpw_area">
-                <input type="password" name="user_password" id="user_password" placeholder="비밀번호" />
+                <input type="password" name="user_password" id="user_password" placeholder="비밀번호" maxlength="24"/>
               </div>
               <div>
               	<span id="login_status">&nbsp;</span>

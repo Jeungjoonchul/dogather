@@ -70,16 +70,7 @@
 					</div>
 					<form name="joinForm" method="post" action="${cp}/user/join_ok.us" onsubmit="return sendit()">
 						<div id="join2" style="display: none">
-							<!--         <textarea name="" id="" cols="30" rows="10" readonly></textarea>
-        <label><input type="checkbox" id="injeong1" name="injeong1">
-        개인정보 수집 및 이용</label>
-        <label><input type="checkbox" id="injeong2" name="injeong2">
-        전자금융서비스 이용약관</label>
-        <BR>
-        <input type="button" value="Next" onclick="next1()">
-        <input type="button" value="Back" onclick="back1()">
-      
-       -->
+	
 							<c:forEach var="terms" items="${terms_list}">
 
 								<div>
