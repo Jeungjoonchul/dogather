@@ -18,6 +18,7 @@
     />
     <link rel="shortcut icon" href="${cp}/resources/images/favicon.png" />
 
+   <!--  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script> -->
    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
@@ -37,38 +38,41 @@
 		<%@include file="../../../header.jsp"%>
 		<main>
 		<div id="main">
+		<div id="post_write_container">
+		<div id="post_write_title">
+			<h2>새 글 작성하기</h2>
+		</div>
 			<form method="post" action="${cp}/board/free_board/post_write_ok.bo"
+		
 				id="post_editor" name="post_editor">
 				<table class="post_write">
 				<tbody>
-					<tr>
-						<th>제목</th>
-						<td><input type="text" name="b_title" id="b_title"></td>
-					</tr>
-					<tr>
-						<th>작성자</th>
-						<td><input type="text" name="user_id"
-							value="${loginUser.user_nickname }" readonly></td>
-					</tr>
-					<tr>
-					<th>주제</th>
-					<td>
+					<tr id="post_title">
+						<td>
 						<select name="b_subject">
 						<option value="잡담">잡담</option>
 						<option value="유머">유머</option>
 						<option value="기타">기타</option>
 						</select>
 					</td>
+						<td><input type="text" name="b_title" id="b_title" placeholder="제목을 입력해주세요"></td>
 					</tr>
-					<tr id="editor">
-						<td colspan="2"><textarea id="summernote" name="b_contents" class="yui3-cssreset"></textarea>
-						</td>
+					<tr style="display: none;">
+						<th>작성자</th>
+						<td><input type="text" name="user_id" 
+							value="${loginUser.user_nickname }" readonly></td>
 					</tr>
 					<tr>
+					</tr>
+					<tr id="editor">
+						<td colspan="2"><textarea id="summernote" name="b_contents"></textarea>
+						</td>
+					</tr>
+					<tr id="button_a">
 						<td colspan="2">
 						<a href=javascript:postOn()>등록하기</a>
 						<a
-							href="${cp }/board/free_board/post_list.bo?page=${param.page}">목록</a>
+							href="${cp }/board/free_board/post_list.bo?page=${param.page}&keyword=${param.keyword}">목록</a>
 						</td>
 					</tr>
 				</tbody>
@@ -77,16 +81,12 @@
 				<textarea name="sysName" id="sysName" style="display: none;"></textarea>
 			</form>
 		</div>
+		</div>
 		</main>
 		
 		<%@include file="../../../footer.jsp"%>
 </body>
 <script src="${cp }/resources/js/summernote.js"></script>
 <script src="${cp}/resources/js/board.js"></script>
-<script>
-/* $(document).ready(function(){
-	$('#summernote').val('${fn:replace(productDetail.product_content,"\'","\\'")}');
-	$('#summernote').summernote(setting);
-}); */
-</script>
+
 </html>

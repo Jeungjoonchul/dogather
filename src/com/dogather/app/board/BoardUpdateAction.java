@@ -22,11 +22,11 @@ public class BoardUpdateAction implements Action {
 		String keyword = req.getParameter("keyword");
 		
 		BoardDAO bdao = new BoardDAO();
-		BoardDTO fb = bdao.getPost(b_index, b_name,r_name);
+		BoardDTO b = bdao.getPost(b_index, b_name,r_name);
 		
 		req.setAttribute("page", page);
 		req.setAttribute("keyword", keyword);
-		req.setAttribute("fb", fb);
+		req.setAttribute("b", b);
 		
 		ActionTo transfer = new ActionTo();
 		transfer.setRedirect(false);

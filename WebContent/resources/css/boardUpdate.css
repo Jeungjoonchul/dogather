@@ -6,10 +6,11 @@
 text-align:left;
 }
 
-.post_write{
+.post_update{
+text-align:center;
 	margin: 0 auto;
 }
-.post_write>tbody>tr:last-child>td {
+.post_update>tbody>tr:last-child>td {
 	text-align: right;
 }
 #post_title select {
@@ -42,7 +43,7 @@ display: inline-block;
 #button_a a:hover{
 background-color: #8757de;
 }
-#post_write_container{
+#post_update_container{
 border: solid 1px #eee;
 border-top: 2px solid #621ae5;
 width:1100px;
@@ -50,7 +51,7 @@ width:1100px;
 margin: 0 auto;
 padding: 10px 0;
 }
-#post_write_title {
+#post_update_title {
 	margin: 0 auto;
 	width:90%;
 	color:#141414;

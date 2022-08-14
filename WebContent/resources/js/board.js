@@ -1,7 +1,8 @@
 //게시글 작성 시 로그인 검사
 function loginCheck(loginUser, page) {
+	var keyword=$('#post_query_keyword').val();
 	if (loginUser) {
-		location.href = cp + "/board/free_board/post_write.bo?page=" + page;
+		location.href = cp + "/board/free_board/post_write.bo?page=" + page+"&keyword="+keyword;
 	} else {
 		alert('로그인 후 이용 가능합니다');
 		location.href = cp + "/user/login.us"

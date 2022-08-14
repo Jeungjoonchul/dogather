@@ -109,10 +109,8 @@ public class BoardWriteOkAction implements Action {
 		} else {
 			out.write("<script>");
 			out.write("alert('게시글 등록에 실패했습니다');");
-			
-			
+			out.write("location.href='" + req.getContextPath() + "/board/"+b_path+"/post_list.bo?page=1';");
 		}
-		out.write("location.href='" + req.getContextPath() + "/board/"+b_path+"/post_list.bo?page=1';");
 		out.write("</script>");
 		out.close();
 		return null;
