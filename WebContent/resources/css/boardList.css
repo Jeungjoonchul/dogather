@@ -163,6 +163,11 @@ table tbody tr {
 .list > tbody > tr > td a:hover {
   color: #f94b4b;
 }
+
+.page-btns{
+	height: 40px;
+}
+
 .writing {
   margin-top: 10px;
   border: 0px;

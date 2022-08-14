@@ -22,7 +22,7 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
 
-<title>DoGather - 회원가입</title>
+<title>Doːgather</title>
 <link rel="stylesheet" href="${cp }/resources/css/join.css" />
 <script
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>

@@ -20,7 +20,7 @@
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
-    <title>DoGather</title>
+    <title>Doːgather</title>
     <link rel="stylesheet" href="${cp}/resources/css/login.css" />
   </head>
   <body>

@@ -27,7 +27,7 @@
 	src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 <script src="${cp }/resources/js/summernote.js"></script>
 
-<title>수정하기</title>
+<title>Doːgather</title>
 <script src="${cp}/resources/js/board.js"></script>
 <link rel="stylesheet" href="${cp }/resources/css/include.css" />
 <link rel="stylesheet" href="${cp }/resources/css/boardUpdate.css" />

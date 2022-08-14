@@ -24,14 +24,14 @@ public class BoardViewAction implements Action {
 		
 		//게시글 가져오기
 		BoardDAO bdao = new BoardDAO();
-		BoardDTO fb = bdao.getPost(b_index, b_name,r_name);
+		BoardDTO b = bdao.getPost(b_index, b_name,r_name);
 		
 		//조회수
 		UserDTO loginUser = (UserDTO) req.getSession().getAttribute("loginUser");
 		int user_index = loginUser != null ? loginUser.getUser_index() : 0;
 		if (user_index != 0) {
-			if (fb.getUser_index() != user_index) {
-				fb.setB_hits(fb.getB_hits() + 1);
+			if (b.getUser_index() != user_index) {
+				b.setB_hits(b.getB_hits() + 1);
 				bdao.updateHits(b_index, b_name);
 
 			}
@@ -41,10 +41,10 @@ public class BoardViewAction implements Action {
 		
 		ReplyDAO rdao = new ReplyDAO();
 		ReplyPaging r = new ReplyPaging("", rdao.getReplyCntOnPost(r_name,b_index));
-		List<ReplyDTO> fb_replies = rdao.getReplies(r.getStartRow(),r.getPageSize(),r_name,b_index);
+		List<ReplyDTO> b_replies = rdao.getReplies(r.getStartRow(),r.getPageSize(),r_name,b_index);
 		
-		req.setAttribute("fb", fb);
-		req.setAttribute("fb_replies", fb_replies);
+		req.setAttribute("b", b);
+		req.setAttribute("b_replies", b_replies);
 		req.setAttribute("totalPage", r.getTotalPage());
 		req.setAttribute("totalCnt", r.getTotalCnt());
 		req.setAttribute("startPage", r.getStartPage());

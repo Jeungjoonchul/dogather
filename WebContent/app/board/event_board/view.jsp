@@ -73,7 +73,7 @@
             <div id="summernote">${b.b_contents }</div>
           </div>
           <div id="like_up"><button>좋아요 up</button></div>
-          <div id="post_button">
+          <div id="post_button" style="display: none;">
             <c:if test="${loginUser.user_nickname==b.user_nickname }">
               <a
                 href="${cp}/board/free_board/post_update.bo?b_index=${b.b_index}&page=${param.page}&keyword=${param.keyword }"

@@ -69,7 +69,7 @@
 					<ul class="submenu">
 						<li><a href="#"> <span class="span">콜라보레이션</span>
 						</a></li>
-						<li><a href="#"> <span class="span">이벤트</span>
+						<li><a href="${cp }/board/event_board/post_list.bo"> <span class="span">이벤트</span>
 						</a></li>
 						<li><span>&nbsp;</span></li>
 					</ul></li>
