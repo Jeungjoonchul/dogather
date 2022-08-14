@@ -191,7 +191,7 @@
               <ul>
               <c:choose>
               <c:when test="${eb_list.size()>0 and eb_list!= null }">
-              <c:forEach var="fb_list" items="${eb_list}">
+              <c:forEach var="eb_list" items="${eb_list}">
               <fmt:parseDate var="date" value="${eb_list.b_reg_date }" pattern="yyyy-MM-dd HH:mm:ss"/>
               <c:set var="date"><fmt:formatDate value="${date }" pattern="yyyyMMdd"/></c:set>
               	<li>

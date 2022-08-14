@@ -5,7 +5,8 @@ main{
 
 #main {
   width: 80%;
-  margin: 0 auto
+  margin: 0 auto;
+  padding:20px;
 }
 
 /* class 추가 */
@@ -206,13 +207,16 @@ li {
 }
 #event_community .border ul li .icon {
   color: #006df3;
-  position: relative;
+
   top: -20px;
   left: -10px;
   text-align: left;
   font-size: 10px;
   font-weight: bold;
   width: 30%;
+}
+.new{
+	margin:0;
 }
 /* 후기 인증 게시판 리스트 */
 #review_border {
