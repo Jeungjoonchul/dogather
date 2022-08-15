@@ -18,25 +18,17 @@
 			location.replace("${cp}/user/login.us");
 		</script>
 	</c:if>
-	<!--
-	<form method="post" id="userInfor" name="userInforForm" action="${cp}/user/userInforAction.us">
-		<input type="hidden" name="user_email" value="${loginUser.user_email}"></input>
+	
+<!--<form method="post" id="userInfor" name="userInforForm" action="${cp}/user/userInforAction.us?userInfor=${loginUser.user_email}">
+		<input type="hidden" name="user_email"></input>
 	</form>
 	<script type="text/javascript">
 	this.document.getElementById("userInfor").submit();
 	</script>
-	 -->
-	<script>
-	$(function(){
-		const xhr = new XMLHtppRequest();
-			xhr.onreadystatechange = fuction(){
-			 
-			}
-		xhr.open("Get | Post", "{cp}경로?userid="+userid.value,true);
-		xhr.send();
-	});
-	</script>
+-->	
 	<!-- 작업중 -->
+	${MyInfor_nickname}
+	${MyInfor_zipCode}
  	<div id="changeinfo_area" class="hidden">
     	<div>
         	<h2>기본정보 변경</h2>

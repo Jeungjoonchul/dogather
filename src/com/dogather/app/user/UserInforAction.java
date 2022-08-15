@@ -14,13 +14,13 @@ import com.dogather.action.ActionTo;
 import com.dogather.dao.user.UserDAO;
 import com.dogather.dto.user.UserDTO;
 
-public class UserImforAction implements Action {
+public class UserInforAction implements Action {
 
 	@Override
 	public ActionTo execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String user_id = req.getParameter("user_email");
-		
+		String user_id = req.getParameter("userInfor");
 		//DB에서 정보를 가져올 DAO
+		
 		UserDAO udao = new UserDAO();
 		UserDTO userInfor = new UserDTO();
 		
@@ -33,12 +33,10 @@ public class UserImforAction implements Action {
 		req.setAttribute("MyInfor_addressDefault", userInfor.getAddress_default());
 		req.setAttribute("MyInfor_addressDetail", userInfor.getAddress_detail());
 		req.setAttribute("MyInfor_addressExtra", userInfor.getAddress_extra());
-
 		
-		System.out.println("여기까지");
-//		ActionTo transfer = new ActionTo();
-//		transfer.setRedirect(false);
-//		transfer.setPath("/app/user/user_myPage_modifyMyImfor.jsp");
+		ActionTo transfer = new ActionTo();
+		transfer.setRedirect(false);
+		transfer.setPath("/app/user/user_myPage_modifyMyInfor.jsp");
 		
 
 //		userInfor.getUser_nickname();
@@ -53,6 +51,6 @@ public class UserImforAction implements Action {
 //		userInfor.getAddress_detail();
 //		userInfor.getAddress_extra();
 
-		return null;
+		return transfer;
 	}
 }

@@ -119,15 +119,16 @@ public class UserFrontController extends HttpServlet {
 			transfer.setRedirect(false);
 			break;
 			
-		case "/user_myPage_modifyMyImfor.us":
+		case "/user_transferInfor.us":
 			transfer = new ActionTo();
-			transfer.setPath("/app/user/user_myPage_modifyMyImfor.jsp");
+			transfer.setPath("/app/user/user_transferInfor.jsp");
 			transfer.setRedirect(false);
 			break;
+			
 		
 		case "/user/userInforAction.us":
 			try {
-				transfer = new UserImforAction().execute(req, resp);			
+				transfer=new UserInforAction().execute(req,resp);
 			} catch (Exception e) {
 				System.out.println(command+" : "+e);
 			}
