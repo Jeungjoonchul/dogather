@@ -29,11 +29,11 @@
 	<script>
 	$(function(){
 		const xhr = new XMLHtppRequest();
-		 xhr.onreadystatechange = fuction(){
+			xhr.onreadystatechange = fuction(){
 			 
-		 }
-		 xhr.open("Get | Post", "{cp}경로?userid="+userid.value,true);
-			xhr.send();
+			}
+		xhr.open("Get | Post", "{cp}경로?userid="+userid.value,true);
+		xhr.send();
 	});
 	</script>
 	<!-- 작업중 -->
