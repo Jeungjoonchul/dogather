@@ -3,10 +3,10 @@
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Board">
-	<insert id="postOn" parameterType="boardDTO">
+	<insert id="postOn" parameterType="BoardDTO">
 		insert into
-		${b_name}(user_index, b_title, b_contents, b_files)
-		values(#{user_index}, #{b_title}, #{b_contents},#{b_files})
+		${b_name}(user_index, b_title, b_contents, b_files,b_subject)
+		values(#{user_index}, #{b_title}, #{b_contents},#{b_files},#{b_subject})
 	</insert>
 	
 	

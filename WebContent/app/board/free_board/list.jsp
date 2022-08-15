@@ -37,6 +37,7 @@
 
 
 	<%@include file="../../../header.jsp"%>
+
 	<main>
 	<div id="main">
 
@@ -47,31 +48,31 @@
 					<span class="purple">자유</span><span> 게시판</span>
 				</div>
 				<div class="board_filter">
-				<select id="filter">
+				<select id="subject">
 					<c:choose>
-						<c:when test="${subject eq '유머'}">
-						<option class="filter_opt" value="">전체</option>
-						<option class="filter_opt" value="유머" selected>유머</option>
-						<option class="filter_opt" value="잡담">잡담</option>
-						<option class="filter_opt" value="기타">기타</option>
-						</c:when>
 						<c:when test="${subject eq '잡담'}">
-						<option class="filter_opt" value="">전체</option>
-						<option class="filter_opt" value="유머">유머</option>
-						<option class="filter_opt" value="잡담" selected>잡담</option>
-						<option class="filter_opt" value="기타">기타</option>
+						<option value="">전체</option>
+						<option value="잡담" selected>잡담</option>
+						<option value="유머">유머</option>
+						<option value="기타">기타</option>
+						</c:when>
+						<c:when test="${subject eq '유머'}">
+						<option value="">전체</option>
+						<option value="잡담">잡담</option>
+						<option value="유머" selected>유머</option>
+						<option value="기타">기타</option>
 						</c:when>
 						<c:when test="${subject eq '기타'}">
-						<option class="filter_opt" class="filter" value="">전체</option>
-						<option class="filter_opt" value="유머">유머</option>
-						<option class="filter_opt" value="잡담">잡담</option>
-						<option class="filter_opt" value="기타" selected>기타</option>
+						<option class="filter" value="">전체</option>
+						<option value="잡담">잡담</option>
+						<option value="유머">유머</option>
+						<option value="기타" selected>기타</option>
 						</c:when>
 						<c:otherwise>
-						<option class="filter_opt" value="" selected>전체</option>
-						<option class="filter_opt" value="유머">유머</option>
-						<option class="filter_opt" value="잡담">잡담</option>
-						<option class="filter_opt" value="기타">기타</option>
+						<option value="" selected>전체</option>
+						<option value="잡담">잡담</option>
+						<option value="유머">유머</option>
+						<option value="기타">기타</option>
 						</c:otherwise>
 					</c:choose>
 					</select>
@@ -142,7 +143,7 @@
 						</tr>
 					</table>
 					<div class="search_area">
-						<input type="search" id="post_query_keyword" value="${keyword==null||keyword==''? '':keyword }"/><input type="button" id="post_query_btn" value="검색" onclick="getPostListWithKeyword(${page});"/>
+						<input type="search" id="post_query_keyword" value="${keyword==null||keyword==''? '':keyword }"/><input type="button" id="post_query_btn" value="검색"/>
 						<input type="hidden" id="path" value="free_board"/>
 						<input type="hidden" id="page" value="${page }"/>
 					</div>

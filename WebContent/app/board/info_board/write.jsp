@@ -42,7 +42,7 @@
 		<div id="post_write_title">
 			<h2>새 글 작성하기</h2>
 		</div>
-			<form method="post" action="${cp}/board/free_board/post_write_ok.bo"
+			<form method="post" action="${cp}/board/info_board/post_write_ok.bo"
 		
 				id="post_editor" name="post_editor">
 				<table class="post_write">
@@ -51,26 +51,54 @@
 						<td>
 						<select name="b_subject">
 						<c:choose>
-							<c:when test="${param.subject eq '잡담' }">
-								<option value="잡담" selected>잡담</option>
-								<option value="유머">유머</option>
-								<option value="기타">기타</option>
-							</c:when>
-							<c:when test="${param.subject eq '유머' }">
-								<option value="잡담">잡담</option>
-								<option value="유머" selected>유머</option>
-								<option value="기타">기타</option>
-							</c:when>
-							<c:when test="${param.subject eq '기타' }">
-								<option value="잡담">잡담</option>
-								<option value="유머">유머</option>
-								<option value="기타" selected>기타</option>
-							</c:when>
-							<c:otherwise>
-								<option value="잡담">잡담</option>
-								<option value="유머">유머</option>
-								<option value="기타">기타</option>
-							</c:otherwise>
+						<c:when test="${subject eq '건강'}">
+						<option value="건강" selected>건강</option>
+						<option value="학습">학습</option>
+						<option value="교양">교양</option>
+						<option value="습관">습관</option>
+						<option value="경제">경제</option>
+						<option value="기타">기타</option>
+						</c:when>
+						<c:when test="${subject eq '학습'}">
+						<option value="건강">건강</option>
+						<option value="학습" selected>학습</option>
+						<option value="교양">교양</option>
+						<option value="습관">습관</option>
+						<option value="경제">경제</option>
+						<option value="기타">기타</option>
+						</c:when>
+						<c:when test="${subject eq '교양'}">
+						<option value="건강">건강</option>
+						<option value="학습">학습</option>
+						<option value="교양" selected>교양</option>
+						<option value="습관">습관</option>
+						<option value="경제">경제</option>
+						<option value="기타">기타</option>
+						</c:when>
+						<c:when test="${subject eq '습관'}">
+						<option value="건강">건강</option>
+						<option value="학습">학습</option>
+						<option value="교양">교양</option>
+						<option value="습관" selected>습관</option>
+						<option value="경제">경제</option>
+						<option value="기타">기타</option>
+						</c:when>
+						<c:when test="${subject eq '경제'}">
+						<option value="건강">건강</option>
+						<option value="학습">학습</option>
+						<option value="교양">교양</option>
+						<option value="습관">습관</option>
+						<option value="경제" selected>경제</option>
+						<option value="기타">기타</option>
+						</c:when>
+						<c:otherwise>
+						<option value="건강">건강</option>
+						<option value="학습">학습</option>
+						<option value="교양">교양</option>
+						<option value="습관">습관</option>
+						<option value="경제">경제</option>
+						<option value="기타">기타</option>
+						</c:otherwise>
 						</c:choose>
 						</select>
 					</td>
@@ -91,7 +119,7 @@
 						<td colspan="2">
 						<a href=javascript:postCheck()>등록하기</a>
 						<a
-							href="${cp }/board/free_board/post_list.bo?page=${param.page}&keyword=${param.keyword}&subject=${param.subject}">목록</a>
+							href="${cp }/board/info_board/post_list.bo?page=${param.page}&keyword=${param.keyword}&subject=${param.subject}">목록</a>
 						</td>
 					</tr>
 				</tbody>

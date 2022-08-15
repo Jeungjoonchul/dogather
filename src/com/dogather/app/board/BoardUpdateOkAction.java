@@ -28,7 +28,7 @@ public class BoardUpdateOkAction implements Action {
 
 		String page = req.getParameter("page");
 		String keyword=req.getParameter("keyword");
-		
+		String subject=req.getParameter("subject");
 		int b_index = Integer.parseInt(req.getParameter("b_index"));
 		String b_title = req.getParameter("b_title");
 		String b_subject = req.getParameter("b_subject");
@@ -126,7 +126,7 @@ public class BoardUpdateOkAction implements Action {
 			if (bdao.updatePost(post)) {
 				// DB에 데이터 삽입 성공 시
 				// 실제로 저장할 파일만 분류
-				// 저장할 파일은 temp->upload/images/free_board 폴더로 이동
+				// 저장할 파일은 temp->upload/images/**_board 폴더로 이동
 				// 저장할 필요 없는 파일은 삭제
 				
 				
@@ -181,7 +181,7 @@ public class BoardUpdateOkAction implements Action {
 			out.print("alert('게시글이 수정에 실패했습니다');");
 		}
 		out.print("location.href='" + req.getContextPath() + "/board/"+b_path+"/post_view.bo?b_index=" + b_index
-				+ "&page=" + page + "&keyword="+keyword+"';");
+				+ "&page=" + page + "&keyword="+keyword+"&subject="+subject+"';");
 		out.print("</script>");
 		out.close();
 		return null;

@@ -45,25 +45,73 @@
 		<div id="boardcontainer">
 			<div id="boardmain">
 				<div class="board title">
-					<span class="purple">이벤트</span><span> 게시판</span>
+					<span class="purple">정보</span><span> 게시판</span>
 				</div>
 				<div class="board_filter">
 				<select id="subject">
 					<c:choose>
-						<c:when test="${subject eq '진행중'}">
+						<c:when test="${subject eq '건강'}">
 						<option value="">전체</option>
-						<option value="진행중" selected>진행중</option>
-						<option value="종료">종료</option>
+						<option value="건강" selected>건강</option>
+						<option value="학습">학습</option>
+						<option value="교양">교양</option>
+						<option value="습관">습관</option>
+						<option value="경제">경제</option>
+						<option value="기타">기타</option>
 						</c:when>
-						<c:when test="${subject eq '종료'}">
+						<c:when test="${subject eq '학습'}">
 						<option value="">전체</option>
-						<option value="진행중">진행중</option>
-						<option value="종료" selected>종료</option>
+						<option value="건강">건강</option>
+						<option value="학습" selected>학습</option>
+						<option value="교양">교양</option>
+						<option value="습관">습관</option>
+						<option value="경제">경제</option>
+						<option value="기타">기타</option>
+						</c:when>
+						<c:when test="${subject eq '교양'}">
+						<option value="">전체</option>
+						<option value="건강">건강</option>
+						<option value="학습">학습</option>
+						<option value="교양" selected>교양</option>
+						<option value="습관">습관</option>
+						<option value="경제">경제</option>
+						<option value="기타">기타</option>
+						</c:when>
+						<c:when test="${subject eq '습관'}">
+						<option value="">전체</option>
+						<option value="건강">건강</option>
+						<option value="학습">학습</option>
+						<option value="교양">교양</option>
+						<option value="습관" selected>습관</option>
+						<option value="경제">경제</option>
+						<option value="기타">기타</option>
+						</c:when>
+						<c:when test="${subject eq '경제'}">
+						<option value="">전체</option>
+						<option value="건강">건강</option>
+						<option value="학습">학습</option>
+						<option value="교양">교양</option>
+						<option value="습관">습관</option>
+						<option value="경제" selected>경제</option>
+						<option value="기타">기타</option>
+						</c:when>
+						<c:when test="${subject eq '기타'}">
+						<option value="">전체</option>
+						<option value="건강">건강</option>
+						<option value="학습">학습</option>
+						<option value="교양">교양</option>
+						<option value="습관">습관</option>
+						<option value="경제">경제</option>
+						<option value="기타" selected>기타</option>
 						</c:when>
 						<c:otherwise>
 						<option value="" selected>전체</option>
-						<option value="진행중">진행중</option>
-						<option value="종료">종료</option>
+						<option value="건강">건강</option>
+						<option value="학습">학습</option>
+						<option value="교양">교양</option>
+						<option value="습관">습관</option>
+						<option value="경제">경제</option>
+						<option value="기타">기타</option>
 						</c:otherwise>
 					</c:choose>
 					</select>
@@ -85,7 +133,7 @@
 										<tr>
 											<td>${list.b_index}</td>
 											<td><a
-												href="${cp}/board/event_board/post_view.bo?b_index=${list.b_index}&page=${page}&keyword=${keyword}&subject=${subject}"><span>[${list.b_subject}]${list.b_title}</span><span>[${list.b_reply_cnt }]</span></a></td>
+												href="${cp}/board/info_board/post_view.bo?b_index=${list.b_index}&page=${page}&keyword=${keyword}&subject=${subject}"><span>${list.b_title}</span><span>[${list.b_reply_cnt }]</span></a></td>
 											<td><a href="#">${list.user_nickname}</a></td>
 											<td><fmt:parseDate value="${list.b_reg_date}" pattern="yyyy-MM-dd HH:mm:ss" var="datetime" /> 
 											<c:set var="date"> <fmt:formatDate value="${datetime }" pattern="yyyy-MM-dd" /></c:set> 
@@ -109,7 +157,7 @@
 							<tr class="page-btns">
 								<td colspan="5">
 								<c:if test="${startPage!=1 }">
-										<a href="${cp }/board/event_board/post_list.bo?page=${startPage-1}&keyword=${keyword}&subject=${subject}">&lt;</a>
+										<a href="${cp }/board/info_board/post_list.bo?page=${startPage-1}&keyword=${keyword}&subject=${subject}">&lt;</a>
 									</c:if> 
 									<c:forEach begin="${startPage }" end="${endPage }" var="i">
 										<c:choose>
@@ -117,24 +165,25 @@
 												<span class="nowPage">${i }</span>
 											</c:when>
 											<c:otherwise>
-												<a href="${cp}/board/event_board/post_list.bo?page=${i}&keyword=${keyword}&subject=${subject}">${i}</a>
+												<a href="${cp}/board/info_board/post_list.bo?page=${i}&keyword=${keyword}&subject=${subject}">${i}</a>
 											</c:otherwise>
 										</c:choose>
 									</c:forEach> <c:if test="${endPage!=totalPage }">
 										<a
-											href="${cp }/board/event_board/post_list.bo?page=${endPage+1}&keyword=${keyword}&subject=${subject}">&gt;</a>
+											href="${cp }/board/info_board/post_list.bo?page=${endPage+1}&keyword=${keyword}&subject=${subject}">&gt;</a>
 									</c:if></td>
 							</tr>
 						</tfoot>
 					</table>
 					<table class="writing">
 						<tr>
-							<td>&nbsp;</td>
+							<td><a class="write"
+								href="javascript:loginCheck(${loginUser!=null?true:false})">글쓰기</a></td>
 						</tr>
 					</table>
 					<div class="search_area">
 						<input type="search" id="post_query_keyword" value="${keyword==null||keyword==''? '':keyword }"/><input type="button" id="post_query_btn" value="검색"/>
-						<input type="hidden" id="path" value="event_board"/>
+						<input type="hidden" id="path" value="info_board"/>
 						<input type="hidden" id="page" value="${page }"/>
 					</div>
 				</div>

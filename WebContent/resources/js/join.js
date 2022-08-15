@@ -394,52 +394,50 @@ function sendit() {
 }
 
 // 페이지 넘기기
-const btn1 = document.getElementById('join1');
-const btn2 = document.getElementById('join2');
-const btn3 = document.getElementById('join3');
-const joinForm = document.joinForm;
-const injeong1 = joinForm.user_terms_type1;
-const injeong2 = joinForm.user_terms_type2;
 
-function next() {
-	if (btn1.style.display = 'block') {
-		btn1.style.display = 'none'
-		btn2.style.display = 'block'
-		document.getElementById('join_step1').style.color = "#141414";
-		document.getElementById('join_step2').style.color = "blue";
+var join1=$('#join1');
+var join2=$('#join2');
+var join3=$('#join3');
+var term1 = $('#user_terms_type1');
+var term2 =$('#user_terms_type2');
+function next(){
+	if(join1.is(':visible')){
+		join2.fadeIn(1000);
+		join1.css('display','none');
+		$('#join_step1').css('color','#141414');
+		$('#join_step2').css('color','blue');
 	}
 }
-function next1() {
-	if (injeong1.checked & injeong2.checked) {
-		if (btn2.style.display = 'block') {
-			btn2.style.display = 'none';
-			btn3.style.display = 'block';
-			document.getElementById('join_step2').style.color = "#141414";
-			document.getElementById('join_step3').style.color = "blue";
 
+function next1(){
+	if(term1.is(":checked") && term2.is(":checked")){
+		if(join2.is(':visible')){
+			join3.fadeIn(2000);
+			join2.css('display','none');
+			$('#join_step2').css('color','#141414');
+			$('#join_step3').css('color','blue');
 		}
-	} else {
-		alert("약관에 동의해주세요");
+	}else{
+		alert("필수 약관에 동의해주세요");
 	}
-
 }
-function back() {
-	if (confirm("작성을 취소하시겠습니까?")) {
-		if (btn3.style.display = 'block') {
-			btn3.style.display = 'none';
-			btn1.style.display = 'block';
-			document.getElementById('join_step3').style.color = "#141414";
-			document.getElementById('join_step1').style.color = "blue";
+
+function back(){
+	if(confirm("작성을 취소하시겠습니까?")){
+		if(join3.is(":visible")){
+			join3.css('display','none');
+			join1.fadeIn(2000);
+			$('#join_step3').css('color','#141414');
+			$('#join_step1').css('color','blue');
 		}
 	}
 }
-function back1() {
-
-	if (btn2.style.display = 'block') {
-		btn2.style.display = 'none';
-		btn1.style.display = 'block';
-		document.getElementById('join_step2').style.color = "#141414";
-		document.getElementById('join_step1').style.color = "blue";
-	}
+function back1(){
+	
+		if(join2.is(":visible")){
+			join2.css('display','none');
+			join1.fadeIn(2000);
+			$('#join_step2').css('color','#141414');
+			$('#join_step1').css('color','blue');
+		}
 }
-

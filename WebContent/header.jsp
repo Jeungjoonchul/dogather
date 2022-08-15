@@ -60,7 +60,7 @@
 						<li><a href="${cp }/board/free_board/post_list.bo"> <span
 								class="span">자유게시판</span>
 						</a></li>
-						<li><a href="#"> <span class="span">정보게시판</span>
+						<li><a href="${cp }/board/info_board/post_list.bo"> <span class="span">정보게시판</span>
 						</a></li>
 						<li><span>&nbsp;</span></li>
 					</ul></li>

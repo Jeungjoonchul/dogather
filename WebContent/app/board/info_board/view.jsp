@@ -76,12 +76,12 @@
           <div id="post_button">
             <c:if test="${loginUser.user_nickname==b.user_nickname }">
               <a
-                href="${cp}/board/free_board/post_update.bo?b_index=${b.b_index}&page=${param.page}&keyword=${param.keyword }&subject=${param.subject}"
+                href="${cp}/board/info_board/post_update.bo?b_index=${b.b_index}&page=${param.page}&keyword=${param.keyword }&subject=${param.subject}"
                 >수정</a
               >
               <a href="javascript:delete_check(${b.b_index},${param.page },'${param.keyword }','${param.subject }');">삭제</a>
             </c:if>
-            <a href="${cp }/board/free_board/post_list.bo?page=${param.page}&keyword=${param.keyword }&subject=${param.subject}"
+            <a href="${cp }/board/info_board/post_list.bo?page=${param.page}&keyword=${param.keyword }&subject=${param.subject}"
               >목록</a
             >
           </div>
@@ -161,7 +161,7 @@
         <div id="reply_write_area">
           <form name="reply_write" id="reply_write">
             <input type="hidden" name="b_index" id="b_index" value="${b.b_index }"/>
-            <input type="hidden" id="path" name="path" value="free_board" />
+            <input type="hidden" id="path" name="path" value="info_board" />
             <input type="hidden" id="page" value="${page}">
             <div id="reply_write_input">
             <c:choose>

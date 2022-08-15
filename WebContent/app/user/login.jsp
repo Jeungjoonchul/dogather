@@ -51,7 +51,7 @@
                 		<input type="email" name="user_email" id="user_email" placeholder="이메일 주소 입력"/>
                 	</c:when>
                 	<c:otherwise>
-                		<input type="email" name="user_email" id="user_email" value="${param.user}"/>
+                		<input type="email" name="user_email" id="user_email" value="${param.user_email}"/>
                 	</c:otherwise>
                 </c:choose>
               </div>

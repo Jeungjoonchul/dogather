@@ -3,7 +3,7 @@
 function loginCheck(loginUser) {
 	var page=$('#page').val();
 	var keyword=$('#post_query_keyword').val();
-	var subject=$('#filter').val();
+	var subject=$('#subject').val();
 	if (loginUser) {
 		location.href = cp + "/board/"+$('#path').val()+"/post_write.bo?page=" + page+"&keyword="+keyword+"&subject="+subject;
 	} else {
@@ -13,7 +13,7 @@ function loginCheck(loginUser) {
 }
 
 //게시글 삭제
-function delete_check(b_index,page,keyword) {
+function delete_check(b_index,page,keyword,subject) {
 	var check = confirm('정말 삭제하시겠습니까?');
 	if (check) {
 		location.href = cp + "/board/"+$('#path').val()+"/post_delete.bo?b_index="+ b_index+"&page="+page+"&keyword="+keyword+"&subject="+subject;
@@ -23,15 +23,15 @@ function delete_check(b_index,page,keyword) {
 
 
 //게시글 필터
-$('.filter_list').on('click',function(){
+$('#subject').on('change',function(){
 	var page=$('#page').val();
 	var keyword=$('#post_query_keyword').val();
-	var subject=$('#filter').val();
+	var subject=$('#subject').val();
 	location.href = cp + "/board/"+$('#path').val()+"/post_list.bo?page="+page+"&keyword="+keyword+"&subject="+subject;
 });
 
 //게시글 작성 유효성 검사
-function postOn() {
+function postCheck() {
 
 	var title = $('#b_title');
 	var contents = $('#summernote');
@@ -50,13 +50,19 @@ function postOn() {
 }
 
 //게시글 검색
-function getPostListWithKeyword(){
+$('#post_query_btn').on('click',function(){
+	postQuery();
+});
+$('#post_query_keyword').on('keyup',function(key){
+	if(key.keyCode==13){
+		postQuery();
+	}
+});
+function postQuery(){
+	var subject= $('#subject').val();
 	var keyword = $('#post_query_keyword').val();
-
-	location.href=cp+'/board/'+$('#path').val()+'/post_list.bo?keyword='+keyword;
-	
-}
-
+	location.href=cp+'/board/'+$('#path').val()+'/post_list.bo?keyword='+keyword+'&subject='+subject;
+};
 
 //댓글 작성
 $(document).on('click','#reply_on',function(){

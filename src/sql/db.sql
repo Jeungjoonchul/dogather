@@ -144,9 +144,37 @@ create table t_fb_reply(
     constraint fbReply_user_fk foreign key(user_index) references t_user(user_index)
 );
 
-###아래 146번 쿼리문  0을 최근 게시물 번호로 수정 후 더미 데이터 생성
-
+###!!!!!!!!!!!!!!!!!!!!!아래 쿼리문  0을 최근 게시물 번호로 수정 후 더미 데이터 생성!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 insert into t_fb_reply(b_index,user_index,r_contents) values(0,1,'사과의 댓글'),(0,2,'바나나의 댓글'),(0,3,'체리의 댓글'),(0,4,'두리안의 댓글');
+
+#정보 게시판
+create table t_info_board(
+	b_index int primary key auto_increment, #게시글 번호
+    user_index int, #게시글 작성자
+    b_reg_date datetime default now(), #게시글 등록일
+    b_update_date datetime default now(), #게시글 수정일
+    b_subject varchar(300) not null, #전체, 자유게시판, 카테고리 게시판(ex : 전체)
+    b_title varchar(1000) not null, #게시글 제목
+    b_contents text not null, #게시글 내용(blob 타입 확인 필요)
+    b_hits int default 0, #게시글 조회수
+    b_like_user_index text, #좋아요 누른 사람
+    b_inactive boolean default false not null, #게시글 삭제여부
+    b_files varchar(1000),
+    constraint infoBoard_user_fk foreign key(user_index) references t_user(user_index)
+);
+#정보 게시판 댓글
+create table t_ib_reply(
+	r_index int primary key auto_increment,
+	b_index int, #게시판 번호
+    user_index int, #댓글 작성자
+    r_reg_date datetime default now(), #댓글 작성 시간
+    r_update_date datetime default now(), #댓글 수정 시간
+    r_contents text, #댓글 내용
+    r_like_user_index text,
+    r_inactive boolean default false not null, #댓글 삭제 여부
+    constraint ibReply_infoBoard_fk foreign key(b_index) references t_info_board(b_index),
+    constraint ibReply_user_fk foreign key(user_index) references t_user(user_index)
+);
 
 #이벤트(adminMode에서 crud 가능 / userMode에서는 r만 가능)
 create table t_event_board(
@@ -154,7 +182,7 @@ create table t_event_board(
     user_index varchar(300) default -1, #게시글 작성자(default admin)
 	b_reg_date datetime default now(), #게시글 등록일(ex : 2022-07-26)
     b_update_date datetime default now(), #게시글 수정일(ex : 2022-07-27)
-    b_subject varchar(300) not null, #콜라보, 진행중, 종료(ex : 진행중)
+    b_subject varchar(300) not null, #진행중, 종료(ex : 진행중)
     b_title varchar(1000) not null, #게시글 제목(ex : 3일만에 50kg감량 시 1000만원!!)
     b_contents text not null, #게시글 내용(blob 타입 확인 필요)
     b_hits int default 0, #게시글 조회수(ex : 50000)

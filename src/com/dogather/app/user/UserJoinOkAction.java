@@ -1,6 +1,7 @@
 package com.dogather.app.user;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.regex.Pattern;
 
 import javax.servlet.ServletException;
@@ -104,18 +105,29 @@ public class UserJoinOkAction implements Action {
 		
 		
 		UserDAO udao=new UserDAO();
-		ActionTo transfer = new ActionTo();
-		transfer.setRedirect(true);
+		
+		resp.setCharacterEncoding("utf-8");
+		resp.setContentType("text/html; charset=utf-8");
+		PrintWriter out = resp.getWriter();
+		
+		out.print("<script>");
 		if(udao.insertUser(user)) {
 			//회원가입 성공
 			//경로, 전송방법 설정
-			transfer.setPath(req.getContextPath()+"/user/login.us?user="+user_email);
+			out.print("alert('두개더의 가족이 되신 걸 환영합니다!!')");
+			out.print("location.href='"+req.getContextPath()+"/user/login.us?user="+user_email+"';");
 		}else {
 			//회원가입 실패
 			//경로, 전송방법 설정
-			transfer.setPath(req.getContextPath());
+			String prev = req.getParameter("prev_page");
+			String cp = req.getContextPath();
+			String cmd = prev.substring(cp.length() + prev.indexOf(cp));
+			out.print("alert('회원 가입에 실패했습니다 ㅠㅠ 다시 시도해주세요!')");			
+			out.print("location.href='"+req.getContextPath()+cmd+"';");
 		}
-		return transfer;
+		out.print("</script>");
+		out.close();
+		return null;
 
 	}
 }
