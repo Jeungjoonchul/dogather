@@ -81,6 +81,7 @@
 				<textarea name="sysName" id="sysName" style="display: none;"></textarea>
 				<input type="hidden" id="page" name="page" value="${param.page}"/>
 				<input type="hidden" id="keyword" name="keyword" value="${param.keyword}"/>
+				<input type="hidden" id="subject" name="subject" value="${param.subject}"/>
 			</form>
 		</div>
 		</div>

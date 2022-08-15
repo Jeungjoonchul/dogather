@@ -79,7 +79,7 @@
                 href="${cp}/board/free_board/post_update.bo?b_index=${b.b_index}&page=${param.page}&keyword=${param.keyword }"
                 >수정</a
               >
-              <a href="javascript:delete_check(${b.b_index},${param.page },'${param.keyword }');">삭제</a>
+              <a href="javascript:delete_check(${b.b_index},${param.page },'${param.keyword }','${param.subject }');">삭제</a>
             </c:if>
             <a href="${cp }/board/free_board/post_list.bo?page=${param.page}&keyword=${param.keyword }"
               >목록</a
@@ -161,7 +161,7 @@
         <div id="reply_write_area">
           <form name="reply_write" id="reply_write">
             <input type="hidden" name="b_index" id="b_index" value="${b.b_index }"/>
-            <input type="hidden" id="r_path" name="r_path" value="free_board" />
+            <input type="hidden" id="path" name="path" value="free_board" />
             <input type="hidden" id="page" value="${page}">
             <div id="reply_write_input">
             <c:choose>

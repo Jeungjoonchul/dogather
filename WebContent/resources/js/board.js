@@ -1,8 +1,11 @@
 //게시글 작성 시 로그인 검사
-function loginCheck(loginUser, page) {
+
+function loginCheck(loginUser) {
+	var page=$('#page').val();
 	var keyword=$('#post_query_keyword').val();
+	var subject=$('#filter').val();
 	if (loginUser) {
-		location.href = cp + "/board/free_board/post_write.bo?page=" + page+"&keyword="+keyword;
+		location.href = cp + "/board/"+$('#path').val()+"/post_write.bo?page=" + page+"&keyword="+keyword+"&subject="+subject;
 	} else {
 		alert('로그인 후 이용 가능합니다');
 		location.href = cp + "/user/login.us"
@@ -13,9 +16,19 @@ function loginCheck(loginUser, page) {
 function delete_check(b_index,page,keyword) {
 	var check = confirm('정말 삭제하시겠습니까?');
 	if (check) {
-		location.href = cp + "/board/free_board/post_delete.bo?b_index="+ b_index+"&page="+page+"&keyword="+keyword;
+		location.href = cp + "/board/"+$('#path').val()+"/post_delete.bo?b_index="+ b_index+"&page="+page+"&keyword="+keyword+"&subject="+subject;
 	}
 }
+
+
+
+//게시글 필터
+$('.filter_list').on('click',function(){
+	var page=$('#page').val();
+	var keyword=$('#post_query_keyword').val();
+	var subject=$('#filter').val();
+	location.href = cp + "/board/"+$('#path').val()+"/post_list.bo?page="+page+"&keyword="+keyword+"&subject="+subject;
+});
 
 //게시글 작성 유효성 검사
 function postOn() {
@@ -40,7 +53,7 @@ function postOn() {
 function getPostListWithKeyword(){
 	var keyword = $('#post_query_keyword').val();
 
-	location.href=cp+'/board/'+$('#b_path').val()+'/post_list.bo?keyword='+keyword;
+	location.href=cp+'/board/'+$('#path').val()+'/post_list.bo?keyword='+keyword;
 	
 }
 
@@ -60,7 +73,7 @@ $(document).on('click','#reply_on',function(){
 	}
 	var form= $('#reply_write');
 	$.ajax({
-		url : cp+'/board/'+$('#r_path').val()+'/reply_on.bo',
+		url : cp+'/board/'+$('#path').val()+'/reply_on.bo',
 		type : 'post',
 		data : form.serialize(),
 		dataType : 'text',
@@ -77,7 +90,6 @@ $(document).on('click','#reply_on',function(){
 		}
 	});
 });
-
 
 //댓글 펼치기, 접기
 $('#reply_area_toggle').on('click',function(){
@@ -125,7 +137,7 @@ $(document).on('click','.reply_update_submit',function(e){
 		return false;
 	}
 	$.ajax({
-		url : cp+'/board/'+$('#r_path').val()+'/reply_update.bo',
+		url : cp+'/board/'+$('#path').val()+'/reply_update.bo',
 		type : 'post',
 		data : {"r_contents":r_contents,"r_index":r_index},
 		dataType : 'text',
@@ -151,7 +163,7 @@ $(document).on('click','.reply_delete',function(e){
 		var page = $('#page').val();
 		var b_index=$('#b_index').val();
 		$.ajax({
-			url : cp+'/board/'+$('#r_path').val()+'/reply_delete.bo',
+			url : cp+'/board/'+$('#path').val()+'/reply_delete.bo',
 			type : 'post',
 			data : {"r_index":r_index,"page":page,"b_index":b_index},
 			dataType : 'text',
@@ -193,7 +205,7 @@ var getList=function(page){
 	var user_nickname=$('#loginUser_nickname').val();
 	$
 			.ajax({
-				url : cp+'/board/'+$('#r_path').val()+'/reply_list.bo',
+				url : cp+'/board/'+$('#path').val()+'/reply_list.bo',
 				type : 'post',
 				data : {
 					"page" : page,

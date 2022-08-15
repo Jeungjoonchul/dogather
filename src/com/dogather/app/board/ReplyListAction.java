@@ -39,7 +39,6 @@ public class ReplyListAction implements Action {
 		
 		Gson gson= new Gson();
 		String jsonStr = gson.toJson(map);
-		System.out.println(jsonStr);
 		resp.setCharacterEncoding("utf-8");
 		resp.getWriter().print(jsonStr);
 		resp.getWriter().close();

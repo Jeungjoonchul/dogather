@@ -46,6 +46,36 @@
 				<div class="board title">
 					<span class="purple">자유</span><span> 게시판</span>
 				</div>
+				<div class="board_filter">
+				<select id="filter">
+					<c:choose>
+						<c:when test="${subject eq '유머'}">
+						<option class="filter_opt" value="">전체</option>
+						<option class="filter_opt" value="유머" selected>유머</option>
+						<option class="filter_opt" value="잡담">잡담</option>
+						<option class="filter_opt" value="기타">기타</option>
+						</c:when>
+						<c:when test="${subject eq '잡담'}">
+						<option class="filter_opt" value="">전체</option>
+						<option class="filter_opt" value="유머">유머</option>
+						<option class="filter_opt" value="잡담" selected>잡담</option>
+						<option class="filter_opt" value="기타">기타</option>
+						</c:when>
+						<c:when test="${subject eq '기타'}">
+						<option class="filter_opt" class="filter" value="">전체</option>
+						<option class="filter_opt" value="유머">유머</option>
+						<option class="filter_opt" value="잡담">잡담</option>
+						<option class="filter_opt" value="기타" selected>기타</option>
+						</c:when>
+						<c:otherwise>
+						<option class="filter_opt" value="" selected>전체</option>
+						<option class="filter_opt" value="유머">유머</option>
+						<option class="filter_opt" value="잡담">잡담</option>
+						<option class="filter_opt" value="기타">기타</option>
+						</c:otherwise>
+					</c:choose>
+					</select>
+				</div>
 				<div class="board_list">
 					<table class="list">
 						<tbody>
@@ -63,7 +93,7 @@
 										<tr>
 											<td>${list.b_index}</td>
 											<td><a
-												href="${cp}/board/free_board/post_view.bo?b_index=${list.b_index}&page=${page}&keyword=${keyword}"><span>${list.b_title}</span><span>[${list.b_reply_cnt }]</span></a></td>
+												href="${cp}/board/free_board/post_view.bo?b_index=${list.b_index}&page=${page}&keyword=${keyword}&subject=${subject}"><span>${list.b_title}</span><span>[${list.b_reply_cnt }]</span></a></td>
 											<td><a href="#">${list.user_nickname}</a></td>
 											<td><fmt:parseDate value="${list.b_reg_date}" pattern="yyyy-MM-dd HH:mm:ss" var="datetime" /> 
 											<c:set var="date"> <fmt:formatDate value="${datetime }" pattern="yyyy-MM-dd" /></c:set> 
@@ -85,21 +115,22 @@
 						</tbody>
 						<tfoot>
 							<tr class="page-btns">
-								<td colspan="5"><c:if test="${startPage!=1 }">
-										<a
-											href="${cp }/board/free_board/post_list.bo?page=${startPage-1}&keyword=${keyword}">&lt;</a>
-									</c:if> <c:forEach begin="${startPage }" end="${endPage }" var="i">
+								<td colspan="5">
+								<c:if test="${startPage!=1 }">
+										<a href="${cp }/board/free_board/post_list.bo?page=${startPage-1}&keyword=${keyword}&subject=${subject}">&lt;</a>
+									</c:if> 
+									<c:forEach begin="${startPage }" end="${endPage }" var="i">
 										<c:choose>
 											<c:when test="${page==i }">
 												<span class="nowPage">${i }</span>
 											</c:when>
 											<c:otherwise>
-												<a href="${cp}/board/free_board/post_list.bo?page=${i}&keyword=${keyword}">${i}</a>
+												<a href="${cp}/board/free_board/post_list.bo?page=${i}&keyword=${keyword}&subject=${subject}">${i}</a>
 											</c:otherwise>
 										</c:choose>
 									</c:forEach> <c:if test="${endPage!=totalPage }">
 										<a
-											href="${cp }/board/free_board/post_list.bo?page=${endPage+1}&keyword=${keyword}">&gt;</a>
+											href="${cp }/board/free_board/post_list.bo?page=${endPage+1}&keyword=${keyword}&subject=${subject}">&gt;</a>
 									</c:if></td>
 							</tr>
 						</tfoot>
@@ -107,12 +138,13 @@
 					<table class="writing">
 						<tr>
 							<td><a class="write"
-								href="javascript:loginCheck(${loginUser!=null?true:false},${page })">글쓰기</a></td>
+								href="javascript:loginCheck(${loginUser!=null?true:false})">글쓰기</a></td>
 						</tr>
 					</table>
 					<div class="search_area">
 						<input type="search" id="post_query_keyword" value="${keyword==null||keyword==''? '':keyword }"/><input type="button" id="post_query_btn" value="검색" onclick="getPostListWithKeyword(${page});"/>
-						<input type="hidden" id="b_path" value="free_board"/>
+						<input type="hidden" id="path" value="free_board"/>
+						<input type="hidden" id="page" value="${page }"/>
 					</div>
 				</div>
 			</div>

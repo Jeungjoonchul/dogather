@@ -25,11 +25,12 @@ public class BoardDAO {
 			return sqlSession.selectOne("Board.getBoardCnt",datas);
 		}
 
-		public List<BoardDTO> getBoard(int startRow, int pageSize,String keyword,String b_name,String r_name) {
+		public List<BoardDTO> getBoard(int startRow, int pageSize,String keyword,String subject,String b_name,String r_name) {
 			HashMap<String, Object> datas = new HashMap<String, Object>();
 			datas.put("startRow", startRow);
 			datas.put("pageSize", pageSize);
 			datas.put("keyword", keyword);
+			datas.put("subject", subject);
 			datas.put("b_name",b_name);
 			datas.put("r_name",r_name);
 			

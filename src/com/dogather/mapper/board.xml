@@ -42,7 +42,8 @@
 		left join(select b_index,count(r_index) as b_reply_cnt from ${r_name} where r_inactive=0 group by b_index) as r 
 		on b.b_index=r.b_index 
 		where b.b_inactive = 0 
-		and(b.b_title like('%${keyword}%') or b.b_contents like('%${keyword}%') or u.user_nickname like('%${keyword}%')) 
+		and (b.b_title like('%${keyword}%') or b.b_contents like('%${keyword}%') or u.user_nickname like('%${keyword}%')) 
+		and b_subject like('%${subject}%') 
 		order by 1 desc 
 		limit #{startRow}, #{pageSize}
 	</select>
