@@ -232,7 +232,7 @@ create table t_dogather(
     dg_capacity int default 50, #dogather 참여 가능 인원 수, dogather 점수에 따라 증가 가능, 점수 산정식은 미정, 최선:admin에서 설정해줌 / DB 자동화는 가능하면 하도록(ex : 50)
 	dg_limit_scope enum('unLimit','limit','impossible'), #가입 제한(ex : 'unLimit')
     #dg_likeUserIndex text #두개더에 좋아요 누른 유저(생각해 보고 넣기)
-    dg_expire datetime, #전체 목표 완료 날짜(ex : 2022-12-26)
+    dg_expire date, #전체 목표 완료 날짜(ex : 2022-12-26)
     dg_inactive boolean default false not null,
     constraint dogather_user_fk foreign key(user_index) references t_user(user_index),
     constraint dogather_category_fk foreign key(category_index) references t_category(category_index)
