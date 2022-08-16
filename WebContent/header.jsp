@@ -22,8 +22,8 @@
 					</c:when>
 					<c:otherwise>
 						<!-- 세션이 있다면 -->
-						<a href="#?user_index=${loginUser.user_index}"> <span>
-								마이페이지 </span>
+						<a href="${cp}/user/myPage.us">
+    			        	<span> 마이페이지 </span>
 						</a>
 						<a href="${cp}/user/logout.us"> <span> 로그아웃 </span>
 						</a>

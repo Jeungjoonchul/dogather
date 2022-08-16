@@ -26,7 +26,7 @@
 
     <title>Doːgather</title>
     <link rel="stylesheet" href="${cp }/resources/css/include.css" />
-        <link rel="stylesheet" href="${cp }/resources/css/mainStyle.css" />
+    <link rel="stylesheet" href="${cp }/resources/css/mainStyle.css" />
   </head>
   <body>	
   <%@include file="/header.jsp"%>

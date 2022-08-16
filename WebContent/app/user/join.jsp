@@ -89,7 +89,7 @@
 										<div>${terms.terms_contents}</div>
 										<div>
 											<input type="checkbox"
-												name="user_terms_type${terms.terms_index}" value="true">
+												name="user_terms_type${terms.terms_index}" id="user_terms_type${terms.terms_index}" value="true">
 										</div>
 									</div>
 								</div>
