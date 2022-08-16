@@ -23,7 +23,7 @@
 <body>
 	<%@include file="../../../header.jsp"%>
 <main>
-<div style="width:80% ">
+<div>
 	<%@include file="../../../myPage_sideBar.jsp" %> 
 	<table>
 		<form action="">
