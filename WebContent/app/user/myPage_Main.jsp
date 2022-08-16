@@ -35,6 +35,7 @@
 				<input type="submit" value="변경">
 				<input type="button" value="취소">
 			</div>
+<!-- 작업중 -->
 		</form>
 	</table>
 </div>
