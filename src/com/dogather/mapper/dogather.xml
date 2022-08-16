@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="Dogather">
+ 	<insert id="dgCreate" parameterType="DogatherDTO">
+ 		insert into t_dogather(user_index,category_index,dg_title,dg_intro,dg_intro_short,dg_banner,dg_public_scope,dg_limit_scope,dg_expire) 
+ 		values(#{user_index},#{category_index},#{dg_title},#{dg_intro},#{dg_intro_short},#{dg_banner},#{dg_public_scope},#{dg_limit_scope},#{dg_expire})
+ 	</insert>
+ 
+ 
+ 
+	<select id="dgDupCheck" parameterType="string" resultType="_int">
+		select count(*) from t_dogather where dg_title=#{dg_title}
+	</select>
+ </mapper>

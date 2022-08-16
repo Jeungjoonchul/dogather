@@ -7,16 +7,17 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <title>Insert title here</title>
 </head>
+<style>
+
+</style>
 <body>
+<input type="hidden" value="true" id="test">
+
 
 </body>
 <script>
-$(document).ready(function(){
-	console.log($('select').val());
-	console.log($('select').val()=='');
-});
-	$('select').change(function(){
-		console.log($('select').val());
-	});
+
+alert($('#test').val()==true);
+
 </script>
 </html>

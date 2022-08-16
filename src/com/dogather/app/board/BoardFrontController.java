@@ -46,6 +46,7 @@ public class BoardFrontController extends HttpServlet {
 				transfer = new BoardImageUploadAction().execute(req, resp);
 			} catch (ServletException e) {
 				System.out.println(command + " : " + e);
+				e.printStackTrace();
 			} catch (IOException e) {
 				System.out.println(command + " : " + e);
 				e.printStackTrace();

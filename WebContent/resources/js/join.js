@@ -280,12 +280,16 @@ $('#user_birth_date')
 					var month = ('0' + (today.getMonth() + 1)).slice(-2);
 					var day = ('0' + today.getDate()).slice(-2);
 					var now = year + '-' + month + '-' + day;
-					const reg_birth_date = /^(19[0-9][0-9]|20\d{2})-(0[0-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/;
+					const reg_birth_date = /^(?=\d)(?:(?:31(?!.(?:0?[2469]|11))|(?:30|29)(?!.0?2)|29(?=.0?2.(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00)))(?:\x20|$))|(?:2[0-8]|1\d|0?[1-9]))([-.\/])(?:1[012]|0?[1-9])\1(?:1[6-9]|[2-9]\d)?\d\d(?:(?=\x20\d)\x20|$))?(((0?[1-9]|1[012])(:[0-5]\d){0,2}(\x20[AP]M))|([01]\d|2[0-3])(:[0-5]\d){1,2})?$/;
+					var y = user_birth_date.split("-")[0];
+					var m = user_birth_date.split("-")[1];
+					var d = user_birth_date.split("-")[2];
+					
 					if (user_birth_date == '') {
 						result.text('null');
 						resultText.text('생년월일을 입력해주세요');
 						resultText.css('color', 'deeppink');
-					} else if (!reg_birth_date.test(user_birth_date)
+					} else if (!reg_birth_date.test(d+'-'+m+'-'+y)
 							|| user_birth_date > now) {
 						result.text('invalid');
 						resultText.text('생년월일 형식이 올바르지 않습니다');
@@ -300,19 +304,35 @@ $('#user_birth_date')
 $('#address_detail').on(
 		'blur',
 		function() {
+			var zip_code=$('#zip_code').val();
+			var address_default = $('#address_default').val();
 			var address_detail = $('#address_detail').val();
 			var result = $('#address_detail').parent().parent().next()
 					.children().first().children();
 			var resultText = result.parent().next().children();
 			resultText.text('');
-			if (address_detail == '') {
+			if (address_detail == ''||zip_code=='') {
 				result.text('null');
-				resultText.text('상세 주소를 입력해주세요');
-				resultText.css('color', 'deeppink');
+				if(zip_code==''){
+					$('#zip_code').css('border-bottom','1px solid red');
+					$('#address_default').css('border-bottom','1px solid red');
+					resultText.text('주소를 입력해주세요');
+					resultText.css('color', 'deeppink');
+					$('#zip_code').focus();
+				}
+				if(address_detail==''){
+					resultText.text('상세주소를 입력해주세요');
+					$('#address_detail').css('border-bottom','1px solid red');
+					resultText.css('color', 'deeppink');
+				}
+				
 			} else {
 				result.text('ok');
 				resultText.text('✔');
 				resultText.css('color', 'deepskyblue');
+				$('#address_default').css('border-bottom','1px solid #141414');
+				$('#zip_code').css('border-bottom','1px solid #141414');
+				$('#address_detail').css('border-bottom','1px solid #141414');
 			}
 		});
 
@@ -365,8 +385,9 @@ function daumPostcode() {
 	}).open();
 }
 
-function sendit() {
-	var flag = true;
+$('form[name=joinForm]').on('submit',function(e){
+	e.preventDefault();
+	var flag=true;
 	$('.status').each(
 			function(index, item) {
 				if ($(this).text() == 'null') {
@@ -376,22 +397,27 @@ function sendit() {
 							.children().blur();
 					$(this).parent().parent().prev().children().last()
 							.children().focus();
-					flag = false;
+					flag=false
 					return flag;
 				} else if ($(this).text() == 'invalid') {
 					$(this).parent().parent().prev().children().last()
 							.children().focus();
-					flag = false;
+					flag=false
 					return flag;
 				} else if ($(this).text() == 'duplication') {
 					$(this).parent().parent().prev().children().last()
 							.children().focus();
-					flag = false;
+					flag=false
 					return flag;
 				}
 			});
-	return flag;
-}
+	if(flag){
+		this.submit();
+	}
+});
+	
+	
+
 
 // 페이지 넘기기
 

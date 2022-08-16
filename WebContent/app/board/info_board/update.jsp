@@ -34,12 +34,21 @@
 </head>
 
 <body>
-	<c:if test="${empty loginUser}">
+<c:if test="${empty loginUser }">
+	<c:choose>
+		<c:when test="${empty cookie.autoLogin_check }">
 		<script>
-			alert("로그인 후 이용 가능합니다");
+			alert('로그인 후 이용 가능합니다');
 			location.replace("${cp}/user/login.us");
 		</script>
-	</c:if>
+		</c:when>
+		<c:otherwise>
+		<script>
+			location.replace("${cp}/user/login.us");
+		</script>
+		</c:otherwise>
+	</c:choose>
+</c:if>
 	<c:if test="${not (loginUser.user_nickname eq b.user_nickname)}">
 		<script>
 			alert("글쓴이가 아닙니다");

@@ -29,12 +29,21 @@
 
 </head>
 <body>
-	<c:if test="${empty loginUser }">
+<c:if test="${empty loginUser }">
+	<c:choose>
+		<c:when test="${empty cookie.autoLogin_check }">
 		<script>
-			alert("로그인 후 이용 가능합니다");
+			alert('로그인 후 이용 가능합니다');
 			location.replace("${cp}/user/login.us");
 		</script>
-	</c:if>
+		</c:when>
+		<c:otherwise>
+		<script>
+			location.replace("${cp}/user/login.us");
+		</script>
+		</c:otherwise>
+	</c:choose>
+</c:if>
 		<%@include file="../../../header.jsp"%>
 		<main>
 		<div id="main">

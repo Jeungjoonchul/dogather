@@ -36,8 +36,7 @@ create table t_user(
     
     #회원 가입 완료 후 설정
    
-	user_profile_original_name varchar(300), #유저 프로필 사진 원본 파일이름
-    user_profile_system_name varchar(300), #유저 프로필 사진 시스템 파일이름
+	user_profile_image varchar(300),#유저 이미지 파일 이름(원본파일명:저장파일명)
 
 	user_term_essential1 boolean default true not null, #필수약관 1 동의 여부(기본 't' / ex : 't')
     user_term_essential2 boolean default true not null, #필수약관 2 동의 여부(기본 't' / ex : 't')
@@ -223,13 +222,13 @@ create table t_notice_board(
 create table t_dogather(
 	dg_index int primary key auto_increment, #dogather 인덱스 번호(ex : 1)
     user_index int, #dogather 창시자(방장)(ex : 1)
-    dg_reg_date datetime default now(),#dogather 만든 날짜(ex : 2022-07-26)
+    dg_reg_date date default now(),#dogather 만든 날짜(ex : 2022-07-26)
     category_index int not null, #카테고리(ex : 1)
     dg_title varchar(767) not null unique, #dogather 제목(ex : 살빼기dogather)
     dg_intro text, #dogather 소개(ex : 체중감량 같이해요!)
     dg_intro_short varchar(60), #dogather 짧은 설명
     dg_banner text, #dogather 사진(로고)
-    dg_public_scope enum('t','f'), #공개범위(ex : 't')
+    dg_public_scope boolean, #공개범위(ex : 't')
     dg_capacity int default 50, #dogather 참여 가능 인원 수, dogather 점수에 따라 증가 가능, 점수 산정식은 미정, 최선:admin에서 설정해줌 / DB 자동화는 가능하면 하도록(ex : 50)
 	dg_limit_scope enum('unLimit','limit','impossible'), #가입 제한(ex : 'unLimit')
     #dg_likeUserIndex text #두개더에 좋아요 누른 유저(생각해 보고 넣기)
@@ -247,6 +246,8 @@ create table t_dogather_user(
     constraint dogatherUser_dogather_fk foreign key(dg_index) references t_dogather(dg_index),
     constraint dogatherUser_user_fk foreign key(user_index) references t_user(user_index)
 );
+
+#dogather 유저 초대
 
 #dogather 유저 목표(진행중)
 create table t_dogather_user_target(
