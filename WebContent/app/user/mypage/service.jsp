@@ -42,20 +42,49 @@
 	<div id="mypage_container">
 		<%@include file="../../../myPage_sideBar.jsp" %> 
 		<div id="mypage_area">
-        	<div id="check_pw">
-            	<form action="">
-                      <table>
-                          <tr>
-                            <td>현재 비밀번호</td>
-                            <td><input type="password" name="" id=""></td>
-                          </tr>
-                    	</table>
-                	<input type="submit" value="확인">
-            	</form>
-        	</div>
+        	<form action="">
+                <div id="myservice_area">
+                  <div id="service">
+                    <h2>문의 내역</h2>
+                    <table>
+                      <tr>
+                       <th><input type="checkbox" name="qna" id="qna"
+                          value="selectall"
+                          onclick="selectAll_qna(this)"/></th>
+                      <th>상태</th>
+                      <th>제목</th>
+                        <th>날짜</th>
+                    </tr>
+                    <tr>
+                    <td><input type="checkbox" name="qna" value=""> </td>
+                      <td>처리중</td>
+                      <td>처리해주세요</td>
+                      <td>2222.22.22</td>
+                    </tr>
+                    </table>
+                  </div>
+                  </div>
+                </form>
+              </div>
+              
     	</div>
 	</div>
-</div>
+
 	<%@include file="../../../footer.jsp"%>
 </body>
+<script>
+const service = '/dogather/app/user/mypage/service.jsp';
+if("<%= request.getRequestURI() %>"==service){
+	document.querySelector("#service").className = "on";
+	
+	
+}
+function selectAll_qna(selectAll) {
+	  const qna = document.getElementsByName("qna");
+
+	  qna.forEach((checkbox) => {
+	    checkbox.checked = selectAll.checked;
+	  });
+	}
+</script>
 </html>

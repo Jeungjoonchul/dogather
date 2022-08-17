@@ -42,20 +42,41 @@
 	<div id="mypage_container">
 		<%@include file="../../../myPage_sideBar.jsp" %> 
 		<div id="mypage_area">
-        	<div id="check_pw">
-            	<form action="">
-                      <table>
-                          <tr>
-                            <td>현재 비밀번호</td>
-                            <td><input type="password" name="" id=""></td>
-                          </tr>
-                    	</table>
-                	<input type="submit" value="확인">
-            	</form>
-        	</div>
+        	<div id="top_meun">
+                <table>
+                  <tr>
+                    <th id="myboard" class="off">
+                      <a href="${cp}/app/user/mypage/community.jsp">내 게시글</a>
+                    </th>
+                    <th id="friendslist" class="on">
+                        <a href="${cp}/app/user/mypage/friends.jsp">친구목록</a>
+                    </th>
+                    <th id="notebox" class="off">
+                      <a href="${cp}/app/user/mypage/notebox.jsp"> 쪽지함 </a> 
+                    </th>
+                  </tr>
+                </table>
+              </div>
+              <!--친구 관리 -->
+              <div id="friendslist_area">
+                <form action="">
+                  <div>
+                    <h2>친구목록</h2>
+                  </div>
+                </form>
+              </div>
+              </div>
     	</div>
 	</div>
-</div>
+
 	<%@include file="../../../footer.jsp"%>
 </body>
+<script>
+const friends = '/dogather/app/user/mypage/friends.jsp';
+if("<%= request.getRequestURI() %>"==friends){
+	document.querySelector("#friends").className = "on";
+	
+	
+}
+</script>
 </html>

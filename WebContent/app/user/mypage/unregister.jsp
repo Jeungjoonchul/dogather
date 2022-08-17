@@ -42,20 +42,37 @@
 	<div id="mypage_container">
 		<%@include file="../../../myPage_sideBar.jsp" %> 
 		<div id="mypage_area">
-        	<div id="check_pw">
-            	<form action="">
-                      <table>
-                          <tr>
-                            <td>현재 비밀번호</td>
-                            <td><input type="password" name="" id=""></td>
-                          </tr>
-                    	</table>
-                	<input type="submit" value="확인">
-            	</form>
-        	</div>
+        	<form action="">
+                <div id="unregister_area">
+                  <div id="unregister">
+                    <h2>회원 탈퇴</h2>
+                    <div>
+
+                      <p>사용중인 아이디(user_id)는 사용할 경우 재사용 및 복구가 불가능합니다.</p>
+                      <p>탈퇴 후 회원정보 및 개인형 서비스 이용기록은 모두 삭제됩니다.</p>
+                      <p>탈퇴 후에도 게시판형 서비스에 등록한 게시물은 그대로 남아 있습니다.</p>
+
+                    </div>
+                    <div>
+
+                      <input type="checkbox" name="" id=""><span>안내 사항을 모두 확인하였으며, 이에 동의합니다.</span>
+                      <input type="submit" value="확인">
+                    </div>
+                      
+                  </div>
+                  </div>
+                </form>
     	</div>
 	</div>
 </div>
 	<%@include file="../../../footer.jsp"%>
 </body>
+<script>
+const unregister = '/dogather/app/user/mypage/unregister.jsp';
+if("<%= request.getRequestURI() %>"==unregister){
+	document.querySelector("#unregister").className = "on";
+	
+	
+}
+</script>
 </html>
