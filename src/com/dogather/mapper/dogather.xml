@@ -4,13 +4,56 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="Dogather">
  	<insert id="dgCreate" parameterType="DogatherDTO">
- 		insert into t_dogather(user_index,category_index,dg_title,dg_intro,dg_intro_short,dg_banner,dg_public_scope,dg_limit_scope,dg_expire) 
- 		values(#{user_index},#{category_index},#{dg_title},#{dg_intro},#{dg_intro_short},#{dg_banner},#{dg_public_scope},#{dg_limit_scope},#{dg_expire})
+ 		insert into t_dogather(user_index,category_index,dg_title,dg_intro,dg_intro_short,dg_banner_org,dg_banner_sys,dg_public_scope,dg_limit_scope,dg_expire) 
+ 		values(#{user_index},#{category_index},#{dg_title},#{dg_intro},#{dg_intro_short},#{dg_banner_org},#{dg_banner_sys},#{dg_public_scope},#{dg_limit_scope},#{dg_expire})
+ 	</insert>
+ 
+ 	<insert id="dgJoin" parameterType="hashmap">
+ 		insert into t_dogather_user(dg_index,user_index) values(#{dg_index},#{user_index})
  	</insert>
  
  
  
 	<select id="dgDupCheck" parameterType="string" resultType="_int">
 		select count(*) from t_dogather where dg_title=#{dg_title}
+	</select>
+	
+	<select id="getDgIndexWithDgTitle" parameterType="string" resultType="_int">
+		select dg_index from t_dogather where dg_title=#{dg_title}
+	</select>
+	
+	<select id="getDgList" parameterType="hashmap" resultType="DogatherDTO">
+		select 
+			d.dg_index,
+			u.user_index,
+			u.user_nickname,
+			d.dg_reg_date,
+			d.category_index,
+			d.dg_title,
+			d.dg_intro,
+			d.dg_intro_short,
+			d.dg_banner_org,
+			d.dg_banner_sys,
+			dg_public_scope,
+			d.dg_hits,
+			d.dg_capacity,
+			d.dg_limit_scope,
+			d.dg_expire,
+			d.dg_inactive 
+		from t_dogather d
+		join t_user u 
+		on u.user_index=d.user_index 
+		where d.dg_inactive=0 and d.dg_public_scope=1 and d.category_index like('%${category_index}%') and(case when d.dg_expire is not null then d.dg_expire>now() else d.dg_expire is null end) 
+			and(d.dg_title like('%${keyword}%') or d.dg_intro like('%${keyword}%') or d.dg_intro_short like('%${keyword}%') or u.user_nickname like('%${keyword}%'))  
+			order by d.${criteria} ${align} limit #{startRow}, #{pageSize}
+	</select>
+	
+	<select id="getDgCnt" parameterType="hashmap" resultType="_int">
+		select count(*) 
+		from t_dogather d 
+		left join(select user_nickname,user_index from t_user) u 
+		on d.user_index=u.user_index 
+		where d.dg_inactive=0 and d.dg_public_scope=1 and d.category_index like('%${category_index}%') and d.dg_expire>now() 
+		and(d.dg_title like('%${keyword}%') or d.dg_intro like('%${keyword}%') or d.dg_intro_short like('%${keyword}%') or u.user_nickname like('%${keyword}%'))
 	</select>
  </mapper>

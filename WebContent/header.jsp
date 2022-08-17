@@ -1,4 +1,3 @@
-<%@page import="java.net.CookieStore"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -45,10 +44,10 @@
 						</a></li>
 
 					</ul></li>
-				<li><a href="${cp }/dogather/main.dg"> <span> 두게더 </span>
+				<li><a href="${cp }/dg/front.dg"> <span> 두게더 </span>
 				</a>
 					<ul class="submenu">
-						<li><a href="#"> <span class="span">진행 중 두게더</span>
+						<li><a href="${cp }/dg/list.dg"> <span class="span">진행 중 두게더</span>
 						</a></li>
 						<li><a href="#"> <span class="span">종료 된 두게더</span>
 						</a></li>

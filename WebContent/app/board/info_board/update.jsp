@@ -16,9 +16,7 @@
 	rel="stylesheet" />
 <link rel="shortcut icon" href="${cp}/resources/images/favicon.png" />
 
-<!-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-	integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-	crossorigin="anonymous"></script> -->
+
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <link
 	href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css"
@@ -34,21 +32,7 @@
 </head>
 
 <body>
-<c:if test="${empty loginUser }">
-	<c:choose>
-		<c:when test="${empty cookie.autoLogin_check }">
-		<script>
-			alert('로그인 후 이용 가능합니다');
-			location.replace("${cp}/user/login.us");
-		</script>
-		</c:when>
-		<c:otherwise>
-		<script>
-			location.replace("${cp}/user/login.us");
-		</script>
-		</c:otherwise>
-	</c:choose>
-</c:if>
+<%@include file="../../../loginCheck.jsp" %>
 	<c:if test="${not (loginUser.user_nickname eq b.user_nickname)}">
 		<script>
 			alert("글쓴이가 아닙니다");

@@ -17,7 +17,7 @@
 		from ${b_name} b 
 		left join(select user_nickname,user_index from t_user) u 
 		on b.user_index=u.user_index 
-		where b.b_inactive=0 
+		where b.b_inactive=0 and b.b_subject like('%${subject}%') 
 		and(b.b_title like('%${keyword}%') or b.b_contents like('%${keyword}%') or u.user_nickname like('%${keyword}%'))
 	</select>
 	

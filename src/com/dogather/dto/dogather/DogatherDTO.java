@@ -3,13 +3,16 @@ package com.dogather.dto.dogather;
 public class DogatherDTO {
 	private int dg_index;
 	private int user_index;
+	private String user_nickname;
 	private String dg_reg_date;
 	private int category_index;
 	private String dg_title;
 	private String dg_intro;
 	private String dg_intro_short;
-	private String dg_banner;
+	private String dg_banner_org;
+	private String dg_banner_sys;
 	private boolean dg_public_scope;
+	private int dg_hits;
 	private int dg_capacity;
 	private String dg_limit_scope;
 	private String dg_expire;
@@ -26,6 +29,12 @@ public class DogatherDTO {
 	}
 	public void setUser_index(int user_index) {
 		this.user_index = user_index;
+	}
+	public String getUser_nickname() {
+		return user_nickname;
+	}
+	public void setUser_nickname(String user_nickname) {
+		this.user_nickname = user_nickname;
 	}
 	public String getDg_reg_date() {
 		return dg_reg_date;
@@ -57,17 +66,29 @@ public class DogatherDTO {
 	public void setDg_intro_short(String dg_intro_short) {
 		this.dg_intro_short = dg_intro_short;
 	}
-	public String getDg_banner() {
-		return dg_banner;
+	public String getDg_banner_org() {
+		return dg_banner_org;
 	}
-	public void setDg_banner(String dg_banner) {
-		this.dg_banner = dg_banner;
+	public void setDg_banner_org(String dg_banner_org) {
+		this.dg_banner_org = dg_banner_org;
+	}
+	public String getDg_banner_sys() {
+		return dg_banner_sys;
+	}
+	public void setDg_banner_sys(String dg_banner_sys) {
+		this.dg_banner_sys = dg_banner_sys;
 	}
 	public boolean isDg_public_scope() {
 		return dg_public_scope;
 	}
 	public void setDg_public_scope(int dg_public_scope) {
 		this.dg_public_scope = dg_public_scope==1;
+	}
+	public int getDg_hits() {
+		return dg_hits;
+	}
+	public void setDg_hits(int dg_hits) {
+		this.dg_hits = dg_hits;
 	}
 	public int getDg_capacity() {
 		return dg_capacity;

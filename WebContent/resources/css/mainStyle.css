@@ -9,10 +9,6 @@ main{
   padding:20px;
 }
 
-/* class 추가 */
-.purple {
-  color: #621ae5;
-}
 .more {
   display: inline-block;
   position: absolute;
@@ -20,15 +16,7 @@ main{
   font-size: 16px;
   color: #666666;
 }
-.green {
-  color: #03fa5a;
-}
-.gray {
-  color: #666666;
-}
-.red {
-  color: #f94b4b;
-}
+
 
 ul {
   padding-inline-start: 0px;

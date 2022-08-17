@@ -35,17 +35,17 @@ public class DogatherFrontController extends HttpServlet {
 
 		ActionTo transfer = null;
 		switch (command) {
-		case "/dogather/main.dg":
+		case "/dg/front.dg":
 			transfer=new ActionTo();
-			transfer.setPath("/app/dogather/main.jsp");
+			transfer.setPath("/app/dg/front.jsp");
 			transfer.setRedirect(false);
 			break;
-		case "/dogather/create.dg":
+		case "/dg/create.dg":
 			transfer=new ActionTo();
-			transfer.setPath("/app/dogather/create.jsp");
+			transfer.setPath("/app/dg/create.jsp");
 			transfer.setRedirect(false);
 			break;
-		case "/dogather/dogather_dup_check.dg":
+		case "/dg/dogather_dup_check.dg":
 			try {
 				transfer=new DogatherDupCheckAction().execute(req,resp);
 			} catch (Exception e) {
@@ -53,9 +53,17 @@ public class DogatherFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 			break;
-		case "/dogather/create_ok.dg":
+		case "/dg/create_ok.dg":
 			try {
 				transfer=new DogatherCreateOkAction().execute(req,resp);
+			} catch (Exception e) {
+				System.out.println(command+" : "+e);
+				e.printStackTrace();
+			}
+			break;
+		case "/dg/list.dg":
+			try {
+				transfer=new DogatherListAction().execute(req,resp);
 			} catch (Exception e) {
 				System.out.println(command+" : "+e);
 				e.printStackTrace();

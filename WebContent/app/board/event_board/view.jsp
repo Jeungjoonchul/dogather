@@ -45,7 +45,7 @@
 <input type="hidden" id="endPage" value="${endPage}">
 
 <input type="hidden" id="loginUser_nickname" value="${loginUser.user_nickname }"/>
-	<%@include file="../../../header.jsp"%>
+	<%@include file="/header.jsp"%>
 	<main>
 	<div id="main">
       <div id="post">
@@ -176,7 +176,7 @@
     </div>
 	</main>
 	
-	<%@include file="../../../footer.jsp"%>
+	<%@include file="/footer.jsp"%>
 </body>
 <script src="${cp }/resources/js/board.js"></script>
 <script>

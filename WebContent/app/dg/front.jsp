@@ -23,16 +23,52 @@
 
 <title>Doːgather</title>
 <link rel="stylesheet" href="${cp }/resources/css/include.css" />
-<link rel="stylesheet" href="${cp }/resources/css/mainStyle.css" />
-
+<style>
+	main{
+		width: 100%;
+	}
+	#main{
+		width: 80%;
+		margin: 0 auto;
+		display: flex;
+		justify-content: space-around;
+	}
+	.dg_box{
+		width: 20%;
+		height:300px;
+		border: 1px solid #eeeeee;
+		border-radius: 10px;
+		box-shadow: 10px 10px 5px #aaaaaa;
+	}
+	main a{
+		text-decoration: none;
+		color:#141414;
+		display:block;
+		width: 100%;
+		height: 100%
+	}
+	.hover{
+		background-color: #eeeeee;
+	}
+</style>
 </head>
 <body>
-<%@include file="../../header.jsp" %>
+<%@include file="/header.jsp" %>
 	<main>
 		<div id="main">
-	<a href="${cp }/dogather/create.dg">두개더 생성하기</a>
+			<div class="create_dg dg_box"><a href="${cp }/dg/create.dg">두개더 생성하기</a></div>
+			<div class="progress_dg dg_box"><a href="${cp }/dg/list.dg">진행 중 두개더 보기</a></div>
+			<div class="end_dg dg_box"><a href="#">종료된 두개더 보기</a></div>
+			<div class="epilogue_dg dg_box"><a href="#">두개더 후기 게시판</a></div>
 		</div>
 	</main>
-	<%@include file="../../footer.jsp" %>
+	<%@include file="/footer.jsp" %>
 </body>
+<script>
+	$('.dg_box').hover(function(e){
+		$(this).addClass('hover')
+	},function(e){
+		$(this).removeClass('hover')
+	});
+</script>
 </html>

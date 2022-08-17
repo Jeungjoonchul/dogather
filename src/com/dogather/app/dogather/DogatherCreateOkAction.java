@@ -36,31 +36,38 @@ public class DogatherCreateOkAction implements Action {
 		String dg_intro_short=multi.getParameter("dg_intro_short");
 		dg_intro_short=dg_intro_short.equals("")?null:dg_intro_short;
 		
-		String dg_banner=null;
+		String dg_banner_org=null;
+		String dg_banner_sys=null;
 		//배너가 있을때
 		if(sysName!=null) {
 			File file = new File(saveDirectory+"\\"+sysName);
 			File newFile=new File(saveDirectory+"\\"+uuid);
 			file.renameTo(newFile);
-			dg_banner=orgName+":"+uuid;
+			dg_banner_org=orgName;
+			System.out.println("dg_banner_org : "+dg_banner_org);
+			dg_banner_sys=uuid+"";
+			System.out.println("dg_banner_sys : "+dg_banner_sys);
 		}
 
 		int dg_public_scope=Integer.parseInt(multi.getParameter("dg_public_scope"));
-		System.out.println("dg_public_scope : "+dg_public_scope);
+
 		String dg_limit_scope=multi.getParameter("dg_limit_scope");
 		dg_limit_scope=dg_public_scope==0?"impossible":dg_limit_scope;
-		System.out.println("dg_limit_scope : "+dg_limit_scope);
+
 		String dg_expire = multi.getParameter("dg_expire");
 		dg_expire=dg_expire.equals("")?null:dg_expire;
 		
 		DogatherDTO dg=new DogatherDTO();
 		
-		dg.setUser_index(((UserDTO)req.getSession().getAttribute("loginUser")).getUser_index());
+		int user_index=((UserDTO)req.getSession().getAttribute("loginUser")).getUser_index();
+		
+		dg.setUser_index(user_index);
 		dg.setCategory_index(category_index);
 		dg.setDg_title(dg_title);
 		dg.setDg_intro(dg_intro);
 		dg.setDg_intro_short(dg_intro_short);
-		dg.setDg_banner(dg_banner);
+		dg.setDg_banner_org(dg_banner_org);
+		dg.setDg_banner_sys(dg_banner_sys);
 		dg.setDg_public_scope(dg_public_scope);
 		dg.setDg_limit_scope(dg_limit_scope);
 		dg.setDg_expire(dg_expire);
@@ -72,13 +79,14 @@ public class DogatherCreateOkAction implements Action {
 		PrintWriter out = resp.getWriter();
 		out.print("<script>");
 		if(ddao.dgCreate(dg)) {
+			int dg_index=ddao.getDgIndexWithDgTitle(dg_title);
+			ddao.dgJoin(dg_index,user_index);
 			out.print("alert('두개더가 개설되었습니다!');");
 		}else {
 			out.print("alert('두개더가 개설에 실패했습니다');");
 		}
-		out.print("location.href='"+req.getContextPath()+"/dogather/main.dg';");
+		out.print("location.href='"+req.getContextPath()+"/dg/front.dg';");
 		out.print("</script>");
 		return null;
 	}
-
 }

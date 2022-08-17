@@ -25,13 +25,14 @@ public class BoardListAction implements Action {
 		String keyword=req.getParameter("keyword");//검색 키워드
 		String page = req.getParameter("page");//현재 페이지
 		String subject = req.getParameter("subject");
+		keyword=keyword==null?"":keyword;
+		subject=subject==null?"":subject;
 
 		//페이징 구하는 util, 매개변수는 현재 페이지(null도 가능), 전체 게시글 개수 
-		BoardPaging paging = new BoardPaging(page, bdao.getBoardCnt(b_name,keyword));
-		
+		BoardPaging paging = new BoardPaging(page, bdao.getBoardCnt(b_name,keyword,subject));
+
 		//paging 객체의 startRow와 pageSize로 전체 게시글 목록 얻음
 		List<BoardDTO> b_list = bdao.getBoard(paging.getStartRow(),paging.getPageSize(),keyword,subject,b_name,r_name);
-
 		//전송을 위한 set
 		req.setAttribute("b_list", b_list);
 		req.setAttribute("totalPage", paging.getTotalPage());

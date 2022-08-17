@@ -27,34 +27,20 @@
         <link rel="stylesheet" href="${cp }/resources/css/mainStyle.css" />
         <style>
         	#banner_image{
-        		width: 100px;
-        		height: 100px;
+        		width: 256px;
+        		height: 256px;
         	}
         	td:first-of-type{text-align: left;}
         	th{font-size: 16px;}
         </style>
 </head>
 <body>
+	<%@include file="/loginCheck.jsp" %>
 
-<c:if test="${empty loginUser }">
-	<c:choose>
-		<c:when test="${empty cookie.autoLogin_check }">
-		<script>
-			alert('로그인 후 이용 가능합니다');
-			location.replace("${cp}/user/login.us");
-		</script>
-		</c:when>
-		<c:otherwise>
-		<script>
-			location.replace("${cp}/user/login.us");
-		</script>
-		</c:otherwise>
-	</c:choose>
-</c:if>
-	<%@include file="../../header.jsp" %>
+	<%@include file="/header.jsp" %>
 	<main>
 		<div id="main">
-	<form name="dogather_create" action="${cp }/dogather/create_ok.dg" method="post" enctype="multipart/form-data">
+	<form name="dogather_create" action="${cp }/dg/create_ok.dg" method="post" enctype="multipart/form-data">
 	<table>
 	<thead>
 	<tr>
@@ -187,7 +173,7 @@
 		var dg_title=$('#dg_title');
 		var dg_intro=$('#dg_intro');
 		$.ajax({
-			url : cp + '/dogather/dogather_dup_check.dg',
+			url : cp + '/dg/dogather_dup_check.dg',
 			type : 'post',
 			data : {"dg_title":dg_title.val()},
 			dataType : 'text',

@@ -17,10 +17,11 @@ public class BoardDAO {
 		}
 		
 		//전체 게시글 개수
-		public int getBoardCnt(String b_name,String keyword) {
+		public int getBoardCnt(String b_name,String keyword, String subject) {
 			HashMap<String, String> datas = new HashMap<String, String>();
 			datas.put("b_name", b_name);
 			datas.put("keyword", keyword);
+			datas.put("subject", subject);
 			
 			return sqlSession.selectOne("Board.getBoardCnt",datas);
 		}
