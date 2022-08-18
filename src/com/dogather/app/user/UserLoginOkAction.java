@@ -80,5 +80,4 @@ public class UserLoginOkAction implements Action {
 
 		return transfer;
 	}
-
 }

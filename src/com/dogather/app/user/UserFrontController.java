@@ -122,7 +122,24 @@ public class UserFrontController extends HttpServlet {
 			transfer.setPath("/app/user/myPage_Main.jsp");
 			transfer.setRedirect(false);
 			break;
+			
+		case "/user/pwCheck.us":
+			try {
+				transfer=new UserPwCheckAction().execute(req,resp);
+			} catch (Exception e) {
+				System.out.println(command+" : "+e);
+			}
+			break;
+			
+		case "/user/pwCheck_ok.us":
+			try {
+				transfer=new UserPwCheckOkAction().execute(req,resp);
+			} catch (Exception e) {
+				System.out.println(command+" : "+e);
+			}
+			break;
 		}
+		
 
 		// 전송 일괄처리
 		if (transfer != null) {

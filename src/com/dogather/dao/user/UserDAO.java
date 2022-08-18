@@ -47,6 +47,10 @@ public class UserDAO {
 	public void updateLastLogin(int user_index) {
 		sqlSession.update("User.updateLastLogin",user_index);
 	}
-	
+
+	public UserDTO getUserInfor(String user_email) {
+		return sqlSession.selectOne("User.getUserInfor",user_email);
+	}
+
 	
 }

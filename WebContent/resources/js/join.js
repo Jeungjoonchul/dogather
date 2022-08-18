@@ -123,8 +123,7 @@ $('#user_password').on(
 			}
 		});
 
-$('#user_password')
-		.on(
+$('#user_password').on(
 				'blur',
 				function() {
 					var user_password = $('#user_password').val();
