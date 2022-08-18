@@ -3,9 +3,6 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="cp" value="${pageContext.request.contextPath }"/>
 <style>
-* {
-  font-family: "Noto Sans KR", sans-serif;
-}
 
 div {
   width: 100%;
@@ -13,11 +10,7 @@ div {
   text-align: center;
   box-sizing: border-box;
 }
-body{
-  width: 100%;
-  height: 100%;
-  margin: 0;
-}
+
 #body {
   width: 100%;
   
@@ -37,22 +30,6 @@ li {
   display: block;
   list-style: none;
   text-align: center;
-}
-
-/* 마이페이지 */
-.hidden {
-  display: none;
-}
-#mypage {
-  width: 80%;
-  margin-top: 100px;
-}
-#mypage_container {
-  box-sizing: border-box;
-  width: 1202px;
-  height: 800px;
-  margin: 0 auto;
-  margin-bottom: 50px;
 }
 /* 사이드 */
 #side_menu {
@@ -84,50 +61,63 @@ li {
   font-weight: 700;
 }
 </style>
-<div id="side_menu">
-	<ul>
-    	<li>
-        	<a href="" class="cap">회원정보관리</a>
-		</li>
-		<li>
-        	<a href="javascript:changeprofile();"
-                id="changeprofile_side"
-                class="on">프로필 변경</a>
-        </li>
-        <li>
-        	<a href="javascript:changepw();" id="changepw_side">비밀번호 변경</a>
-        </li>
-        <li>
-        	<a href="javascript:changeinfo();" id="changeinfo_side">기본정보 변경</a>
-        </li>
-	</ul>
-    <ul>
-    	<li>
-        	<a href="./mypage_dogather.html" class="cap">두게더</a>
-        </li>
-        <li><a href="./mypage_dogather.html">마이 두게더</a></li>
-        <li><a href="./mypage_dogather.html">관심 카테고리 설정</a></li>
-    </ul>
-    <ul>
-        <li>
-        	<a href="" class="cap">커뮤니티</a>
-        </li>
-        <li>
-        	<a href="/mypage_community.html"
-                id="myboard_side">내 게시글</a>
-        </li>
-        <li>
-        	<a href="/mypage_community.html" id="friendslist_side">친구목록</a>
-        </li>
-        <li>
-        	<a href="/mypage_community.html" id="notebox_side">쪽지함</a>
-        </li>
-    </ul>
-    <ul>
-    	<li>
-        	<a href="" class="cap">고객센터</a>
-        </li>
-        <li><a href="">나의 문의 내역</a></li>
-        <li><a href="">회원탈퇴</a></li>
-    </ul>
-</div>
+  
+        <div id="side_menu">
+              <ul>
+                <li>
+                  <a href="${cp}/app/user/myPage_Main.jsp" class="cap">회원정보관리</a>
+                </li>
+                <li>
+                  <a
+                    href="${cp}/app/user/myPage_Main.jsp"
+                    id="porfile">프로필 변경</a>
+                </li>
+                <li>
+                  <a href="${cp}/app/user/myPage_Main.jsp" id="password"
+                    >비밀번호 변경</a
+                  >
+                </li>
+                <li>
+                  <a href="${cp}/app/user/myPage_Main.jsp" id="info"
+                    >기본정보 변경</a
+                  >
+                </li>
+              </ul>
+              <ul>
+                <li>
+                  <a href="${cp}/app/user/mypage/mydogather.jsp" class="cap">두게더</a>
+                </li>
+                <li><a id="mydogather" href="${cp}/app/user/mypage/mydogather.jsp">마이 두게더</a></li>
+                <li><a id="favorite_dogather" href="${cp}/app/user/mypage/favorite_dogather.jsp">관심 카테고리 설정</a></li>
+              </ul>
+              <ul>
+                <li>
+                  <a href="${cp}/app/user/mypage/community.jsp" class="cap">커뮤니티</a>
+                </li>
+                <li>
+                  <a
+                    href="${cp}/app/user/mypage/community.jsp"
+                    id="community"
+                    >내 게시글</a
+                  >
+                </li>
+                <li>
+                  <a id="friends" href="${cp}/app/user/mypage/friends.jsp" id="friendslist_side"
+                    >친구목록</a
+                  >
+                </li>
+                <li>
+                  <a id="notebox" href="${cp}/app/user/mypage/notebox.jsp" id="notebox_side"
+                    >쪽지함</a
+                  >
+                </li>
+              </ul>
+              <ul>
+                <li>
+                  <a href="${cp}/app/user/mypage/service.jsp" class="cap">고객센터</a>
+                </li>
+                <li><a id="service" href="${cp}/app/user/mypage/service.jsp">나의 문의 내역</a></li>
+                <li><br></li>
+                <li><a id="unregister" href="${cp}/app/user/mypage/unregister.jsp">회원탈퇴</a></li>
+              </ul>
+            </div>

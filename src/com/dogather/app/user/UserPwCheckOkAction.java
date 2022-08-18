@@ -35,7 +35,7 @@ public class UserPwCheckOkAction implements Action {
 
 		ActionTo transfer = new ActionTo();
 		transfer.setRedirect(false);
-		transfer.setPath("/app/user/myPage_Infor.jsp");
+		transfer.setPath("/app/user/myPage/infor.jsp");
 
 		return transfer;
 	}

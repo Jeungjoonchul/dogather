@@ -23,6 +23,21 @@
 <title>마이페이지</title>
 <!--<link rel="stylesheet" href="${cp }/resources/css/myPage_sideBar.css" />-->
 </head>
+<style>
+
+#mypage {
+  width: 80%;
+  margin-top: 160px;
+}
+#mypage_container {
+  box-sizing: border-box;
+  width: 1202px;
+  height: 800px;
+  margin: 0 auto;
+  margin-bottom: 50px;
+}
+
+</style>
 <body>
 		<c:if test="${loginUser == null }">
 			<script>
@@ -32,24 +47,29 @@
 			</script>
 		</c:if>
 	<%@include file="../../../header.jsp"%>
-<main>
-	<table>
-		<form method="post" id="pwCheck" name="pwCheckForm" action="${cp}/user/pwCheck_ok.us?loginUser=${loginUser.user_email}">
-			<tr>
-				<td>현재 비밀번호</td>
-				<td><input type="password" name="user_password" id="user_password" maxlength="24"></td>
-				<input type="hidden" name="user_email" id="user_email" value="${loginUser.user_email}">
-			</tr>
-				<input type="submit" value="확인">
-		</form>
-	</table>
-	
-	
+<div id="mypage">
+	<div id="mypage_container">
+		<%@include file="../../../myPage_sideBar.jsp" %> 
+		<div id="mypage_area">
+        	<div id="check_pw">
+				<form method="post" id="pwCheck" name="pwCheckForm" action="${cp}/user/pwCheck_ok.us?loginUser=${loginUser.user_email}">
+				<table>
+					<tr>
+						<td>현재 비밀번호</td>
+						<td><input type="password" name="user_password" id="user_password" maxlength="24"></td>
+					<input type="hidden" name="user_email" id="user_email" value="${loginUser.user_email}">
+					</tr>
+				</table>
+					<input type="submit" value="확인">
+				</form>
+        	</div>
+    	</div>
+	</div>
+</div>	
 	
 	<%@include file="../../../footer.jsp"%>
+
 	
-	
-</main>
 </body>
 	<script src="${cp }/resources/js/myPage.js"></script>
 </html>
