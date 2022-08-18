@@ -22,7 +22,7 @@
 
 <title>Doːgather</title>
 <link rel="stylesheet" href="${cp }/resources/css/include.css" />
-<link rel="stylesheet" href="${cp }/resources/css/dogatherList.css" />
+<link rel="stylesheet" href="${cp }/resources/css/dogatherCatalog.css" />
 </head>
 <style>
 
@@ -68,7 +68,7 @@
 										<p class="dg_maker">만든 사람 : ${dg.user_nickname }</p>
 										<p class="dg_info"><span>참여자 수 : ${dg.dg_member_cnt }</span><span>&nbsp;<c:if test="${dg.dg_expire!=null }">종료일 : ${dg.dg_expire }</c:if></span></p>
 										<div class="list_container_contents"><p class="dg_intro">${dg.dg_intro }</p></div>
-										<button class="viewMore" type="button">자세히 보기</button>
+											<a class="viewMore" href="${cp}/dg/detail.dg?dg_index=${dg.dg_index}&page=${page}&criteria_key=${criteria_key}&align=${align}&keyword=${keyword}&category_index=${category_index}">자세히 보기</a>
 									</div>
 								</div>
 								</c:when>
@@ -94,7 +94,7 @@
 										<p class="dg_maker">만든 사람 : ${dg.user_nickname }</p>
 										<p class="dg_info"><span>참여자 수 : ${dg.dg_member_cnt }</span><span>&nbsp;<c:if test="${dg.dg_expire!=null }">종료일 : ${dg.dg_expire }</c:if></span></p>
 										<div class="list_container_contents"><p class="dg_intro">${dg.dg_intro }</p></div>
-										<button class="viewMore" type="button">자세히 보기</button>
+										<a class="viewMore" href="${cp}/dg/detail.dg?dg_index=${dg.dg_index}&page=${page}&criteria_key=${criteria_key}&align=${align}&keyword=${keyword}&category_index=${category_index}">자세히 보기</a>
 									</div>
 								</div>
 								</c:otherwise>
@@ -106,7 +106,7 @@
 						<div class="page-btns" style="display: none">
 							<div>
 								<c:if test="${startPage!=1 }">
-									<a href="${cp }/dg/list.dg?page=${startPage-1}&criteria=${criteria}&align=${align}&keyword=${keyword}&category_index=${category_index}">&lt;</a>
+									<a href="${cp }/dg/catalog.dg?page=${startPage-1}&criteria_key=${criteria_key}&align=${align}&keyword=${keyword}&category_index=${category_index}">&lt;</a>
 								</c:if> 
 								<c:forEach begin="${startPage }" end="${endPage }" var="i">
 									<c:choose>
@@ -114,12 +114,12 @@
 											<span class="nowPage">${i }</span>
 										</c:when>
 										<c:otherwise>
-											<a href="${cp }/dg/list.dg?page=${i}&criteria=${criteria}&align=${align}&keyword=${keyword}&category_index=${category_index}">${i}</a>
+											<a href="${cp }/dg/catalog.dg?page=${i}&criteria_key=${criteria_key}&align=${align}&keyword=${keyword}&category_index=${category_index}">${i}</a>
 										</c:otherwise>
 									</c:choose>
 								</c:forEach>
 								<c:if test="${endPage!=totalPage }">
-									<a href="${cp }/dg/list.dg?page=${endPage+1}&criteria=${criteria}&align=${align}&keyword=${keyword}&category_index=${category_index}">&gt;</a>
+									<a href="${cp }/dg/catalog.dg?page=${endPage+1}&criteria_key=${criteria_key}&aalign=${align}&keyword=${keyword}&category_index=${category_index}">&gt;</a>
 								</c:if>
 							</div>
 						</div>
@@ -153,14 +153,18 @@
 		}
 	});
 	
-	$('.viewMore').on('click',function(e){
-		
-	});
-	
 	$('.dogathermain_list').hover(function(e){
 		$(this).css('transform','translate(-10px,-10px)');
+		$(this).css('transition-property','all');
+		$(this).css('transition-duration','0.5s');
+		$(this).css('transition-delay','0.1s');
+		$(this).css('box-shadow','20px 20px 10px #aaaaaa');
 	},function(e){
 		$(this).css('transform','translate(0,0)');
+		$(this).css('transition-property','all');
+		$(this).css('transition-duration','0.5s');
+		$(this).css('transition-delay','0.1s');
+		$(this).css('box-shadow','10px 10px 5px #aaaaaa')
 	});
 </script>
 </html>

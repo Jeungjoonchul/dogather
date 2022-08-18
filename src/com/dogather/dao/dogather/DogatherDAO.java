@@ -54,4 +54,16 @@ SqlSession sqlSession;
 		
 		return sqlSession.selectOne("Dogather.getDgCnt", datas);
 	}
+
+	public List<DogatherDTO> getDgListOnMain(String criteria) {
+		return sqlSession.selectList("Dogather.getDgListOnMain", criteria);
+	}
+
+	public DogatherDTO getDetail(int dg_index) {
+		return sqlSession.selectOne("Dogather.getDetail", dg_index);
+	}
+
+	public List<Integer> getDgMembers(int dg_index) {
+		return sqlSession.selectList("Dogather.getDgMembers", dg_index);
+	}
 }

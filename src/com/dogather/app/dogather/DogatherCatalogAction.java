@@ -13,15 +13,16 @@ import com.dogather.dao.dogather.DogatherDAO;
 import com.dogather.dto.dogather.DogatherDTO;
 import com.dogather.util.DogatherPaging;
 
-public class DogatherListAction implements Action {
+public class DogatherCatalogAction implements Action {
 
 	@Override
 	public ActionTo execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		DogatherDAO ddao = new DogatherDAO();
 		
 		//정렬 기준(등록순, 회원순, 조회순)
-		String criteria = req.getParameter("criteria");
-		criteria = criteria==null?"dg_index":criteria;
+		String criteria_key = req.getParameter("criteria_key");
+		criteria_key = criteria_key==null?"dg_index":criteria_key;
+		String criteria = criteria_key.equals("dg_member_cnt")?"du."+criteria_key:"d."+criteria_key;
 		System.out.println("criteria : "+criteria);
 
 		//정렬 방법(내림차순, 오름차순)
@@ -53,7 +54,7 @@ public class DogatherListAction implements Action {
 		List<DogatherDTO> list = ddao.getDgList(paging.getStartRow(),paging.getPageSize(),criteria,align,keyword,category_index);
 		System.out.println("list.size() : "+list.size());
 		req.setAttribute("list", list);
-		req.setAttribute("criteria", criteria);
+		req.setAttribute("criteria_key", criteria_key);
 		req.setAttribute("align", align);
 		req.setAttribute("keyword", keyword);
 		req.setAttribute("category_index", category_index);
@@ -66,7 +67,7 @@ public class DogatherListAction implements Action {
 		
 		ActionTo transfer = new ActionTo();
 		transfer.setRedirect(false);
-		transfer.setPath("/app/dg/list.jsp");
+		transfer.setPath("/app/dg/catalog.jsp");
 		
 		return transfer;
 	}

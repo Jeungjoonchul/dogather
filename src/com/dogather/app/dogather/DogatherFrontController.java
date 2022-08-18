@@ -61,9 +61,17 @@ public class DogatherFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 			break;
-		case "/dg/list.dg":
+		case "/dg/catalog.dg":
 			try {
-				transfer=new DogatherListAction().execute(req,resp);
+				transfer=new DogatherCatalogAction().execute(req,resp);
+			} catch (Exception e) {
+				System.out.println(command+" : "+e);
+				e.printStackTrace();
+			}
+			break;
+		case "/dg/detail.dg":
+			try {
+				transfer=new DogatherDetailAction().execute(req,resp);
 			} catch (Exception e) {
 				System.out.println(command+" : "+e);
 				e.printStackTrace();

@@ -34,7 +34,7 @@
 			d.dg_intro_short,
 			d.dg_banner_org,
 			d.dg_banner_sys,
-			dg_public_scope,
+			d.dg_public_scope,
 			d.dg_hits,
 			d.dg_capacity,
 			d.dg_limit_scope,
@@ -48,7 +48,7 @@
 		on d.dg_index=du.dg_index 
 		where d.dg_inactive=0 and d.dg_public_scope=1 and d.category_index like('%${category_index}%') and(case when d.dg_expire is not null then d.dg_expire>now() else d.dg_expire is null end) 
 			and(d.dg_title like('%${keyword}%') or d.dg_intro like('%${keyword}%') or d.dg_intro_short like('%${keyword}%') or u.user_nickname like('%${keyword}%'))  
-			order by d.${criteria} ${align} limit #{startRow}, #{pageSize}
+			order by ${criteria} ${align} limit #{startRow}, #{pageSize}
 	</select>
 	
 	<select id="getDgCnt" parameterType="hashmap" resultType="_int">
@@ -58,5 +58,61 @@
 		on d.user_index=u.user_index 
 		where d.dg_inactive=0 and d.dg_public_scope=1 and d.category_index like('%${category_index}%') and(case when d.dg_expire is not null then d.dg_expire>now() else d.dg_expire is null end)
 		and(d.dg_title like('%${keyword}%') or d.dg_intro like('%${keyword}%') or d.dg_intro_short like('%${keyword}%') or u.user_nickname like('%${keyword}%'))
+	</select>
+	
+	<select id="getDgListOnMain" parameterType="string" resultType="DogatherDTO">
+		select 
+			d.dg_index,
+			u.user_index,
+			u.user_nickname,
+			d.dg_reg_date,
+			d.category_index,
+			d.dg_title,
+			d.dg_intro,
+			d.dg_intro_short,
+			d.dg_banner_org,
+			d.dg_banner_sys,
+			d.dg_public_scope,
+			d.dg_hits,
+			d.dg_capacity,
+			d.dg_limit_scope,
+			d.dg_expire,
+			d.dg_inactive,
+			du.dg_member_cnt 
+		from t_dogather d
+		join t_user u 
+		on u.user_index=d.user_index 
+		left join (select count(user_index) as dg_member_cnt, dg_index from t_dogather_user group by dg_index) as du 
+		on d.dg_index=du.dg_index 
+		where d.dg_inactive=0 and d.dg_public_scope=1 and(case when d.dg_expire is not null then d.dg_expire>now() else d.dg_expire is null end) 
+			order by ${criteria} desc limit 0,5
+	</select>
+	
+	<select id="getDetail" parameterType="_int" resultType="DogatherDTO">
+		select 
+			d.dg_index,
+			u.user_index,
+			u.user_nickname,
+			d.dg_reg_date,
+			d.category_index,
+			d.dg_title,
+			d.dg_intro,
+			d.dg_intro_short,
+			d.dg_banner_org,
+			d.dg_banner_sys,
+			d.dg_public_scope,
+			d.dg_hits,
+			d.dg_capacity,
+			d.dg_limit_scope,
+			d.dg_expire,
+			d.dg_inactive
+		from t_dogather d
+		join t_user u
+		on d.user_index=u.user_index
+		where d.dg_index=${dg_index}
+	</select>
+	
+	<select id="getDgMembers" parameterType="_int" resultType="_int">
+		select user_index from t_dogather_user where dg_index=#{dg_index} and dg_user_active=1
 	</select>
  </mapper>

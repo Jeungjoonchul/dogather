@@ -11,8 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 import com.dogather.action.Action;
 import com.dogather.action.ActionTo;
 import com.dogather.dao.board.BoardDAO;
+import com.dogather.dao.dogather.DogatherDAO;
 import com.dogather.dao.user.UserDAO;
 import com.dogather.dto.board.BoardDTO;
+import com.dogather.dto.dogather.DogatherDTO;
 import com.dogather.dto.user.UserDTO;
 
 public class MainAction implements Action {
@@ -45,6 +47,21 @@ public class MainAction implements Action {
 		List<BoardDTO> eb_list = bdao.getBoardListOnMain(eb,ebr);
 		req.setAttribute("eb_list", eb_list);
 		
+		//두개더 리스트 5개 가져오기
+		DogatherDAO ddao=new DogatherDAO();
+		
+		String hot_criteria = "du.dg_member_cnt";
+		List<DogatherDTO> hot_list = ddao.getDgListOnMain(hot_criteria);
+		req.setAttribute("hot_list", hot_list);
+		System.out.println(hot_list.size());
+		String latest_criteria = "d.dg_index";
+		List<DogatherDTO> latest_list = ddao.getDgListOnMain(latest_criteria);
+		req.setAttribute("latest_list", latest_list);
+		System.out.println(latest_list.size());
+		String mostView_criteria = "d.dg_hits";
+		List<DogatherDTO> mostView_list = ddao.getDgListOnMain(mostView_criteria);
+		req.setAttribute("mostView_list", mostView_list);
+		System.out.println(mostView_list.size());
 		// 자동 로그인 체크 여부
 		String user_email = null;
 

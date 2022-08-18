@@ -62,7 +62,7 @@
 		</tr>
 		<tr>
 			<th><label for="dg_title">두개더 이름(필수)</label></th>
-			<td><input type="text" name="dg_title" id="dg_title"/></td>
+			<td><input type="text" name="dg_title" id="dg_title" maxlength="10"/></td>
 		</tr>
 		<tr>
 			<th>	<label for="dg_intro">두개더 설명(필수)</label></th>
