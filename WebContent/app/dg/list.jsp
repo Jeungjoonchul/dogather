@@ -119,7 +119,7 @@
 									</c:choose>
 								</c:forEach>
 								<c:if test="${endPage!=totalPage }">
-									<a href="${cp }/dg/list.dg?page=${startPage-1}&criteria=${criteria}&align=${align}&keyword=${keyword}&category_index=${category_index}">&gt;</a>
+									<a href="${cp }/dg/list.dg?page=${endPage+1}&criteria=${criteria}&align=${align}&keyword=${keyword}&category_index=${category_index}">&gt;</a>
 								</c:if>
 							</div>
 						</div>
