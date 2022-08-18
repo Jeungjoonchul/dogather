@@ -17,6 +17,7 @@ public class DogatherDTO {
 	private String dg_limit_scope;
 	private String dg_expire;
 	private boolean dg_inactive;
+	private int dg_member_cnt;
 	
 	public int getDg_index() {
 		return dg_index;
@@ -113,5 +114,11 @@ public class DogatherDTO {
 	}
 	public void setDg_inactive(int dg_inactive) {
 		this.dg_inactive = dg_inactive==1;
+	}
+	public int getDg_member_cnt() {
+		return dg_member_cnt;
+	}
+	public void setDg_member_cnt(int dg_member_cnt) {
+		this.dg_member_cnt = dg_member_cnt;
 	}
 }

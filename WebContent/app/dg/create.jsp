@@ -69,8 +69,8 @@
 			<td><textarea name="dg_intro" id="dg_intro"rows="6" cols="15"></textarea></td>
 		</tr>
 		<tr>
-			<th>	<label for="dg_intro_short">짧은 설명</label></th>
-			<td><input type="text" name="dg_intro_short" id="dg_intro_short"/></td>
+			<th>	<label for="dg_intro_short">짧은 설명(15글자 이내)</label></th>
+			<td><input type="text" name="dg_intro_short" id="dg_intro_short" maxlength='15' style="width: 300px;"/></td>
 		</tr>
 		<tr>
 			<th><label for="dg_banner">배너</label></th>

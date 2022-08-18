@@ -39,10 +39,13 @@
 			d.dg_capacity,
 			d.dg_limit_scope,
 			d.dg_expire,
-			d.dg_inactive 
+			d.dg_inactive,
+			du.dg_member_cnt 
 		from t_dogather d
 		join t_user u 
 		on u.user_index=d.user_index 
+		left join (select count(user_index) as dg_member_cnt, dg_index from t_dogather_user group by dg_index) as du 
+		on d.dg_index=du.dg_index 
 		where d.dg_inactive=0 and d.dg_public_scope=1 and d.category_index like('%${category_index}%') and(case when d.dg_expire is not null then d.dg_expire>now() else d.dg_expire is null end) 
 			and(d.dg_title like('%${keyword}%') or d.dg_intro like('%${keyword}%') or d.dg_intro_short like('%${keyword}%') or u.user_nickname like('%${keyword}%'))  
 			order by d.${criteria} ${align} limit #{startRow}, #{pageSize}
@@ -53,7 +56,7 @@
 		from t_dogather d 
 		left join(select user_nickname,user_index from t_user) u 
 		on d.user_index=u.user_index 
-		where d.dg_inactive=0 and d.dg_public_scope=1 and d.category_index like('%${category_index}%') and d.dg_expire>now() 
+		where d.dg_inactive=0 and d.dg_public_scope=1 and d.category_index like('%${category_index}%') and(case when d.dg_expire is not null then d.dg_expire>now() else d.dg_expire is null end)
 		and(d.dg_title like('%${keyword}%') or d.dg_intro like('%${keyword}%') or d.dg_intro_short like('%${keyword}%') or u.user_nickname like('%${keyword}%'))
 	</select>
  </mapper>

@@ -36,7 +36,7 @@
 		<div id="main">
 			<div id="dg_present">
 				<div class="dg_present_title">
-					<a href=""> <span class="purple">진행중</span><span> 두게더</span>
+					<a href="${cp }/dg/list.dg"> <span class="purple">진행중</span><span> 두게더</span>
 					</a>
 				</div>
 			</div>
@@ -64,15 +64,17 @@
 									</c:otherwise>
 								</c:choose>
 									<div class="list_container">
-										<span class="dg_title">제목</span> <br> <span>시작일: / 종료일: </span><br>
-										<p class="list_container_contents"></p>
-										<button class="ViewMore" type="button">자세히 보기</button>
+										<h3 class="dg_title">${dg.dg_title }</h3>
+										<p class="dg_maker">만든 사람 : ${dg.user_nickname }</p>
+										<p class="dg_info"><span>참여자 수 : ${dg.dg_member_cnt }</span><span>&nbsp;<c:if test="${dg.dg_expire!=null }">종료일 : ${dg.dg_expire }</c:if></span></p>
+										<div class="list_container_contents"><p class="dg_intro">${dg.dg_intro }</p></div>
+										<button class="viewMore" type="button">자세히 보기</button>
 									</div>
 								</div>
 								</c:when>
 								
 								<c:otherwise>
-								<div class="dogathermain_list dg_number${i }" style="display: none">
+								<div class="dogathermain_list dg_number${i }" style="display: none;">
 								<c:choose>
 									<c:when test="${dg.dg_banner_sys eq null }">
 										<c:choose>
@@ -88,9 +90,11 @@
 									</c:otherwise>
 								</c:choose>
 									<div class="list_container">
-										<span class="dg_title">제목</span> <br> <span>시작일: / 종료일: </span><br>
-										<p class="list_container_contents"></p>
-										<button class="ViewMore" type="button">자세히 보기</button>
+										<h3 class="dg_title">${dg.dg_title }</h3>
+										<p class="dg_maker">만든 사람 : ${dg.user_nickname }</p>
+										<p class="dg_info"><span>참여자 수 : ${dg.dg_member_cnt }</span><span>&nbsp;<c:if test="${dg.dg_expire!=null }">종료일 : ${dg.dg_expire }</c:if></span></p>
+										<div class="list_container_contents"><p class="dg_intro">${dg.dg_intro }</p></div>
+										<button class="viewMore" type="button">자세히 보기</button>
 									</div>
 								</div>
 								</c:otherwise>
@@ -102,7 +106,7 @@
 						<div class="page-btns" style="display: none">
 							<div>
 								<c:if test="${startPage!=1 }">
-									<a href="${cp }/dg/list.dg?page=${startPage-1}">&lt;</a>
+									<a href="${cp }/dg/list.dg?page=${startPage-1}&criteria=${criteria}&align=${align}&keyword=${keyword}&category_index=${category_index}">&lt;</a>
 								</c:if> 
 								<c:forEach begin="${startPage }" end="${endPage }" var="i">
 									<c:choose>
@@ -110,12 +114,12 @@
 											<span class="nowPage">${i }</span>
 										</c:when>
 										<c:otherwise>
-											<a href="${cp}/dg/list.dg?page=${i}">${i}</a>
+											<a href="${cp }/dg/list.dg?page=${startPage-1}&criteria=${criteria}&align=${align}&keyword=${keyword}&category_index=${category_index}">${i}</a>
 										</c:otherwise>
 									</c:choose>
 								</c:forEach>
 								<c:if test="${endPage!=totalPage }">
-									<a href="${cp }/dg/list.dg?page=${endPage+1}">&gt;</a>
+									<a href="${cp }/dg/list.dg?page=${startPage-1}&criteria=${criteria}&align=${align}&keyword=${keyword}&category_index=${category_index}">&gt;</a>
 								</c:if>
 							</div>
 						</div>
@@ -133,4 +137,30 @@
 	</main>
 	<%@include file="/footer.jsp"%>
 </body>
+<script>
+	var next = 5;
+	var end = next+5;
+
+	$('.addlist').on('click',function(){
+		for (var i = next; i < end; i++) {
+		$('.dg_number'+i).show(500);		
+		}
+		next=end;
+		end=next+5;
+		if(next==20){
+			$('.addlist').hide();
+			$('.page-btns').show();
+		}
+	});
+	
+	$('.viewMore').on('click',function(e){
+		
+	});
+	
+	$('.dogathermain_list').hover(function(e){
+		$(this).css('transform','translate(-10px,-10px)');
+	},function(e){
+		$(this).css('transform','translate(0,0)');
+	});
+</script>
 </html>

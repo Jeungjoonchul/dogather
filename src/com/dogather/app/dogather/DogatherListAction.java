@@ -42,8 +42,13 @@ public class DogatherListAction implements Action {
 		String page = req.getParameter("page");
 		int totalCnt=ddao.getDgCnt(keyword,category_index);
 		DogatherPaging paging = new DogatherPaging(page, totalCnt);
+		System.out.println("Page : "+paging.getPage());
+		System.out.println("TotalCnt : "+paging.getTotalCnt());
+		System.out.println("TotalPage : "+paging.getTotalPage());
 		System.out.println("StartRow : "+paging.getStartRow());
 		System.out.println("PageSize : "+paging.getPageSize());
+		System.out.println("StartPage : "+paging.getStartPage());
+		System.out.println("EndPage : "+paging.getEndPage());
 		
 		List<DogatherDTO> list = ddao.getDgList(paging.getStartRow(),paging.getPageSize(),criteria,align,keyword,category_index);
 		System.out.println("list.size() : "+list.size());
