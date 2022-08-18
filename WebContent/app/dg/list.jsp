@@ -114,7 +114,7 @@
 											<span class="nowPage">${i }</span>
 										</c:when>
 										<c:otherwise>
-											<a href="${cp }/dg/list.dg?page=${startPage-1}&criteria=${criteria}&align=${align}&keyword=${keyword}&category_index=${category_index}">${i}</a>
+											<a href="${cp }/dg/list.dg?page=${i}&criteria=${criteria}&align=${align}&keyword=${keyword}&category_index=${category_index}">${i}</a>
 										</c:otherwise>
 									</c:choose>
 								</c:forEach>
