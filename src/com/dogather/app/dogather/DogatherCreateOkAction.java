@@ -33,6 +33,8 @@ public class DogatherCreateOkAction implements Action {
 		int category_index=Integer.parseInt(multi.getParameter("category_index"));
 		String dg_title=multi.getParameter("dg_title");
 		String dg_intro=multi.getParameter("dg_intro");
+		dg_intro=dg_intro.replaceAll("\r\n","<br>");
+		System.out.println(dg_intro);
 		String dg_intro_short=multi.getParameter("dg_intro_short");
 		dg_intro_short=dg_intro_short.equals("")?null:dg_intro_short;
 		

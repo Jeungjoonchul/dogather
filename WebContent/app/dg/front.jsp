@@ -64,11 +64,5 @@
 	</main>
 	<%@include file="/footer.jsp" %>
 </body>
-<script>
-	$('.dg_box').hover(function(e){
-		$(this).addClass('hover')
-	},function(e){
-		$(this).removeClass('hover')
-	});
-</script>
+<script src="${cp }/resources/js/dg.js"></script>
 </html>

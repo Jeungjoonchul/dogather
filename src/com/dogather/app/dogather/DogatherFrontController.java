@@ -77,6 +77,32 @@ public class DogatherFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 			break;
+		case "/dg/join.dg":
+			transfer=new ActionTo();
+			transfer.setRedirect(false);
+			transfer.setPath("/app/dg/join.jsp");
+			break;
+		case "/dg/join_ok.dg":
+			try {
+				transfer=new DogatherJoinOkAction().execute(req,resp);
+			} catch (Exception e) {
+				System.out.println(command+" : "+e);
+				e.printStackTrace();
+			}
+			break;
+		case "/dg/post_write.dg":
+			transfer=new ActionTo();
+			transfer.setRedirect(false);
+			transfer.setPath("/app/dg/write.jsp");
+			break;
+		case "/dg/post_on.dg":
+			try {
+				transfer=new DogatherPostOnAction().execute(req,resp);
+			} catch (Exception e) {
+				System.out.println(command+" : "+e);
+				e.printStackTrace();
+			}
+			break;
 		}
 
 		// 전송 일괄처리

@@ -17,7 +17,6 @@
       rel="stylesheet"
     />
     <link rel="shortcut icon" href="${cp}/resources/images/favicon.png" />
-    <!-- include libraries(jQuery, bootstrap) -->
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 

@@ -9,6 +9,7 @@
 		<typeAlias type="com.dogather.dto.board.BoardDTO" alias="BoardDTO"/>
 		<typeAlias type="com.dogather.dto.board.ReplyDTO" alias="ReplyDTO"/>
 		<typeAlias type="com.dogather.dto.dogather.DogatherDTO" alias="DogatherDTO"/>
+		<typeAlias type="com.dogather.dto.dogather.DogatherPostDTO" alias="DogatherPostDTO"/>
 	</typeAliases>
 	<environments default="development">
 		<environment id="development">

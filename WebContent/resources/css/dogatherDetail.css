@@ -58,6 +58,17 @@ main ul {
     height: 70%;
     
   }
+  .list_container_contents{
+  max-height:300px;
+  	overflow: hidden;
+  	text-overflow: ellipsis;
+  	word-break: break-all;
+  }
+  .dg_intro_detail{
+  	position: absolute;
+  	background-color: green;
+  	top:550px;
+  }
   .joindg{
   display:block;
     background-color: #141414;

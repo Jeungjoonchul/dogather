@@ -257,65 +257,43 @@ create table t_dogather_user(
 create table t_dogather_user_target(
 	dg_index int, #dogather 인덱스 번호(ex : 1)
     user_index int, #유저 번호(ex: 1)
-    dgu_target_date datetime, #(ex : 2022-12-25)
-    dgu_target text, #목표(ex : 70kg까지 살빼기 / 살빼기)
+    dg_user_target_date datetime, #(ex : 2022-12-25)
+    dg_user_target text, #목표(ex : 70kg까지 살빼기 / 살빼기)
     constraint dogatherUserTarget_dogather_fk foreign key(dg_index) references t_dogather(dg_index),
     constraint dogatherUserTarget_user_fk foreign key(user_index) references t_user(user_index)
 );
 
-#dogather 인증글
-create table t_dogather_do(
-	dd_index int primary key auto_increment, #dogather 인증글 번호(ex : 1)
+#dogather post
+create table t_dogather_post(
+	dp_index int primary key auto_increment, #dogather 인증글 번호(ex : 1)
     dg_index int, #dogather 인덱스 번호(ex : 1)
     user_index int, #작성자 번호(ex : 1)
-    dd_reg_date datetime default now(), #작성 날짜(ex : 2022-07-26)
-    dd_update_date datetime default now(), #수정 날짜(ex : 2022-07-26)
-    dd_contents text, #작성 내용(ex : 오늘도 해냈다)
-    dd_inactive boolean default false not null, #삭제 여부(ex : 'f')
-    dd_like_user_index text, #인증 글에 좋아요 누른 유저(ex : 2,4,6,7,...)
-    dd_image1 text, #인증 사진1t_free_board
-    dd_image2 text, #인증 사진2
-    dd_image3 text, #인증 사진3
+    dp_reg_date datetime default now(), #작성 날짜(ex : 2022-07-26)
+    dp_update_date datetime default now(), #수정 날짜(ex : 2022-07-26)
+    dp_contents text, #작성 내용(ex : 오늘도 해냈다)
+    dp_like_user_index text, #인증 글에 좋아요 누른 유저(ex : 2,4,6,7,...)
+    dp_inactive boolean default false not null, #삭제 여부(ex : 'f')
+    dp_image1_org varchar(300), #인증 사진1
+	dp_image1_sys varchar(300),
+    dp_image2_org varchar(300), #인증 사진2
+	dp_image2_sys varchar(300),
+    dp_image3_org varchar(300), #인증 사진3
+	dp_image3_sys varchar(300),
+    dp_type enum('feed','cert') not null,#피드인지 인증글인지 확인용
     constraint dogatherDo_dogather_fk foreign key(dg_index) references t_dogather(dg_index),
     constraint dogatherDo_user_fk foreign key(user_index) references t_user(user_index)
 );
 
-#dogather 인증글 댓글
-create table t_dd_reply(
-	dd_index int, #dogather 인증글 번호(ex : 1)
+#dogather post reply
+create table t_dp_reply(
+	dp_index int, #dogather 인증글 번호(ex : 1)
     user_index int, #댓글 작성자(ex : 2)
-    ddr_reg_date datetime default now(), #댓글 작성 시간(ex : 2022-07-26)
-    ddr_update_date datetime default now(), #댓글 수정 시간(ex : )<-수정 안함
-    ddr_contents text, #댓글 내용(ex : 축하여~)
-    ddr_inactive boolean default false not null, #댓글 삭제 여부(ex : 'f')
+    dpr_reg_date datetime default now(), #댓글 작성 시간(ex : 2022-07-26)
+    dpr_update_date datetime default now(), #댓글 수정 시간(ex : )<-수정 안함
+    dpr_contents text, #댓글 내용(ex : 축하여~)
+    dpr_inactive boolean default false not null, #댓글 삭제 여부(ex : 'f')
     constraint ddReply_dogather_do_fk foreign key(dd_index) references t_dogather_do(dd_index),
     constraint ddReply_user_fk foreign key(user_index) references t_user(user_index)
-);
-
-#dogather feed
-create table t_dogather_feed(
-	df_index int primary key auto_increment, #dogather 피드 번호(ex : 1)
-    dg_index int, #dogather 인덱스 번호(ex : 1)
-    user_index int, #작성자 번호(ex : 2)
-    df_reg_date datetime default now(), #작성 날짜(ex : 2022-07-26)
-    df_update_date datetime default now(), #수정 날짜(ex : )
-    df_contents text, #작성 내용(ex : 여긴 어떤곳인가요?)
-    df_like_user_index text, #인증 글에 좋아요 누른 유저(ex : 1,3,5,...)
-    df_inactive boolean default false not null, #삭제 여부(ex : 'f')
-    constraint dogatherFeed_dogather_fk foreign key(dg_index) references t_dogather(dg_index),
-    constraint dogatherFeed_user_fk foreign key(user_index) references t_user(user_index)
-);
-
-#dogather feed 댓글
-create table t_df_reply(
-	df_index int, #dogather 피드 번호(ex : 1)
-    user_index int, #댓글 작성자(ex : 1)
-    dfr_reg_date datetime default now(), #댓글 작성 시간(ex : 2022-07-26)
-    dfr_update_date datetime default now(), #댓글 수정 시간(ex : )
-    dfr_contents text, #댓글 내용(ex : 살빼는 곳입니다)
-    dfr_inactive boolean default false not null, #댓글 삭제 여부(ex : 'f')
-    constraint dfReply_dogather_feed_fk foreign key(df_index) references t_dogather_feed(df_index),
-    constraint dfReply_user_fk foreign key(user_index) references t_user(user_index)
 );
 
 #############################################################################################

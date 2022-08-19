@@ -48,7 +48,7 @@
 						<c:forEach var="dg" items="${list}">
 							<c:choose>
 								<c:when test="${i<5}">
-								<div class="dogathermain_list dg_number${i }">
+								<div class="dg_number${i } dogathermain_list">
 								<c:choose>
 									<c:when test="${dg.dg_banner_sys eq null }">
 										<c:choose>
@@ -74,7 +74,7 @@
 								</c:when>
 								
 								<c:otherwise>
-								<div class="dogathermain_list dg_number${i }" style="display: none;">
+								<div class="dg_number${i } dogathermain_list" style="display: none;">
 								<c:choose>
 									<c:when test="${dg.dg_banner_sys eq null }">
 										<c:choose>
@@ -137,34 +137,5 @@
 	</main>
 	<%@include file="/footer.jsp"%>
 </body>
-<script>
-	var next = 5;
-	var end = next+5;
-
-	$('.addlist').on('click',function(){
-		for (var i = next; i < end; i++) {
-		$('.dg_number'+i).show(500);		
-		}
-		next=end;
-		end=next+5;
-		if(next==20){
-			$('.addlist').hide();
-			$('.page-btns').show();
-		}
-	});
-	
-	$('.dogathermain_list').hover(function(e){
-		$(this).css('transform','translate(-10px,-10px)');
-		$(this).css('transition-property','all');
-		$(this).css('transition-duration','0.5s');
-		$(this).css('transition-delay','0.1s');
-		$(this).css('box-shadow','20px 20px 10px #aaaaaa');
-	},function(e){
-		$(this).css('transform','translate(0,0)');
-		$(this).css('transition-property','all');
-		$(this).css('transition-duration','0.5s');
-		$(this).css('transition-delay','0.1s');
-		$(this).css('box-shadow','10px 10px 5px #aaaaaa')
-	});
-</script>
+<script src="${cp }/resources/js/dg.js"></script>
 </html>

@@ -18,33 +18,20 @@
 <link rel="shortcut icon" href="${cp}/resources/images/favicon.png" />
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+   <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 
 
 <title>Doːgather</title>
-<link rel="stylesheet" href="${cp }/resources/css/include.css" />
 </head>
-<style>
-	div{
-		width: 500px;
-		height:500px;
-		display: none;
-	}
-	body>div:first-child {
-	background-color: blue;
-}
-	body>div:last-child {
-	background-color: deeppink;
-}
-</style>
 
 <body>
-	<div class="test1">asdf</div>
-	<div class="test2">asdf</div>
-	<input type="button" value="test1" id="show">
+	<form method="get" action="result.jsp">
+		<textarea name="test" class="textarea" style="width:338px;max-width:338px;height:100px;max-height: 300px;" maxlength="500"></textarea>
+		<input type="submit"/>
+	</form>
 </body>
 <script>
-	$('#show').on('click',function(){
-		$('.test'+1).show();
-	});
+
 </script>
 </html>

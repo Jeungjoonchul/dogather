@@ -56,6 +56,7 @@
                       </div>
                       
                       <div class="dg_comm_information">
+                      
                         <span>${dg.dg_title }</span>
                         <br>
                         <span>만든 사람 : ${dg.user_nickname }</span>
@@ -76,9 +77,9 @@
 	                        		<nav>
 	                     				<ul>
 				                			<li><a href="#"><span class="purple">내정보</span> 보러가기</a></li>
-				                			<li><a href="#"><span class="purple">인증글</span> 쓰러가기</a></li>
-				                			<li><a href="#"><span class="purple">피드</span> 쓰러가기</a></li>
-				                			<li><a href="#"><span class="purple">두게더</span> 그만두기</a></li>
+				                			<li><a href="${cp }/dg/post_write.dg?dp_type=cert&dg_index=${dg.dg_index}"><span class="purple">인증글</span> 쓰러가기</a></li>
+				                			<li><a href="${cp }/dg/post_write.dg?dp_type=feed&dg_index=${dg.dg_index}"><span class="purple">피드</span> 쓰러가기</a></li>
+				                			<li><a href="javascript:quitDg(${loginUser.user_index },${dg.user_index },${dg.dg_index })" id="quit_dg_btn"><span class="purple">두게더</span> 그만두기</a></li>
 	              						</ul>
 	            					</nav>
                         			<c:set var="doneLoop" value="true"/>
@@ -86,7 +87,7 @@
                         	</c:if>
                         </c:forEach>
                         <c:if test="${not doneLoop }">
-                     <a class="joindg" href="#">두게더 신청하기</a>
+                     <a class="joindg" href="${cp }/dg/join.dg?dg_index=${dg.dg_index}">두게더 신청하기</a>
                         </c:if>
 					
                     </div>
@@ -197,20 +198,5 @@
     </main>
     <%@include file="/footer.jsp" %>
 </body>
-<script>
-
-$('#dg_comm_bulletin').hover(function(e){
-	$(this).css('transform','translate(-10px,-10px)');
-	$(this).css('transition-property','all');
-	$(this).css('transition-duration','0.5s');
-	$(this).css('transition-delay','0.1s');
-	$(this).css('box-shadow','20px 20px 10px #aaaaaa');
-},function(e){
-	$(this).css('transform','translate(0,0)');
-	$(this).css('transition-property','all');
-	$(this).css('transition-duration','0.5s');
-	$(this).css('transition-delay','0.1s');
-	$(this).css('box-shadow','10px 10px 5px #aaaaaa');
-});
-</script>
+<script src="${cp }/resources/js/dg.js"></script>
 </html>
