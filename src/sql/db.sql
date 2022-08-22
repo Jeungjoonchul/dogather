@@ -280,8 +280,8 @@ create table t_dogather_post(
     dp_image3_org varchar(300), #인증 사진3
 	dp_image3_sys varchar(300),
     dp_type enum('feed','cert') not null,#피드인지 인증글인지 확인용
-    constraint dogatherDo_dogather_fk foreign key(dg_index) references t_dogather(dg_index),
-    constraint dogatherDo_user_fk foreign key(user_index) references t_user(user_index)
+    constraint dogatherPost_dogather_fk foreign key(dg_index) references t_dogather(dg_index),
+    constraint dogatherPost_user_fk foreign key(user_index) references t_user(user_index)
 );
 
 #dogather post reply
@@ -292,8 +292,8 @@ create table t_dp_reply(
     dpr_update_date datetime default now(), #댓글 수정 시간(ex : )<-수정 안함
     dpr_contents text, #댓글 내용(ex : 축하여~)
     dpr_inactive boolean default false not null, #댓글 삭제 여부(ex : 'f')
-    constraint ddReply_dogather_do_fk foreign key(dd_index) references t_dogather_do(dd_index),
-    constraint ddReply_user_fk foreign key(user_index) references t_user(user_index)
+    constraint dpReply_dogatherPost_do_fk foreign key(dp_index) references t_dogather_post(dp_index),
+    constraint dpReply_user_fk foreign key(user_index) references t_user(user_index)
 );
 
 #############################################################################################
