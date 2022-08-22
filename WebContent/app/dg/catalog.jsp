@@ -36,7 +36,7 @@
 		<div id="main">
 			<div id="dg_present">
 				<div class="dg_present_title">
-					<a href="${cp }/dg/list.dg"> <span class="purple">진행중</span><span> 두게더</span>
+					<a href="${cp }/dg/catalog.dg"> <span class="purple">진행중</span><span> 두게더</span>
 					</a>
 				</div>
 			</div>

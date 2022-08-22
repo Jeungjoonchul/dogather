@@ -209,7 +209,7 @@
         <c:set var="today"><fmt:formatDate value="${today }" pattern="yyyyMMdd"/></c:set>
           <div id="event_border">
             <div class="event title">
-              <a href="1#">
+              <a href="${cp }/board/event_board/post_list.bo">
                 <span class="purple">Event</span><span> 게시판</span>
               </a>
             </div>
@@ -232,8 +232,8 @@
                     <div class="icon">
                       <p class="new">
 						<c:choose>
-                      	<c:when test="${today-date <=1}">N</c:when>
-                      	<c:otherwise>&nbsp;</c:otherwise>
+                      		<c:when test="${today-date <=1}">N</c:when>
+                      		<c:otherwise>&nbsp;</c:otherwise>
                       	</c:choose>
                       </p>
                     </div>
