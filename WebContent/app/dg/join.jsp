@@ -63,9 +63,15 @@
 					</tr>
 				</thead>
 				<tbody>
+
+				
 					<tr><th>두개더 목표</th><td><textarea spellcheck="false" name="dg_user_target" id="dg_user_target" maxlength="300"></textarea><span id="counter">(0 / 최대 300자)</span></td></tr>
 					<tr><th>목표 달성 날짜</th><td><input type="date" name="dg_user_target_date" id="dg_user_target_date"/></td></tr>
-					<tr style="display: none;"><td colspan="2"><input type="hidden" name="dg_index" value="${param.dg_index }"/></td></tr>
+					
+					<tr style="display: none;"><td colspan="2">
+					<input type="hidden" name="dg_index" value="${dg_index }"/>
+					<input type="hidden" name="dg_user_join_record" value="${dg_user_join_record }"/>
+					</td></tr>
 				</tbody>
 				<tfoot>
 					<tr><td colspan="2"><input type="submit"/></td></tr>

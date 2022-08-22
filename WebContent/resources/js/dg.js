@@ -181,14 +181,35 @@ $('#dg_comm_bulletin').hover(function(e){
 	$(this).css('box-shadow','10px 10px 5px #aaaaaa');
 });
 
-//만드는 중
-function quitDg(login_user_index,dg_user_index,dg_index){
-	if(login_user_index==dg_user_index){
+//detail post page mover
+
+function transferPage(dp_page){
+	var dg_index=$('#dg_index').val();
+	var dp_type=$('input[name=dp_type]:checked').val();
+	var dp_align=$('input[name=dp_align]:checked').val();
+	var dp_mine=$('#dp_mine').is(':checked')?'on':'off';
+
+		location.href=cp+"/dg/detail.dg?dg_index="+dg_index+"&dp_page="+dp_page+"&dp_type="+dp_type+"&dp_align="+dp_align+"&dp_mine="+dp_mine;
+
+}
+
+$('.dp_filter input').on('change',function(){
+	var dg_index=$('#dg_index').val();
+	var dp_type=$('input[name=dp_type]:checked').val();
+	var dp_align=$('input[name=dp_align]:checked').val();
+	var dp_mine=$('#dp_mine').is(':checked')?'on':'off';
+	location.href=cp+"/dg/detail.dg?dg_index="+dg_index+"&dp_type="+dp_type+"&dp_align="+dp_align+"&dp_mine="+dp_mine;
+});
+
+
+//회원 탈퇴
+function quitDg(loginUser_index,dg_user_index,dg_index){
+	if(loginUser_index==dg_user_index){
 		alert('회원님은 해당 두개더를 탈퇴할 수 없습니다');
 	}else{
-		var confirm = confirm('해당 두개더를 정말 그만두시겠습니까?');
-		if(confirm){
-			location.href=cp+'/dg/quit.dg?login_user_index='+login_user_index+'&dg_index='+dg_index;			
+		var quit_confirm = confirm('해당 두개더를 정말 그만두시겠습니까?\r\n(두개더를 그만 두시는 경우 작성하신 글들은 해당 두개더에서 보이지 않습니다)');
+		if(quit_confirm){
+			location.href=cp+'/dg/quit.dg?loginUser_index='+loginUser_index+'&dg_index='+dg_index;			
 		}
 	}
 }
@@ -239,9 +260,8 @@ $('#dp_contents').keyup(function(){
             }
         });
 
-$('input[type=radio]').on('change',function(){
+$('input[name=dp_type]').on('change',function(){
 	$('#cert_images').toggle('fast');
-	console.log($('input[name=dp_type]').val());
 });
 
 function upload_image(dp_image){

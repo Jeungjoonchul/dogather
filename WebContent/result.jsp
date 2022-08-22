@@ -12,8 +12,11 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
 <body>
-
-
+${param.date eq ''}
+${param.dp_type eq ''}
+${user_index eq '' }
+${user_index eq 0 }
+${user_index eq null }
 </body>
 
 </html>

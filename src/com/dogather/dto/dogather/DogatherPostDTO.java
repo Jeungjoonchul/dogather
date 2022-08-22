@@ -9,6 +9,7 @@ public class DogatherPostDTO {
 	private String dp_update_date;
 	private String dp_contents;
 	private String dp_like_user_index;
+	private int dp_like_cnt;
 	private boolean dp_inactive;
 	private String dp_image1_org;
 	private String dp_image1_sys;
@@ -64,6 +65,15 @@ public class DogatherPostDTO {
 	}
 	public void setDp_like_user_index(String dp_like_user_index) {
 		this.dp_like_user_index = dp_like_user_index;
+	}
+	public int getDp_like_cnt() {
+		return dp_like_cnt;
+	}
+	public void setDp_like_cnt(int dp_like_cnt) {
+		this.dp_like_cnt = dp_like_cnt;
+	}
+	public void setDp_inactive(boolean dp_inactive) {
+		this.dp_inactive = dp_inactive;
 	}
 	public boolean isDp_inactive() {
 		return dp_inactive;

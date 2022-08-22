@@ -7,6 +7,8 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.dogather.dto.dogather.DogatherDTO;
 import com.dogather.dto.dogather.DogatherPostDTO;
+import com.dogather.dto.dogather.DogatherUserDTO;
+import com.dogather.dto.dogather.DogatherUserTargetDTO;
 import com.dogather.mybatis.SqlMapConfig;
 
 public class DogatherDAO {
@@ -36,10 +38,10 @@ SqlSession sqlSession;
 		return sqlSession.insert("Dogather.dgJoin", datas)==1;
 	}
 
-	public List<DogatherDTO> getDgList(int startRow,int pageSize,String criteria, String align,String keyword,String category_index) {
+	public List<DogatherDTO> getDgList(int dg_startRow,int dg_pageSize,String criteria, String align,String keyword,String category_index) {
 		HashMap<String, Object> datas = new HashMap<String, Object>();
-		datas.put("startRow",startRow);
-		datas.put("pageSize", pageSize);
+		datas.put("dg_startRow",dg_startRow);
+		datas.put("dg_pageSize", dg_pageSize);
 		datas.put("align", align);
 		datas.put("criteria", criteria);
 		datas.put("keyword", keyword);
@@ -70,6 +72,7 @@ SqlSession sqlSession;
 
 	public void setDgUserTarget(int dg_index, int user_index, String dg_user_target, String dg_user_target_date) {
 		HashMap<String, Object> datas = new HashMap<String, Object>();
+
 		datas.put("dg_index",dg_index);
 		datas.put("user_index", user_index);
 		datas.put("dg_user_target", dg_user_target);
@@ -80,5 +83,58 @@ SqlSession sqlSession;
 
 	public boolean dgPostOn(DogatherPostDTO dp) {
 		return sqlSession.insert("Dogather.dgPostOn", dp)==1;
+	}
+
+	public List<DogatherDTO> getDpList(int dp_startRow,int dp_pageSize,int dg_index,String user_index,String dp_type,String dp_align) {
+		HashMap<String, Object> datas = new HashMap<String, Object>();
+		datas.put("dp_startRow",dp_startRow);
+		datas.put("dp_pageSize", dp_pageSize);
+		datas.put("dg_index",dg_index);
+		datas.put("user_index",user_index);
+		datas.put("dp_type", dp_type);
+		datas.put("dp_align", dp_align);
+		return sqlSession.selectList("Dogather.getDpList", datas);
+	}
+
+	public int getDpCnt(int dg_index,String dp_type,String user_index) {
+		HashMap<String, Object> datas = new HashMap<String, Object>();
+		datas.put("dg_index",dg_index);
+		datas.put("dp_type",dp_type);
+		datas.put("user_index", user_index);
+		return sqlSession.selectOne("Dogather.getDpCnt",datas);
+	}
+
+	public List<String> getLikeUserListByDP(int dg_index) {
+		return sqlSession.selectList("Dogather.getLikeUserListByDP", dg_index);
+	}
+
+	public boolean dgQuit(int user_index, int dg_index) {
+		HashMap<String, Integer> datas = new HashMap<String, Integer>();
+		datas.put("user_index",user_index);
+		datas.put("dg_index",dg_index);
+		return sqlSession.delete("Dogather.dgQuit",datas)==1;
+	}
+
+	public List<DogatherUserDTO> getDgMembersInfo(int dg_index) {
+
+		return sqlSession.selectList("Dogather.getDgMembersInfo", dg_index);
+	}
+
+	public boolean dgReJoin(int dg_index, int user_index) {
+		HashMap<String, Integer> datas = new HashMap<String, Integer>();
+		datas.put("user_index",user_index);
+		datas.put("dg_index",dg_index);
+		return sqlSession.update("Dogather.dgReJoin",datas)==1;
+	}
+
+	public void updateDgUserTarget(int dg_index, int user_index, String dg_user_target, String dg_user_target_date) {
+		HashMap<String, Object> datas = new HashMap<String, Object>();
+
+		datas.put("dg_index",dg_index);
+		datas.put("user_index", user_index);
+		datas.put("dg_user_target", dg_user_target);
+		datas.put("dg_user_target_date", dg_user_target_date);
+		sqlSession.update("Dogather.updateDgUserTarget",datas);
+		
 	}
 }

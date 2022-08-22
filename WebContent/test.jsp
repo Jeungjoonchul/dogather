@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <c:set var="cp" value="${pageContext.request.contextPath }" />
 <!DOCTYPE html>
 <html>
@@ -24,14 +25,14 @@
 
 <title>Doːgather</title>
 </head>
-
 <body>
-	<form method="get" action="result.jsp">
-		<textarea name="test" class="textarea" style="width:338px;max-width:338px;height:100px;max-height: 300px;" maxlength="500"></textarea>
-		<input type="submit"/>
-	</form>
+<input type="radio" value="all" name="radio" />
+<input type="radio" value="feed" name="radio" checked/>
+<input type="radio" value="cert" name="radio"/>
 </body>
 <script>
-
+	$('input[name=radio]').on('change',function(){
+		console.log($('input[name=radio]').checked().val())
+	})
 </script>
 </html>

@@ -21,6 +21,7 @@ public class DogatherPostOnAction implements Action {
 
 	@Override
 	public ActionTo execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
 		String saveDirectory = req.getServletContext().getRealPath("upload") + "\\images\\dogather\\cert";
 		System.out.println(saveDirectory);
 		int maxPostSize = 1024 * 1024 * 5;

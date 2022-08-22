@@ -68,7 +68,7 @@
 										<p class="dg_maker">만든 사람 : ${dg.user_nickname }</p>
 										<p class="dg_info"><span>참여자 수 : ${dg.dg_member_cnt }</span><span>&nbsp;<c:if test="${dg.dg_expire!=null }">종료일 : ${dg.dg_expire }</c:if></span></p>
 										<div class="list_container_contents"><p class="dg_intro">${dg.dg_intro }</p></div>
-											<a class="viewMore" href="${cp}/dg/detail.dg?dg_index=${dg.dg_index}&page=${page}&criteria_key=${criteria_key}&align=${align}&keyword=${keyword}&category_index=${category_index}">자세히 보기</a>
+											<a class="viewMore" href="${cp}/dg/detail.dg?dg_index=${dg.dg_index}&dg_page=${dg_page}&criteria_key=${criteria_key}&align=${align}&keyword=${keyword}&category_index=${category_index}">자세히 보기</a>
 									</div>
 								</div>
 								</c:when>
@@ -94,7 +94,7 @@
 										<p class="dg_maker">만든 사람 : ${dg.user_nickname }</p>
 										<p class="dg_info"><span>참여자 수 : ${dg.dg_member_cnt }</span><span>&nbsp;<c:if test="${dg.dg_expire!=null }">종료일 : ${dg.dg_expire }</c:if></span></p>
 										<div class="list_container_contents"><p class="dg_intro">${dg.dg_intro }</p></div>
-										<a class="viewMore" href="${cp}/dg/detail.dg?dg_index=${dg.dg_index}&page=${page}&criteria_key=${criteria_key}&align=${align}&keyword=${keyword}&category_index=${category_index}">자세히 보기</a>
+										<a class="viewMore" href="${cp}/dg/detail.dg?dg_index=${dg.dg_index}&dg_page=${dg_page}&criteria_key=${criteria_key}&align=${align}&keyword=${keyword}&category_index=${category_index}">자세히 보기</a>
 									</div>
 								</div>
 								</c:otherwise>
@@ -105,21 +105,21 @@
 						<button class="addlist" type="button">더보기</button>
 						<div class="page-btns" style="display: none">
 							<div>
-								<c:if test="${startPage!=1 }">
-									<a href="${cp }/dg/catalog.dg?page=${startPage-1}&criteria_key=${criteria_key}&align=${align}&keyword=${keyword}&category_index=${category_index}">&lt;</a>
+								<c:if test="${dg_startPage!=1 }">
+									<a href="${cp }/dg/catalog.dg?dg_page=${dg_startPage-1}&criteria_key=${criteria_key}&align=${align}&keyword=${keyword}&category_index=${category_index}">&lt;</a>
 								</c:if> 
-								<c:forEach begin="${startPage }" end="${endPage }" var="i">
+								<c:forEach begin="${dg_startPage }" end="${dg_endPage }" var="i">
 									<c:choose>
-										<c:when test="${page==i }">
+										<c:when test="${dg_page==i }">
 											<span class="nowPage">${i }</span>
 										</c:when>
 										<c:otherwise>
-											<a href="${cp }/dg/catalog.dg?page=${i}&criteria_key=${criteria_key}&align=${align}&keyword=${keyword}&category_index=${category_index}">${i}</a>
+											<a href="${cp }/dg/catalog.dg?dg_page=${i}&criteria_key=${criteria_key}&align=${align}&keyword=${keyword}&category_index=${category_index}">${i}</a>
 										</c:otherwise>
 									</c:choose>
 								</c:forEach>
-								<c:if test="${endPage!=totalPage }">
-									<a href="${cp }/dg/catalog.dg?page=${endPage+1}&criteria_key=${criteria_key}&aalign=${align}&keyword=${keyword}&category_index=${category_index}">&gt;</a>
+								<c:if test="${dg_endPage!=dg_totalPage }">
+									<a href="${cp }/dg/catalog.dg?dg_page=${dg_endPage+1}&criteria_key=${criteria_key}&aalign=${align}&keyword=${keyword}&category_index=${category_index}">&gt;</a>
 								</c:if>
 							</div>
 						</div>

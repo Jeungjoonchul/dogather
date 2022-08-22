@@ -131,9 +131,13 @@ main ul {
   #dg_comm_bulletin{
     overflow: scroll;
     width: 100%;
+    height:100%;
     border-radius: 20px;
 	box-shadow: 10px 10px 5px #aaaaaa;
 	border: 0.3px solid #bbbbbb;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
   }
   #dg_comm_bulletin::-webkit-scrollbar {
     display: none;
@@ -162,3 +166,56 @@ main ul {
     padding: 20px;
     text-align: left;
   }
+  
+  .page-btns{
+  	width: 100%;
+  	display: flex;
+  	justify-content: center;
+  	margin-bottom:10px;
+  }
+  
+.page-btns a{
+	color : black;
+	margin: 0 2px;
+	padding: 1px;
+	padding: 0 3px;
+}
+.page-btns a:hover{
+	color:red;
+}
+.nowPage{
+	background-color:#dddddd;
+	/* border: 1px solid #141414; */
+	border-radius: 3px;
+	margin: 0 2px;
+	padding: 1px;
+	padding: 0 3px;
+}
+.dp_filter input{
+	display: none;
+}
+
+.dp_filter label{
+	padding : 4px;
+	margin-right:10px;
+	border:1px solid #621ae5;
+	border-radius: 10px;
+	cursor: pointer;
+	
+}
+.filter_checked{
+	color:white;
+	background-color: #621ae5;
+}
+
+.filter_unchecked{
+	color:#141414;
+	background-color: white;
+}
+
+.align_leg{
+	padding : 4px;
+	margin-right:10px;
+	border:1px solid #621ae5;
+	border-radius: 10px;	
+}

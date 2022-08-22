@@ -40,16 +40,9 @@ public class DogatherCatalogAction implements Action {
 		System.out.println("category_index : "+category_index);
 		
 		//페이징 처리
-		String page = req.getParameter("page");
+		String dg_page = req.getParameter("dg_page");
 		int totalCnt=ddao.getDgCnt(keyword,category_index);
-		DogatherPaging paging = new DogatherPaging(page, totalCnt);
-		System.out.println("Page : "+paging.getPage());
-		System.out.println("TotalCnt : "+paging.getTotalCnt());
-		System.out.println("TotalPage : "+paging.getTotalPage());
-		System.out.println("StartRow : "+paging.getStartRow());
-		System.out.println("PageSize : "+paging.getPageSize());
-		System.out.println("StartPage : "+paging.getStartPage());
-		System.out.println("EndPage : "+paging.getEndPage());
+		DogatherPaging paging = new DogatherPaging(dg_page, totalCnt);
 		
 		List<DogatherDTO> list = ddao.getDgList(paging.getStartRow(),paging.getPageSize(),criteria,align,keyword,category_index);
 		System.out.println("list.size() : "+list.size());
@@ -58,11 +51,11 @@ public class DogatherCatalogAction implements Action {
 		req.setAttribute("align", align);
 		req.setAttribute("keyword", keyword);
 		req.setAttribute("category_index", category_index);
-		req.setAttribute("totalPage", paging.getTotalPage());
-		req.setAttribute("totalCnt", paging.getTotalCnt());
-		req.setAttribute("startPage", paging.getStartPage());
-		req.setAttribute("endPage", paging.getEndPage());
-		req.setAttribute("page", paging.getPage());
+		req.setAttribute("dg_totalPage", paging.getTotalPage());
+		req.setAttribute("dg_totalCnt", paging.getTotalCnt());
+		req.setAttribute("dg_startPage", paging.getStartPage());
+		req.setAttribute("dg_endPage", paging.getEndPage());
+		req.setAttribute("dg_page", paging.getPage());
 
 		
 		ActionTo transfer = new ActionTo();

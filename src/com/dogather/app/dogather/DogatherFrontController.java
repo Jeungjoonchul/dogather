@@ -78,9 +78,12 @@ public class DogatherFrontController extends HttpServlet {
 			}
 			break;
 		case "/dg/join.dg":
-			transfer=new ActionTo();
-			transfer.setRedirect(false);
-			transfer.setPath("/app/dg/join.jsp");
+			try {
+				transfer=new DogatherJoinAction().execute(req,resp);
+			} catch (Exception e) {
+				System.out.println(command+" : "+e);
+				e.printStackTrace();
+			}
 			break;
 		case "/dg/join_ok.dg":
 			try {
@@ -95,9 +98,18 @@ public class DogatherFrontController extends HttpServlet {
 			transfer.setRedirect(false);
 			transfer.setPath("/app/dg/write.jsp");
 			break;
+			
 		case "/dg/post_on.dg":
 			try {
 				transfer=new DogatherPostOnAction().execute(req,resp);
+			} catch (Exception e) {
+				System.out.println(command+" : "+e);
+				e.printStackTrace();
+			}
+			break;
+		case "/dg/quit.dg":
+			try {
+				transfer=new DogatherQuitAction().execute(req,resp);
 			} catch (Exception e) {
 				System.out.println(command+" : "+e);
 				e.printStackTrace();
