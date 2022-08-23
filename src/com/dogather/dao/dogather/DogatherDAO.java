@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.dogather.dto.dogather.DogatherDTO;
 import com.dogather.dto.dogather.DogatherPostDTO;
+import com.dogather.dto.dogather.DogatherReplyDTO;
 import com.dogather.dto.dogather.DogatherUserDTO;
 import com.dogather.dto.dogather.DogatherUserTargetDTO;
 import com.dogather.mybatis.SqlMapConfig;
@@ -136,5 +137,32 @@ SqlSession sqlSession;
 		datas.put("dg_user_target_date", dg_user_target_date);
 		sqlSession.update("Dogather.updateDgUserTarget",datas);
 		
+	}
+
+	public DogatherPostDTO getPostDetail(int dp_index) {
+		return sqlSession.selectOne("Dogather.getPostDetail", dp_index);
+	}
+
+	public List<DogatherReplyDTO> getReplyList(int startRow, int pageSize,int dp_index) {
+		HashMap<String, Integer> datas = new HashMap<String, Integer>();
+		datas.put("startRow",startRow);
+		datas.put("pageSize", pageSize);
+		datas.put("dp_index",dp_index);
+		return sqlSession.selectList("Dogather.getReplyList",datas);
+	}
+
+	public int getReplyTotalCnt(int dp_index) {
+		return sqlSession.selectOne("Dogather.getReplyTotalCnt", dp_index);
+	}
+
+	public boolean dpReplyOn(DogatherReplyDTO dr) {
+		return sqlSession.insert("Dogather.dpReplyOn", dr)==1;
+	}
+
+	public DogatherReplyDTO getReplyLastOn(int dp_index, int user_index) {
+		HashMap<String, Integer> datas = new HashMap<String, Integer>();
+		datas.put("dp_index",dp_index);
+		datas.put("user_index", user_index);
+		return sqlSession.selectOne("Dogather.getReplyLastOn",datas);
 	}
 }

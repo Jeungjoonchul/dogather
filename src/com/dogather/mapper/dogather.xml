@@ -22,6 +22,12 @@
  		values(#{dg_index},#{user_index},#{dp_contents},#{dp_image1_org},#{dp_image1_sys},#{dp_image2_org},#{dp_image2_sys},#{dp_image3_org},#{dp_image3_sys},#{dp_type})
  	</insert>
  
+ 	<insert id="dpReplyOn" parameterType="DogatherReplyDTO">
+ 		insert into t_dp_reply(dp_index,user_index,dpr_contents) 
+ 		values(#{dp_index},#{user_index},#{dpr_contents})	
+ 	</insert>
+ 
+ 
  
 	<select id="dgDupCheck" parameterType="string" resultType="_int">
 		select count(*) from t_dogather where dg_title=#{dg_title}
@@ -167,6 +173,69 @@
 		
 	<select id="getDgMembersInfo" parameterType="hashmap" resultType="DogatherUserDTO">
 		select * from t_dogather_user where dg_index=#{dg_index}
+	</select>
+	
+	<select id="getPostDetail" parameterType="_int" resultType="DogatherPostDTO">
+		select 
+			d.dp_index,
+			d.dg_index,
+			u.user_index,
+			u.user_nickname,
+			d.dp_reg_date,
+			d.dp_update_date,
+			d.dp_contents,
+			d.dp_like_user_index,
+			d.dp_inactive,
+			d.dp_image1_org,
+			d.dp_image1_sys,
+			d.dp_image2_org,
+			d.dp_image2_sys,
+			d.dp_image3_org,
+			d.dp_image3_sys,
+			d.dp_type,
+			length(d.dp_like_user_index)-length(replace(d.dp_like_user_index,',',''))+1 as dp_like_cnt
+		from t_dogather_post d 
+		join t_user u 
+		on u.user_index=d.user_index 
+		where dp_index=#{dp_index}
+	</select>
+	
+	<select id="getReplyList" parameterType="hashmap" resultType="DogatherReplyDTO">
+		select
+			d.dpr_index,
+			d.dp_index,
+			u.user_index,
+			u.user_nickname,
+			d.dpr_reg_date,
+			d.dpr_update_date,
+			d.dpr_contents,
+			d.dpr_inactive 
+		from t_dp_reply d  
+			join t_user u 
+				on d.user_index=u.user_index 
+		where dp_index=#{dp_index} and dpr_inactive=0 
+		order by 1 asc limit #{startRow},#{pageSize}
+	</select>
+	
+	<select id="getReplyTotalCnt" parameterType="_int" resultType="_int">
+		select count(*) from t_dp_reply where dp_index=#{dp_index} and dpr_inactive=0
+	</select>
+	
+	<select id="getReplyLastOn" parameterType="hashmap" resultType="DogatherReplyDTO">
+		select
+			d.dpr_index,
+			d.dp_index,
+			u.user_index,
+			u.user_nickname,
+			d.dpr_reg_date,
+			d.dpr_update_date,
+			d.dpr_contents,
+			d.dpr_inactive 
+		from t_dp_reply d  
+			join t_user u 
+				on d.user_index=u.user_index 
+		where d.dp_index=#{dp_index} and u.user_index=#{user_index}
+			order by 1 desc limit 0,1
 	</select>
 	
 	

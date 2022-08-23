@@ -20,16 +20,20 @@
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
-
 <title>Doːgather</title>
 <link rel="stylesheet" href="${cp }/resources/css/include.css" />
 <link rel="stylesheet" href="${cp }/resources/css/dogatherDetail.css" />
+<link rel="stylesheet" href="${cp }/resources/css/dogatherPost.css" />
 </head>
 <body>
 <div style="display: none;">
 <input type="hidden" value="${dg_index }" id="dg_index">
 <input type="hidden" value="${dp_page }" id="dp_page">
+<input type="hidden" id="loginUser_nickname" value="${loginUser.user_nickname }">
 </div>
+
+<div id="modal"></div>
+
 	<%-- 	로그인 후 이용해야할 때 사용
 	<%@include file="/loginCheck.jsp" %> --%>
 	<%@include file="/header.jsp"%>
@@ -202,34 +206,51 @@
 								<c:choose>
 									<c:when test="${dp.dp_type eq 'feed' }">
 										<div class="dg_comm_feed">
+										<a href="javascript:viewPost(${dp.dp_index })">
 											<table>
 												<tr>
-													<th width="20%" class="comm_feed_user_nickname">${dp.user_nickname }</th>
-													<th width="50%" class="comm_feed_date">${dp.dp_reg_date }</th>
-													<th width="50%" class="comm_board_date">♥ ${dp.dp_like_cnt }</th>
+													<th class="comm_board_user_nickname" colspan="2">${dp.user_nickname }</th>
+													<th class="comm_board_date"><span>♥</span> ${dp.dp_like_cnt }</th>
 												</tr>
 												<tr>
-													<td width="100%" height="200px" class="comm_feed_contents" colspan="3">${dp.dp_contents }</td>
+													<th class="comm_board_date" colspan="3" style="font-size: 14px; color:#ccc;">${dp.dp_reg_date }<c:if test="${dp.dp_reg_date!=dp.dp_update_date }">(수정됨)</c:if></th>
 												</tr>
+												<tr>
+													<th class="comm_board_contents" colspan="3">${dp.dp_contents }</th>
+												</tr>
+												<tr>
 											</table>
+											</a>
 										</div>
 									</c:when>
 									<c:otherwise>
-										<div class="dg_comm_board">
+									
+										<div class="dg_comm_cert">
+										<a href="javascript:viewPost(${dp.dp_index },'${dp.dp_type }')">
 											<table>
 												<tr>
-													<th width="20%" class="comm_board_user_nickname">${dp.user_nickname }</th>
-													<th width="50%" class="comm_board_date">${dp.dp_reg_date }</th>
-													<th width="50%" class="comm_board_date">♥ ${dp.dp_like_cnt }</th>
+													<th class="comm_board_user_nickname" colspan="2">${dp.user_nickname }</th>
+													<th class="comm_board_date"><span>♥</span> ${dp.dp_like_cnt }</th>
 												</tr>
 												<tr>
-													<th width="100%" height="200px" class="comm_board_contents" colspan="3">${dp.dp_contents }</th>
+													<th class="comm_board_date" colspan="3" style="font-size: 14px; color:#ccc;">${dp.dp_reg_date }<c:if test="${dp.dp_reg_date!=dp.dp_update_date }">(수정됨)</c:if></th>
+												</tr>
+												<tr>
+													<th class="comm_board_contents" colspan="3">${dp.dp_contents }</th>
+												</tr>
+												<tr>
+													<c:if test="${dp.dp_image1_sys !=null }"><td><img src="${cp }/upload/images/dogather/cert/${dp.dp_image1_sys}" style="max-width: 144px;max-height:144px;"></td></c:if>
+													<c:if test="${dp.dp_image2_sys !=null }"><td><img src="${cp }/upload/images/dogather/cert/${dp.dp_image2_sys}" style="max-width: 144px;max-height:144px;"></td></c:if>
+													<c:if test="${dp.dp_image3_sys !=null }"><td><img src="${cp }/upload/images/dogather/cert/${dp.dp_image3_sys}" style="max-width: 144px;max-height:144px;"></td></c:if>
 												</tr>
 											</table>
+										</a>
 										</div>
+										
 									</c:otherwise>
 								</c:choose>
 							</c:forEach>
+							
 						<div class="page-btns">
 							<div>
 								<c:if test="${dp_startPage!=1 }">
@@ -262,5 +283,7 @@
 	</main>
 	<%@include file="/footer.jsp"%>
 </body>
-<script src="${cp }/resources/js/dg.js"></script>
+<script src="${cp }/resources/js/dg.js">
+
+</script>
 </html>

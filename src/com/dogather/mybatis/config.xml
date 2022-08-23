@@ -10,6 +10,7 @@
 		<typeAlias type="com.dogather.dto.board.ReplyDTO" alias="ReplyDTO"/>
 		<typeAlias type="com.dogather.dto.dogather.DogatherDTO" alias="DogatherDTO"/>
 		<typeAlias type="com.dogather.dto.dogather.DogatherPostDTO" alias="DogatherPostDTO"/>
+		<typeAlias type="com.dogather.dto.dogather.DogatherReplyDTO" alias="DogatherReplyDTO"/>
 		<typeAlias type="com.dogather.dto.dogather.DogatherUserDTO" alias="DogatherUserDTO"/>
 		<typeAlias type="com.dogather.dto.dogather.DogatherUserTargetDTO" alias="DogatherUserTargetDTO"/>
 	</typeAliases>

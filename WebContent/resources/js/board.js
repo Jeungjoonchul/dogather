@@ -193,6 +193,7 @@ $(document).on('click','.reply_delete',function(e){
 //댓글 페이지 버튼 누를 시 페이지 변경
 $(document).on('click','.reply_page_btn',function(e){
 	var page = $(e.target).val();
+
 	getList(page);
 });
 
@@ -276,7 +277,7 @@ var getList=function(page){
 								reply_header_right.append(btn_delete);
 
 							}else{
-								var btn_report = $('<input type="button" class="reply_btns reply_delete" value="신고"/>');
+								var btn_report = $('<input type="button" class="reply_btns reply_report" value="신고"/>');
 
 								reply_header_right.append(btn_report);
 								

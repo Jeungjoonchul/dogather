@@ -105,6 +105,11 @@ table tbody tr {
   background-color: #ffffff;
   border: none;
 }
+
+.list span{
+	color:#888;
+}
+
 .list > tbody > tr:nth-child(2n) > td {
   background-color: #eee;
 }
@@ -171,7 +176,6 @@ table tbody tr {
 }
 .nowPage{
 	background-color:#dddddd;
-	/* border: 1px solid #141414; */
 	border-radius: 3px;
 	margin: 0 2px;
 	padding: 1px;

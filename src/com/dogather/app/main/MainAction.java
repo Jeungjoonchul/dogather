@@ -23,7 +23,9 @@ public class MainAction implements Action {
 	public ActionTo execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		ActionTo transfer = new ActionTo();
 		String skip_index = req.getParameter("skip_index");
+		System.out.println("skip_index : "+skip_index);
 		boolean skip_check = skip_index != null ? true : false;
+		System.out.println("skip_check : "+skip_check);
 		// true -> 인덱스 스킵하는 사람
 		// false -> 인덱스 보는 사람
 		if (skip_check) {
@@ -53,15 +55,15 @@ public class MainAction implements Action {
 		String hot_criteria = "du.dg_member_cnt";
 		List<DogatherDTO> hot_list = ddao.getDgListOnMain(hot_criteria);
 		req.setAttribute("hot_list", hot_list);
-		System.out.println(hot_list.size());
+		
 		String latest_criteria = "d.dg_index";
 		List<DogatherDTO> latest_list = ddao.getDgListOnMain(latest_criteria);
 		req.setAttribute("latest_list", latest_list);
-		System.out.println(latest_list.size());
+		
 		String mostView_criteria = "d.dg_hits";
 		List<DogatherDTO> mostView_list = ddao.getDgListOnMain(mostView_criteria);
 		req.setAttribute("mostView_list", mostView_list);
-		System.out.println(mostView_list.size());
+		
 		// 자동 로그인 체크 여부
 		String user_email = null;
 
@@ -74,6 +76,7 @@ public class MainAction implements Action {
 				break;
 			}
 		}
+		
 		//user_email = apple@apple.com
 		if (req.getSession().getAttribute("loginUser") == null) {
 			if (user_email != null) {
@@ -93,5 +96,4 @@ public class MainAction implements Action {
 		transfer.setPath("/main.jsp");
 		return transfer;
 	}
-
 }

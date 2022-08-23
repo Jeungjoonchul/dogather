@@ -24,9 +24,7 @@
 <link rel="stylesheet" href="${cp }/resources/css/include.css" />
 <link rel="stylesheet" href="${cp }/resources/css/dogatherCatalog.css" />
 </head>
-<style>
 
-</style>
 
 <body>
 	<%-- 	로그인 후 이용해야할 때 사용

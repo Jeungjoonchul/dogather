@@ -37,12 +37,14 @@ public class DogatherPostOnAction implements Action {
 		dp.setUser_index(user_index);
 
 		String dp_contents = multi.getParameter("dp_contents");
+		dp_contents=dp_contents.replaceAll("\r\n","<br>");
+		
 		dp.setDp_contents(dp_contents);
-
+		System.out.println(dp_contents);
 		String dp_type = multi.getParameter("dp_type");
 		dp.setDp_type(dp_type);
 		
-		boolean result=false;
+
 		if (dp_type.equals("cert")) {
 			String[] sysNames = new String[3];
 			String[] orgNames = new String[3];

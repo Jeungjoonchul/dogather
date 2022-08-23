@@ -59,7 +59,7 @@
 			<div class="create_dg dg_box"><a href="${cp }/dg/create.dg">두개더 생성하기</a></div>
 			<div class="progress_dg dg_box"><a href="${cp }/dg/catalog.dg">진행 중 두개더 보기</a></div>
 			<div class="end_dg dg_box"><a href="#">종료된 두개더 보기</a></div>
-			<div class="epilogue_dg dg_box"><a href="#">두개더 후기 게시판</a></div>
+			<!-- <div class="epilogue_dg dg_box"><a href="#">두개더 후기 게시판</a></div> -->
 		</div>
 	</main>
 	<%@include file="/footer.jsp" %>
