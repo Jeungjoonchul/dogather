@@ -11,7 +11,7 @@ import com.dogather.action.ActionTo;
 import com.dogather.dao.user.UserDAO;
 import com.dogather.dto.user.UserDTO;
 
-public class UsermodifyOkAction implements Action {
+public class UserModifyOkAction implements Action {
 	@Override
 	public ActionTo execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		//데이터 수집
@@ -51,8 +51,8 @@ public class UsermodifyOkAction implements Action {
 		userInfor.setAddress_detail(m_address_detail);
 		userInfor.setAddress_extra(m_address_extra);
 
-		System.out.println(userInfor.getUser_name());
-		System.out.println("여기까지");
+		udao.updateUser(user_email, userInfor);
+		
 		return null;
 	}
 }

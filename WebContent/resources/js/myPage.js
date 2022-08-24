@@ -5,7 +5,7 @@ let cnt = 0;
 let org_nick = document.getElementById('user_nickname').value;
 let org_phone = document.getElementById('user_phone').value;
 let org_zipCode = document.getElementById('zip_code').value;
-let org_address = document.getElementById('address').value;
+let org_address = document.getElementById('address_default').value;
 let org_addressDetail = document.getElementById('address_detail').value;
 
 //닉네임
@@ -233,7 +233,7 @@ $( document ).ready(function() {
 	    	});
 	        
 	    	// 주소 이벤트
-	        $('#address').on('click',function(){
+	        $('#address_default').on('click',function(){
 	        	console.log('클릭');
 	        	if(isModify){
 	        		daumPostcode();	
@@ -289,7 +289,7 @@ $('#cancel').on(
 	$('#user_nickname').val(org_nick);
 	$('#user_phone').val(org_phone);
 	$('#zip_code').val(org_zipCode);
-	$('#address').val(org_address);
+	$('#address_default').val(org_address);
 	$('#address_detail').val(org_addressDetail);
 	
 	$('#user_nickname').attr('readonly',true);
