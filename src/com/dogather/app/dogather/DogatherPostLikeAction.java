@@ -20,7 +20,6 @@ public class DogatherPostLikeAction implements Action {
 	@Override
 	public ActionTo execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		int dp_index=Integer.parseInt(req.getParameter("dp_index"));
-		System.out.println("여기옴");
 		String status=req.getParameter("status");
 
 		int user_index = ((UserDTO)req.getSession().getAttribute("loginUser")).getUser_index();
