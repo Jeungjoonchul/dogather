@@ -5,7 +5,7 @@ let cnt = 0;
 let org_nick = document.getElementById('user_nickname').value;
 let org_phone = document.getElementById('user_phone').value;
 let org_zipCode = document.getElementById('zip_code').value;
-let org_address = document.getElementById('address').value;
+let org_address = document.getElementById('address_default').value;
 let org_addressDetail = document.getElementById('address_detail').value;
 
 //닉네임
@@ -289,13 +289,13 @@ $('#cancel').on(
 	$('#user_nickname').val(org_nick);
 	$('#user_phone').val(org_phone);
 	$('#zip_code').val(org_zipCode);
-	$('#address').val(org_address);
+	$('#address_default').val(org_address);
 	$('#address_detail').val(org_addressDetail);
 	
 	$('#user_nickname').attr('readonly',true);
 	$('#user_phone').attr('readonly',true);
 	$('#zip_code').attr('readonly',true);
-	$('#address').attr('readonly',true);
+	$('#address_default').attr('readonly',true);
 	$('#address_detail').attr('readonly',true);
 	$('span').text('');
 	isModify = false;

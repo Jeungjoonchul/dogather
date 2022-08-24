@@ -11,7 +11,7 @@ import com.dogather.action.ActionTo;
 import com.dogather.dao.user.UserDAO;
 import com.dogather.dto.user.UserDTO;
 
-public class UsermodifyOkAction implements Action {
+public class UserModifyOkAction implements Action {
 	@Override
 	public ActionTo execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		//데이터 수집

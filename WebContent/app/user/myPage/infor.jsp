@@ -135,7 +135,7 @@
                     <tr>
                       <th>주소</th>
                       <td>
-                        <input type="text" name="address" id="address" readonly value="${myInfor.address_default}"/>
+                        <input type="text" name="address_default" id="address_default" readonly value="${myInfor.address_default}"/>
                       </td>
                     </tr>
                     <tr>
