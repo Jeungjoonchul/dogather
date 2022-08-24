@@ -37,7 +37,11 @@
 		values(#{user_email},#{user_nickname},#{user_name},#{user_password},#{user_phone},#{user_gender},#{user_birth_date},#{user_interest},#{user_intro},#{user_term_selective1},#{user_term_selective2},#{zip_code},#{address_default},#{address_detail},#{address_extra})
 	</insert>
 	
-	
+	<update id="updateUser" parameterType="UserDTO">
+		update t_user
+		set user_nickname=#{user_nickname}, user_phone=#{user_phone}, zip_code=#{zip_code}, address_default=#{address_default}, address_detail=#{address_detail}, address_extra=#{address_extra}
+		where user_email=#{user_email};
+	</update>
 	
 	<update id="updateLastLogin" parameterType="_int">
 		update t_user set user_last_login=now() where user_index=#{user_index}

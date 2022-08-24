@@ -47,6 +47,7 @@ let org_phone = document.getElementById('user_phone').value;
 let org_zipCode = document.getElementById('zip_code').value;
 let org_address = document.getElementById('address_default').value;
 let org_addressDetail = document.getElementById('address_detail').value;
+let org_addressExtra = document.getElementById('address_extra').value;
 
 //닉네임
 function ckNick() {

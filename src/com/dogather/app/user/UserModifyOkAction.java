@@ -51,7 +51,7 @@ public class UserModifyOkAction implements Action {
 		userInfor.setAddress_detail(m_address_detail);
 		userInfor.setAddress_extra(m_address_extra);
 
-		udao.updateUser(user_email, userInfor);
+		udao.updateUser(userInfor);
 		
 		return null;
 	}

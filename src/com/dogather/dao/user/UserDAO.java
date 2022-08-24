@@ -52,8 +52,9 @@ public class UserDAO {
 		return sqlSession.selectOne("User.getUserInfor",user_email);
 	}
 	
-	public void updateUser(String user_email, UserDTO infor) {
+	public void updateUser(UserDTO infor) {
 		// 작업중
+		sqlSession.update("User.updateUser",infor);
 	}
 
 	

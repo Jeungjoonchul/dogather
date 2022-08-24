@@ -148,6 +148,10 @@
 						<th><span style="display: none;" class="status">null</span></th>
 						<td><span>&nbsp;</span></td>
 					</tr>
+					<tr>
+					<th>참고항목</th>
+						<td><input type="text" name="address_extra" id="address_extra" readonly value="${myInfor.address_extra}"></td>
+					</tr>
                   </table>
                   <br/>
 					<input type="button" value="수정하기" id="modify"/>
