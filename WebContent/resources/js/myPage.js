@@ -1,7 +1,6 @@
 $('#pwCheck').submit(function(event) {
 	event.preventDefault();
 	var isSubmit = false;
-	console.log("들어오긴 하니?")
 	$.ajax({
 		url : cp + '/user/pwCheck.us',
 		type : 'post',
@@ -38,6 +37,9 @@ $('#pwCheck').submit(function(event) {
 
 // 비밀번호 확인을 세기 위한 변수
 let cnt = 0;
+
+//수정하기 버튼 활성화를 감지하기 위한 변수
+let isModify =false;
 
 //로그인한 유저의 기본 정보를 보존하기 위한 변수
 let org_nick = document.getElementById('user_nickname').value;
@@ -219,7 +221,7 @@ $( document ).ready(function() {
     switch(curPathName){
 	    case "/dogather/user/pwCheck_ok":
 	    	console.log('패스워드 체크 페이지');
-	    	let isModify =false;
+//	    	let isModify =false;
 	    	
 	    	// 수정 버튼 클릭
 	    	$('#modify').on(

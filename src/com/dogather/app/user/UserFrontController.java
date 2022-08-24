@@ -139,6 +139,7 @@ public class UserFrontController extends HttpServlet {
 			}
 			break;
 		case "/user/modify_ok.us":
+			System.out.println("여기까지");
 			try {
 				transfer = new UserModifyOkAction().execute(req, resp);
 			} catch (Exception e) {
