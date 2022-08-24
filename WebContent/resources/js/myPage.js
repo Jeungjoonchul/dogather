@@ -1,84 +1,58 @@
+// 비밀번호 확인을 세기 위한 변수
 let cnt = 0;
-$('#pwCheck').submit(function(event) {
-	event.preventDefault();
-	var isSubmit = false;
-	$.ajax({
-		url : cp + '/user/pwCheck.us',
-		type : 'post',
-		data : $('#pwCheck').serialize(),
-		dataType : 'text',
-		async : false,
-		success : function(data) {
 
-			if (data == 'O') {
-				isSubmit = true;
-				cnt=0;
-			} else {
-				isSubmit = false;
-			}
-		}
-	});
+//로그인한 유저의 기본 정보를 보존하기 위한 변수
+let org_nick = document.getElementById('user_nickname').value;
+let org_phone = document.getElementById('user_phone').value;
+let org_zipCode = document.getElementById('zip_code').value;
+let org_address = document.getElementById('address').value;
+let org_addressDetail = document.getElementById('address_detail').value;
 
-	if (isSubmit) {
-		this.submit();
+//닉네임
+function ckNick() {
+	var user_nickname = $('#user_nickname').val();
+	var result = $('#user_nickname').parent().parent().next()
+			.children().first().children();
+	var resultText = result.parent().next().children();
+	resultText.text('');
+	const reg_nickname = /^[가-힣a-zA-Z0-9]{2,10}$/;
+	if (user_nickname == '') {
+		result.text('null');
+		resultText.text('닉네임을 입력해주세요');
+		resultText.css('color', 'deeppink');
+	} else if (!reg_nickname.test(user_nickname)) {
+		result.text('invalid');
+		resultText.text('닉네임 형식이 올바르지 않습니다');
+		resultText.css('color', 'deeppink');
+	} else if(user_nickname == org_nick){
+		result.text('ok');
+		resultText.text('전과 동일한 닉네임입니다');
+		resultText.css('color', 'deepskyblue');
 	} else {
-		alert("비밀번호가 일치하지 않습니다");
-		user_password.value=""
-		user_password.focus();
-		cnt++;
-		console.log(cnt);
-		if(cnt==5){
-			alert("5회 이상 틀리셨습니다. 로그아웃됩니다.");
-			$.ajax({
-				url : cp + '/user/logout.us'
+		$.ajax({
+			url : cp + "/user/check_nickname.us",
+			data : {
+				"user_nickname" : user_nickname
+			},
+			type : "get",
+			dataType : "text",
+			success : function(data) {
+				if (data == 'O') {
+					result.text('ok');
+					resultText.text('멋진 닉네임이네요!');
+					resultText.css('color', 'deepskyblue');
+				} else {
+					result.text('duplication');
+					resultText.text('중복된 닉네임입니다.');
+					resultText.css('color', 'deeppink');
+					}
+				}
 			});
 		}
 	}
-});
 
-$('#user_nickname').on(
-		'blur',
-		function() {
-			var user_nickname = $('#user_nickname').val();
-			var result = $('#user_nickname').parent().parent().next()
-					.children().first().children();
-			var resultText = result.parent().next().children();
-			resultText.text('');
-			const reg_nickname = /^[가-힣a-zA-Z0-9]{2,10}$/;
-			if (user_nickname == '') {
-				result.text('null');
-				resultText.text('닉네임을 입력해주세요');
-				resultText.css('color', 'deeppink');
-			} else if (!reg_nickname.test(user_nickname)) {
-				result.text('invalid');
-				resultText.text('닉네임 형식이 올바르지 않습니다');
-				resultText.css('color', 'deeppink');
-			} else {
-				$.ajax({
-					url : cp + "/user/check_nickname.us",
-					data : {
-						"user_nickname" : user_nickname
-					},
-					type : "get",
-					dataType : "text",
-					success : function(data) {
-						if (data == 'O') {
-							result.text('ok');
-							resultText.text('멋진 닉네임이네요!');
-							resultText.css('color', 'deepskyblue');
-						} else {
-							result.text('duplication');
-							resultText.text('중복된 닉네임입니다.');
-							resultText.css('color', 'deeppink');
-						}
-					}
-				});
-			}
-		});
-
-$('#user_phone').on(
-		'blur',
-		function() {
+//핸드폰
+function ckPhone() {
 			var user_phone = $('#user_phone').val();
 			var result = $('#user_phone').parent().parent().next().children()
 					.first().children();
@@ -98,11 +72,10 @@ $('#user_phone').on(
 				resultText.text('✔');
 				resultText.css('color', 'deepskyblue');
 			}
-		});
+		}
 
-$('#address_detail').on(
-		'blur',
-		function() {
+//주소
+function ckAddress() {
 			var address_detail = $('#address_detail').val();
 			var result = $('#address_detail').parent().parent().next()
 					.children().first().children();
@@ -117,8 +90,9 @@ $('#address_detail').on(
 				resultText.text('✔');
 				resultText.css('color', 'deepskyblue');
 			}
-		});
+		}
 
+//다음 주소 API
 function daumPostcode() {
 	new daum.Postcode({
 		oncomplete : function(data) {
@@ -168,40 +142,161 @@ function daumPostcode() {
 	}).open();
 }
 
-//infor
-
-function modify(){
-	$('#modify').hide();
-	$('#modifyOk').show();
-	$('#cancel').show();
-	$('#user_nickname').attr('readonly',false);
-	$('#user_phone').attr('readonly',false);
-	$('#zip_code').attr('readonly',false);
-	$('#address').attr('readonly',false);
-	$('#address_detail').attr('readonly',false);
-	$('#zip_code').on('onclick',daumPostcode());
-	$('#address').on('onclick',daumPostcode());
-	
-	
+//마이페이지 회원정보 수정 - 유효성체크
+function submitValidCheck() {
+	var flag = true;
+	$('.status').each(
+			function(index, item) {
+				if ($(this).text() == 'null') {
+					$(this).closest('tr').prev().children().last()
+							.children().focus();
+					flag = false;
+					return flag;
+				} else if ($(this).text() == 'invalid') {
+					$(this).closest('tr').prev().children().last()
+							.children().focus();
+					flag = false;
+					return flag;
+				} else if ($(this).text() == 'duplication') {
+					$(this).closest('tr').prev().children().last()
+							.children().focus();
+					flag = false;
+					return flag;
+				}
+			});
+	return flag;
 }
 
-function modify(){
+$('#pwCheck').submit(function(event) {
+	event.preventDefault();
+	var isSubmit = false;
+	$.ajax({
+		url : cp + '/user/pwCheck.us',
+		type : 'post',
+		data : $('#pwCheck').serialize(),
+		dataType : 'text',
+		async : false,
+		success : function(data) {
+
+			if (data == 'O') {
+				isSubmit = true;
+				cnt=0;
+			} else {
+				isSubmit = false;
+			}
+		}
+	});
+
+	if (isSubmit) {
+		this.submit();
+	} else {
+		alert("비밀번호가 일치하지 않습니다");
+		user_password.value=""
+		user_password.focus();
+		cnt++;
+		console.log(cnt);
+		if(cnt==5){
+			alert("5회 이상 틀리셨습니다. 로그아웃됩니다");
+			$.ajax({
+				url : cp + '/user/logout.us'
+			});
+		}
+	}
+});
+
+
+$( document ).ready(function() {
+	console.log( "ready!" );
+//	console.log(document.getElementById('user_nickname').value);
+	
+    
+    // 페이지 분기 처리
+    const curPathName = window.location.pathname.replace(".us","").replace(".jsp","");
+    console.log(curPathName);
+    
+    // 페이지 분기 처리 로직
+    switch(curPathName){
+	    case "/dogather/user/pwCheck_ok":
+	    	console.log('패스워드 체크 페이지');
+	    	let isModify =false;
+	    	
+	    	// 수정 버튼 클릭
+	    	$('#modify').on(
+	    			'click',function(){
+	    		$('#modify').hide();
+	    		$('#modifyOk').show();
+	    		$('#cancel').show();
+	    		$('#user_nickname').attr('readonly',false);
+	    		$('#user_phone').attr('readonly',false);
+	    		$('#address_detail').attr('readonly',false);
+	    		isModify = true;
+	    	});
+	        
+	    	// 주소 이벤트
+	        $('#address').on('click',function(){
+	        	console.log('클릭');
+	        	if(isModify){
+	        		daumPostcode();	
+	        	}
+	        });
+	        $('#zip_code').on('click',function(){
+	        	console.log('클릭');
+	        	if(isModify){
+	        		daumPostcode();	
+	        	}
+	        });
+	        
+	        //유효성 검사 로직
+	        $('#user_nickname').on('blur', function(){
+	        	console.log('userNickname');
+	        	if(isModify){
+	        		ckNick();
+	        	}
+	        });
+	        
+	        $('#user_phone').on('blur',function() {
+	        	console.log('userPhone');
+	        	if(isModify){
+	        		ckPhone();
+	        	}
+	        });
+	        
+	        $('#address_detail').on('blur',function() {
+	        	console.log('userAddress');
+	        	if(isModify){
+	        		ckAddress();
+	        	}
+	        });
+
+	    	break;
+	    	
+	    case "/dogather/app/user/myPage_Main":
+	    	console.log('패스워드 체크 페이지222');
+	    	break;
+		default:
+			break;
+    }
+});
+
+
+$('#cancel').on(
+		'click',function(){
 	$('#modify').show();
 	$('#modifyOk').hide();
 	$('#cancel').hide();
-
-// 기존값 어캐넘기지
-//	$('#user_nickname').val(org_nick);
-//	$('#user_phone').val(org_phone);
-//	$('#zip_code').val(org_zipCode);
-//	$('#address').val(org_address);
-//	$('#address_detail').val(org_addressDetail);
 	
+	//기존값으로 초기화
+	$('#user_nickname').val(org_nick);
+	$('#user_phone').val(org_phone);
+	$('#zip_code').val(org_zipCode);
+	$('#address').val(org_address);
+	$('#address_detail').val(org_addressDetail);
 	
 	$('#user_nickname').attr('readonly',true);
 	$('#user_phone').attr('readonly',true);
 	$('#zip_code').attr('readonly',true);
 	$('#address').attr('readonly',true);
 	$('#address_detail').attr('readonly',true);
-	
-}
+	$('span').text('');
+	isModify = false;
+});

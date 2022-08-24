@@ -366,13 +366,10 @@ function daumPostcode() {
 
 function sendit() {
 	var flag = true;
+	
 	$('.status').each(
 			function(index, item) {
 				if ($(this).text() == 'null') {
-					$(this).parent().parent().prev().children().last()
-							.children().focus();
-					$(this).parent().parent().prev().children().last()
-							.children().blur();
 					$(this).parent().parent().prev().children().last()
 							.children().focus();
 					flag = false;

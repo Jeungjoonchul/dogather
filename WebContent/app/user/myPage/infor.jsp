@@ -16,6 +16,7 @@
     />
     <link rel="shortcut icon" href="./img/favicon.png" />
     <link rel="shortcut icon" href="${cp}/resources/images/favicon.png" />
+<script src="${cp}/resources/js/cp.js"></script>
 <title>마이페이지</title>
 <link rel="stylesheet" href="${cp }/resources/css/include.css" />
 <link rel="stylesheet" href="${cp }/resources/css/myPage.css" />
@@ -75,7 +76,7 @@
 
 			<!-- 기본정보 변경 -->
 			<div id="changeinfo_area">
-				<form action="">
+				<form action="${cp}/user/modify_ok.us" onsubmit="return submitValidCheck()">
 					<div>
 						<h2>기본정보 변경</h2>
 					</div>
@@ -112,11 +113,19 @@
                       </td>
                     </tr>
                     <tr>
+						<th><span style="display: none;" class="status">null</span></th>
+						<td><span>&nbsp;</span></td>
+					</tr>
+                    <tr>
                       <th>휴대폰 번호</th>
                       <td>
                         <input type="tel" name="user_phone" id="user_phone" readonly value="${myInfor.user_phone}" maxlength="13"/>
                       </td>
                     </tr>
+                    <tr>
+						<th><span style="display: none;" class="status">null</span></th>
+						<td><span>&nbsp;</span></td>
+					</tr>
                     <tr>
                       <th>우편번호</th>
                       <td>
@@ -136,29 +145,29 @@
                       </td>
                     </tr>
                     <tr>
-                      <th>
-                        <span style="display: none" class="status">null</span>
-                      </th>
-                      <td><span>&nbsp;</span></td>
-                    </tr>
+						<th><span style="display: none;" class="status">null</span></th>
+						<td><span>&nbsp;</span></td>
+					</tr>
                   </table>
                   <br/>
-					<input type="button" value="수정하기" id="modify" onclick="modify()"/>
+					<input type="button" value="수정하기" id="modify"/>
 					<input type="submit" style="display:none;" value="수정완료" id="modifyOk" onclick="modifyOk()"/>
-					<input type="button" style="display:none;" value="취소" id="cancel" onclick="cancel()"/>
+					<input type="button" style="display:none;" value="취소" id="cancel"/>
                 </form>
               </div>
     	</div>
 	</div>
 </div>
 	<%@include file="../../../footer.jsp"%>
-</body>
 <script>
 const info = '/dogather/app/user/mypage/info.jsp';
+console.log("<%= request.getRequestURI() %>");
 if("<%= request.getRequestURI() %>"==info){
 	document.querySelector("#info").className = "on";
 }
 </script>
-	<script src="${cp }/resources/js/myPage.js">
+<script src="${cp }/resources/js/myPage.js">
 	</script>
+</body>
+	
 </html>

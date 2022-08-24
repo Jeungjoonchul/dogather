@@ -14,6 +14,7 @@
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;600;700;800;900&display=swap"
       rel="stylesheet"
     />
+	<script src="${cp}/resources/js/cp.js"></script>
     <link rel="shortcut icon" href="./img/favicon.png" />
     <link rel="shortcut icon" href="${cp}/resources/images/favicon.png" />
 <title>마이페이지</title>
