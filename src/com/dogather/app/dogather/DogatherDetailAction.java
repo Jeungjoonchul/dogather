@@ -19,7 +19,7 @@ public class DogatherDetailAction implements Action {
 	@Override
 	public ActionTo execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		DogatherDAO ddao = new DogatherDAO();
-
+		
 		int dg_index = Integer.parseInt(req.getParameter("dg_index"));
 		String dp_page = req.getParameter("dp_page");
 //		String criteria_key = req.getParameter("criteria_key");
@@ -56,6 +56,17 @@ public class DogatherDetailAction implements Action {
 
 		// dg_index에 해당하는 dogather
 		DogatherDTO dg = ddao.getDetail(dg_index);
+		boolean flag=true;
+		UserDTO dg_user=(UserDTO)req.getSession().getAttribute("loginUser");
+		if(dg_user!=null) {
+			if(dg.getUser_index()==dg_user.getUser_index()) {
+				flag=false;
+			}
+		}
+		if(flag) {
+			ddao.dgHitUp(dg.getDg_index());
+			dg.setDg_hits(dg.getDg_hits()+1);
+		}
 		req.setAttribute("dg", dg);
 
 		// dg에 가입한 사람 List

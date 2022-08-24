@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <c:set var="cp" value="${pageContext.request.contextPath}"></c:set>
 <c:set var="today" value="<%=new java.util.Date()%>"></c:set>
 <c:set var="today">
@@ -66,13 +67,31 @@
             <div id="meta_right">
               <span>조회 ${b.b_hits } &#124;</span>
               <span>댓글 ${b.b_reply_cnt } &#124;</span>
-              <span>좋아요 </span>
+              <span>좋아요 ${b.b_like_cnt }</span>
             </div>
           </div>
           <div id="post_contents_area">
             <div id="summernote">${b.b_contents }</div>
           </div>
-          <div id="like_up"><button>좋아요 up</button></div>
+          <div id="like_up">
+          	<c:set var="like_flag" value="${false }"/>
+          	<c:set var="like_user_index" value="${fn:split(b.b_like_user_index,',') }"/>
+          	<c:if test="${!empty loginUser }">
+          	<c:forEach items="${like_user_index }" var="i">
+          		<c:if test="${i == loginUser.user_index}">
+          			<c:set var="like_flag" value="${true }"/>
+          		</c:if>
+          	</c:forEach>
+			</c:if>
+          	<c:choose>
+          			<c:when test="${like_flag}">
+          			<span style="color:red; font-weight: bold; font-size: 24px;">♥</span><span style="display: none;">like</span>
+          			</c:when>
+          			<c:otherwise>
+          				  <span style="color:red; font-weight: bold; font-size: 24px;">♡</span><span style="display: none;">none</span>
+          			</c:otherwise>
+          		</c:choose>
+          </div>
           <div id="post_button">
             <c:if test="${loginUser.user_nickname==b.user_nickname }">
               <a
@@ -131,7 +150,7 @@
                   </div>
                 </div>
                 <div class="reply_content">
-              		<textarea readonly spellcheck="false">${reply.r_contents}</textarea>
+              		<div>${reply.r_contents}</div>
                 </div>
               </div>
               <c:set var="i" value="${i+1}"></c:set>

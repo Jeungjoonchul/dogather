@@ -28,6 +28,7 @@ public class DogatherPostReplyAction implements Action {
 		DogatherReplyPaging p=new DogatherReplyPaging(page, ddao.getReplyTotalCnt(dp_index));
 		
 		List<DogatherReplyDTO> rl = ddao.getReplyList(p.getStartRow(), p.getPageSize(), dp_index);
+
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("rl", rl);
 		map.put("totalPage", p.getTotalPage());

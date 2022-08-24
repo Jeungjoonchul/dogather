@@ -165,4 +165,34 @@ SqlSession sqlSession;
 		datas.put("user_index", user_index);
 		return sqlSession.selectOne("Dogather.getReplyLastOn",datas);
 	}
+
+	public void dgHitUp(int dg_index) {
+		sqlSession.update("Dogather.dgHitUp", dg_index);
+	}
+
+	public boolean updateReply(int dpr_index, String dpr_contents) {
+		HashMap<String, Object> datas = new HashMap<String, Object>();
+		datas.put("dpr_index",dpr_index);
+		datas.put("dpr_contents", dpr_contents);
+		return sqlSession.update("Dogather.updateReply", datas)==1;
+	}
+
+	public boolean deleteReply(int dpr_index) {
+		return sqlSession.delete("Dogather.deleteReply", dpr_index)==1;
+	}
+
+	public String getLikeUsersByDP(int dp_index) {
+		return sqlSession.selectOne("Dogather.getLikeUsers", dp_index);
+	}
+
+	public boolean setLikeUserIndexByDP(int dp_index, String dp_like_user_index) {
+		HashMap<String, Object> datas = new HashMap<String, Object>();
+		datas.put("dp_index",dp_index);
+		datas.put("dp_like_user_index", dp_like_user_index);
+		return sqlSession.update("Dogather.setLikeUserIndex", datas)==1;
+	}
+
+	public String getLikeCntByDP(int dp_index) {
+		return sqlSession.selectOne("Dogather.getLikeCntByDP", dp_index);
+	}
 }

@@ -224,7 +224,7 @@ main ul {
 	border:1px solid #621ae5;
 	border-radius: 10px;	
 }
-.comm_board_date > span{
+.comm_board_date > span:first-child{
 	color:red;
 }
 #modal{

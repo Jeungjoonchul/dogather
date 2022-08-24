@@ -29,6 +29,7 @@
 <div style="display: none;">
 <input type="hidden" value="${dg_index }" id="dg_index">
 <input type="hidden" value="${dp_page }" id="dp_page">
+<input type="hidden" value="${loginUser.user_index }"/>
 <input type="hidden" id="loginUser_nickname" value="${loginUser.user_nickname }">
 </div>
 
@@ -210,7 +211,7 @@
 											<table>
 												<tr>
 													<th class="comm_board_user_nickname" colspan="2">${dp.user_nickname }</th>
-													<th class="comm_board_date"><span>♥</span> ${dp.dp_like_cnt }</th>
+													<th class="comm_board_date"><span>♥</span> <span>${dp.dp_like_cnt }</span><input type="hidden" id="dp_index${dp.dp_index}" value="${dp.dp_index}"/></th>
 												</tr>
 												<tr>
 													<th class="comm_board_date" colspan="3" style="font-size: 14px; color:#ccc;">${dp.dp_reg_date }<c:if test="${dp.dp_reg_date!=dp.dp_update_date }">(수정됨)</c:if></th>
@@ -230,7 +231,7 @@
 											<table>
 												<tr>
 													<th class="comm_board_user_nickname" colspan="2">${dp.user_nickname }</th>
-													<th class="comm_board_date"><span>♥</span> ${dp.dp_like_cnt }</th>
+														<th class="comm_board_date"><span>♥</span> <span>${dp.dp_like_cnt }</span><input type="hidden" id="dp_index${dp.dp_index}" value="${dp.dp_index}"/></th>
 												</tr>
 												<tr>
 													<th class="comm_board_date" colspan="3" style="font-size: 14px; color:#ccc;">${dp.dp_reg_date }<c:if test="${dp.dp_reg_date!=dp.dp_update_date }">(수정됨)</c:if></th>

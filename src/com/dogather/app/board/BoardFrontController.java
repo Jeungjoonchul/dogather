@@ -352,6 +352,14 @@ public class BoardFrontController extends HttpServlet {
 			}
 			break;
 ////////////////////////////////////////////////////////////////////////////////////
+		case "/board/free_board/board_like.bo":
+			try {
+				transfer = new BoardLikeAction().execute(req,resp,b_name,r_name);
+			} catch (Exception e) {
+				System.out.println(command + " : " + e);
+				e.printStackTrace();
+			}
+			break;
 		}
 
 		// 전송 일괄처리

@@ -116,21 +116,47 @@ var reply_contents_before='';
 //수정 버튼 누르면 수정 완료 버튼으로 변경
 $(document).on('click','.reply_update',function(e){
 	var target = $(e.target);
-	reply_contents_before=target.parent().parent().next().children().val();
+	reply_contents_before=target.parent().parent().next().children().html().replaceAll('<br>','\n');
+
+	var cont=target.parent().parent().next();
 	if(replyUpdateFlag){
 		target.hide();
 		target.next().show();
 		replyUpdateFlag=false;
-		var textarea=target.parent().parent().next().children();
-		textarea.removeAttr('readonly');
-		textarea.css('background-color','#fffde7');
-		textarea.css('border','0.5px solid #e0e0e0');
+		
+		var textarea=$('<textarea spellcheck="false" id="reply_editor"></textarea>');
+		textarea.val(reply_contents_before);
+		var height = cont.children().css('height');
+		cont.children().remove();
+		textarea.css('height',height);
+		cont.append(textarea);
+		
+//		var textarea=target.parent().parent().next().children();
+//		textarea.removeAttr('readonly');
+//		textarea.css('background-color','#fffde7');
+//		textarea.css('border','0.5px solid #e0e0e0');
 		textarea.focus();
+		
+		const re = document.getElementById('reply_editor');
+		caretMoveEnd(re);
 	}else{
 		alert('수정중인 댓글이 있습니다');
 	}
 	
 });
+
+
+
+$(document).on('keyup','#reply_editor',function(){
+	var rows=$('#reply_editor').val().split('\n').length;
+	$('#reply_editor').css('height',(rows-1)*20+45+ 'px');
+})
+$(document).on('keyup','#r_contents',function(){
+	var rows=$('#r_contents').val().split('\n').length;
+	if(rows>4){
+		$('#r_contents').css('height',(rows-4)*20+100+ 'px');
+	}
+})
 
 //댓글 수정
 $(document).on('click','.reply_update_submit',function(e){
@@ -160,6 +186,15 @@ $(document).on('click','.reply_update_submit',function(e){
 		}
 	});
 });
+
+var caretMoveEnd=function(item){
+	var selection=document.getSelection();
+	var range=document.createRange();
+	range.selectNodeContents(item);
+	range.collapse(false);
+	selection.removeAllRanges();
+	selection.addRange(range);
+};
 
 //댓글 삭제
 $(document).on('click','.reply_delete',function(e){
@@ -197,8 +232,42 @@ $(document).on('click','.reply_page_btn',function(e){
 	getList(page);
 });
 
+//좋아요 누르기
+$('#like_up span').on('click',function(e){
+	var user_nickname=$('#loginUser_nickname').val();
+	if(user_nickname==null||user_nickname==''){
+		alert('로그인 후 좋아요를 누를 수 있습니다');
+		return false; 
+	}
+	else{
+		var status = $('#like_up span:last-child').text();
+		var b_index = $('#b_index').val();
+		$.ajax({
+			url : cp+'/board/'+$('#path').val()+'/board_like.bo',
+			type : 'post',
+			data : {"b_index":b_index,"status":status},
+			dataType : 'json',
+			async: false,
+			success : function(data){
+				console.log(data.b_like_cnt);
+				if(data.result=='like'){
+					$('#like_up').children().first().text('♥');
+					$('#like_up').children().last().text('like');
+				}else{
+					$('#like_up').children().first().text('♡');
+					$('#like_up').children().last().text('none');
+				}
+				if(data.b_like_cnt==undefined){
+					data.b_like_cnt=0;
+				}
+				$('#meta_right').children().last().text('좋아요 '+(data.b_like_cnt+''));
+				return;
+			}
+		});
+	}
+});
 
-	
+
 //페이지에 대한 댓글 리스트 가져오기
 var getList=function(page){
 	if(page=='>'){
@@ -293,8 +362,7 @@ var getList=function(page){
 							
 							// 두번째 줄에 댓글 내용 담을 div 및 textarea 생성
 							var reply_content = $('<div class="reply_content"></div>');
-							var replyTXT = $('<textarea readonly spellcheck="false"></textarea>');
-							replyTXT.val(data.list[i].r_contents);
+							var replyTXT = $('<div>'+data.list[i].r_contents+'</div>');
 							reply_content.append(replyTXT);
 							reply_area.append(reply_content);
 							$('#reply_area').append(reply_area);

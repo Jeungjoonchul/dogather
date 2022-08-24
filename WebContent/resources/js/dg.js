@@ -201,8 +201,11 @@ $('.dp_filter input').on('change',function(){
 	location.href=cp+"/dg/detail.dg?dg_index="+dg_index+"&dp_type="+dp_type+"&dp_align="+dp_align+"&dp_mine="+dp_mine;
 });
 
+
+var dp_replyUpdateFlag=true;
 //modal_post_detail
 function viewPost(dp_index){
+	dp_replyUpdateFlag=true;
 	var modal=$('#modal');
 	modal.fadeIn(500);
 	$('.dg_comm_feed>a').attr('onclick','return false');
@@ -229,11 +232,37 @@ function viewPost(dp_index){
 			post_dp_nickname.appendTo(post_info);
 			
 			var post_dp_like_cnt=$('<div id="post_dp_like_cnt" ></div>');
-			var like_span=$('<span>♥</span>');
+			
+			
+			
+			var dp_like_user_index = data.dp.dp_like_user_index;
+			
+			var like_span=$('<span></span>');
 			var like_cnt_span=$('<span></span>');
+			var like_status=$('<span style="display:none;"></span>')
+			var loginUser_index=$('#loginUser_nickname').prev().val();
+			var like_flag=false;
+			if(dp_like_user_index!=undefined){
+				var like_user_arr = dp_like_user_index.split(',');
+				for (var i = 0; i < like_user_arr.length; i++) {
+					if(like_user_arr[i]==loginUser_index){
+						like_flag=true;
+						break;
+					}
+				}
+			}
+			if(like_flag){
+				like_span.text('♥');
+				like_status.text('like');
+			}else{
+				like_span.text('♡');
+				like_status.text('none');
+			}
+			
 			like_cnt_span.text(data.dp.dp_like_cnt);
 			post_dp_like_cnt.append(like_span);
 			post_dp_like_cnt.append(like_cnt_span);
+			post_dp_like_cnt.append(like_status);
 			post_dp_like_cnt.appendTo(post_info);
 			post_detail.append(post_info);
 			
@@ -252,7 +281,6 @@ function viewPost(dp_index){
 			
 			var post_dp_contents=$('<div id="post_dp_contents" ></div>');
 			var contents_cont=$('<p>'+data.dp.dp_contents+'</p>');
-
 			post_dp_contents.append(contents_cont);
 			post_dp_contents.appendTo(post_contents);
 			post_detail.append(post_contents);
@@ -374,18 +402,18 @@ function viewPost(dp_index){
 					
 					// 두번째 줄에 댓글 내용 담을 div 및 textarea 생성
 					var dp_reply_content = $('<div class="dp_reply_content"></div>');
-					var replyTXT = $('<div>'+data.rl[i].dpr_contents+'</div>');
+					var replyTXT = $('<div class="dpr_reply">'+data.rl[i].dpr_contents+'</div>');
 					dp_reply_content.append(replyTXT);
 					dp_reply_area.append(dp_reply_content);
 					reply_list.append(dp_reply_area);
 				}
 				
 				//페이징 처리
-				var dp_totalPage=$('<input type=hidden value="'+data.totalPage+'" id="dp_totalPage">')
-				var dp_totalCnt=$('<input type=hidden value="'+data.totalCnt+'" id="dp_totalCnt">')
-				var dp_startPage=$('<input type=hidden value="'+data.startPage+'" id="dp_startPage">')
-				var dp_endPage=$('<input type=hidden value="'+data.endPage+'" id="dp_endPage">')
-				var dp_page=$('<input type=hidden value="'+data.page+'" id="dp_page">')
+				var dp_totalPage=$('<input type=hidden value="'+data.totalPage+'" id="dpr_totalPage">')
+				var dp_totalCnt=$('<input type=hidden value="'+data.totalCnt+'" id="dpr_totalCnt">')
+				var dp_startPage=$('<input type=hidden value="'+data.startPage+'" id="dpr_startPage">')
+				var dp_endPage=$('<input type=hidden value="'+data.endPage+'" id="dpr_endPage">')
+				var dp_page=$('<input type=hidden value="'+data.page+'" id="dpr_page">')
 				reply_list.append(dp_totalPage);
 				reply_list.append(dp_totalCnt);
 				reply_list.append(dp_startPage);
@@ -425,6 +453,7 @@ function viewPost(dp_index){
 			modal_cont.appendTo(modal);
 		}
 	});
+	
 }
 
 
@@ -463,6 +492,7 @@ $(document).mouseup(function (e){
 		$("#modal").children().remove();
 		$('.dg_comm_feed>a').removeAttr('onclick');
 		$('.dg_comm_cert>a').removeAttr('onclick');
+		dp_replyUpdateFlag=false;
 	}
 });
 $(document).keydown(function(e){
@@ -474,6 +504,7 @@ $(document).keydown(function(e){
 		$("#modal").children().remove();
 		$('.dg_comm_feed>a').removeAttr('onclick');
 		$('.dg_comm_cert>a').removeAttr('onclick');
+		dp_replyUpdateFlag=false;
     }
 });
 
@@ -486,7 +517,7 @@ function dpReplyOn(){
 	}
 	var dp_index=$('#dp_index').val();
 	var dpr_contents=$('#reply_writer').val();
-	var page=$('#dp_page').val();
+	var page=$('#dpr_page').val();
 	if(dpr_contents==''){
 		$('#reply_writer').focus();
 		alert('내용을 입력해주세요');
@@ -512,9 +543,150 @@ function dpReplyOn(){
 }
 
 
-$('input[name=dp_type]').on('change',function(){
-	$('#cert_images').toggle('fast');
+//reply update in modal
+var dp_reply_contents_before='';
+$(document).on('click','.dp_reply_update',function(e){
+	var target = $(e.target);
+	dp_reply_contents_before=target.parent().parent().next().children().html().replaceAll("<br>","\n");
+	var cont=target.parent().parent().next();
+	if(dp_replyUpdateFlag){
+		target.hide();
+		target.next().show();
+		replyUpdateFlag=false;
+		
+		var textarea=$('<textarea spellcheck="false" id="reply_editor"></textarea>');
+		textarea.val(dp_reply_contents_before);
+		var height = cont.children().css('height');
+		cont.children().remove();
+		textarea.css('height',height);
+		cont.append(textarea);
+		
+//		var textarea=target.parent().parent().next().children();
+//		textarea.attr('contentEditable','true');
+//		textarea.attr('spellcheck','false');
+//		textarea.css('background-color','#fffde7');
+//		textarea.css('border','0.5px solid #e0e0e0');
+		
+		textarea.focus();
+		
+		const re = document.getElementById('reply_editor');
+		caretMoveEnd(re);
+
+	}else{
+		alert('수정중인 댓글이 있습니다');
+	}
+});
+
+$(document).on('keyup','#reply_editor',function(){
+	var rows=$('#reply_editor').val().split('\n').length;
+	$('#reply_editor').css('height',(rows*-1)*20+45+ 'px');
+})
+
+//reply update execute in modal
+$(document).on('click','.dp_reply_update_submit',function(e){
+	var dpr_contents=$(e.target).parent().parent().next().children().val();
+	console.log(dpr_contents);
+	var dpr_index = $(e.target).next().next().val();
+	console.log(dpr_index);
+	var page = $('#dpr_page').val();
+	console.log(page);
+	if(dp_reply_contents_before==dpr_contents){
+		alert('변경 사항이 없습니다')
+		return false;
+	}
+	$.ajax({
+		url : cp+'/dg/reply_update.dg',
+		type : 'post',
+		data : {"dpr_contents":dpr_contents,"dpr_index":dpr_index},
+		dataType : 'text',
+		async: false,
+		success : function(data) {
+			if(data=='X'){
+				alert('댓글 수정에 실패했습니다');
+				return false;
+			}else{
+				alert('댓글이 수정되었습니다');
+				dp_replyUpdateFlag=true;
+				getDpReplyList(page);
+			}
+		}
 	});
+});
+
+//reply delete execute in modal
+$(document).on('click','.dp_reply_delete',function(e){
+	var check=confirm('댓글을 삭제하시겠습니까?');
+	if(check){
+		var dpr_index=$(e.target).next().val();
+		var page = $('#dpr_page').val();
+		var dp_index=$('#dp_index').val();
+		$.ajax({
+			url : cp+'/dg/reply_delete.dg',
+			type : 'post',
+			data : {"dpr_index":dpr_index,"page":page,"dp_index":dp_index},
+			dataType : 'text',
+			async: false,
+			success : function(data) {
+				if(data=='X'){
+					alert('댓글 삭제에 실패했습니다');
+					return false;
+				}else{
+					alert('댓글이 삭제되었습니다');
+					getDpReplyList(data);
+				}
+			}
+		});
+	}else{
+		return false;
+	}
+});
+
+var caretMoveEnd=function(item){
+	var selection=document.getSelection();
+	var range=document.createRange();
+	range.selectNodeContents(item);
+	range.collapse(false);
+	selection.removeAllRanges();
+	selection.addRange(range);
+};
+
+//like modify in modal
+$(document).on('click','#post_dp_like_cnt>span:first-child',function(){
+	var user_nickname=$('#loginUser_nickname').val();
+	if(user_nickname==null||user_nickname==''){
+		alert('로그인 후 좋아요를 누를 수 있습니다');
+		return false; 
+	}
+	else{
+		var status = $('#post_dp_like_cnt>span:last-child').text();
+		var dp_index = $('#dp_index').val();
+		$.ajax({
+			url : cp+'/dg/dp_like.dg',
+			type : 'post',
+			data : {"dp_index":dp_index,"status":status},
+			dataType : 'json',
+			async: false,
+			success : function(data){
+				console.log(data);
+				if(data.result=='like'){
+					$('#post_dp_like_cnt').children().first().text('♥');
+					$('#post_dp_like_cnt').children().last().text('like');
+				}else{
+					$('#post_dp_like_cnt').children().first().text('♡');
+					$('#post_dp_like_cnt').children().last().text('none');
+				}
+				if(data.dp_like_cnt==undefined){
+					data.dp_like_cnt=0;
+				}
+				$('#post_dp_like_cnt').children().first().next().text(data.dp_like_cnt);
+				$('#dp_index'+dp_index).prev().text(data.dp_like_cnt);
+				return;
+			}
+		});
+	}
+});
+
+
 //회원 탈퇴
 function quitDg(loginUser_index,dg_user_index,dg_index){
 	if(loginUser_index==dg_user_index){
@@ -552,7 +724,6 @@ $('#dg_user_target').keyup(function(){
 
 
 //write
-
 $('#dp_contents').keyup(function (e){
     var content = $(this).val();
     $('#counter').html("("+content.length+" / 최대 400자)");    //글자수 실시간 카운팅
@@ -573,8 +744,12 @@ $('#dp_contents').keyup(function(){
             }
         });
 
-$('input[name=dp_type]').on('change',function(){
-	$('#cert_images').toggle('fast');
+$('input[name=dp_type]').on('click',function(){
+	if($('input[name=dp_type]:checked').val()=='cert'){
+		$('#cert_images').show('fast');		
+	}else{
+		$('#cert_images').hide('fast');	
+	}
 });
 
 function upload_image(dp_image){
@@ -654,15 +829,17 @@ $('form[name=dogather_post_on').submit(function(e){
 
 //dogather post reply list
 var getDpReplyList=function(page){
-	console.log(page);
+	
 	if(page=='>'){
-		page=parseInt($('#dp_endPage').val())+1;
+		page=parseInt($('#dpr_endPage').val())+1;
 	}
 	if(page=='<'){
-		page=parseInt($('#dp_startPage').val())-1;
+		console.log(page);
+		page=parseInt($('#dpr_startPage').val())-1;
 	}
 	var user_nickname=$('#loginUser_nickname').val();
 	var dp_index=$('#dp_index').val();
+	console.log(page);
 	$.ajax({
 		url : cp+'/dg/post_reply.dg',
 		type : 'post',
@@ -670,7 +847,7 @@ var getDpReplyList=function(page){
 		dataType : 'json',
 		async: false,
 		success : function(data) {
-			console.log(data);
+
 //			var dp_index=$('<input type="hidden" value="'+data.dp.dp_index+'" id="dp_index"/>')
 //			modal.append(dp_index);
 //			
@@ -832,18 +1009,20 @@ var getDpReplyList=function(page){
 					
 					// 두번째 줄에 댓글 내용 담을 div 및 textarea 생성
 					var dp_reply_content = $('<div class="dp_reply_content"></div>');
-					var replyTXT = $('<div>'+data.rl[i].dpr_contents+'</div>');
+					var replyTXT = $('<div class="dpr_reply">'+data.rl[i].dpr_contents+'</div>');
+//					var replyTXT = $('<textarea class="reply_editor" readonly></textarea>');
+//					replyTXT.val(data.rl[i].dpr_contents);
 					dp_reply_content.append(replyTXT);
 					dp_reply_area.append(dp_reply_content);
 					reply_list.append(dp_reply_area);
 				}
 				
 				//페이징 처리
-				var dp_totalPage=$('<input type=hidden value="'+data.totalPage+'" id="dp_totalPage">')
-				var dp_totalCnt=$('<input type=hidden value="'+data.totalCnt+'" id="dp_totalCnt">')
-				var dp_startPage=$('<input type=hidden value="'+data.startPage+'" id="dp_startPage">')
-				var dp_endPage=$('<input type=hidden value="'+data.endPage+'" id="dp_endPage">')
-				var dp_page=$('<input type=hidden value="'+data.page+'" id="dp_page">')
+				var dp_totalPage=$('<input type=hidden value="'+data.totalPage+'" id="dpr_totalPage">')
+				var dp_totalCnt=$('<input type=hidden value="'+data.totalCnt+'" id="dpr_totalCnt">')
+				var dp_startPage=$('<input type=hidden value="'+data.startPage+'" id="dpr_startPage">')
+				var dp_endPage=$('<input type=hidden value="'+data.endPage+'" id="dpr_endPage">')
+				var dp_page=$('<input type=hidden value="'+data.page+'" id="dpr_page">')
 				reply_list.append(dp_totalPage);
 				reply_list.append(dp_totalCnt);
 				reply_list.append(dp_startPage);

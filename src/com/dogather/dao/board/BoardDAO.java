@@ -86,4 +86,26 @@ public class BoardDAO {
 			datas.put("user_index",user_index);
 			return sqlSession.selectOne("Board.getLastIndexWithUserIndex",datas);
 		}
+
+		public String getLikeUsers(int b_index,String b_name) {
+			HashMap<String, Object> datas = new HashMap<String, Object>();
+			datas.put("b_name",b_name);
+			datas.put("b_index",b_index);
+			return sqlSession.selectOne("Board.getLikeUsers", datas);
+		}
+
+		public boolean setLikeUserIndex(int b_index, String b_name, String b_like_user_index) {
+			HashMap<String, Object> datas = new HashMap<String, Object>();
+			datas.put("b_name",b_name);
+			datas.put("b_index",b_index);
+			datas.put("b_like_user_index",b_like_user_index);
+			return sqlSession.update("Board.setLikeUserIndex", datas)==1;
+		}
+
+		public String getLikeCnt(int b_index, String b_name) {
+			HashMap<String, Object> datas = new HashMap<String, Object>();
+			datas.put("b_name",b_name);
+			datas.put("b_index",b_index);
+			return sqlSession.selectOne("Board.getLikeCnt", datas);
+		}
 }

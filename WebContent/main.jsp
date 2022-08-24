@@ -70,7 +70,7 @@
           <!--인기 두게더  -->
           <div id="favorite">
             <div class="list_title">
-              <a href="">
+              <a href="${cp}/dg/catalog.dg?criteria_key=dg_member_cnt">
                 <span class="purple">인기 </span><span>두ː게더</span>
               </a>
             </div>
@@ -115,7 +115,7 @@
           </div>
           <div id="new">
             <div class="list_title">
-              <a href="">
+              <a href="${cp}/dg/catalog.dg?criteria_key=dg_reg_date">
                 <span class="purple">최신 </span><span>두ː게더</span>
               </a>
             </div>
@@ -160,7 +160,7 @@
           </div>
           <div id="interest">
             <div class="list_title">
-              <a href="">
+              <a href="${cp}/dg/catalog.dg?criteria_key=dg_hits">
                 <span class="purple">관심 </span><span>두ː게더</span>
               </a>
             </div>

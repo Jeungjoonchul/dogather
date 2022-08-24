@@ -393,10 +393,10 @@ $('form[name=joinForm]').on('submit',function(e){
 				if ($(this).text() == 'null') {
 					$(this).parent().parent().prev().children().last()
 							.children().focus();
-					$(this).parent().parent().prev().children().last()
+/*					$(this).parent().parent().prev().children().last()
 							.children().blur();
 					$(this).parent().parent().prev().children().last()
-							.children().focus();
+							.children().focus();*/
 					flag=false
 					return flag;
 				} else if ($(this).text() == 'invalid') {

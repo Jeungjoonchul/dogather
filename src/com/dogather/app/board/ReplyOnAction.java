@@ -24,9 +24,10 @@ public class ReplyOnAction implements Action {
 		int user_index = ((UserDTO)req.getSession().getAttribute("loginUser")).getUser_index();
 		int b_index = Integer.parseInt(req.getParameter("b_index"));
 		String r_contents = req.getParameter("r_contents");
+		r_contents=r_contents.replaceAll("\n", "<br>");
 
 		String page = req.getParameter("page");
-		
+		System.out.println(r_name);
 		
 		
 		ReplyDTO reply = new ReplyDTO();

@@ -171,6 +171,10 @@
 		select dp_like_user_index from t_dogather_post where dg_index=#{dg_index}
 	</select>
 		
+	<select id="getLikeUsers" parameterType="_int" resultType="string">
+		select dp_like_user_index from t_dogather_post where dp_index=#{dp_index}	
+	</select>
+		
 	<select id="getDgMembersInfo" parameterType="hashmap" resultType="DogatherUserDTO">
 		select * from t_dogather_user where dg_index=#{dg_index}
 	</select>
@@ -238,6 +242,11 @@
 			order by 1 desc limit 0,1
 	</select>
 	
+	<select id="getLikeCntByDP" parameterType="_int" resultType="string">
+		select length(dp_like_user_index)-length(replace(dp_like_user_index,',',''))+1 
+		from t_dogather_post where dp_index=#{dp_index}
+	</select>
+	
 	
 	
 	<update id="dgReJoin" parameterType="hashmap">
@@ -248,9 +257,25 @@
 		update t_dogather_user_target set dg_user_target_date=#{dg_user_target_date},dg_user_target=#{dg_user_target} where dg_index=#{dg_index} and user_index=#{user_index}
 	</update>
 	
+	<update id="dgHitUp" parameterType="_int">
+		update t_dogather set dg_hits=dg_hits+1 where dg_index=#{dg_index}
+	</update>
+	
+	<update id="updateReply" parameterType="hashmap">
+		update t_dp_reply set dpr_contents=#{dpr_contents}, dpr_update_date=now() where dpr_index=#{dpr_index}
+	</update>
+	
+	<update id="setLikeUserIndex" parameterType="hashmap">
+		update t_dogather_post set dp_like_user_index = #{dp_like_user_index} where dp_index=#{dp_index}
+	</update>
+	
 	
 	
 	<delete id="dgQuit" parameterType="hashmap">
 		update t_dogather_user set dg_user_active=0 ,dg_user_drop_date=now() where dg_index=#{dg_index} and user_index=#{user_index}
+	</delete>
+	
+	<delete id="deleteReply" parameterType="_int">
+		update t_dp_reply set dpr_inactive=1 where dpr_index=#{dpr_index}
 	</delete>
  </mapper>

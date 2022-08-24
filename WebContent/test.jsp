@@ -48,19 +48,10 @@
 <title>Doːgather</title>
 </head>
 <body>
-	<div id="modal">
-		<div id="post_info">
-			<div id="post_user_nickname"><span>바나나</span></div>
-			<div id="post_dp_reg_date"><span>2022-08-23</span><span>(수정됨)</span></div>
-			<div id="post_dp_like_cnt"><span>♥</span><span>32</span></div>
-		</div>
-		<div id="post_dp_contents">asdf</div>
-		<div id="post_images">asfd</div>
-		<div id="post_reply">sadf</div>
-	</div>
-	<p>asdf<br>sdf</p>
+<c:set var="test1" value="${'1' }"/>
+<c:set var="test2" value="1"/>
+<c:if test="${test1==test2 }">트루</c:if>
 </body>
 <script>
-
 </script>
 </html>

@@ -36,6 +36,7 @@
 		u.user_index,
 		u.user_nickname,
 		r.b_reply_cnt 
+		
 		from ${b_name} b 
 		join t_user u 
 		on b.user_index=u.user_index 
@@ -50,7 +51,8 @@
 
 	<select id="getPost" parameterType="hashmap"
 		resultType="BoardDTO">
-		select b.b_index,b.b_reg_date,b.b_update_date,b.b_subject,b.b_title,b.b_contents,b.b_hits,b.b_like_user_index,b.b_inactive,b.b_files,u.user_index,u.user_nickname, r.b_reply_cnt 
+		select b.b_index,b.b_reg_date,b.b_update_date,b.b_subject,b.b_title,b.b_contents,b.b_hits,b.b_like_user_index,b.b_inactive,b.b_files,u.user_index,u.user_nickname, r.b_reply_cnt, 
+		length(b.b_like_user_index)-length(replace(b.b_like_user_index,',',''))+1 as b_like_cnt  
 		from ${b_name} b
 		join t_user u 
 		on b.user_index=u.user_index 
@@ -70,6 +72,15 @@
 		select b_index from ${b_name} where user_index=#{user_index} order by b_reg_date desc limit 0,1
 	</select>
 	
+	<select id="getLikeUsers" parameterType="hashmap" resultType="string">
+		select b_like_user_index from ${b_name} where b_index=#{b_index}
+	</select>
+	
+	<select id="getLikeCnt" parameterType="hashmap" resultType="string">
+		select length(b_like_user_index)-length(replace(b_like_user_index,',',''))+1
+		from ${b_name} where b_index=#{b_index}
+	</select>
+	
 	
 	
 	<update id="updateHits" parameterType="hashmap">
@@ -82,6 +93,10 @@
 		update ${b_name} 
 		set b_update_date=now(), b_subject=#{b_subject}, b_title=#{b_title},b_contents=#{b_contents},b_files=#{b_files} 
 		where b_index=#{b_index}
+	</update>
+	
+	<update id="setLikeUserIndex">
+		update ${b_name} set b_like_user_index=#{b_like_user_index} where b_index=#{b_index}
 	</update>
 	
 	
