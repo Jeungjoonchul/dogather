@@ -1,3 +1,41 @@
+$('#pwCheck').submit(function(event) {
+	event.preventDefault();
+	var isSubmit = false;
+	console.log("들어오긴 하니?")
+	$.ajax({
+		url : cp + '/user/pwCheck.us',
+		type : 'post',
+		data : $('#pwCheck').serialize(),
+		dataType : 'text',
+		async : false,
+		success : function(data) {
+
+			if (data == 'O') {
+				isSubmit = true;
+				cnt=0;
+			} else {
+				isSubmit = false;
+			}
+		}
+	});
+
+	if (isSubmit) {
+		this.submit();
+	} else {
+		alert("비밀번호가 일치하지 않습니다");
+		user_password.value=""
+		user_password.focus();
+		cnt++;
+		console.log(cnt);
+		if(cnt==5){
+			alert("5회 이상 틀리셨습니다. 로그아웃됩니다");
+			$.ajax({
+				url : cp + '/user/logout.us'
+			});
+		}
+	}
+});
+
 // 비밀번호 확인을 세기 위한 변수
 let cnt = 0;
 
@@ -166,43 +204,6 @@ function submitValidCheck() {
 			});
 	return flag;
 }
-
-$('#pwCheck').submit(function(event) {
-	event.preventDefault();
-	var isSubmit = false;
-	$.ajax({
-		url : cp + '/user/pwCheck.us',
-		type : 'post',
-		data : $('#pwCheck').serialize(),
-		dataType : 'text',
-		async : false,
-		success : function(data) {
-
-			if (data == 'O') {
-				isSubmit = true;
-				cnt=0;
-			} else {
-				isSubmit = false;
-			}
-		}
-	});
-
-	if (isSubmit) {
-		this.submit();
-	} else {
-		alert("비밀번호가 일치하지 않습니다");
-		user_password.value=""
-		user_password.focus();
-		cnt++;
-		console.log(cnt);
-		if(cnt==5){
-			alert("5회 이상 틀리셨습니다. 로그아웃됩니다");
-			$.ajax({
-				url : cp + '/user/logout.us'
-			});
-		}
-	}
-});
 
 
 $( document ).ready(function() {
