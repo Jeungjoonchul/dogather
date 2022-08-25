@@ -2,8 +2,7 @@
 
 $('#user_email').on('blur',function() {
 					var user_email = $('#user_email').val();
-					var result = $('#user_email').parent().parent().next()
-							.children().first().children();
+					var result = $('#user_email').parent().parent().next().children().first().children();
 					var resultText = result.parent().next().children();
 					resultText.text('');
 					const reg_email = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
@@ -38,12 +37,9 @@ $('#user_email').on('blur',function() {
 					}
 				});
 
-$('#user_nickname').on(
-		'blur',
-		function() {
+$('#user_nickname').on('blur',function() {
 			var user_nickname = $('#user_nickname').val();
-			var result = $('#user_nickname').parent().parent().next()
-					.children().first().children();
+			var result = $('#user_nickname').parent().parent().next().children().first().children();
 			var resultText = result.parent().next().children();
 			resultText.text('');
 			const reg_nickname = /^[가-힣a-zA-Z0-9]{2,10}$/;
@@ -78,12 +74,9 @@ $('#user_nickname').on(
 			}
 		});
 
-$('#user_password').on(
-		'keyup',
-		function() {
+$('#user_password').on('keyup',function() {
 			var user_password = $('#user_password').val();
-			var resultText = $('#user_password').parent().parent().next()
-					.children().last().children();
+			var resultText = $('#user_password').parent().parent().next().children().last().children();
 			resultText.css("color", "black");
 			const regPW_n = /[0-9]+/;
 			const regPW_l = /[a-zA-Z]+/;
@@ -123,12 +116,9 @@ $('#user_password').on(
 			}
 		});
 
-$('#user_password').on(
-				'blur',
-				function() {
+$('#user_password').on('blur',function() {
 					var user_password = $('#user_password').val();
-					var result = $('#user_password').parent().parent().next()
-							.children().first().children();
+					var result = $('#user_password').parent().parent().next().children().first().children();
 					var resultText = result.parent().next().children();
 					resultText.text('');
 					const reg_password = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,24}$/;
@@ -147,13 +137,10 @@ $('#user_password').on(
 					}
 				});
 
-$('#user_password_re').on(
-		'blur',
-		function() {
+$('#user_password_re').on('blur',function() {
 			var user_password = $('#user_password').val();
 			var user_password_re = $('#user_password_re').val();
-			var result = $('#user_password_re').parent().parent().next()
-					.children().first().children();
+			var result = $('#user_password_re').parent().parent().next().children().first().children();
 			var resultText = result.parent().next().children();
 			resultText.text('');
 			if (user_password_re == '') {
@@ -171,12 +158,9 @@ $('#user_password_re').on(
 			}
 		});
 
-$('#user_name').on(
-		'blur',
-		function() {
+$('#user_name').on('blur',function() {
 			var user_name = $('#user_name').val();
-			var result = $('#user_name').parent().parent().next().children()
-					.first().children();
+			var result = $('#user_name').parent().parent().next().children().first().children();
 			var resultText = result.parent().next().children();
 			resultText.text('');
 			const reg_name = /^[가-힣]{2,17}$/;
@@ -220,12 +204,9 @@ $('#user_phone').on('keyup', function() {
 	$('#user_phone').val(phone);
 });
 
-$('#user_phone').on(
-		'blur',
-		function() {
+$('#user_phone').on('blur',function() {
 			var user_phone = $('#user_phone').val();
-			var result = $('#user_phone').parent().parent().next().children()
-					.first().children();
+			var result = $('#user_phone').parent().parent().next().children().first().children();
 			var resultText = result.parent().next().children();
 			resultText.text('');
 			const reg_phone = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
@@ -265,13 +246,9 @@ $('#user_birth_date').on('keyup', function() {
 	$('#user_birth_date').val(date);
 });
 
-$('#user_birth_date')
-		.on(
-				'blur',
-				function() {
+$('#user_birth_date').on('blur',function() {
 					var user_birth_date = $('#user_birth_date').val();
-					var result = $('#user_birth_date').parent().parent().next()
-							.children().first().children();
+					var result = $('#user_birth_date').parent().parent().next().children().first().children();
 					var resultText = result.parent().next().children();
 					resultText.text('');
 					var today = new Date();
@@ -300,14 +277,11 @@ $('#user_birth_date')
 					}
 				});
 
-$('#address_detail').on(
-		'blur',
-		function() {
+$('#address_detail').on('blur',function() {
 			var zip_code=$('#zip_code').val();
 			var address_default = $('#address_default').val();
 			var address_detail = $('#address_detail').val();
-			var result = $('#address_detail').parent().parent().next()
-					.children().first().children();
+			var result = $('#address_detail').parent().parent().next().children().first().children();
 			var resultText = result.parent().next().children();
 			resultText.text('');
 			if (address_detail == ''||zip_code=='') {
@@ -396,8 +370,7 @@ $('form[name=joinForm]').on('submit',function(e){
 	$('.status').each(
 			function(index, item) {
 				if ($(this).text() == 'null') {
-					$(this).parent().parent().prev().children().last()
-							.children().focus();
+					$(this).parent().parent().prev().children().last().children().focus();
 
 					flag = false;
 
@@ -408,13 +381,11 @@ $('form[name=joinForm]').on('submit',function(e){
 					flag=false*/
 					return flag;
 				} else if ($(this).text() == 'invalid') {
-					$(this).parent().parent().prev().children().last()
-							.children().focus();
+					$(this).parent().parent().prev().children().last().children().focus();
 					flag=false
 					return flag;
 				} else if ($(this).text() == 'duplication') {
-					$(this).parent().parent().prev().children().last()
-							.children().focus();
+					$(this).parent().parent().prev().children().last().children().focus();
 					flag=false
 					return flag;
 				}
