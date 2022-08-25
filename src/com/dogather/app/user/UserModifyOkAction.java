@@ -41,6 +41,7 @@ public class UserModifyOkAction implements Action {
 		
 		
 		//유저 정보를 가져오고 보낼 DTO설정
+		//바뀐 정보를 dto에 새로 포장
 		UserDAO udao = new UserDAO();
 		UserDTO userInfor = new UserDTO();
 		userInfor = udao.getUserInfor(user_email);
@@ -51,8 +52,20 @@ public class UserModifyOkAction implements Action {
 		userInfor.setAddress_detail(m_address_detail);
 		userInfor.setAddress_extra(m_address_extra);
 
+		//sql명령문으로 업데이트
 		udao.updateUser(userInfor);
 		
-		return null;
+		//바뀐 정보로 새로운 세션 설정
+		req.getSession().setAttribute("myInfor", userInfor);
+		resp.setCharacterEncoding("utf-8");
+		resp.setContentType("text/html charset=utf-8");
+		req.getSession().setMaxInactiveInterval(15*16);
+		
+		//다시 화면으로 보내주기
+		ActionTo transfer = new ActionTo();
+		transfer.setRedirect(false);
+		transfer.setPath("/app/user/myPage/infor.jsp");
+
+		return transfer;
 	}
 }
