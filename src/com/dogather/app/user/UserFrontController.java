@@ -175,7 +175,41 @@ public class UserFrontController extends HttpServlet {
 			} catch (Exception e) {
 				System.out.println(command+" : "+e);
 			}
+		case "/user/find_email.us":
+			transfer=new ActionTo();
+			transfer.setPath("/app/user/find_email.jsp");
+			transfer.setRedirect(false);
+			break;
+		case "/user/find_password.us":
+			transfer=new ActionTo();
+			transfer.setPath("/app/user/find_password.jsp");
+			transfer.setRedirect(false);
+			break;
+		case "/user/find_email_submit.us":
+			try {
+				transfer=new UserFindEmailAction().execute(req,resp);
+			} catch (Exception e) {
+				System.out.println(command+" : "+e);
+				e.printStackTrace();
+			}
+			break;
+		case "/user/find_password_cert.us":
+			try {
+				transfer=new UserFindPasswordAction().execute(req,resp);
+			} catch (Exception e) {
+				System.out.println(command+" : "+e);
+				e.printStackTrace();
+			}
+			break;
 			
+		case "/user/password_reset.us":
+			try {
+				transfer=new UserPasswordResetAction().execute(req,resp);
+			} catch (Exception e) {
+				System.out.println(command+" : "+e);
+				e.printStackTrace();
+			}
+			break;
 		}
 		
 

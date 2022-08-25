@@ -29,6 +29,14 @@
 		select * from t_user where user_email=#{user_email}
 	</select>
 
+	<select id="findEmail" parameterType="hashmap" resultType="string">
+		select user_email from t_user where user_name=#{user_name} and user_phone=#{user_phone}
+	</select>
+	
+	<select id="findPassword" parameterType="hashmap" resultType="UserDTO">
+		select * from t_user where user_name=#{user_name} and user_phone=#{user_phone} and user_email=#{user_email}
+	</select>
+
 
 
 	<insert id="insertUser" parameterType="UserDTO">
@@ -51,5 +59,9 @@
 	
 	<update id="updateLastLogin" parameterType="_int">
 		update t_user set user_last_login=now() where user_index=#{user_index}
+	</update>
+	
+	<update id="resetPassword" parameterType="hashmap">
+		update t_user set user_password=#{user_password} where user_index=#{user_index}
 	</update>
 </mapper>

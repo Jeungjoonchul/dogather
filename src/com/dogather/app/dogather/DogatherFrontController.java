@@ -163,6 +163,14 @@ public class DogatherFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 			break;
+		case "/dg/view_my_info.dg":
+			try {
+				transfer=new DogatherViewMyInfoAction().execute(req,resp);
+			} catch (Exception e) {
+				System.out.println(command+" : "+e);
+				e.printStackTrace();
+			}
+			break;
 		}
 
 		// 전송 일괄처리

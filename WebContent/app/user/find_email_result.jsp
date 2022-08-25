@@ -25,17 +25,58 @@
     <link rel="stylesheet" href="${cp }/resources/css/include.css" />
 </head>
 <style>
+  main *{box-sizing: border-box;}
 #head {
-    width: 80%;
+    width: 66%;
     margin:0 auto;
-    margin-top: 50px;
+    margin-top: 66px;
     height: 200px;
     text-align: center;
   }
  #main{
  	width: 80%;
+ 	padding-top:50px;
  	margin:0 auto;
  	min-height: 600px;
+ 	padding-bottom:100px;
+ }
+ #cont{
+ 	width: 800px;
+ 	margin:0 auto;
+
+	text-align:center;
+ 	background-color: #ffffff;
+ 	box-shadow: 3px 3px 3px 3px grey;
+ 	height: 700px;
+ 	display: flex;
+ 	justify-content: center;
+ 	align-items: center;
+
+ }
+	#wrapper{
+		width: 500px;
+		height:400px;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-evenly;
+		align-items: center;
+	}
+ input{
+ 	width: 200px;
+ }
+ #wrapper a{
+ 	text-decoration: none;
+ 	padding:10px 10px;
+ 	border-radius: 5px;
+ 	background-color: #621ae5;
+ 	color:white;
+ 	cursor: pointer;
+ }
+ #wrapper a:first-child{
+ 	margin-right:20px;
+ }
+ #wrapper a:hover{
+ 	background-color: #777777;
  }
 </style>
 <body>
@@ -52,31 +93,35 @@
       </div>
 		<div id="main">
 			<div id="cont">
-				<form>
-					<table>
-						<thead>
-							<tr>
-								<td colspan="2">
-									<h2><span class="purple">아이디</span><span> 찾기</span></h2>
-								</td>
-							</tr>
-						<tbody>
-							<tr></tr>
-							<tr></tr>
-							<tr></tr>
-						</tbody>
-						<tfoot>
-							<tr>
-								<td>
-									<input type="submit" value="아이디 찾기">
-								</td>
-							</tr>
-						</tfoot>
-					</table>
-				</form>
+				<div id="wrapper">
+					<c:choose>
+						<c:when test="${user_email != null }">
+							<div>이메일은 <span id="user_email">${user_email}</span> 입니다.</div>
+							<div><a href="${cp }/user/find_password.us">비밀번호 찾기</a><a href="${cp }/user/login.us">로그인 하기</a></div>
+						</c:when>
+						<c:otherwise>
+							이메일을 찾을 수 없습니다
+						</c:otherwise>
+					</c:choose>
+				</div>
 			</div>
 		</div>
 	</main>
     <%@include file="/footer.jsp" %>
 </body>
+<script>
+	$('#find_email_btn').on('click',function(){
+		if($('#user_name').val()==''){
+			alert('이름을 입력하세요');
+			$('#user_name').focus();
+			return false;
+		}
+		if($('#user_phone').val()==''){
+			alert('전화번호를 입력하세요');
+			$('#user_phone').focus();
+			return false;
+		}
+		$('#find_email_form').submit();
+	});
+</script>
 </html>

@@ -19,7 +19,6 @@ public class UserLoginAction implements Action {
 	public ActionTo execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		Cookie[] cookies = req.getCookies();
-		
 		String user_email = null;
 		
 		for (Cookie c : cookies) {
@@ -32,11 +31,14 @@ public class UserLoginAction implements Action {
 		ActionTo transfer = null;
 		
 		if(user_email==null) {
+			
+			System.out.println(req.getHeader("referer"));
 			req.setAttribute("prev_page", req.getHeader("referer"));
 			transfer=new ActionTo();
 			transfer.setPath("/app/user/login.jsp");
 			transfer.setRedirect(false);
 		}else {
+			
 			UserDAO udao=new UserDAO();
 			UserDTO user = udao.selectUserWithUserEmail(user_email);
 			req.getSession().setAttribute("loginUser", user);

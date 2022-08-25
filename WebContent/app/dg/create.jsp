@@ -25,48 +25,6 @@
 <link rel="stylesheet" href="${cp }/resources/css/include.css" />
 <link rel="stylesheet" href="${cp }/resources/css/dogatherCreate.css" />
 
-<!-- <style>
-main {
-	width: 100%;
-}
-
-main * {
-	box-sizing: border-box;
-}
-
-#main {
-	width: 80%;
-	margin: 0 auto;
-}
-
-#banner_image {
-	width: 256px;
-	height: 256px;
-}
-
-td:first-of-type {
-	text-align: left;
-}
-
-th {
-	font-size: 16px;
-}
-
-#dg_intro::-webkit-scrollbar {
-	display: none;
-}
-
-#dg_intro {
-	width: 338px;
-	height: 288px;
-	resize: none;
-}
-
-#counter {
-	display: block;
-	color: #aaa;
-}
-</style> -->
 </head>
 <body>
 	<%@include file="/loginCheck.jsp"%>

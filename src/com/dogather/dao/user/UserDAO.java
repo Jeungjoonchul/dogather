@@ -59,5 +59,26 @@ public class UserDAO {
 	public void updateUserPw(UserDTO infor) {
 		sqlSession.update("User.updateUserPw",infor);
 	}
-	
+
+	public String findEmail(String user_name, String user_phone) {
+		HashMap<String, String> datas = new HashMap<String, String>();
+		datas.put("user_name", user_name);
+		datas.put("user_phone", user_phone);
+		return sqlSession.selectOne("User.findEmail", datas);
+	}
+
+	public UserDTO findPassword(String user_email, String user_phone, String user_name) {
+		HashMap<String, String> datas = new HashMap<String, String>();
+		datas.put("user_name", user_name);
+		datas.put("user_phone", user_phone);
+		datas.put("user_email", user_email);
+		return sqlSession.selectOne("User.findPassword", datas);
+	}
+
+	public boolean resetPassword(int user_index, String user_password) {
+		HashMap<String, Object> datas = new HashMap<String, Object>();
+		datas.put("user_index", user_index);
+		datas.put("user_password", user_password);
+		return sqlSession.update("User.resetPassword", datas)==1;
+	}
 }

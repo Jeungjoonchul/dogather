@@ -91,7 +91,7 @@
 									<nav>
 										<ul>
 											<li>
-												<a href="#">
+												<a href="${cp }/dg/view_my_info.dg?dg_index=${dg.dg_index}">
 													<span class="purple">내정보</span> 보러가기
 												</a>
 											</li>

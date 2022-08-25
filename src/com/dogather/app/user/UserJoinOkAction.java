@@ -114,7 +114,7 @@ public class UserJoinOkAction implements Action {
 		if(udao.insertUser(user)) {
 			//회원가입 성공
 			//경로, 전송방법 설정
-			out.print("alert('두개더의 가족이 되신 걸 환영합니다!!')");
+			out.print("alert('두개더의 가족이 되신 걸 환영합니다!!');");
 			out.print("location.href='"+req.getContextPath()+"/user/login.us?user="+user_email+"';");
 		}else {
 			//회원가입 실패

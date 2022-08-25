@@ -70,7 +70,7 @@ $('#user_nickname').on(
 							resultText.css('color', 'deepskyblue');
 						} else {
 							result.text('duplication');
-							resultText.text('중복된 닉네임입니다.');
+							resultText.text('중복된 닉네임입니다');
 							resultText.css('color', 'deeppink');
 						}
 					}
@@ -142,7 +142,7 @@ $('#user_password').on(
 						resultText.css('color', 'deeppink');
 					} else {
 						result.text('ok');
-						resultText.text('사용 가능한 비밀번호입니다.');
+						resultText.text('사용 가능한 비밀번호입니다');
 						resultText.css('color', 'deepskyblue');
 					}
 				});

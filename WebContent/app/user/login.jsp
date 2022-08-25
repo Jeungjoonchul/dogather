@@ -51,7 +51,7 @@
                 		<input type="email" name="user_email" id="user_email" placeholder="이메일 주소 입력"/>
                 	</c:when>
                 	<c:otherwise>
-                		<input type="email" name="user_email" id="user_email" value="${param.user_email}"/>
+                		<input type="email" name="user_email" id="user_email" value="${param.user}"/>
                 	</c:otherwise>
                 </c:choose>
               </div>
@@ -67,9 +67,11 @@
                   <label for="keep" class="keep_text"> 자동로그인 </label>
                 </div>
                 <div class="find_id">
-                  <a href="">
+                  <a href="${cp }/user/find_email.us">
                     <span>아이디 찾기 &#124;</span>
-                    <span>비밀번호 찾기</span>
+                  </a>
+                  <a href="${cp }/user/find_password.us">
+ 	                 <span>비밀번호 찾기</span>
                   </a>
                 </div>
               </div>
@@ -78,7 +80,7 @@
               </div>
             </form>
           </div>
-          <div class="login_bottom">
+          <%-- <div class="login_bottom">
             <div class="sns_login">
                 <!-- <hr> -->
               <p>SNS 계정 로그인/회원가입</p>
@@ -96,7 +98,7 @@
                    
                 </ul>
               </div>
-            </div>
+            </div> --%>
             <div class="join_container">
                 <div class="join_area">
                     <a href="${cp }/user/join.us" class="join"><p>
