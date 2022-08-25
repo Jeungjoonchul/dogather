@@ -19,7 +19,7 @@
     <link rel="shortcut icon" href="${cp}/resources/images/favicon.png" />
 <title>마이페이지</title>
 <link rel="stylesheet" href="${cp }/resources/css/include.css" />
-<link rel="stylesheet" href="${cp }/resources/css/mypage.css" />
+<link rel="stylesheet" href="${cp }/resources/css/myPage.css" />
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
 <style>
@@ -75,16 +75,28 @@
                 <div id="changpw_area">
                   <h2>비밀번호 변경</h2>
                   <div id="pw_area">
-                        <form action="">
+                        <form action="${cp}/user/modifyPw_ok.us" onsubmit="return pwSubmitValidCheck()">
                     <table>
                        <tr>
+                       <input type="hidden" name="user_email" id="user_email" value="${loginUser.user_email}">
                         <td>변경할 비밀번호</td>
-                        <td><input type="password" name="" id="" /></td>
+                        <td><input type="password" name="user_password"
+							id="user_password" placeholder='새로운 비밀번호를 입력해주세요' maxlength="24"></td>
                     </tr>
+                    <tr>
+						<th><span style="display: none;" class="status">null</span></th>
+						<td><span>&nbsp;</span></td>
+					</tr>
                       <tr>
                         <td>비밀번호 확인</td>
-                        <td><input type="password" name="" id="" /></td>
+                        <td><input type="password" name="user_password_re"
+							id="user_password_re" placeholder='비밀번호 확인' maxlength="24"></td>
                     </tr>
+                    <tr>
+						<th><span style="display: none;" class="status">null</span></th>
+						<td><span>&nbsp;</span></td>
+					</tr>
+						
                 </table>
                 <div id="pw_notice">
                   <p>주의사항</p>
@@ -97,7 +109,7 @@
                   </ul>
                 </div>
                   <div id="pw_button">
-					<input type="submit" style="display:none;" value="변경하기" id="modifyPw"/>
+					<input type="submit" value="변경하기" id="modifyPw"/>
                 </div>
         </form>
             </div>

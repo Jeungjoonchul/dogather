@@ -53,9 +53,11 @@ public class UserDAO {
 	}
 	
 	public void updateUser(UserDTO infor) {
-		// 작업중
 		sqlSession.update("User.updateUser",infor);
 	}
 
+	public void updateUserPw(UserDTO infor) {
+		sqlSession.update("User.updateUserPw",infor);
+	}
 	
 }

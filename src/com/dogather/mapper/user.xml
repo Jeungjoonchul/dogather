@@ -43,6 +43,12 @@
 		where user_email=#{user_email};
 	</update>
 	
+	<update id="updateUserPw" parameterType="UserDTO">
+		update t_user
+		set user_password=#{user_password}
+		where user_email=#{user_email};
+	</update>
+	
 	<update id="updateLastLogin" parameterType="_int">
 		update t_user set user_last_login=now() where user_index=#{user_index}
 	</update>

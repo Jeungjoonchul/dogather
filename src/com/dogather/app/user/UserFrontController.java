@@ -139,7 +139,6 @@ public class UserFrontController extends HttpServlet {
 			}
 			break;
 		case "/user/modify_ok.us":
-			System.out.println("여기까지");
 			try {
 				transfer = new UserModifyOkAction().execute(req, resp);
 			} catch (Exception e) {
@@ -156,6 +155,13 @@ public class UserFrontController extends HttpServlet {
 			transfer.setPath("/app/user/myPage/password.jsp");
 			transfer.setRedirect(false);
 			break;
+		case "/user/modifyPw_ok.us":
+			try {
+				transfer = new UserModifyPwOkAction().execute(req, resp);
+			} catch (Exception e) {
+				System.out.println(command+" : "+e);
+			}
+			
 		}
 		
 

@@ -19,6 +19,7 @@
       rel="stylesheet"/>
     <link rel="shortcut icon" href="./img/favicon.png" />
 	<link rel="stylesheet" href="${cp }/resources/css/include.css" />
+	<link rel="stylesheet" href="${cp }/resources/css/myPage.css" />
 	
 <title>마이페이지</title>
 <!--<link rel="stylesheet" href="${cp }/resources/css/myPage_sideBar.css" />-->

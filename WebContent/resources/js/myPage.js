@@ -34,6 +34,98 @@ $('#pwCheck').submit(function(event) {
 		}
 	}
 });
+$('#user_password').on(
+		'keyup',
+		function() {
+			var user_password = $('#user_password').val();
+			var resultText = $('#user_password').parent().parent().next()
+					.children().last().children();
+			resultText.css("color", "black");
+			const regPW_n = /[0-9]+/;
+			const regPW_l = /[a-zA-Z]+/;
+			const regPW_sl = /[@$!%#?&]+/;
+			var len = $('<span>비밀번호 길이 </span>');
+			var len_chk = $('<span style="color:red;">X </span>');
+			var n = $('<span>숫자 포함 </span>');
+			var n_chk = $('<span style="color:red;">X </span>');
+			var l = $('<span>문자 포함 </span>');
+			var l_chk = $('<span style="color:red;">X </span>');
+			var sl = $('<span>특수문자 포함 </span>');
+			var sl_chk = $('<span style="color:red;">X </span>');
+			resultText.text('');
+			resultText.append(len);
+			resultText.append(len_chk);
+			resultText.append(n);
+			resultText.append(n_chk);
+			resultText.append(l);
+			resultText.append(l_chk);
+			resultText.append(sl);
+			resultText.append(sl_chk);
+			if (user_password.length >= 8) {
+				len_chk.text('✓  ');
+				len_chk.css("color", "deepskyblue");
+			}
+			if (regPW_n.test(user_password)) {
+				n_chk.text('✓  ');
+				n_chk.css("color", "deepskyblue");
+			}
+			if (regPW_l.test(user_password)) {
+				l_chk.text('✓  ');
+				l_chk.css("color", "deepskyblue");
+			}
+			if (regPW_sl.test(user_password)) {
+				sl_chk.text('✓  ');
+				sl_chk.css("color", "deepskyblue");
+			}
+		});
+
+$('#user_password').on(
+		'blur',
+		function() {
+			var user_password = $('#user_password').val();
+			var result = $('#user_password').parent().parent().next()
+					.children().first().children();
+			var resultText = result.parent().next().children();
+			resultText.text('');
+			const reg_password = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,24}$/;
+			if (user_password == '') {
+				result.text('null');
+				resultText.text('비밀번호를 입력해주세요');
+				resultText.css('color', 'deeppink');
+			} else if (!reg_password.test(user_password)) {
+				result.text('invalid');
+				resultText.text('비밀번호 형식이 올바르지 않습니다');
+				resultText.css('color', 'deeppink');
+			} else {
+				result.text('ok');
+				resultText.text('사용 가능한 비밀번호입니다.');
+				resultText.css('color', 'deepskyblue');
+			}
+		});
+
+$('#user_password_re').on(
+'blur',
+function() {
+	var user_password = $('#user_password').val();
+	var user_password_re = $('#user_password_re').val();
+	var result = $('#user_password_re').parent().parent().next()
+			.children().first().children();
+	var resultText = result.parent().next().children();
+	resultText.text('');
+	if (user_password_re == '') {
+		result.text('null');
+		resultText.text('비밀번호를 확인해주세요');
+		resultText.css('color', 'deeppink');
+	} else if (user_password != user_password_re) {
+		result.text('invalid');
+		resultText.text('비밀번호가 일치하지 않습니다');
+		resultText.css('color', 'deeppink');
+	} else if (user_password == user_password_re) {
+		result.text('ok');
+		resultText.text('비밀번호가 확인되었습니다');
+		resultText.css('color', 'deepskyblue');
+	}
+});
 
 // 비밀번호 확인을 세기 위한 변수
 let cnt = 0;
@@ -184,6 +276,31 @@ function daumPostcode() {
 }
 
 //마이페이지 회원정보 수정 - 유효성체크
+function pwSubmitValidCheck() {
+	var flag = true;
+	$('.status').each(
+			function(index, item) {
+				if ($(this).text() == 'null') {
+					$(this).closest('tr').prev().children().last()
+							.children().focus();
+					flag = false;
+					return flag;
+				} else if ($(this).text() == 'invalid') {
+					$(this).closest('tr').prev().children().last()
+							.children().focus();
+					flag = false;
+					return flag;
+				} else if ($(this).text() == 'duplication') {
+					$(this).closest('tr').prev().children().last()
+							.children().focus();
+					flag = false;
+					return flag;
+				}
+			});
+	return flag;
+}
+
+//마이페이지 회원정보 수정 - 유효성체크
 function submitValidCheck() {
 	var flag = true;
 	$('.status').each(
@@ -220,7 +337,7 @@ $( document ).ready(function() {
     
     // 페이지 분기 처리 로직
     switch(curPathName){
-	    case "/dogather/user/pwCheck_ok":
+	    case "/dogather/user/pwCheck_ok", "/dogather/user/info":
 	    	console.log('내정보 수정 페이지');
 //	    	let isModify =false;
 	    	
@@ -305,5 +422,3 @@ $( document ).ready(function() {
 			break;
     }
 });
-
-
