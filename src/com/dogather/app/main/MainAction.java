@@ -23,9 +23,8 @@ public class MainAction implements Action {
 	public ActionTo execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		ActionTo transfer = new ActionTo();
 		String skip_index = req.getParameter("skip_index");
-		System.out.println("skip_index : "+skip_index);
 		boolean skip_check = skip_index != null ? true : false;
-		System.out.println("skip_check : "+skip_check);
+		
 		// true -> 인덱스 스킵하는 사람
 		// false -> 인덱스 보는 사람
 		if (skip_check) {
@@ -56,7 +55,7 @@ public class MainAction implements Action {
 		List<DogatherDTO> hot_list = ddao.getDgListOnMain(hot_criteria);
 		req.setAttribute("hot_list", hot_list);
 		
-		String latest_criteria = "d.dg_index";
+		String latest_criteria = "d.dg_reg_date";
 		List<DogatherDTO> latest_list = ddao.getDgListOnMain(latest_criteria);
 		req.setAttribute("latest_list", latest_list);
 		

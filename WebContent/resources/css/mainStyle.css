@@ -9,6 +9,8 @@ main{
   padding:20px;
 }
 
+#main *{box-sizing: border-box;}
+
 .more {
   display: inline-block;
   position: absolute;

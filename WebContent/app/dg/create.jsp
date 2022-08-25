@@ -23,8 +23,9 @@
 
 <title>Doːgather</title>
 <link rel="stylesheet" href="${cp }/resources/css/include.css" />
+<link rel="stylesheet" href="${cp }/resources/css/dogatherCreate.css" />
 
-<style>
+<!-- <style>
 main {
 	width: 100%;
 }
@@ -65,7 +66,7 @@ th {
 	display: block;
 	color: #aaa;
 }
-</style>
+</style> -->
 </head>
 <body>
 	<%@include file="/loginCheck.jsp"%>

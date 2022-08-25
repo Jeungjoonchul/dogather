@@ -23,83 +23,9 @@
 
 <title>Doːgather</title>
 <link rel="stylesheet" href="${cp }/resources/css/include.css" />
-<style>
-main {
-	width: 100%;
-}
+<link rel="stylesheet" href="${cp }/resources/css/dogatherWrite.css" />
 
-main * {
-	box-sizing: border-box;
-}
 
-#main {
-	width: 80%;
-	margin: 0 auto;
-}
-
-#dp_contents {
-	width: 539px;
-	height: 206px;
-	resize: none;
-}
-
-#counter {
-	display: block;
-	color: #aaa;
-}
-
-#cert_images {
-	display: flex;
-	justify-content: flex-start;
-}
-
-.cert_image {
-	width: 33%
-}
-
-.cert_image>div {
-	margin: 5px 0;
-	width: 100%;
-}
-
-.cert_image * {
-	display: block;
-}
-
-.cert_image  img {
-	width: 128px;
-	height: 128px;
-}
-
-.cert_image>div:first-child {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-.cert_image>div:last-child {
-	display: flex;
-	justify-content: space-evenly;
-}
-
-.cert_image a {
-	text-decoration: none;
-	margin-right: 5px;
-	border-radius: 4px;
-	background-color: #eee;
-	padding: 10px;
-	display: inline-block;
-}
-
-.cert_image span {
-	padding: 10px;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	width: 100%;
-	text-align: center;
-}
-</style>
 </head>
 <body>
 	<%@include file="/loginCheck.jsp"%>
