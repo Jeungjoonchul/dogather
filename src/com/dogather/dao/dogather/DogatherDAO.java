@@ -105,9 +105,9 @@ SqlSession sqlSession;
 		return sqlSession.selectOne("Dogather.getDpCnt",datas);
 	}
 
-	public List<String> getLikeUserListByDP(int dg_index) {
-		return sqlSession.selectList("Dogather.getLikeUserListByDP", dg_index);
-	}
+//	public List<String> getLikeUserListByDP(int dg_index) {
+//		return sqlSession.selectList("Dogather.getLikeUserListByDP", dg_index);
+//	}
 
 	public boolean dgQuit(int user_index, int dg_index) {
 		HashMap<String, Integer> datas = new HashMap<String, Integer>();
@@ -182,7 +182,7 @@ SqlSession sqlSession;
 	}
 
 	public String getLikeUsersByDP(int dp_index) {
-		return sqlSession.selectOne("Dogather.getLikeUsers", dp_index);
+		return sqlSession.selectOne("Dogather.getLikeUsersByDP", dp_index);
 	}
 
 	public boolean setLikeUserIndexByDP(int dp_index, String dp_like_user_index) {

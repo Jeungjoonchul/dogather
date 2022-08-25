@@ -228,7 +228,6 @@ $(document).on('click','.reply_delete',function(e){
 //댓글 페이지 버튼 누를 시 페이지 변경
 $(document).on('click','.reply_page_btn',function(e){
 	var page = $(e.target).val();
-
 	getList(page);
 });
 
@@ -249,7 +248,6 @@ $('#like_up span').on('click',function(e){
 			dataType : 'json',
 			async: false,
 			success : function(data){
-				console.log(data.b_like_cnt);
 				if(data.result=='like'){
 					$('#like_up').children().first().text('♥');
 					$('#like_up').children().last().text('like');

@@ -61,7 +61,7 @@
 		on u.user_index=d.user_index 
 		left join (select count(user_index) as dg_member_cnt, dg_index from t_dogather_user group by dg_index) as du 
 		on d.dg_index=du.dg_index 
-		where d.dg_inactive=0 and d.dg_public_scope=1 and d.category_index like('%${category_index}%') and(case when d.dg_expire is not null then d.dg_expire>now() else d.dg_expire is null end) 
+		where d.dg_inactive=0 and u.user_inactive=0 and d.dg_public_scope=1 and d.category_index like('%${category_index}%') and(case when d.dg_expire is not null then d.dg_expire>now() else d.dg_expire is null end) 
 			and(d.dg_title like('%${keyword}%') or d.dg_intro like('%${keyword}%') or d.dg_intro_short like('%${keyword}%') or u.user_nickname like('%${keyword}%'))  
 			order by ${criteria} ${align} limit #{dg_startRow}, #{dg_pageSize}
 	</select>
@@ -69,9 +69,9 @@
 	<select id="getDgCnt" parameterType="hashmap" resultType="_int">
 		select count(*) 
 		from t_dogather d 
-		left join(select user_nickname,user_index from t_user) u 
+		left join(select user_nickname,user_index, user_inactive from t_user) u 
 		on d.user_index=u.user_index 
-		where d.dg_inactive=0 and d.dg_public_scope=1 and d.category_index like('%${category_index}%') and(case when d.dg_expire is not null then d.dg_expire>now() else d.dg_expire is null end)
+		where d.dg_inactive=0 and u.user_inactive=0 and d.dg_public_scope=1 and d.category_index like('%${category_index}%') and(case when d.dg_expire is not null then d.dg_expire>now() else d.dg_expire is null end)
 		and(d.dg_title like('%${keyword}%') or d.dg_intro like('%${keyword}%') or d.dg_intro_short like('%${keyword}%') or u.user_nickname like('%${keyword}%'))
 	</select>
 	
@@ -99,7 +99,7 @@
 		on u.user_index=d.user_index 
 		left join (select count(user_index) as dg_member_cnt, dg_index from t_dogather_user group by dg_index) as du 
 		on d.dg_index=du.dg_index 
-		where d.dg_inactive=0 and d.dg_public_scope=1 and(case when d.dg_expire is not null then d.dg_expire>now() else d.dg_expire is null end) 
+		where d.dg_inactive=0 and u.user_inactive=0 and d.dg_public_scope=1 and(case when d.dg_expire is not null then d.dg_expire>now() else d.dg_expire is null end) 
 			order by ${criteria} desc limit 0,5
 	</select>
 	
@@ -163,15 +163,17 @@
 	
 	<select id="getDpCnt" parameterType="hashmap" resultType="_int">
 		select count(*) 
-		from t_dogather_post 
-		where dg_index = #{dg_index} and user_index like('${user_index}') and dp_type like('%${dp_type}%')
+		from t_dogather_post d
+		join t_user u
+		on d.user_index=u.user_index
+		where d.dp_inactive=0 and u.user_inactive=0 and d.dg_index = #{dg_index} and d.user_index like('${user_index}') and d.dp_type like('%${dp_type}%')
 	</select>
 	
-	<select id="getLikeUserListByDP" parameterType="_int" resultType="string">
+	<!-- <select id="getLikeUserListByDP" parameterType="_int" resultType="string">
 		select dp_like_user_index from t_dogather_post where dg_index=#{dg_index}
-	</select>
+	</select> -->
 		
-	<select id="getLikeUsers" parameterType="_int" resultType="string">
+	<select id="getLikeUsersByDP" parameterType="_int" resultType="string">
 		select dp_like_user_index from t_dogather_post where dp_index=#{dp_index}	
 	</select>
 		

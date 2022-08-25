@@ -15,9 +15,9 @@
 		resultType="_int">
 		select count(*) 
 		from ${b_name} b 
-		left join(select user_nickname,user_index from t_user) u 
+		left join(select user_nickname,user_index,user_inactive from t_user) u 
 		on b.user_index=u.user_index 
-		where b.b_inactive=0 and b.b_subject like('%${subject}%') 
+		where b.b_inactive=0 and b.b_subject like('%${subject}%') and u.user_inactive=0 
 		and(b.b_title like('%${keyword}%') or b.b_contents like('%${keyword}%') or u.user_nickname like('%${keyword}%'))
 	</select>
 	
@@ -42,7 +42,7 @@
 		on b.user_index=u.user_index 
 		left join(select b_index,count(r_index) as b_reply_cnt from ${r_name} where r_inactive=0 group by b_index) as r 
 		on b.b_index=r.b_index 
-		where b.b_inactive = 0 
+		where b.b_inactive = 0 and u.user_inactive=0 
 		and (b.b_title like('%${keyword}%') or b.b_contents like('%${keyword}%') or u.user_nickname like('%${keyword}%')) 
 		and b_subject like('%${subject}%') 
 		order by 1 desc 
@@ -61,11 +61,13 @@
 	</select>
 	
 	<select id="getBoardListOnMain" parameterType="hashmap" resultType="BoardDTO">
-		select b.b_index,b.b_reg_date,b.b_subject,b.b_title,r.b_reply_cnt 
+		select b.b_index,b.b_reg_date,b.b_subject,b.b_title,r.b_reply_cnt,u.user_inactive
 		from ${b_name} as b 
+		join t_user u  
+		on u.user_index=b.user_index 
 		left join(select b_index,count(r_index) as b_reply_cnt from ${r_name} where r_inactive=0 group by b_index) as r 
 		on b.b_index=r.b_index 
-		where b_inactive=0 order by 1 desc limit 0,6
+		where b.b_inactive=0 and u.user_inactive=0 order by 1 desc limit 0,6
 	</select>
 	
 	<select id="getLastIndexWithUserIndex" parameterType="hashmap" resultType="_int">
