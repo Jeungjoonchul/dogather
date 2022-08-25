@@ -404,8 +404,8 @@ $('form[name=joinForm]').on('submit',function(e){
 /*					$(this).parent().parent().prev().children().last()
 							.children().blur();
 					$(this).parent().parent().prev().children().last()
-							.children().focus();*/
-					flag=false
+							.children().focus();
+					flag=false*/
 					return flag;
 				} else if ($(this).text() == 'invalid') {
 					$(this).parent().parent().prev().children().last()
