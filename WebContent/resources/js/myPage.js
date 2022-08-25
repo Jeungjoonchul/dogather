@@ -216,7 +216,8 @@ $( document ).ready(function() {
     
     // 페이지 분기 처리 로직
     switch(curPathName){
-	    case "/dogather/user/pwCheck_ok":
+    
+    case "/dogather/user/pwCheck_ok", "/dogather/user/info":
 	    	console.log('패스워드 체크 페이지');
 	    	let isModify =false;
 	    	

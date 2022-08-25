@@ -36,6 +36,8 @@ main * {
 #counter {
 	display: block;
 	color: #aaa;
+	width: 120px;
+	margin-left: 65%;
 }
 
 #cert_images {

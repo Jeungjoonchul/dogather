@@ -58,16 +58,21 @@ $('#dg_banner').on('change',function(e){
 	}
 });
 
-$(document).ready(function(){
+/*$(document).ready(function(){
 	$('#limit_scope_container').show();
 	$('#dg_expire').hide();
-});
+});*/
 
 $('#dg_public_scope').on('change',function(){
-	
-		$('#limit_scope_container').toggle();
-	
+	if($('#dg_public_scope :checked').val()==1){
+		$('#limit_scope_container').show(500);
+	}else{
+		$('#limit_scope_container').hide(500);
+	}
+		//$('#limit_scope_container').toggle();
+
 });
+
 $('#dg_expire_define').on('change',function(){
 	$('#dg_expire').toggle();
 	if(!$('#dg_expire').is(':visible')){
@@ -579,7 +584,9 @@ $(document).on('click','.dp_reply_update',function(e){
 
 $(document).on('keyup','#reply_editor',function(){
 	var rows=$('#reply_editor').val().split('\n').length;
-	$('#reply_editor').css('height',(rows*-1)*20+45+ 'px');
+	console.log(rows);
+	console.log((rows-1)*20+45);
+	$('#reply_editor').css('height',(rows-1)*20+45+'px');
 })
 
 //reply update execute in modal
@@ -755,7 +762,9 @@ $('input[name=dp_type]').on('click',function(){
 function upload_image(dp_image){
 	$('#'+dp_image).click();
 }
-$('input[type=file]').on('change',function(e){
+
+$('.dp_image').on('change',function(e){
+	console.log('실행')
 	var flag=true;
 	var file = e.target.files[0];
 	var file_reg = /^(.*?)\.(jpg|jpeg|png|gif|bmp|webp)$/;

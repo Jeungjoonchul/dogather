@@ -170,7 +170,7 @@
            </c:choose>
             </div>
           </div>
-          <div id="id="interest">">
+          <div id="id="interest">
             <div class="list_title">
               <a href="${cp}/dg/catalog.dg?criteria_key=dg_hits">
                 <span class="purple">관심 </span><span>두ː게더</span>
