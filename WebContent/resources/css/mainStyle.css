@@ -9,10 +9,8 @@ main{
   padding:20px;
 }
 
-/* class 추가 */
-.purple {
-  color: #621ae5;
-}
+#main *{box-sizing: border-box;}
+
 .more {
   display: inline-block;
   position: absolute;
@@ -20,15 +18,7 @@ main{
   font-size: 16px;
   color: #666666;
 }
-.green {
-  color: #03fa5a;
-}
-.gray {
-  color: #666666;
-}
-.red {
-  color: #f94b4b;
-}
+
 
 ul {
   padding-inline-start: 0px;
@@ -44,7 +34,9 @@ li {
   list-style: none;
   text-align: center;
 }
-
+.slides li{
+	cursor: pointer;
+}
 /* 이벤트 슬라이드 영역 */
 .section {
   width: 100%;
@@ -121,13 +113,24 @@ li {
   overflow-y: hidden;
   overflow-x: auto;
   white-space: nowrap;
+
 }
+.album{
+	  display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.album>img{
+	display:block;
+	max-width: 200px;
+	max-height: 200px;
+}
+
 #dogather_list .list_album ul li {
   display: inline-block;
 }
 #dogather_list .list_album ul li div {
   margin: 0 30px;
-  border: 1px solid #141414;
   width: 200px;
   height: 200px;
 }
@@ -392,3 +395,10 @@ td {
 }
 
 
+.dg_intro{
+	max-width: 202px !important;
+	height:21px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}

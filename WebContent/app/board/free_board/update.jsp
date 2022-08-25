@@ -32,87 +32,13 @@
 <link rel="stylesheet" href="${cp }/resources/css/include.css" />
 <link rel="stylesheet" href="${cp }/resources/css/boardUpdate.css" />
 </head>
-<!-- <style>
-#body {
-	padding-top: 60px;
-	padding-bottom: 60px;
-}
 
-#body table tr {
-	text-align: left;
-}
-
-.post_update {
-	text-align: center;
-	margin: 0 auto;
-}
-
-.post_update>tbody>tr:last-child>td {
-	text-align: right;
-}
-
-#post_title select {
-	width: 200px;
-	height: 40px;
-	font-size: 16px;
-	text-align: center;
-	border: 1px solid #ccc;
-	border-radius: 3px;
-}
-
-#post_title input {
-	font-size: 16px;
-	width: 750px;
-	height: 36px;
-	padding-right: 42px;
-	border: 1px solid #ccc;
-	border-radius: 3px;
-}
-
-#button_a a {
-	text-align: right;
-	display: inline-block;
-	border-radius: 5px;
-	padding: 10px;
-	color: #fff;
-	background-color: #621ae5;
-	margin: 10px 5px 10px 0;
-	text-decoration: none;
-}
-
-#button_a a:hover {
-	background-color: #8757de;
-}
-
-#post_update_container {
-	border: solid 1px #eee;
-	border-top: 2px solid #621ae5;
-	width: 1100px;
-	margin: 0 auto;
-	padding: 10px 0;
-}
-
-#post_update_title {
-	margin: 0 auto;
-	width: 90%;
-	color: #141414;
-	font-size: 24px;
-}
-/* #post_title td:nth-child(1){
-width:100%;
-} */
-</style> -->
 <body>
-	<c:if test="${empty loginUser}">
-		<script>
-			alert("로그인 후 이용 가능합니다");
-			location.replace("${cp}/user/login.us");
-		</script>
-	</c:if>
+<%@include file="../../../loginCheck.jsp" %>
 	<c:if test="${not (loginUser.user_nickname eq b.user_nickname)}">
 		<script>
 			alert("글쓴이가 아닙니다");
-			location.replace("${cp}/board/free_board/post_list.bo?page=${param.page}");
+			location.replace("${cp}/board/free_board/post_list.bo?page=${param.page}&keyword=${param.keyword}&subject=${param.subject}");
 		</script>
 	</c:if>
 	<%@include file="../../../header.jsp"%>
@@ -130,20 +56,20 @@ width:100%;
 								<td>
 									<select name="b_subject">
 										<c:choose>
-											<c:when test="${b.b_subject eq '유머'}">
+											<c:when test="${b.b_subject eq '잡담'}">
+												<option value="잡담" selected>잡담</option>
 												<option value="유머">유머</option>
-												<option value="잡담">잡담</option>
 												<option value="기타">기타</option>
 											</c:when>
-											<c:when test="${b.b_subject eq '잡담'}">
+											<c:when test="${b.b_subject eq '유머'}">
 												<option value="잡담">잡담</option>
-												<option value="유머">유머</option>
+												<option value="유머" selected>유머</option>
 												<option value="기타">기타</option>
 											</c:when>
 											<c:otherwise>
-												<option value="기타">기타</option>
-												<option value="유머">유머</option>
 												<option value="잡담">잡담</option>
+												<option value="유머">유머</option>
+												<option value="기타" selected>기타</option>
 											</c:otherwise>
 										</c:choose>
 									</select>
@@ -164,8 +90,8 @@ width:100%;
 							</tr>
 							<tr id="button_a">
 								<th></th>
-								<td><a href="javascript:postOn();">수정완료</a> <a
-									href="${cp }/board/free_board/post_list.bo?page=${param.page}&keyword=${param.keyword}">목록</a></td>
+								<td><a href="javascript:postCheck();">수정완료</a> <a
+									href="${cp }/board/free_board/post_list.bo?page=${param.page}&keyword=${param.keyword}&subject=${param.subject}">목록</a></td>
 							</tr>
 						</tbody>
 					</table>
@@ -173,6 +99,7 @@ width:100%;
 					<input type="hidden" name="b_index" value="${b.b_index }" />
 					<input type="hidden" name="page" value="${param.page}" />
 					<input type="hidden" name="keyword" value="${param.keyword}" />
+					<input type="hidden" name="subject" value="${param.subject}" />
 					<textarea name="orgName" id="orgName" style="display: none;"></textarea>
 					<textarea name="sysName" id="sysName" style="display: none;"></textarea>
 				</form>

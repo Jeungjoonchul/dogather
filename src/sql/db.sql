@@ -36,8 +36,7 @@ create table t_user(
     
     #회원 가입 완료 후 설정
    
-	user_profile_original_name varchar(300), #유저 프로필 사진 원본 파일이름
-    user_profile_system_name varchar(300), #유저 프로필 사진 시스템 파일이름
+	user_profile_image varchar(300),#유저 이미지 파일 이름(원본파일명:저장파일명)
 
 	user_term_essential1 boolean default true not null, #필수약관 1 동의 여부(기본 't' / ex : 't')
     user_term_essential2 boolean default true not null, #필수약관 2 동의 여부(기본 't' / ex : 't')
@@ -144,9 +143,37 @@ create table t_fb_reply(
     constraint fbReply_user_fk foreign key(user_index) references t_user(user_index)
 );
 
-###아래 146번 쿼리문  0을 최근 게시물 번호로 수정 후 더미 데이터 생성
-
+###!!!!!!!!!!!!!!!!!!!!!아래 쿼리문  0을 최근 게시물 번호로 수정 후 더미 데이터 생성!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 insert into t_fb_reply(b_index,user_index,r_contents) values(0,1,'사과의 댓글'),(0,2,'바나나의 댓글'),(0,3,'체리의 댓글'),(0,4,'두리안의 댓글');
+
+#정보 게시판
+create table t_info_board(
+	b_index int primary key auto_increment, #게시글 번호
+    user_index int, #게시글 작성자
+    b_reg_date datetime default now(), #게시글 등록일
+    b_update_date datetime default now(), #게시글 수정일
+    b_subject varchar(300) not null, #전체, 자유게시판, 카테고리 게시판(ex : 전체)
+    b_title varchar(1000) not null, #게시글 제목
+    b_contents text not null, #게시글 내용(blob 타입 확인 필요)
+    b_hits int default 0, #게시글 조회수
+    b_like_user_index text, #좋아요 누른 사람
+    b_inactive boolean default false not null, #게시글 삭제여부
+    b_files varchar(1000),
+    constraint infoBoard_user_fk foreign key(user_index) references t_user(user_index)
+);
+#정보 게시판 댓글
+create table t_ib_reply(
+	r_index int primary key auto_increment,
+	b_index int, #게시판 번호
+    user_index int, #댓글 작성자
+    r_reg_date datetime default now(), #댓글 작성 시간
+    r_update_date datetime default now(), #댓글 수정 시간
+    r_contents text, #댓글 내용
+    r_like_user_index text,
+    r_inactive boolean default false not null, #댓글 삭제 여부
+    constraint ibReply_infoBoard_fk foreign key(b_index) references t_info_board(b_index),
+    constraint ibReply_user_fk foreign key(user_index) references t_user(user_index)
+);
 
 #이벤트(adminMode에서 crud 가능 / userMode에서는 r만 가능)
 create table t_event_board(
@@ -154,7 +181,7 @@ create table t_event_board(
     user_index varchar(300) default -1, #게시글 작성자(default admin)
 	b_reg_date datetime default now(), #게시글 등록일(ex : 2022-07-26)
     b_update_date datetime default now(), #게시글 수정일(ex : 2022-07-27)
-    b_subject varchar(300) not null, #콜라보, 진행중, 종료(ex : 진행중)
+    b_subject varchar(300) not null, #진행중, 종료(ex : 진행중)
     b_title varchar(1000) not null, #게시글 제목(ex : 3일만에 50kg감량 시 1000만원!!)
     b_contents text not null, #게시글 내용(blob 타입 확인 필요)
     b_hits int default 0, #게시글 조회수(ex : 50000)
@@ -195,17 +222,19 @@ create table t_notice_board(
 create table t_dogather(
 	dg_index int primary key auto_increment, #dogather 인덱스 번호(ex : 1)
     user_index int, #dogather 창시자(방장)(ex : 1)
-    dg_reg_date datetime default now(),#dogather 만든 날짜(ex : 2022-07-26)
+    dg_reg_date date default (current_date),#dogather 만든 날짜(ex : 2022-07-26)
     category_index int not null, #카테고리(ex : 1)
     dg_title varchar(767) not null unique, #dogather 제목(ex : 살빼기dogather)
     dg_intro text, #dogather 소개(ex : 체중감량 같이해요!)
     dg_intro_short varchar(60), #dogather 짧은 설명
-    dg_banner text, #dogather 사진(로고)
-    dg_public_scope enum('t','f'), #공개범위(ex : 't')
+    dg_banner_org varchar(300),
+    dg_banner_sys varchar(300), #dogather 사진(로고)
+    dg_public_scope boolean, #공개범위(ex : 1)
     dg_capacity int default 50, #dogather 참여 가능 인원 수, dogather 점수에 따라 증가 가능, 점수 산정식은 미정, 최선:admin에서 설정해줌 / DB 자동화는 가능하면 하도록(ex : 50)
 	dg_limit_scope enum('unLimit','limit','impossible'), #가입 제한(ex : 'unLimit')
+    dg_hits int default 0,
     #dg_likeUserIndex text #두개더에 좋아요 누른 유저(생각해 보고 넣기)
-    dg_expire datetime, #전체 목표 완료 날짜(ex : 2022-12-26)
+    dg_expire date, #전체 목표 완료 날짜(ex : 2022-12-26)
     dg_inactive boolean default false not null,
     constraint dogather_user_fk foreign key(user_index) references t_user(user_index),
     constraint dogather_category_fk foreign key(category_index) references t_category(category_index)
@@ -216,73 +245,56 @@ create table t_dogather_user(
 	dg_index int, #dogather 인덱스 번호(ex : 1)
     user_index int, #dogather 참여자 번호(ex : 1)
     dg_user_reg_date datetime default now(), #dogather 참여자:가입날짜(ex : 2022-07-25)
+    dg_user_active boolean default true,
+    dg_user_drop_date datetime, #dogather 탈퇴 날짜
     constraint dogatherUser_dogather_fk foreign key(dg_index) references t_dogather(dg_index),
     constraint dogatherUser_user_fk foreign key(user_index) references t_user(user_index)
 );
+
+#dogather 유저 초대
 
 #dogather 유저 목표(진행중)
 create table t_dogather_user_target(
 	dg_index int, #dogather 인덱스 번호(ex : 1)
     user_index int, #유저 번호(ex: 1)
-    dgu_target_date datetime, #(ex : 2022-12-25)
-    dgu_target text, #목표(ex : 70kg까지 살빼기 / 살빼기)
+    dg_user_target_date datetime, #(ex : 2022-12-25)
+    dg_user_target text, #목표(ex : 70kg까지 살빼기 / 살빼기)
     constraint dogatherUserTarget_dogather_fk foreign key(dg_index) references t_dogather(dg_index),
     constraint dogatherUserTarget_user_fk foreign key(user_index) references t_user(user_index)
 );
 
-#dogather 인증글
-create table t_dogather_do(
-	dd_index int primary key auto_increment, #dogather 인증글 번호(ex : 1)
+#dogather post
+create table t_dogather_post(
+	dp_index int primary key auto_increment, #dogather 인증글 번호(ex : 1)
     dg_index int, #dogather 인덱스 번호(ex : 1)
     user_index int, #작성자 번호(ex : 1)
-    dd_reg_date datetime default now(), #작성 날짜(ex : 2022-07-26)
-    dd_update_date datetime default now(), #수정 날짜(ex : 2022-07-26)
-    dd_contents text, #작성 내용(ex : 오늘도 해냈다)
-    dd_inactive boolean default false not null, #삭제 여부(ex : 'f')
-    dd_like_user_index text, #인증 글에 좋아요 누른 유저(ex : 2,4,6,7,...)
-    dd_image1 text, #인증 사진1t_free_board
-    dd_image2 text, #인증 사진2
-    dd_image3 text, #인증 사진3
-    constraint dogatherDo_dogather_fk foreign key(dg_index) references t_dogather(dg_index),
-    constraint dogatherDo_user_fk foreign key(user_index) references t_user(user_index)
+    dp_reg_date datetime default now(), #작성 날짜(ex : 2022-07-26)
+    dp_update_date datetime default now(), #수정 날짜(ex : 2022-07-26)
+    dp_contents text, #작성 내용(ex : 오늘도 해냈다)
+    dp_like_user_index text, #인증 글에 좋아요 누른 유저(ex : 2,4,6,7,...)
+    dp_inactive boolean default false not null, #삭제 여부(ex : 'f')
+    dp_image1_org varchar(300), #인증 사진1
+	dp_image1_sys varchar(300),
+    dp_image2_org varchar(300), #인증 사진2
+	dp_image2_sys varchar(300),
+    dp_image3_org varchar(300), #인증 사진3
+	dp_image3_sys varchar(300),
+    dp_type enum('feed','cert') not null,#피드인지 인증글인지 확인용
+    constraint dogatherPost_dogather_fk foreign key(dg_index) references t_dogather(dg_index),
+    constraint dogatherPost_user_fk foreign key(user_index) references t_user(user_index)
 );
 
-#dogather 인증글 댓글
-create table t_dd_reply(
-	dd_index int, #dogather 인증글 번호(ex : 1)
+#dogather post reply
+create table t_dp_reply(
+	dpr_index int primary key auto_increment,
+	dp_index int, #dogather 인증글 번호(ex : 1)
     user_index int, #댓글 작성자(ex : 2)
-    ddr_reg_date datetime default now(), #댓글 작성 시간(ex : 2022-07-26)
-    ddr_update_date datetime default now(), #댓글 수정 시간(ex : )<-수정 안함
-    ddr_contents text, #댓글 내용(ex : 축하여~)
-    ddr_inactive boolean default false not null, #댓글 삭제 여부(ex : 'f')
-    constraint ddReply_dogather_do_fk foreign key(dd_index) references t_dogather_do(dd_index),
-    constraint ddReply_user_fk foreign key(user_index) references t_user(user_index)
-);
-
-#dogather feed
-create table t_dogather_feed(
-	df_index int primary key auto_increment, #dogather 피드 번호(ex : 1)
-    dg_index int, #dogather 인덱스 번호(ex : 1)
-    user_index int, #작성자 번호(ex : 2)
-    df_reg_date datetime default now(), #작성 날짜(ex : 2022-07-26)
-    df_update_date datetime default now(), #수정 날짜(ex : )
-    df_contents text, #작성 내용(ex : 여긴 어떤곳인가요?)
-    df_like_user_index text, #인증 글에 좋아요 누른 유저(ex : 1,3,5,...)
-    df_inactive boolean default false not null, #삭제 여부(ex : 'f')
-    constraint dogatherFeed_dogather_fk foreign key(dg_index) references t_dogather(dg_index),
-    constraint dogatherFeed_user_fk foreign key(user_index) references t_user(user_index)
-);
-
-#dogather feed 댓글
-create table t_df_reply(
-	df_index int, #dogather 피드 번호(ex : 1)
-    user_index int, #댓글 작성자(ex : 1)
-    dfr_reg_date datetime default now(), #댓글 작성 시간(ex : 2022-07-26)
-    dfr_update_date datetime default now(), #댓글 수정 시간(ex : )
-    dfr_contents text, #댓글 내용(ex : 살빼는 곳입니다)
-    dfr_inactive boolean default false not null, #댓글 삭제 여부(ex : 'f')
-    constraint dfReply_dogather_feed_fk foreign key(df_index) references t_dogather_feed(df_index),
-    constraint dfReply_user_fk foreign key(user_index) references t_user(user_index)
+    dpr_reg_date datetime default now(), #댓글 작성 시간(ex : 2022-07-26)
+    dpr_update_date datetime default now(), #댓글 수정 시간(ex : )<-수정 안함
+    dpr_contents text, #댓글 내용(ex : 축하여~)
+    dpr_inactive boolean default false not null, #댓글 삭제 여부(ex : 'f')
+    constraint dpReply_dogatherPost_do_fk foreign key(dp_index) references t_dogather_post(dp_index),
+    constraint dpReply_user_fk foreign key(user_index) references t_user(user_index)
 );
 
 #############################################################################################

@@ -44,23 +44,23 @@
 						</a></li>
 
 					</ul></li>
-				<li><a href="#"> <span> 두게더 </span>
+				<li><a href="${cp }/dg/front.dg"> <span> 두게더 </span>
 				</a>
 					<ul class="submenu">
-						<li><a href="#"> <span class="span">진행 중 두게더</span>
+						<li><a href="${cp }/dg/catalog.dg"> <span class="span">진행 중 두게더</span>
 						</a></li>
 						<li><a href="#"> <span class="span">종료 된 두게더</span>
 						</a></li>
 						<li><a href="#"> <span class="span">인증/후기 게시판</span>
 						</a></li>
 					</ul></li>
-				<li><a href="#"> <span> 커뮤니티 </span>
+				<li><a href=""> <span> 커뮤니티 </span>
 				</a>
 					<ul class="submenu">
 						<li><a href="${cp }/board/free_board/post_list.bo"> <span
 								class="span">자유게시판</span>
 						</a></li>
-						<li><a href="#"> <span class="span">정보게시판</span>
+						<li><a href="${cp }/board/info_board/post_list.bo"> <span class="span">정보게시판</span>
 						</a></li>
 						<li><span>&nbsp;</span></li>
 					</ul></li>

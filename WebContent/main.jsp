@@ -19,7 +19,7 @@
       rel="stylesheet"
     />
     <link rel="shortcut icon" href="${cp}/resources/images/favicon.png" />
-    <!-- include libraries(jQuery, bootstrap) -->
+
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
@@ -70,112 +70,158 @@
           <!--인기 두게더  -->
           <div id="favorite">
             <div class="list_title">
-              <a href="">
+              <a href="${cp}/dg/catalog.dg?criteria_key=dg_member_cnt">
                 <span class="purple">인기 </span><span>두ː게더</span>
               </a>
             </div>
             <div class="list_album">
-              <ul class="slides">
-                <li>
-                  <div class="album"></div>
-                  <span>인기1제목</span>
-                  <span>내용</span>
-                </li>
-                <li>
-                  <div class="album"></div>
-                  <span>인기2</span>
-                  <span>내용</span>
-                </li>
-                <li>
-                  <div class="album"></div>
-                  <span>인기3</span>
-                  <span>내용</span>
-                </li>
-                <li>
-                  <div class="album"></div>
-                  <span>인기4</span>
-                  <span>내용</span>
-                </li>
-                <li>
-                  <div class="album"></div>
-                  <span>인기5</span>
-                  <span>내용</span>
-                </li>
-              </ul>
+            <c:choose>
+            	<c:when test="${hot_list.size()>0 and hot_list!=null }">
+              		<ul class="slides">
+             		<c:forEach items="${hot_list }" var="hl">
+              			<li>
+              				<a href="${cp }/dg/detail.dg?dg_index=${hl.dg_index}">
+                 				 <div class="album">
+                  					<c:choose>
+										<c:when test="${hl.dg_banner_sys == null}">
+											<c:choose>
+												<c:when test="${hl.category_index eq 1 }"><img src="${cp}/resources/images/default_health.png"/></c:when>
+												<c:when test="${hl.category_index eq 2 }"><img src="${cp}/resources/images/default_study.png"/></c:when>
+												<c:when test="${hl.category_index eq 3 }"><img src="${cp}/resources/images/default_refinement.png"/></c:when>
+												<c:when test="${hl.category_index eq 4 }"><img src="${cp}/resources/images/default_habit.png"/></c:when>
+												<c:otherwise><img src="${cp}/resources/images/default_economy.png"/></c:otherwise>
+											</c:choose>
+										</c:when>
+										<c:otherwise>
+											<img src="${cp }/upload/images/dogather/banner/${hl.dg_banner_sys}"/>
+										</c:otherwise>
+									</c:choose>
+                 				 </div>
+								<span>${hl.dg_title }</span>
+                 				<span class="dg_intro">
+	                  				<c:choose>
+	                  					<c:when test="${hl.dg_intro_short!=null }">
+	                  						${hl.dg_intro_short }
+	                  					</c:when>
+	                  					<c:otherwise>
+	                  						${hl.dg_intro}
+	                  					</c:otherwise>
+	                  				</c:choose>
+                  				</span>
+                 			</a>
+                		</li>
+              	</c:forEach>
+              		</ul>
+            </c:when>
+            <c:otherwise>
+				<div style="line-height: 300px; font-size: 49px;font-weight: bold">두개더가 없습니다 ㅠㅠ</div>
+            </c:otherwise>
+           </c:choose>
             </div>
           </div>
           <div id="new">
             <div class="list_title">
-              <a href="">
+              <a href="${cp}/dg/catalog.dg?criteria_key=dg_reg_date">
                 <span class="purple">최신 </span><span>두ː게더</span>
               </a>
             </div>
             <div class="list_album">
-              <ul class="slides">
-                <li>
-                  <div class="album"></div>
-                  <span>최신1</span>
-                  <span>내용</span>
-                </li>
-                <li>
-                  <div class="album"></div>
-                  <span>최신2</span>
-                  <span>내용</span>
-                </li>
-                <li>
-                  <div class="album"></div>
-                  <span>최신3</span>
-                  <span>내용</span>
-                </li>
-                <li>
-                  <div class="album"></div>
-                  <span>최신4</span>
-                  <span>내용</span>
-                </li>
-                <li>
-                  <div class="album"></div>
-                  <span>최신5</span>
-                  <span>내용</span>
-                </li>
-              </ul>
+            <c:choose>
+            	<c:when test="${latest_list.size()>0 and latest_list!=null }">
+              		<ul class="slides">
+             		<c:forEach items="${latest_list }" var="ll">
+              			<li>
+              				<a href="${cp }/dg/detail.dg?dg_index=${ll.dg_index}">
+                 				 <div class="album">
+                  					<c:choose>
+										<c:when test="${ll.dg_banner_sys == null}">
+											<c:choose>
+												<c:when test="${ll.category_index eq 1 }"><img src="${cp}/resources/images/default_health.png"/></c:when>
+												<c:when test="${ll.category_index eq 2 }"><img src="${cp}/resources/images/default_study.png"/></c:when>
+												<c:when test="${ll.category_index eq 3 }"><img src="${cp}/resources/images/default_refinement.png"/></c:when>
+												<c:when test="${ll.category_index eq 4 }"><img src="${cp}/resources/images/default_habit.png"/></c:when>
+												<c:otherwise><img src="${cp}/resources/images/default_economy.png"/></c:otherwise>
+											</c:choose>
+										</c:when>
+										<c:otherwise>
+											<img src="${cp }/upload/images/dogather/banner/${ll.dg_banner_sys}"/>
+										</c:otherwise>
+									</c:choose>
+                 				 </div>
+								<span>${ll.dg_title }</span>
+                 				<span class="dg_intro">
+	                  				<c:choose>
+	                  					<c:when test="${ll.dg_intro_short!=null }">
+	                  						${ll.dg_intro_short }
+	                  					</c:when>
+	                  					<c:otherwise>
+	                  						${ll.dg_intro}
+	                  					</c:otherwise>
+	                  				</c:choose>
+                  				</span>
+                 			</a>
+                		</li>
+              	</c:forEach>
+              		</ul>
+            </c:when>
+            <c:otherwise>
+				<div style="line-height: 300px; font-size: 49px;font-weight: bold">두개더가 없습니다 ㅠㅠ</div>
+            </c:otherwise>
+           </c:choose>
             </div>
           </div>
-          <div id="interest">
+          <div id="id="interest">
             <div class="list_title">
-              <a href="">
+              <a href="${cp}/dg/catalog.dg?criteria_key=dg_hits">
                 <span class="purple">관심 </span><span>두ː게더</span>
               </a>
             </div>
             <div class="list_album">
-              <ul class="slides">
-                <li>
-                  <div class="album"></div>
-                  <span>관심1</span>
-                  <span>내용</span>
-                </li>
-                <li>
-                  <div class="album"></div>
-                  <span>관심2</span>
-                  <span>내용</span>
-                </li>
-                <li>
-                  <div class="album"></div>
-                  <span>관심3</span>
-                  <span>내용</span>
-                </li>
-                <li>
-                  <div class="album"></div>
-                  <span>관심4</span>
-                  <span>내용</span>
-                </li>
-                <li>
-                  <div class="album"></div>
-                  <span>관심5</span>
-                  <span>내용</span>
-                </li>
-              </ul>
+            <c:choose>
+            	<c:when test="${mostView_list.size()>0 and mostView_list!=null }">
+              		<ul class="slides">
+             		<c:forEach items="${mostView_list }" var="ml">
+              			<li>
+              				<a href="${cp }/dg/detail.dg?dg_index=${ml.dg_index}">
+                 				 <div class="album">
+                  					<c:choose>
+										<c:when test="${ml.dg_banner_sys == null}">
+											<c:choose>
+												<c:when test="${ml.category_index eq 1 }"><img src="${cp}/resources/images/default_health.png"/></c:when>
+												<c:when test="${ml.category_index eq 2 }"><img src="${cp}/resources/images/default_study.png"/></c:when>
+												<c:when test="${ml.category_index eq 3 }"><img src="${cp}/resources/images/default_refinement.png"/></c:when>
+												<c:when test="${ml.category_index eq 4 }"><img src="${cp}/resources/images/default_habit.png"/></c:when>
+												<c:otherwise><img src="${cp}/resources/images/default_economy.png"/></c:otherwise>
+											</c:choose>
+										</c:when>
+										<c:otherwise>
+											<img src="${cp }/upload/images/dogather/banner/${ml.dg_banner_sys}"/>
+										</c:otherwise>
+									</c:choose>
+                 				 </div>
+								<span>${ml.dg_title }</span>
+                 				<span class="dg_intro">
+	                  				<c:choose>
+	                  					<c:when test="${ml.dg_intro_short!=null }">
+	                  						${ml.dg_intro_short }
+	                  					</c:when>
+	                  					<c:otherwise>
+	                  						${ml.dg_intro}
+	                  					</c:otherwise>
+	                  				</c:choose>
+                  				</span>
+                 			</a>
+                		</li>
+              	</c:forEach>
+              		</ul>
+            </c:when>
+            <c:otherwise>
+				<div style="line-height: 300px; font-size: 49px;font-weight: bold">두개더가 없습니다 ㅠㅠ</div>
+            </c:otherwise>
+           </c:choose>
             </div>
           </div>
+          
         </div>
         <!-- 이벤트&커뮤니티 게시판 -->
         <div id="event_community">
@@ -183,7 +229,7 @@
         <c:set var="today"><fmt:formatDate value="${today }" pattern="yyyyMMdd"/></c:set>
           <div id="event_border">
             <div class="event title">
-              <a href="1#">
+              <a href="${cp }/board/event_board/post_list.bo">
                 <span class="purple">Event</span><span> 게시판</span>
               </a>
             </div>
@@ -206,8 +252,8 @@
                     <div class="icon">
                       <p class="new">
 						<c:choose>
-                      	<c:when test="${today-date <=1}">N</c:when>
-                      	<c:otherwise>&nbsp;</c:otherwise>
+                      		<c:when test="${today-date <=1}">N</c:when>
+                      		<c:otherwise>&nbsp;</c:otherwise>
                       	</c:choose>
                       </p>
                     </div>
@@ -294,6 +340,6 @@
       </div>
     </main>
 
-    <%@include file="footer.jsp" %>
+    <%@include file="/footer.jsp" %>
   </body>
 </html>

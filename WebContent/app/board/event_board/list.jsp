@@ -37,14 +37,36 @@
 
 
 	<%@include file="../../../header.jsp"%>
+
 	<main>
 	<div id="main">
 
-		<!-- 이벤트 게시판 -->
+		<!-- 자유 게시판 -->
 		<div id="boardcontainer">
 			<div id="boardmain">
 				<div class="board title">
 					<span class="purple">이벤트</span><span> 게시판</span>
+				</div>
+				<div class="board_filter">
+				<select id="subject">
+					<c:choose>
+						<c:when test="${subject eq '진행중'}">
+						<option value="">전체</option>
+						<option value="진행중" selected>진행중</option>
+						<option value="종료">종료</option>
+						</c:when>
+						<c:when test="${subject eq '종료'}">
+						<option value="">전체</option>
+						<option value="진행중">진행중</option>
+						<option value="종료" selected>종료</option>
+						</c:when>
+						<c:otherwise>
+						<option value="" selected>전체</option>
+						<option value="진행중">진행중</option>
+						<option value="종료">종료</option>
+						</c:otherwise>
+					</c:choose>
+					</select>
 				</div>
 				<div class="board_list">
 					<table class="list">
@@ -63,7 +85,7 @@
 										<tr>
 											<td>${list.b_index}</td>
 											<td><a
-												href="${cp}/board/event_board/post_view.bo?b_index=${list.b_index}&page=${page}&keyword=${keyword}"><span>${list.b_title}</span><span>[${list.b_reply_cnt }]</span></a></td>
+												href="${cp}/board/event_board/post_view.bo?b_index=${list.b_index}&page=${page}&keyword=${keyword}&subject=${subject}"><span>[${list.b_subject}]${list.b_title}</span><span>[${list.b_reply_cnt }]</span></a></td>
 											<td><a href="#">${list.user_nickname}</a></td>
 											<td><fmt:parseDate value="${list.b_reg_date}" pattern="yyyy-MM-dd HH:mm:ss" var="datetime" /> 
 											<c:set var="date"> <fmt:formatDate value="${datetime }" pattern="yyyy-MM-dd" /></c:set> 
@@ -85,34 +107,35 @@
 						</tbody>
 						<tfoot>
 							<tr class="page-btns">
-								<td colspan="5"><c:if test="${startPage!=1 }">
-										<a
-											href="${cp }/board/event_board/post_list.bo?page=${startPage-1}&keyword=${keyword}">&lt;</a>
-									</c:if> <c:forEach begin="${startPage }" end="${endPage }" var="i">
+								<td colspan="5">
+								<c:if test="${startPage!=1 }">
+										<a href="${cp }/board/event_board/post_list.bo?page=${startPage-1}&keyword=${keyword}&subject=${subject}">&lt;</a>
+									</c:if> 
+									<c:forEach begin="${startPage }" end="${endPage }" var="i">
 										<c:choose>
 											<c:when test="${page==i }">
 												<span class="nowPage">${i }</span>
 											</c:when>
 											<c:otherwise>
-												<a href="${cp}/board/event_board/post_list.bo?page=${i}&keyword=${keyword}">${i}</a>
+												<a href="${cp}/board/event_board/post_list.bo?page=${i}&keyword=${keyword}&subject=${subject}">${i}</a>
 											</c:otherwise>
 										</c:choose>
 									</c:forEach> <c:if test="${endPage!=totalPage }">
 										<a
-											href="${cp }/board/event_board/post_list.bo?page=${endPage+1}&keyword=${keyword}">&gt;</a>
+											href="${cp }/board/event_board/post_list.bo?page=${endPage+1}&keyword=${keyword}&subject=${subject}">&gt;</a>
 									</c:if></td>
 							</tr>
 						</tfoot>
 					</table>
 					<table class="writing">
 						<tr>
-							<td style="display: none;"><a class="write"
-								href="javascript:loginCheck(${loginUser!=null?true:false},${page })">글쓰기</a></td>
+							<td>&nbsp;</td>
 						</tr>
 					</table>
 					<div class="search_area">
-						<input type="search" id="post_query_keyword" value="${keyword==null||keyword==''? '':keyword }"/><input type="button" id="post_query_btn" value="검색" onclick="getPostListWithKeyword(${page});"/>
-						<input type="hidden" id="b_path" value="event_board"/>
+						<input type="search" id="post_query_keyword" value="${keyword==null||keyword==''? '':keyword }"/><input type="button" id="post_query_btn" value="검색"/>
+						<input type="hidden" id="path" value="event_board"/>
+						<input type="hidden" id="page" value="${page }"/>
 					</div>
 				</div>
 			</div>

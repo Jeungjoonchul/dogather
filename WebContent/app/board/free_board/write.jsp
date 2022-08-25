@@ -29,12 +29,7 @@
 
 </head>
 <body>
-	<c:if test="${empty loginUser }">
-		<script>
-			alert("로그인 후 이용 가능합니다");
-			location.replace("${cp}/user/login.us");
-		</script>
-	</c:if>
+<%@include file="../../../loginCheck.jsp" %>
 		<%@include file="../../../header.jsp"%>
 		<main>
 		<div id="main">
@@ -50,9 +45,28 @@
 					<tr id="post_title">
 						<td>
 						<select name="b_subject">
-						<option value="잡담">잡담</option>
-						<option value="유머">유머</option>
-						<option value="기타">기타</option>
+						<c:choose>
+							<c:when test="${param.subject eq '잡담' }">
+								<option value="잡담" selected>잡담</option>
+								<option value="유머">유머</option>
+								<option value="기타">기타</option>
+							</c:when>
+							<c:when test="${param.subject eq '유머' }">
+								<option value="잡담">잡담</option>
+								<option value="유머" selected>유머</option>
+								<option value="기타">기타</option>
+							</c:when>
+							<c:when test="${param.subject eq '기타' }">
+								<option value="잡담">잡담</option>
+								<option value="유머">유머</option>
+								<option value="기타" selected>기타</option>
+							</c:when>
+							<c:otherwise>
+								<option value="잡담">잡담</option>
+								<option value="유머">유머</option>
+								<option value="기타">기타</option>
+							</c:otherwise>
+						</c:choose>
 						</select>
 					</td>
 						<td><input type="text" name="b_title" id="b_title" placeholder="제목을 입력해주세요"></td>
@@ -70,9 +84,9 @@
 					</tr>
 					<tr id="button_a">
 						<td colspan="2">
-						<a href=javascript:postOn()>등록하기</a>
+						<a href=javascript:postCheck()>등록하기</a>
 						<a
-							href="${cp }/board/free_board/post_list.bo?page=${param.page}&keyword=${param.keyword}">목록</a>
+							href="${cp }/board/free_board/post_list.bo?page=${param.page}&keyword=${param.keyword}&subject=${param.subject}">목록</a>
 						</td>
 					</tr>
 				</tbody>

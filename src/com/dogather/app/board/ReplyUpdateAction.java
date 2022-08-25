@@ -19,7 +19,7 @@ public class ReplyUpdateAction implements Action {
 	public ActionTo execute(HttpServletRequest req, HttpServletResponse resp,String b_name,String r_name) throws ServletException, IOException {
 
 		String r_contents = req.getParameter("r_contents");
-
+		r_contents=r_contents.replaceAll("\n", "<br>");
 		int r_index = Integer.parseInt(req.getParameter("r_index"));
 	
 		ReplyDAO rdao = new ReplyDAO();

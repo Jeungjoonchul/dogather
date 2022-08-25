@@ -118,6 +118,9 @@ width: 100%;
 #reply_area .reply_content {
   padding: 10px 10px;
 }
+#reply_area .reply_content *{
+	box-sizing: border-box;
+}
 .reply_btns{
 	outline:none;
 	border:none;
@@ -133,7 +136,11 @@ width: 100%;
 	border:none;
 	text-indent: 0;
 	width: 100%;
+	/* overflow-y:hidden; */
 }
+/* .reply_content>textarea::-webkit-scrollbar {
+    display: none;
+} */
 .hidden {
  display: none;
 }
@@ -192,4 +199,10 @@ text-align: center;
 
 #summernote{
 	min-height:200px;
+	width: 100%;
+	padding :10px;
+}
+
+#like_up span:first-child{
+	cursor: pointer;
 }

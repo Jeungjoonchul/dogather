@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <c:set var="cp" value="${pageContext.request.contextPath}"></c:set>
 <c:set var="today" value="<%=new java.util.Date()%>"></c:set>
 <c:set var="today">
@@ -45,7 +46,7 @@
 <input type="hidden" id="endPage" value="${endPage}">
 
 <input type="hidden" id="loginUser_nickname" value="${loginUser.user_nickname }"/>
-	<%@include file="../../../header.jsp"%>
+	<%@include file="/header.jsp"%>
 	<main>
 	<div id="main">
       <div id="post">
@@ -66,22 +67,34 @@
             <div id="meta_right">
               <span>조회 ${b.b_hits } &#124;</span>
               <span>댓글 ${b.b_reply_cnt } &#124;</span>
-              <span>좋아요 </span>
+              <span>좋아요 ${b.b_like_cnt }</span>
             </div>
           </div>
           <div id="post_contents_area">
             <div id="summernote">${b.b_contents }</div>
           </div>
-          <div id="like_up"><button>좋아요 up</button></div>
-          <div id="post_button" style="display: none;">
-            <c:if test="${loginUser.user_nickname==b.user_nickname }">
-              <a
-                href="${cp}/board/free_board/post_update.bo?b_index=${b.b_index}&page=${param.page}&keyword=${param.keyword }"
-                >수정</a
-              >
-              <a href="javascript:delete_check(${b.b_index},${param.page },'${param.keyword }');">삭제</a>
-            </c:if>
-            <a href="${cp }/board/free_board/post_list.bo?page=${param.page}&keyword=${param.keyword }"
+          <div id="like_up">
+          	<c:set var="like_flag" value="${false }"/>
+          	<c:set var="like_user_index" value="${fn:split(b.b_like_user_index,',') }"/>
+          	<c:if test="${!empty loginUser }">
+          	<c:forEach items="${like_user_index }" var="i">
+          		<c:if test="${i == loginUser.user_index}">
+          			<c:set var="like_flag" value="${true }"/>
+          		</c:if>
+          	</c:forEach>
+			</c:if>
+          	<c:choose>
+          			<c:when test="${like_flag}">
+          			<span style="color:red; font-weight: bold; font-size: 24px;">♥</span><span style="display: none;">like</span>
+          			</c:when>
+          			<c:otherwise>
+          				  <span style="color:red; font-weight: bold; font-size: 24px;">♡</span><span style="display: none;">none</span>
+          			</c:otherwise>
+          		</c:choose>
+          </div>
+          <div id="post_button">
+            
+            <a href="${cp }/board/free_board/post_list.bo?page=${param.page}&keyword=${param.keyword }&subject=${param.subject}"
               >목록</a
             >
           </div>
@@ -131,7 +144,7 @@
                   </div>
                 </div>
                 <div class="reply_content">
-              		<textarea readonly spellcheck="false">${reply.r_contents}</textarea>
+              		<div>${reply.r_contents}</div>
                 </div>
               </div>
               <c:set var="i" value="${i+1}"></c:set>
@@ -161,7 +174,7 @@
         <div id="reply_write_area">
           <form name="reply_write" id="reply_write">
             <input type="hidden" name="b_index" id="b_index" value="${b.b_index }"/>
-            <input type="hidden" id="r_path" name="r_path" value="free_board" />
+            <input type="hidden" id="path" name="path" value="free_board" />
             <input type="hidden" id="page" value="${page}">
             <div id="reply_write_input">
             <c:choose>
@@ -182,7 +195,7 @@
     </div>
 	</main>
 	
-	<%@include file="../../../footer.jsp"%>
+	<%@include file="/footer.jsp"%>
 </body>
 <script src="${cp }/resources/js/board.js"></script>
 <script>

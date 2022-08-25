@@ -42,8 +42,10 @@ public class UserFrontController extends HttpServlet {
 				transfer = new UserJoinAction().execute(req, resp);
 			} catch (ServletException e) {
 				System.out.println(command+" : "+e);
+				e.printStackTrace();
 			} catch (IOException e) {
 				System.out.println(command+" : "+e);
+				e.printStackTrace();
 			}
 			break;
 			
@@ -52,6 +54,7 @@ public class UserFrontController extends HttpServlet {
 				transfer = new UserCheckEmailAction().execute(req, resp);
 			} catch (Exception e) {
 				System.out.println(command+" : "+e);
+				e.printStackTrace();
 			}
 			break;
 			
@@ -61,6 +64,7 @@ public class UserFrontController extends HttpServlet {
 				transfer = new UserCheckNicknameAction().execute(req, resp);
 			} catch (Exception e) {
 				System.out.println(command+" : "+e);
+				e.printStackTrace();
 			}
 			break;
 			
@@ -69,6 +73,7 @@ public class UserFrontController extends HttpServlet {
 				transfer = new UserJoinOkAction().execute(req, resp);
 			} catch (Exception e) {
 				System.out.println(command+" : "+e);
+				e.printStackTrace();
 			}
 			break;
 		case "/user/logout.us":
@@ -94,19 +99,27 @@ public class UserFrontController extends HttpServlet {
 		
 			break;
 			
-		case "/user/login.us":
-			transfer = new ActionTo();
-			req.setAttribute("prev_page", req.getHeader("referer"));
-			transfer.setPath("/app/user/login.jsp");
-			transfer.setRedirect(false);
+//		case "/user/login.us":
+//			transfer = new ActionTo();
+//			req.setAttribute("prev_page", req.getHeader("referer"));
+//			transfer.setPath("/app/user/login.jsp");
+//			transfer.setRedirect(false);
+//			break;
+			case "/user/login.us":
+			try {
+				transfer = new UserLoginAction().execute(req,resp);
+			} catch (Exception e) {
+				System.out.println(command+" : "+e);
+				e.printStackTrace();
+			}
 			break;
-			
 					
 		case "/user/login_ok.us":
 			try {
 				transfer=new UserLoginOkAction().execute(req,resp);
 			} catch (Exception e) {
 				System.out.println(command+" : "+e);
+				e.printStackTrace();
 			}
 			break;
 			
@@ -115,6 +128,7 @@ public class UserFrontController extends HttpServlet {
 				transfer=new UserLoginCheckAction().execute(req,resp);
 			} catch (Exception e) {
 				System.out.println(command+" : "+e);
+				e.printStackTrace();
 			}
 			break;
 		case "/user/myPage.us":

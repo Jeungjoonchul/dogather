@@ -1,0 +1,102 @@
+main {
+	width: 100%;
+}
+
+main * {
+	box-sizing: border-box;
+}
+
+#main {
+	width: 80%;
+	margin: 0 auto;
+}
+#main table {
+	border: 1px solid #eee;
+	margin: 0 auto;
+	width :850px;
+	
+}
+#main h2{
+	font-size:36px;
+	width: 850px;
+	margin: 20px auto;
+	text-align: center;
+}
+#main h2 p{
+	color: #621ae5;
+	display:inline;
+}
+#banner_image {
+border: 1px solid #eee;
+
+	width: 256px;
+	height: 256px;
+}
+#main table tr th{
+padding:20px;
+padding-left:100px;
+width: 350px;
+
+}
+#main table tr td input[type="text"]{
+width: 350px;
+height: 30px;
+background-color: #eee;
+border-radius: 1px;
+ border: none;
+
+}
+#main table tr td textarea{
+width: 350px;
+height:100px;
+background-color: #eee;
+border-radius: 1px;
+ border: none;
+ overflow:auto;
+}
+#main table tr td input:focus{
+ border: none;
+}
+
+#main table select{
+width: 100px;
+text-align: center;
+}
+td:first-of-type {
+	text-align: left;
+}
+
+th {
+	text-align: left;
+	font-size: 16px;
+}
+
+/* #dg_intro::-webkit-scrollbar {
+	display: none;
+} */
+
+#dg_intro {
+	width: 338px;
+	height: 288px;
+	resize: none;
+}
+
+#counter {
+	display: block;
+	color: #aaa;
+}
+#main table tfoot tr td{
+ text-align: center;
+}
+#main table tfoot input[type="submit"]{
+	padding: 10px 20px;
+	border: none;
+	color: #ffffff;
+	border-radius: 3px;
+	margin:10px;
+	cursor: pointer;
+  	background-color: #621ae5;
+}
+#main table tfoot input[type="submit"]:hover{
+background-color: #8757de;
+}

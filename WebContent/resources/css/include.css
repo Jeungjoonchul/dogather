@@ -1,11 +1,26 @@
 * {
 	font-family: "Noto Sans KR", sans-serif;
+	color:#141414;
 }
 
 body {
 	width: 100%;
 	box-sizing: border-box;
-	margin: 0
+	margin: 0;
+}
+
+/* class 추가 */
+.purple {
+  color: #621ae5;
+}
+.green {
+  color: #03fa5a;
+}
+.gray {
+  color: #666666;
+}
+.red {
+  color: #f94b4b;
 }
 
 header, footer {
@@ -28,7 +43,7 @@ header ul, footer ul {
 }
 
 header{
-	margin-bottom: 60px;
+	margin-bottom: 80px;
 }
 
 #header {
@@ -113,7 +128,7 @@ header{
 }
 
 footer{
-	margin-top:60px;
+	margin-top:80px;
 	border-top: 1px solid #141414;
 	background-color: RGB(245, 246, 247);
 }

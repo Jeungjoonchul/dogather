@@ -1,0 +1,117 @@
+main {
+	width: 100%;
+}
+
+main * {
+	box-sizing: border-box;
+}
+
+#main {
+	width: 80%;
+	margin: 0 auto;
+}
+#main table {
+	border: 1px solid #eee;
+	margin: 0 auto;
+	width :850px;
+	
+}
+
+#main table td{
+	text-align: center;
+}
+#main h2{
+	font-size:36px;
+	width: 850px;
+	margin: 20px auto;
+	text-align: center;
+}
+
+#dp_contents {
+	width: 539px;
+	height: 206px;
+	resize: none;
+}
+
+#counter {
+	display: block;
+	color: #aaa;
+	width: 120px;
+	margin-left: 65%;
+}
+
+#cert_images {
+	display: flex;
+	justify-content: flex-start;
+}
+#main table tr td textarea{
+width: 500px;
+height:200px;
+background-color: #eee;
+border-radius: 1px;
+ border: none;
+ overflow:auto;
+}
+
+.cert_image {
+	width: 33.3%;
+}
+
+.cert_image>div {
+	margin: 5px 0;
+	width: 100%;
+}
+
+.cert_image * {
+	display: block;
+}
+
+.cert_image  img {
+border: 1px solid #eee;
+	width: 128px;
+	height: 128px;
+}
+
+.cert_image>div:first-child {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.cert_image>div:last-child {
+	display: flex;
+	justify-content: space-evenly;
+}
+
+.cert_image a {
+	text-decoration: none;
+	margin-right: 5px;
+	border-radius: 4px;
+	background-color: #eee;
+	padding: 10px;
+	display: inline-block;
+}
+
+.cert_image span {
+	padding: 10px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	width: 100%;
+	text-align: center;
+}
+#main table tfoot tr td{
+ text-align: center;
+}
+#main table tfoot input[type="submit"]{
+	padding: 10px 20px;
+	border: none;
+	color: #ffffff;
+	border-radius: 3px;
+	margin:10px;
+	cursor: pointer;
+  	background-color: #621ae5;
+}
+#main table tfoot input[type="submit"]:hover{
+background-color: #8757de;
+}

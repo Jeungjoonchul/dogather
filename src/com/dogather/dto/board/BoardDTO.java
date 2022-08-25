@@ -11,6 +11,7 @@ public class BoardDTO {
 	private String b_contents;
 	private int b_hits;
 	private String b_like_user_index;
+	private int b_like_cnt;
 	private boolean b_inactive;
 	private String b_files;
 	private String b_name;
@@ -76,6 +77,12 @@ public class BoardDTO {
 	}
 	public void setB_like_user_index(String b_like_user_index) {
 		this.b_like_user_index = b_like_user_index;
+	}
+	public int getB_like_cnt() {
+		return b_like_cnt;
+	}
+	public void setB_like_cnt(int b_like_cnt) {
+		this.b_like_cnt = b_like_cnt;
 	}
 	public boolean isB_inactive() {
 		return b_inactive;

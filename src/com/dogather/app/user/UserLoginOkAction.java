@@ -77,7 +77,6 @@ public class UserLoginOkAction implements Action {
 			out.print("</script>");
 			out.close();
 		}
-
 		return transfer;
 	}
 }

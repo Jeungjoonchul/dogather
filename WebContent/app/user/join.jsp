@@ -68,7 +68,7 @@
 
 						</div>
 					</div>
-					<form name="joinForm" method="post" action="${cp}/user/join_ok.us" onsubmit="return sendit()">
+					<form name="joinForm" method="post" action="${cp}/user/join_ok.us">
 						<div id="join2" style="display: none">
 	
 							<c:forEach var="terms" items="${terms_list}">
