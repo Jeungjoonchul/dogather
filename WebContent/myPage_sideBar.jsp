@@ -73,12 +73,12 @@ li {
                     id="porfile">프로필 변경</a>
                 </li>
                 <li>
-                  <a href="${cp}/app/user/myPage_Main.jsp" id="password"
+                  <a href="${cp}/user/pw.us" id="password"
                     >비밀번호 변경</a
                   >
                 </li>
                 <li>
-                  <a href="${cp}/app/user/myPage_Main.jsp" id="info"
+                  <a href="${cp}/user/info.us" id="info"
                     >기본정보 변경</a
                   >
                 </li>

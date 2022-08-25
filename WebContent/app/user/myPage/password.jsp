@@ -63,10 +63,10 @@
                       <a href="${cp}/app/user/porfile.jsp"> 내프로필 </a>
                     </th>
                     <th id="changepw" class="on">
-                      <a href="${cp}/app/user/password.jsp"> 비밀번호변경 </a>
+                      <a href="${cp}/user/pw.us"> 비밀번호변경 </a>
                     </th>
                     <th id="changeinfo" class="off">
-                      <a href="${cp}/app/user/info.jsp"> 기본정보변경 </a>
+                      <a href="${cp}/user/info.us"> 기본정보변경 </a>
                     </th>
                   </tr>
                 </table>
@@ -97,8 +97,7 @@
                   </ul>
                 </div>
                   <div id="pw_button">
-                    <input type="submit" value="변경">
-                    <input type="button" value="취소">
+					<input type="submit" style="display:none;" value="변경하기" id="modifyPw"/>
                 </div>
         </form>
             </div>
@@ -107,6 +106,7 @@
 	</div>
 </div>
 	<%@include file="../../../footer.jsp"%>
+<script src="${cp }/resources/js/myPage.js"></script>
 </body>
 <script>
 const info = '/dogather/app/user/mypage/info.jsp';

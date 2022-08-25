@@ -46,6 +46,12 @@
 				location.replace("${cp}/user/login.us");
 			</script>
 		</c:if>
+		<c:if test="${myInfor != null }">
+			<script>
+				let cp = "${pageContext.request.contextPath}";
+				location.replace("{cp}/user/info.us");
+			</script>
+		</c:if>
 	<%@include file="../../../header.jsp"%>
 <div id="mypage">
 	<div id="mypage_container">

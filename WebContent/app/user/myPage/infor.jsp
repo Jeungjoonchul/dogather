@@ -65,10 +65,10 @@
 								<a href="${cp}/app/user/porfile.jsp"> 내프로필 </a>
 							</th>
 							<th id="changepw">
-								<a href="${cp}/app/user/password.jsp"> 비밀번호변경 </a>
+								<a href="${cp}/user/pw.us"> 비밀번호변경 </a>
 							</th>
 							<th id="changeinfo" class="on">
-								<a href="${cp}/app/user/info.jsp"> 기본정보변경 </a>
+								<a href="${cp}/user/info.us"> 기본정보변경 </a>
 							</th>
 						</tr>
 					</table>

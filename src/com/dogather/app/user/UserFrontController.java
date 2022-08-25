@@ -146,6 +146,16 @@ public class UserFrontController extends HttpServlet {
 				System.out.println(command+" : "+e);
 			}
 			break;
+		case "/user/info.us":
+			transfer = new ActionTo();
+			transfer.setPath("/app/user/myPage/infor.jsp");
+			transfer.setRedirect(false);
+			break;
+		case "/user/pw.us":
+			transfer = new ActionTo();
+			transfer.setPath("/app/user/myPage/password.jsp");
+			transfer.setRedirect(false);
+			break;
 		}
 		
 

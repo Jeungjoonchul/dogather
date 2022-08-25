@@ -221,7 +221,7 @@ $( document ).ready(function() {
     // 페이지 분기 처리 로직
     switch(curPathName){
 	    case "/dogather/user/pwCheck_ok":
-	    	console.log('패스워드 체크 페이지');
+	    	console.log('내정보 수정 페이지');
 //	    	let isModify =false;
 	    	
 	    	// 수정 버튼 클릭
@@ -234,6 +234,29 @@ $( document ).ready(function() {
 	    		$('#user_phone').attr('readonly',false);
 	    		$('#address_detail').attr('readonly',false);
 	    		isModify = true;
+	    	});
+	    	
+	    	//취소버튼 클릭
+	    	$('#cancel').on(
+	    			'click',function(){
+	    		$('#modify').show();
+	    		$('#modifyOk').hide();
+	    		$('#cancel').hide();
+	    		
+	    		//기존값으로 초기화
+	    		$('#user_nickname').val(org_nick);
+	    		$('#user_phone').val(org_phone);
+	    		$('#zip_code').val(org_zipCode);
+	    		$('#address_default').val(org_address);
+	    		$('#address_detail').val(org_addressDetail);
+	    		
+	    		$('#user_nickname').attr('readonly',true);
+	    		$('#user_phone').attr('readonly',true);
+	    		$('#zip_code').attr('readonly',true);
+	    		$('#address').attr('readonly',true);
+	    		$('#address_detail').attr('readonly',true);
+	    		$('span').text('');
+	    		isModify = false;
 	    	});
 	        
 	    	// 주소 이벤트
@@ -274,33 +297,13 @@ $( document ).ready(function() {
 
 	    	break;
 	    	
-	    case "/dogather/app/user/myPage_Main":
-	    	console.log('패스워드 체크 페이지222');
-	    	break;
+//	    case "/dogather/user/pw.us":
+//	    	console.log('패스워드 변경 페이지');
+//
+//	    	break;
 		default:
 			break;
     }
 });
 
 
-$('#cancel').on(
-		'click',function(){
-	$('#modify').show();
-	$('#modifyOk').hide();
-	$('#cancel').hide();
-	
-	//기존값으로 초기화
-	$('#user_nickname').val(org_nick);
-	$('#user_phone').val(org_phone);
-	$('#zip_code').val(org_zipCode);
-	$('#address_default').val(org_address);
-	$('#address_detail').val(org_addressDetail);
-	
-	$('#user_nickname').attr('readonly',true);
-	$('#user_phone').attr('readonly',true);
-	$('#zip_code').attr('readonly',true);
-	$('#address').attr('readonly',true);
-	$('#address_detail').attr('readonly',true);
-	$('span').text('');
-	isModify = false;
-});
