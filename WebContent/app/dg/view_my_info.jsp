@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <c:set var="cp" value="${pageContext.request.contextPath }" />
+<c:set var="date" value="<%=new java.util.Date() %>"></c:set>
+<c:set var="today"><fmt:formatDate value="${date }" pattern="yyyyMMdd"/></c:set>
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,12 +56,32 @@
             <div class="dates"></div>
           </div>
         </div>
+        		
         <div id="myinfo">
         	<h4>유저님은</h4>
         	<div>
-        	<span>총 <p class="purple">12</p>개의 글을썼어요 </span><br>
-        	<span>총 <p class="purple">12</p>개의 글을썼어요 </span><br>
-        	<span>총 <p class="purple">12</p>개의 글을썼어요 </span><br>
+        	
+        	 <fmt:parseDate var="drd" value="${info.dg_user_reg_date }" pattern="yyyy-MM-dd HH:mm:ss"/>
+              <c:set var="dg_user_reg_date"><fmt:formatDate value="${drd }" pattern="yyyy-MM-dd"/></c:set>
+              
+        	<span><span class="purple">${dg_user_reg_date }</span>에 가입하셨습니다</span><br><br><br>
+        	<span>총 <span class="purple">${info.dp_cert_cnt }</span>개의 인증글을 썼어요 </span><br><br>
+        	<span>총 <span class="purple">${info.dp_feed_cnt }</span>개의 피드를 썼어요 </span><br><br>
+        	<span>총 <span class="purple">${info.dpr_cnt }</span>개의 댓글을 썼어요 </span><br><br><br>
+     		
+     		<c:if test="${info.dg_user_target!=null }">
+        		<span>목표</span><br><br>
+        		<span>${info.dg_user_target }</span><br><br>
+     		</c:if>
+     		
+     		<c:if test="${info.dg_user_target_date!=null }">
+     			<fmt:parseDate var="dutd" value="${info.dg_user_target_date }" pattern="yyyy-MM-dd"/>
+				<c:set var="dg_user_target_date"><fmt:formatDate value="${dutd }" pattern="yyyyMMdd"/></c:set>
+        		<span>목표 달성까지 <span class="purple">${dg_user_target_date - today }</span>일 남았습니다!</span><br>
+     		</c:if>
+     		<c:forEach items="${cl}" var="cert">
+				${cert.dp_reg_date }
+			</c:forEach>
         	</div>
         </div>
 		</div>

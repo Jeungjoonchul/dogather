@@ -13,6 +13,7 @@
 		<typeAlias type="com.dogather.dto.dogather.DogatherReplyDTO" alias="DogatherReplyDTO"/>
 		<typeAlias type="com.dogather.dto.dogather.DogatherUserDTO" alias="DogatherUserDTO"/>
 		<typeAlias type="com.dogather.dto.dogather.DogatherUserTargetDTO" alias="DogatherUserTargetDTO"/>
+		<typeAlias type="com.dogather.dto.dogather.DogatherUserInfoDTO" alias="DogatherUserInfoDTO"/>
 	</typeAliases>
 	<environments default="development">
 		<environment id="development">

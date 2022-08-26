@@ -9,6 +9,7 @@ import com.dogather.dto.dogather.DogatherDTO;
 import com.dogather.dto.dogather.DogatherPostDTO;
 import com.dogather.dto.dogather.DogatherReplyDTO;
 import com.dogather.dto.dogather.DogatherUserDTO;
+import com.dogather.dto.dogather.DogatherUserInfoDTO;
 import com.dogather.dto.dogather.DogatherUserTargetDTO;
 import com.dogather.mybatis.SqlMapConfig;
 
@@ -194,5 +195,19 @@ SqlSession sqlSession;
 
 	public String getLikeCntByDP(int dp_index) {
 		return sqlSession.selectOne("Dogather.getLikeCntByDP", dp_index);
+	}
+
+	public DogatherUserInfoDTO getDgUserInfo(int dg_index, int user_index) {
+		HashMap<String, Integer> datas = new HashMap<String, Integer>();
+		datas.put("dg_index",dg_index);
+		datas.put("user_index", user_index);
+		return sqlSession.selectOne("Dogather.getDgUserInfo", datas);
+	}
+
+	public List<DogatherPostDTO> getDgCertPostList(int dg_index, int user_index) {
+		HashMap<String, Integer> datas = new HashMap<String, Integer>();
+		datas.put("dg_index",dg_index);
+		datas.put("user_index", user_index);
+		return sqlSession.selectList("Dogather.getDgCertPostList", datas);
 	}
 }

@@ -18,7 +18,7 @@ public class DogatherDTO {
 	private String dg_expire;
 	private boolean dg_inactive;
 	private int dg_member_cnt;
-	
+		
 	public int getDg_index() {
 		return dg_index;
 	}

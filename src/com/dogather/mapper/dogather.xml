@@ -249,6 +249,30 @@
 		from t_dogather_post where dp_index=#{dp_index}
 	</select>
 	
+	<select id="getDgUserInfo" parameterType="hashmap" resultType="DogatherUserInfoDTO">
+		select  
+			du.dg_index,du.user_index,du.dg_user_reg_date,     
+			dut.dg_user_target_date,dut.dg_user_target,     
+			c.dp_cert_cnt,f.dp_feed_cnt,r.dpr_cnt 
+		from t_dogather_user du 
+			left join t_dogather_user_target dut 
+				on dut.dg_index=du.dg_index and dut.user_index=du.user_index  
+			left join (select dg_index,user_index,count(dp_index) as dp_cert_cnt from t_dogather_post where dp_type='cert' group by dg_index,user_index) c 
+				on c.dg_index=du.dg_index and c.user_index=du.user_index  
+			left join (select dg_index,user_index,count(dp_index) as dp_feed_cnt from t_dogather_post where dp_type='feed' group by dg_index,user_index) f  
+				on f.dg_index=du.dg_index and f.user_index=du.user_index  
+			left join (select  d.dg_index,d.dp_index,r.user_index,r.dpr_cnt 
+						from t_dogather_post d 
+							left join(select dp_index,user_index,count(*) as dpr_cnt from t_dp_reply group by user_index,dp_index) r 
+								on d.dp_index=r.dp_index) r 
+				on r.dg_index=du.dg_index and r.user_index=du.user_index
+		where du.dg_index=#{dg_index} and du.user_index=#{user_index};
+	</select>
+	
+	<select id="getDgCertPostList" parameterType="hashmap" resultType="DogatherPostDTO">
+		select * from t_dogather where dg_index=#{dg_index} and user_index=#{user_index}
+	</select>
+	
 	
 	
 	<update id="dgReJoin" parameterType="hashmap">
