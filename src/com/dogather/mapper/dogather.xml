@@ -270,7 +270,7 @@
 	</select>
 	
 	<select id="getDgCertPostList" parameterType="hashmap" resultType="DogatherPostDTO">
-		select * from t_dogather_post where dg_index=#{dg_index} and user_index=#{user_index}
+		select * from t_dogather_post where dg_index=#{dg_index} and user_index=#{user_index} and dp_type='cert'
 	</select>
 	
 	
