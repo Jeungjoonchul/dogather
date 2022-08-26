@@ -201,6 +201,7 @@
 					
 					
 					<div id="dg_comm_bulletin">
+					<div id="dp_contents">
 					<c:choose>
 						<c:when test="${dpList.size()>0 and dpList != null }">
 							<c:forEach items="${dpList }" var="dp">
@@ -252,7 +253,14 @@
 								</c:choose>
 							</c:forEach>
 							
-						<div class="page-btns">
+						
+						</c:when>
+						<c:otherwise>
+							<div><p style="text-align: center;font-size: 32px; padding-top:40px;">작성된 글이 없습니다</p></div>
+						</c:otherwise>
+					</c:choose>
+					</div>
+					<div class="page-btns">
 							<div>
 								<c:if test="${dp_startPage!=1 }">
 									<a href="javascript:transferPage(${dp_startPage-1 })">&lt;</a>
@@ -272,11 +280,6 @@
 								</c:if>
 							</div>
 						</div>
-						</c:when>
-						<c:otherwise>
-							<div><p style="text-align: center;font-size: 32px; padding-top:40px;">작성된 글이 없습니다</p></div>
-						</c:otherwise>
-					</c:choose>
 					</div>
 				</div>
 			</div>

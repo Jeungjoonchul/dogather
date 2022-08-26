@@ -30,6 +30,7 @@
 </head>
 <body>
 	<%@include file="/loginCheck.jsp"%>
+	
 	<%@include file="/header.jsp"%>
 	<main>
 		<h2 class="purple">내정보</h2>
@@ -79,12 +80,26 @@
 				<c:set var="dg_user_target_date"><fmt:formatDate value="${dutd }" pattern="yyyyMMdd"/></c:set>
         		<span>목표 달성까지 <span class="purple">${dg_user_target_date - today }</span>일 남았습니다!</span><br>
      		</c:if>
+     		
      		<c:forEach items="${cl}" var="cert">
-				${cert.dp_reg_date }
+				<fmt:parseDate var="crd" value="${cert.dp_reg_date }" pattern="yyyy-MM-dd"/>
+				<c:set var="cert_month"><fmt:formatDate value="${crd }" pattern="MM"/></c:set>
+              	<c:set var="cert_date"><fmt:formatDate value="${crd }" pattern="dd"/></c:set>
+              	${cert_month }-${cert_date }
 			</c:forEach>
         	</div>
         </div>
 		</div>
+		<c:set var="month"><fmt:formatDate value="${date }" pattern="MM"/></c:set>
+
+				<c:if test="${cert_month eq month }">
+						${cert_date }
+	    		</c:if>
+		
+             
+	              
+
+		
 	</main>
 	<%@include file="../../footer.jsp"%>
 </body>

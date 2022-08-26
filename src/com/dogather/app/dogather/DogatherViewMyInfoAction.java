@@ -22,8 +22,11 @@ public class DogatherViewMyInfoAction implements Action {
 		transfer.setPath("/app/dg/view_my_info.jsp");
 		transfer.setRedirect(false);
 		int dg_index = Integer.parseInt(req.getParameter("dg_index"));
-		int user_index = ((UserDTO)req.getSession().getAttribute("loginUser")).getUser_index();
-		
+		UserDTO loginUser=(UserDTO)req.getSession().getAttribute("loginUser");
+		int user_index=0;
+		if(loginUser!=null) {
+			user_index = ((UserDTO)req.getSession().getAttribute("loginUser")).getUser_index();			
+		}
 		DogatherDAO ddao = new DogatherDAO();
 		
 		//유저가 쓴 글 개수,유저가 쓴 리뷰 개수,유저 목표,목표 완성 날짜,가입날짜
@@ -31,7 +34,7 @@ public class DogatherViewMyInfoAction implements Action {
 		
 		//유저가 쓴 후기 List
 		List<DogatherPostDTO> cl = ddao.getDgCertPostList(dg_index,user_index);
-		
+		System.out.println(cl.size());
 		req.setAttribute("info", info);
 		req.setAttribute("cl", cl);
 		

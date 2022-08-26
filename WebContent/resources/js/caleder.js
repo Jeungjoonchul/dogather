@@ -54,7 +54,7 @@ const renderCalender = () => {
       }
     }
   }
-  if (viewMonth === today.getMonth() && viewYear === today.getFullYear()) {
+  /*if (viewMonth === today.getMonth() && viewYear === today.getFullYear()) {
     for (let date of document.querySelectorAll('.this')) {
       if (+date.innerText === 2) {
         date.innerHTML+="<br>추가됨";
@@ -62,7 +62,7 @@ const renderCalender = () => {
         break;
       }
     }
-  }
+  }*/
 };
 
 renderCalender();
