@@ -160,6 +160,7 @@ table tbody tr {
   border-radius: 3px;
   border: none;
   color: #ffffff;
+  margin-left:10px;
 }
 .search_area [type="button"]:hover {
   background-color: #8757de;

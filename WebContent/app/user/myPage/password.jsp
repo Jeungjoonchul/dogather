@@ -121,9 +121,10 @@
 <script src="${cp }/resources/js/myPage.js"></script>
 </body>
 <script>
-const info = '/dogather/app/user/mypage/info.jsp';
-if("<%= request.getRequestURI() %>"==info){
-	document.querySelector("#info").className = "on";
+const pw = '/dogather/app/user/myPage/password.jsp';
+if("<%= request.getRequestURI() %>"==pw){
+	document.querySelector("#password").className = "on";
 }
+
 </script>
 </html>

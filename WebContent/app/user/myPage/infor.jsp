@@ -164,8 +164,7 @@
 </div>
 	<%@include file="../../../footer.jsp"%>
 <script>
-const info = '/dogather/app/user/mypage/info.jsp';
-console.log("<%= request.getRequestURI() %>");
+const info = '/dogather/app/user/myPage/infor.jsp';
 if("<%= request.getRequestURI() %>"==info){
 	document.querySelector("#info").className = "on";
 }
