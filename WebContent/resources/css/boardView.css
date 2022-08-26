@@ -5,7 +5,8 @@ text-decoration:none;
 
 margin:0 auto;
 margin-top:60px;
-  width: 80%;
+  width: 60%;
+  min-width:700px;
   padding-bottom: 30px;
   border: 1px solid #eee;
   border-top: 2px solid #621ae5;
@@ -70,7 +71,8 @@ margin:0 auto;
 #reply {
 border-top: 2px solid #621ae5;
   border: 1px solid #eee;
-  width: 80%;
+   width: 60%;
+  min-width:700px;
   margin: 20px auto;
 }
 #reply_view {
