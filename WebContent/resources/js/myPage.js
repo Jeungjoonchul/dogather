@@ -337,8 +337,8 @@ $( document ).ready(function() {
     
     // 페이지 분기 처리 로직
     switch(curPathName){
-	    case "/dogather/user/pwCheck_ok", "/dogather/user/info":
-	    	console.log('내정보 수정 페이지');
+	    case "/dogather/user/info":
+	    	console.log('user/info 페이지');
 //	    	let isModify =false;
 	    	
 	    	// 수정 버튼 클릭
@@ -412,6 +412,80 @@ $( document ).ready(function() {
 	        	}
 	        });
 
+	    	break;
+	    	
+	    case "/dogather/user/pwCheck_ok":
+	    	console.log('pwCheck_ok 페이지');
+	    	// 수정 버튼 클릭
+	    	$('#modify').on(
+	    			'click',function(){
+	    		$('#modify').hide();
+	    		$('#modifyOk').show();
+	    		$('#cancel').show();
+	    		$('#user_nickname').attr('readonly',false);
+	    		$('#user_phone').attr('readonly',false);
+	    		$('#address_detail').attr('readonly',false);
+	    		isModify = true;
+	    	});
+	    	
+	    	//취소버튼 클릭
+	    	$('#cancel').on(
+	    			'click',function(){
+	    		$('#modify').show();
+	    		$('#modifyOk').hide();
+	    		$('#cancel').hide();
+	    		
+	    		//기존값으로 초기화
+	    		$('#user_nickname').val(org_nick);
+	    		$('#user_phone').val(org_phone);
+	    		$('#zip_code').val(org_zipCode);
+	    		$('#address_default').val(org_address);
+	    		$('#address_detail').val(org_addressDetail);
+	    		
+	    		$('#user_nickname').attr('readonly',true);
+	    		$('#user_phone').attr('readonly',true);
+	    		$('#zip_code').attr('readonly',true);
+	    		$('#address').attr('readonly',true);
+	    		$('#address_detail').attr('readonly',true);
+	    		$('.msg').text('');
+	    		isModify = false;
+	    	});
+	        
+	    	// 주소 이벤트
+	        $('#address_default').on('click',function(){
+	        	console.log('클릭');
+	        	if(isModify){
+	        		daumPostcode();	
+	        	}
+	        });
+	        $('#zip_code').on('click',function(){
+	        	console.log('클릭');
+	        	if(isModify){
+	        		daumPostcode();	
+	        	}
+	        });
+	        
+	        //유효성 검사 로직
+	        $('#user_nickname').on('blur', function(){
+	        	console.log('userNickname');
+	        	if(isModify){
+	        		ckNick();
+	        	}
+	        });
+	        
+	        $('#user_phone').on('blur',function() {
+	        	console.log('userPhone');
+	        	if(isModify){
+	        		ckPhone();
+	        	}
+	        });
+	        
+	        $('#address_detail').on('blur',function() {
+	        	console.log('userAddress');
+	        	if(isModify){
+	        		ckAddress();
+	        	}
+	        });
 	    	break;
 	    	
 //	    case "/dogather/user/pw.us":
