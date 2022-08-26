@@ -372,7 +372,7 @@ $( document ).ready(function() {
 	    		$('#zip_code').attr('readonly',true);
 	    		$('#address').attr('readonly',true);
 	    		$('#address_detail').attr('readonly',true);
-	    		$('span').text('');
+	    		$('.msg').text('');
 	    		isModify = false;
 	    	});
 	        

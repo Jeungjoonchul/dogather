@@ -114,7 +114,7 @@
                     </tr>
                     <tr>
 						<th><span style="display: none;" class="status">null</span></th>
-						<td><span>&nbsp;</span></td>
+						<td><span class="msg">&nbsp;</span></td>
 					</tr>
                     <tr>
                       <th>휴대폰 번호</th>
@@ -124,7 +124,7 @@
                     </tr>
                     <tr>
 						<th><span style="display: none;" class="status">null</span></th>
-						<td><span>&nbsp;</span></td>
+						<td><span class="msg">&nbsp;</span></td>
 					</tr>
                     <tr>
                       <th>우편번호</th>
@@ -146,7 +146,7 @@
                     </tr>
                     <tr>
 						<th><span style="display: none;" class="status">null</span></th>
-						<td><span>&nbsp;</span></td>
+						<td><span class="msg">&nbsp;</span></td>
 					</tr>
 					<tr>
 					<th>참고항목</th>
