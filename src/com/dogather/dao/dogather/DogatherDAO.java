@@ -204,10 +204,12 @@ SqlSession sqlSession;
 		return sqlSession.selectOne("Dogather.getDgUserInfo", datas);
 	}
 
-	public List<DogatherPostDTO> getDgCertPostList(int dg_index, int user_index) {
-		HashMap<String, Integer> datas = new HashMap<String, Integer>();
+	public List<DogatherPostDTO> getDgCertPostList(int dg_index, int user_index,String year, String month) {
+		HashMap<String, Object> datas = new HashMap<String, Object>();
 		datas.put("dg_index",dg_index);
 		datas.put("user_index", user_index);
+		datas.put("year", year);
+		datas.put("month", month);
 		return sqlSession.selectList("Dogather.getDgCertPostList", datas);
 	}
 }

@@ -25,7 +25,6 @@ public class BoardWriteOkAction implements Action {
 		BoardDAO bdao = new BoardDAO();
 
 		String page=req.getParameter("page");
-
 		String keyword=req.getParameter("keyword");
 		String subject = req.getParameter("subject");
 		
@@ -111,7 +110,7 @@ public class BoardWriteOkAction implements Action {
 			System.out.println("게시글 db 등록 성공");
 			out.write("<script>");
 			out.write("alert('게시글이 등록되었습니다!');");
-			out.write("location.href='" + req.getContextPath() + "/board/"+b_path+"/post_view.bo?b_index="+b_index+"';");
+			out.write("location.href='" + req.getContextPath() + "/board/"+b_path+"/post_view.bo?b_index="+b_index+"&page="+page+"';");
 		} else {
 			out.write("<script>");
 			out.write("alert('게시글 등록에 실패했습니다');");

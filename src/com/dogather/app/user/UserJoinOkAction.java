@@ -38,6 +38,7 @@ public class UserJoinOkAction implements Action {
 		String user_password=req.getParameter("user_password");
 		System.out.println("비밀번호 : "+user_password);
 		String user_phone=req.getParameter("user_phone");
+		System.out.println(user_phone);
 		String[] user_phone_arr=user_phone.split("-");
 		user_phone="";
 		for (int i = 0; i < user_phone_arr.length; i++) {

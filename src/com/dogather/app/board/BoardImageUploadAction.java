@@ -24,7 +24,8 @@ public class BoardImageUploadAction implements Action {
 		PrintWriter out = resp.getWriter();
 		String saveDirectory = req.getServletContext().getRealPath("temp");
 		System.out.println("임시 저장 장소 : "+saveDirectory);
-		int maxPostSize = 1024*1024*5;
+		int maxPostSize = 1024*1024*20;
+		System.out.println("저장 크기 : "+maxPostSize);
 		
 		MultipartRequest multi = new MultipartRequest(req, saveDirectory, maxPostSize, "utf-8",new DefaultFileRenamePolicy());
 		String orgName = (String)multi.getOriginalFileName("file");

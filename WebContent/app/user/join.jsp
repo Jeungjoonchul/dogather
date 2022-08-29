@@ -68,7 +68,7 @@
 
 						</div>
 					</div>
-					<form name="joinForm" method="post" action="${cp}/user/join_ok.us">
+					<form name="joinForm" method="post" action="${cp}/user/join_ok.us" onsubmit="return sendit()">
 						<div id="join2" style="display: none">
 	
 							<c:forEach var="terms" items="${terms_list}">
@@ -240,7 +240,7 @@
 											placeholder="자기소개를 입력해주세요"></textarea></td>
 								</tr>
 							</table>
-							<br> <input type="submit" value="가입 완료"> <input
+							<br> <input type="submit" value="가입 완료" onclick="sendit()"> <input
 								type="button" value="나가기" onclick="back()">
 						</div>
 					</form>
@@ -285,8 +285,6 @@
 			</div>
 		</div>
 	</div>
-
-
 </body>
 	<script src="${cp }/resources/js/join.js"></script>
 </html>

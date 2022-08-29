@@ -4,7 +4,6 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <c:set var="cp" value="${pageContext.request.contextPath }" />
 <c:set var="date" value="<%=new java.util.Date() %>"></c:set>
-<c:set var="today"><fmt:formatDate value="${date }" pattern="yyyyMMdd"/></c:set>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,10 +24,11 @@
 
 <title>Doːgather</title>
 <link rel="stylesheet" href="${cp }/resources/css/include.css" />
-<link rel="stylesheet" href="${cp }/resources/css/calender.css" />
 
+<link rel="stylesheet" href="${cp }/resources/css/calender.css" />
 </head>
 <body>
+	<input type="hidden" value="${dg_index }" id="dg_index"/>
 	<%@include file="/loginCheck.jsp"%>
 	
 	<%@include file="/header.jsp"%>
@@ -56,6 +56,10 @@
             </div>
             <div class="dates"></div>
           </div>
+        <div>
+        <p><span>인증 글 작성 : </span><span>&nbsp;</span></p>
+        <p><span>인증 글 미 작성 : </span><span>&nbsp;</span></p>
+        </div>
         </div>
         		
         <div id="myinfo">
@@ -71,44 +75,83 @@
         	<span>총 <span class="purple">${info.dpr_cnt }</span>개의 댓글을 썼어요 </span><br><br><br>
      		
      		<c:if test="${info.dg_user_target!=null }">
-        		<span>목표</span><br><br>
+        		<span class="purple">${loginUser.user_nickname }님의 목표는</span><br><br>
         		<span>${info.dg_user_target }</span><br><br>
+        		<span class="purple">입니다</span><br><br>
      		</c:if>
      		
      		<c:if test="${info.dg_user_target_date!=null }">
      			<fmt:parseDate var="dutd" value="${info.dg_user_target_date }" pattern="yyyy-MM-dd"/>
 				<c:set var="dg_user_target_date"><fmt:formatDate value="${dutd }" pattern="yyyyMMdd"/></c:set>
-        		<span>목표 달성까지 <span class="purple">${dg_user_target_date - today }</span>일 남았습니다!</span><br>
+				<c:choose>
+					<c:when test="${(dg_user_target_date - today)>0 }">
+        				<span>목표 달성까지 <span class="purple">${dutd - date }</span>일 남았습니다!</span><br>
+					</c:when>
+					<c:otherwise>
+					 <span>목표일이 지났습니다</span>
+					</c:otherwise>
+				</c:choose>
      		</c:if>
      		
-     		<c:set var="month"><fmt:formatDate value="${date }" pattern="MM"/></c:set>
-     		<c:forEach items="${cl}" var="cert">
-				<fmt:parseDate var="crd" value="${cert.dp_reg_date }" pattern="yyyy-MM-dd"/>
-				<c:set var="cert_month"><fmt:formatDate value="${crd }" pattern="MM"/></c:set>
-              	<c:set var="cert_date"><fmt:formatDate value="${crd }" pattern="d"/></c:set>
-              	<c:if test="${cert_month eq month }">
-						${cert_date }
-	    		</c:if>
-			</c:forEach>
+     		
         	</div>
         </div>
 		</div>
-		<c:set var="month"><fmt:formatDate value="${date }" pattern="MM"/></c:set>
-
-				
-		
-             
-	              
-
-		
 	</main>
+	
+	
+	
 	<%@include file="../../footer.jsp"%>
 </body>
 <script src="${cp }/resources/js/dg.js"></script>
 <script src="${cp }/resources/js/caleder.js"></script>
-<script>
-	$(document).ready(function test(){
-	$('.this.18').parent().css('background-color','blue');
-	});
-</script>
+<c:set var="month"><fmt:formatDate value="${date }" pattern="M"/></c:set>
+<c:set var="year"><fmt:formatDate value="${date }" pattern="yyyy"/></c:set>
+<c:set var="now"><fmt:formatDate value="${date }" pattern="d"/></c:set>
+<c:set var="now" value="${now }"/>
+<c:set var="i" value="1"/>
+<c:set var="flag" value="${false }"/>
+    <c:forEach var="i" begin="${i }" end="${now}">
+		<c:forEach var="cert" items="${cl }">
+			<fmt:parseDate var="crd" value="${cert.dp_reg_date }" pattern="yyyy-MM-dd"/>
+ 			<c:set var="cert_year"><fmt:formatDate value="${crd }" pattern="yyyy"/></c:set>
+ 			<c:set var="cert_month"><fmt:formatDate value="${crd }" pattern="M"/></c:set>
+			<c:set var="cert_date"><fmt:formatDate value="${crd }" pattern="d"/></c:set>
+			<c:if test="${cert_year eq year }">
+				<c:if test="${cert_month eq month }">
+					<c:if test="${cert_date eq i }">
+						<c:set var="flag" value="${true }"/>
+					</c:if>
+				</c:if>
+			</c:if>
+		</c:forEach>
+		<c:choose>
+			<c:when test="${flag }">
+				<script>
+					var d = '${i}';
+					$('.this.'+d).parent().css('background-color','#bbdefb');
+				</script>
+			</c:when>
+			<c:otherwise>
+				<script>
+					var d = '${i}';
+					$('.this.'+d).parent().css('background-color','#ffcdd2');
+				</script>
+			</c:otherwise>
+		</c:choose>
+		<c:set var="flag" value="${false }"/>
+		<c:set var="i" value="${i+1 }"/>	
+	</c:forEach>
+	<c:set var="target_date" value="${info.dg_user_target_date }"/>
+	<c:if test="${target_date!=null }">
+		<fmt:parseDate var="td" value="${target_date}" pattern="yyyy-MM-dd"/>
+ 		<c:set var="td_year"><fmt:formatDate value="${td }" pattern="yyyy"/></c:set>
+ 		<c:set var="td_month"><fmt:formatDate value="${td }" pattern="M"/></c:set>
+ 		<c:set var="td_date"><fmt:formatDate value="${td }" pattern="d"/></c:set>
+ 		<c:if test="${td_year eq year and td_month eq month }">
+ 			<script>
+ 				$('.this.${td_date}').parent().append('<br><span class="purple">목표일</span>');
+ 			</script>
+ 		</c:if>
+	</c:if>
 </html>

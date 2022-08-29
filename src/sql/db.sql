@@ -50,7 +50,7 @@ create table t_user(
     user_password_set_date datetime default now(), #비밀번호 마지막으로 설정한 시간 (비밀번호 교체 권유용 / ex : 2022-07-25)
 	user_last_login datetime,
     user_inactive_date datetime, #비활성화 날짜(yyyy-MM-dd / ex : 2022-07-26)
-    user_t_inactive boolean default false not null, #비활성화 여부 (ex : 0 / 0일 경우 활성화 상태, 1일 경우 비활성화 상태)
+    user_inactive boolean default false not null, #비활성화 여부 (ex : 0 / 0일 경우 활성화 상태, 1일 경우 비활성화 상태)
     user_inactive_reason enum('withdrawal','dormancy'),
 
 	zip_code varchar(5), #우편번호(ex : 06236)

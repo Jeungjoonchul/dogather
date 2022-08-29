@@ -63,16 +63,14 @@ public class UserLoginOkAction implements Action {
 			String prev = req.getParameter("prev_page");
 			String cp = req.getContextPath();
 			String cmd = prev.substring(cp.length() + prev.indexOf(cp));
-			System.out.println(cmd);
+			System.out.println("이전 화면 : "+cmd);
 			out.print("<script>");
-			if (cmd.equals("/user/join.us")||cmd.contains("user/find")) {
+			if (cmd.contains("user/join")||cmd.contains("user/find")) {
 				out.print("alert('" + user.getUser_nickname() + "님 환영합니다!');");
 				out.print("location.href='" + req.getContextPath()+"/main'");
 			} else {
-				
 				out.print("alert('" + user.getUser_nickname() + "님 환영합니다!');");
 				out.print("location.href='" + req.getContextPath() + cmd + "'");
-				
 			}
 			out.print("</script>");
 			out.close();

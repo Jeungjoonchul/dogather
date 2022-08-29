@@ -37,9 +37,7 @@ const renderCalender = () => {
     const condition = i >= firstDateIndex && i < lastDateIndex + 1
                       ? 'this'
                       : 'other';
-    dates[i] = `<div class="date"><span class="${condition} ${date} " >${date}</span></div>`;
-    console.log(condition);
-    console.log(date);
+    dates[i] = `<div class="date"><span class="${condition} ${date} ">${date}</span></div>`;
   });
 
   document.querySelector('.dates').innerHTML = dates.join('');
@@ -68,16 +66,134 @@ const renderCalender = () => {
 renderCalender();
 
 const prevMonth = () => {
-  date.setMonth(date.getMonth() - 1);
-  renderCalender();
+	var todayDate = new Date();
+	date.setMonth(date.getMonth() - 1);
+	var year = date.getFullYear();
+	var month = date.getMonth()+1;
+	var day = date.getDate();
+	var dg_index=$('#dg_index').val();
+	$.ajax({
+		url : cp + '/dg/dg_get_certList.dg',
+		type : 'post',
+		data : {"dg_index":dg_index,"year":year,"month":month},
+		dataType : 'json',
+		async : false,
+		success : function(data) {
+			console.log(data.td);
+			renderCalender();
+			$('.this').parent().css("background-color","white");				
+			
+			if(todayDate.getFullYear()>=year&&todayDate.getMonth()+1>month){
+				$('.this').parent().css("background-color","#ffcdd2");
+
+			}else if(todayDate.getMonth()+1<month){
+
+			}else{
+				for (var i = 1; i <= todayDate.getDate(); i++) {
+					$('.this.'+i).parent().css("background-color","#ffcdd2");	
+				}
+
+			}
+			for (var i = 0; i < data.cl.length; i++) {
+				var d=data.cl[i].dp_reg_date.split(' ')[0];
+				var dd=d.split('-')[2];
+				dd=dd.indexOf(0)=='0'?dd.substring(1,2):dd;
+				$('.this.'+dd).parent().css("background-color","#bbdefb");
+			}
+			var td_year=data.td.split('-')[0];
+			var td_month=data.td.split('-')[1];
+			var td_day=data.td.split('-')[2];
+			td_day=td_day.indexOf(0)=='0'?td_day.substring(1,2):td_day;
+			if(td_year==year&&td_month==month){
+				$('.this.'+td_day).parent().append('<br><span class="purple">목표일</span>');
+			}
+		}
+	});
+  
 };
 
 const nextMonth = () => {
-  date.setMonth(date.getMonth() + 1);
-  renderCalender();
+	var todayDate = new Date();
+	date.setMonth(date.getMonth() + 1);
+	var year = date.getFullYear();
+	console.log(year);
+	var month = date.getMonth()+1;
+	console.log(month);
+	var day = date.getDate();
+	console.log(day);
+	var dg_index=$('#dg_index').val();
+  $.ajax({
+		url : cp + '/dg/dg_get_certList.dg',
+		type : 'post',
+		data : {"dg_index":dg_index,"year":year,"month":month},
+		dataType : 'json',
+		async : false,
+		success : function(data) {
+			renderCalender();
+			$('.this').parent().css("background-color","white");				
+			
+			if(todayDate.getFullYear()<=year&&todayDate.getMonth()+1>month){
+				$('.this').parent().css("background-color","#ffcdd2");
+
+			}else if(todayDate.getMonth()+1<month){
+
+			}else{
+				for (var i = 1; i <= todayDate.getDate(); i++) {
+					$('.this.'+i).parent().css("background-color","#ffcdd2");	
+				}
+
+			}
+			for (var i = 0; i < data.cl.length; i++) {
+				var d=data.cl[i].dp_reg_date.split(' ')[0];
+				var dd=d.split('-')[2];
+				dd=dd.indexOf(0)=='0'?dd.substring(1,2):dd;
+				$('.this.'+dd).parent().css("background-color","#bbdefb");
+			}
+			var td_year=data.td.split('-')[0];
+			var td_month=data.td.split('-')[1];
+			var td_day=data.td.split('-')[2];
+			td_day=td_day.indexOf(0)=='0'?td_day.substring(1,2):td_day;
+			if(td_year==year&&td_month==month){
+				$('.this.'+td_day).parent().append('<br><span class="purple">목표일</span>');
+			}
+		}
+	});
+  
 };
 
 const goToday = () => {
   date = new Date();
-  renderCalender();
+  var year = date.getFullYear();
+  var month = date.getMonth()+1;
+  var day=date.getDate();
+  var dg_index=$('#dg_index').val();
+  $.ajax({
+		url : cp + '/dg/dg_get_certList.dg',
+		type : 'post',
+		data : {"dg_index":dg_index,"year":year,"month":month},
+		dataType : 'json',
+		async : false,
+		success : function(data) {
+			renderCalender();
+				$('.this').parent().css("background-color","white");	
+				for (var i = 1; i <= date.getDate(); i++) {
+					$('.this.'+i).parent().css("background-color","#ffcdd2");	
+				}
+			
+				for (var i = 0; i < data.cl.length; i++) {
+					var d=data.cl[i].dp_reg_date.split(' ')[0];
+					var dd=d.split('-')[2];
+					dd=dd.indexOf(0)=='0'?dd.substring(1,2):dd;
+					$('.this.'+dd).parent().css("background-color","#bbdefb");
+				}
+				var td_year=data.td.split('-')[0];
+				var td_month=data.td.split('-')[1];
+				var td_day=data.td.split('-')[2];
+				td_day=td_day.indexOf(0)=='0'?td_day.substring(1,2):td_day;
+				if(td_year==year&&td_month==month){
+					$('.this.'+td_day).parent().append('<br><span class="purple">목표일</span>');
+				}
+		}
+	});
+  
 };

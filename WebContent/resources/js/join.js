@@ -1,5 +1,3 @@
-
-
 $('#user_email').on('blur',function() {
 					var user_email = $('#user_email').val();
 					var result = $('#user_email').parent().parent().next().children().first().children();
@@ -361,40 +359,35 @@ function daumPostcode() {
 
 function sendit() {
 	var flag = true;
-	
-
-$('form[name=joinForm]').on('submit',function(e){
-	e.preventDefault();
-	var flag=true;
-
 	$('.status').each(
 			function(index, item) {
 				if ($(this).text() == 'null') {
 					$(this).parent().parent().prev().children().last().children().focus();
-
-					flag = false;
-
-/*					$(this).parent().parent().prev().children().last()
+					$(this).parent().parent().prev().children().last()
 							.children().blur();
 					$(this).parent().parent().prev().children().last()
 							.children().focus();
-					flag=false*/
+					flag = false;
 					return flag;
 				} else if ($(this).text() == 'invalid') {
 					$(this).parent().parent().prev().children().last().children().focus();
+					$(this).parent().parent().prev().children().last()
+							.children().blur();
+					$(this).parent().parent().prev().children().last()
+							.children().focus();
 					flag=false
 					return flag;
 				} else if ($(this).text() == 'duplication') {
 					$(this).parent().parent().prev().children().last().children().focus();
+					$(this).parent().parent().prev().children().last()
+							.children().blur();
+					$(this).parent().parent().prev().children().last()
+							.children().focus();
 					flag=false
 					return flag;
 				}
 			});
-	if(flag){
-		this.submit();
-	}
-});
-	
+	return flag;
 }
 
 

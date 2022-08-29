@@ -81,12 +81,12 @@ main h2{
   }
   
   .day:nth-child(7n + 1),
-  .date:nth-child(7n + 1) {
+  .date:nth-child(7n + 1)>.this {
     color: #D13E3E;
   }
   
   .day:nth-child(7n),
-  .date:nth-child(7n) {
+  .date:nth-child(7n)>.this {
     color: #396EE2;
   }
   
@@ -95,23 +95,26 @@ main h2{
   }
   
   .today {
-    position: relative;
+/*     position: relative; */
     color: #FFFFFF;
+    background-color: #621ae5;
+    border-radius: 50% ;
+    padding: 5px;
   }
   
-  .today::before {
-    position: absolute;
+/*   .today::before {
+     position: absolute; 
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: -1;
+     z-index: 100;
     width: 30px;
     height: 30px;
     display: block;
     background-color: #FF0000;
     border-radius: 50%;
     content: '';
-  }
+  } */
 #main .on{
 	background-color: #f94b4b;
 	
@@ -136,3 +139,20 @@ main h2{
   font-weight: 700;
   display:inline;
   }
+  
+.calendar>div:last-child>p {
+	display: flex;
+	justify-content: space-between;
+	width: 150px;
+	margin-top:10px;
+}
+.calendar>div:last-child>p>span:last-child {
+	height:24px;
+	width: 30px;
+}
+.calendar>div:last-child>p:first-child>span:last-child {
+	background-color: rgb(187, 222, 251);
+}
+.calendar>div:last-child>p:last-child>span:last-child {
+	background-color: rgb(255, 205, 210);
+}
