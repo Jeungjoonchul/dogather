@@ -21,7 +21,9 @@ public class DogatherDetailAction implements Action {
 		DogatherDAO ddao = new DogatherDAO();
 		
 		int dg_index = Integer.parseInt(req.getParameter("dg_index"));
+		System.out.println("dg_index : "+dg_index);
 		String dp_page = req.getParameter("dp_page");
+		System.out.println("dp_page : "+dp_page);
 //		String criteria_key = req.getParameter("criteria_key");
 //		String align = req.getParameter("align");
 //		String keyword = req.getParameter("keyword");
@@ -39,7 +41,6 @@ public class DogatherDetailAction implements Action {
 
 		// dogather post 내가 쓴글 보기
 		String dp_mine = req.getParameter("dp_mine");
-
 		String user_index = null;
 		boolean uif = false;
 		if (req.getSession().getAttribute("loginUser") != null) {
@@ -52,7 +53,6 @@ public class DogatherDetailAction implements Action {
 		user_index = uif ? ((UserDTO) req.getSession().getAttribute("loginUser")).getUser_index() + "" : "%%";
 		System.out.println("user_index : " + user_index);
 		System.out.println("dp_mine : " + dp_mine);
-		System.out.println(dp_mine == null);
 
 		// dg_index에 해당하는 dogather
 		DogatherDTO dg = ddao.getDetail(dg_index);

@@ -212,4 +212,8 @@ SqlSession sqlSession;
 		datas.put("month", month);
 		return sqlSession.selectList("Dogather.getDgCertPostList", datas);
 	}
+
+	public boolean dgPostDelete(int dp_index) {
+		return sqlSession.delete("Dogather.dgPostDelete", dp_index)==1;
+	}
 }

@@ -79,27 +79,29 @@ const prevMonth = () => {
 		dataType : 'json',
 		async : false,
 		success : function(data) {
-			console.log(data.td);
 			renderCalender();
 			$('.this').parent().css("background-color","white");				
-			
-			if(todayDate.getFullYear()>=year&&todayDate.getMonth()+1>month){
-				$('.this').parent().css("background-color","#ffcdd2");
+			if(todayDate.getFullYear()==year){
+				if(todayDate.getMonth()+1>month){
+					$('.this').parent().css("background-color","#ffcdd2");
 
-			}else if(todayDate.getMonth()+1<month){
+				}else if(todayDate.getMonth()+1<month){
 
-			}else{
-				for (var i = 1; i <= todayDate.getDate(); i++) {
-					$('.this.'+i).parent().css("background-color","#ffcdd2");	
+				}else{
+					for (var i = 1; i <= todayDate.getDate(); i++) {
+						$('.this.'+i).parent().css("background-color","#ffcdd2");	
+					}
+
 				}
-
 			}
+			
 			for (var i = 0; i < data.cl.length; i++) {
 				var d=data.cl[i].dp_reg_date.split(' ')[0];
 				var dd=d.split('-')[2];
 				dd=dd.indexOf(0)=='0'?dd.substring(1,2):dd;
 				$('.this.'+dd).parent().css("background-color","#bbdefb");
 			}
+			
 			var td_year=data.td.split('-')[0];
 			var td_month=data.td.split('-')[1];
 			var td_day=data.td.split('-')[2];
@@ -131,24 +133,27 @@ const nextMonth = () => {
 		success : function(data) {
 			renderCalender();
 			$('.this').parent().css("background-color","white");				
-			
-			if(todayDate.getFullYear()<=year&&todayDate.getMonth()+1>month){
-				$('.this').parent().css("background-color","#ffcdd2");
+			if(todayDate.getFullYear()==year){
+				if(todayDate.getMonth()+1>month){
+					$('.this').parent().css("background-color","#ffcdd2");
 
-			}else if(todayDate.getMonth()+1<month){
+				}else if(todayDate.getMonth()+1<month){
 
-			}else{
-				for (var i = 1; i <= todayDate.getDate(); i++) {
-					$('.this.'+i).parent().css("background-color","#ffcdd2");	
+				}else{
+					for (var i = 1; i <= todayDate.getDate(); i++) {
+						$('.this.'+i).parent().css("background-color","#ffcdd2");	
+					}
+
 				}
-
 			}
+			
 			for (var i = 0; i < data.cl.length; i++) {
 				var d=data.cl[i].dp_reg_date.split(' ')[0];
 				var dd=d.split('-')[2];
 				dd=dd.indexOf(0)=='0'?dd.substring(1,2):dd;
 				$('.this.'+dd).parent().css("background-color","#bbdefb");
 			}
+			
 			var td_year=data.td.split('-')[0];
 			var td_month=data.td.split('-')[1];
 			var td_day=data.td.split('-')[2];
@@ -186,6 +191,7 @@ const goToday = () => {
 					dd=dd.indexOf(0)=='0'?dd.substring(1,2):dd;
 					$('.this.'+dd).parent().css("background-color","#bbdefb");
 				}
+				
 				var td_year=data.td.split('-')[0];
 				var td_month=data.td.split('-')[1];
 				var td_day=data.td.split('-')[2];

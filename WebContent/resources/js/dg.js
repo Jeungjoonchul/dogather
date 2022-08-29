@@ -192,17 +192,18 @@ function transferPage(dp_page){
 	var dg_index=$('#dg_index').val();
 	var dp_type=$('input[name=dp_type]:checked').val();
 	var dp_align=$('input[name=dp_align]:checked').val();
-	var dp_mine=$('#dp_mine').is(':checked')?'on':'off';
+	var dp_mine=$('input[name=dp_mine]').is(':checked')?'on':'off';
 
 		location.href=cp+"/dg/detail.dg?dg_index="+dg_index+"&dp_page="+dp_page+"&dp_type="+dp_type+"&dp_align="+dp_align+"&dp_mine="+dp_mine;
 
 }
 
 $('.dp_filter input').on('change',function(){
+
 	var dg_index=$('#dg_index').val();
 	var dp_type=$('input[name=dp_type]:checked').val();
 	var dp_align=$('input[name=dp_align]:checked').val();
-	var dp_mine=$('#dp_mine').is(':checked')?'on':'off';
+	var dp_mine=$('input[name=dp_mine]').is(':checked')?'on':'off';
 	location.href=cp+"/dg/detail.dg?dg_index="+dg_index+"&dp_type="+dp_type+"&dp_align="+dp_align+"&dp_mine="+dp_mine;
 });
 
@@ -278,8 +279,20 @@ function viewPost(dp_index){
 			if(data.dp.dp_reg_date!=data.dp.dp_update_date){
 				var update_check=$('<span></span>');
 				update_check.text('(수정됨)');
-				post_dp_reg_date.append(update_check);
+				reg_date_span.append(update_check);
 			}
+			
+			if(data.dp.user_nickname==$('#loginUser_nickname').val()){
+				post_dp_reg_date.append(`<div id='modify_btns'>
+											<input type='button' value='수정' id='dp_update_btn'>
+											<input type='button' value='삭제' id='dp_delete_btn'>
+										</div>`);
+			}else{
+				post_dp_reg_date.append(`<div id='modify_btns'>
+											<input type='button' value='신고'>
+										</div>`);
+			}
+
 			post_dp_reg_date.appendTo(post_detail);
 				
 			var post_contents = $('<div id="post_contents" ></div>');
@@ -489,6 +502,21 @@ function letterCount(){
 	            }
 
 }
+
+//dp_post delete in modal
+$(document).on('click','#dp_delete_btn',function(e){
+	var c = confirm('글을 삭제하시겠습니까?');
+	if(c){
+		var dg_index='dg_index='+$('#dg_index').val()+'&';
+		var dp_index='dp_index='+$('#dp_index').val()+'&';
+		var dp_page='dp_page='+$('#dp_page').val()+'&';
+		var dp_type='dp_type='+$('#dp_type').val()+'&';
+		var dp_align='dp_align='+$('#dp_align').val()+'&';
+		var dp_mine='dp_mine='+$('#dp_mine').val();
+		
+		location.href=cp+'/dg/post_delete.dg?'+dg_index+dp_index+dp_page+dp_type+dp_align+dp_mine;
+	}
+});
 
 //modal close
 $(document).mouseup(function (e){

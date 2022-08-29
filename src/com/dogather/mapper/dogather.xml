@@ -304,4 +304,8 @@
 	<delete id="deleteReply" parameterType="_int">
 		update t_dp_reply set dpr_inactive=1 where dpr_index=#{dpr_index}
 	</delete>
+	
+	<delete id="dgPostDelete" parameterType="_int">
+		update t_dogather_post set dp_inactive=1 where dp_index=#{dp_index}
+	</delete>
  </mapper>

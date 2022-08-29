@@ -63,7 +63,7 @@
         </div>
         		
         <div id="myinfo">
-        	<h4>유저님은</h4>
+        	<h4>${loginUser.user_nickname }님은</h4>
         	<div>
         	
         	 <fmt:parseDate var="drd" value="${info.dg_user_reg_date }" pattern="yyyy-MM-dd HH:mm:ss"/>
@@ -82,18 +82,17 @@
      		
      		<c:if test="${info.dg_user_target_date!=null }">
      			<fmt:parseDate var="dutd" value="${info.dg_user_target_date }" pattern="yyyy-MM-dd"/>
-				<c:set var="dg_user_target_date"><fmt:formatDate value="${dutd }" pattern="yyyyMMdd"/></c:set>
-				<c:choose>
-					<c:when test="${(dg_user_target_date - today)>0 }">
-        				<span>목표 달성까지 <span class="purple">${dutd - date }</span>일 남았습니다!</span><br>
+				<fmt:parseNumber var="dutd_num" value="${dutd.time/(1000*60*60*24 )}" integerOnly="true"/>
+				<fmt:parseNumber var="today_num" value="${date.time/(1000*60*60*24 )}" integerOnly="true"/>
+ 				<c:choose>
+					<c:when test="${dutd_num-today_num>1 }">
+        				<span>목표 달성까지 <span class="purple">${dutd_num-today_num+1}</span>일 남았습니다!</span><br>
 					</c:when>
 					<c:otherwise>
 					 <span>목표일이 지났습니다</span>
 					</c:otherwise>
-				</c:choose>
+				</c:choose> 
      		</c:if>
-     		
-     		
         	</div>
         </div>
 		</div>

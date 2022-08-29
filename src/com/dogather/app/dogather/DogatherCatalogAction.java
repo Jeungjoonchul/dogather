@@ -36,8 +36,8 @@ public class DogatherCatalogAction implements Action {
 		System.out.println("keyword : "+keyword);
 		
 		String category_index=req.getParameter("category_index");
-		category_index=category_index==null?"":keyword;
-		System.out.println("category_index : "+category_index);
+		category_index=category_index==null?"":category_index;
+		System.out.println("category_index : "+category_index+"("+category_index.length()+")");
 		
 		//페이징 처리
 		String dg_page = req.getParameter("dg_page");

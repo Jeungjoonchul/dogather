@@ -38,11 +38,104 @@
 					</a>
 				</div>
 			</div>
-
+<form action="${cp }/dg/catalog.dg" method="post">
+					<div id="navi">
+					<input type="text" name="keyword" value="${keyword }">
+					<select name="category_index">
+					<c:choose>
+						<c:when test="${category_index eq '1' }">
+						<option value="">전체</option>
+						<option value="1" selected="selected">건강</option>
+						<option value="2">학습</option>
+						<option value="3">교양</option>
+						<option value="4">습관</option>
+						<option value="5">경제</option>
+						</c:when>
+						<c:when test="${category_index eq '2' }">
+						<option value="">전체</option>
+						<option value="1">건강</option>
+						<option value="2" selected="selected">학습</option>
+						<option value="3">교양</option>
+						<option value="4">습관</option>
+						<option value="5">경제</option>
+						</c:when>
+						<c:when test="${category_index eq '3' }">
+						<option value="">전체</option>
+						<option value="1">건강</option>
+						<option value="2">학습</option>
+						<option value="3" selected="selected">교양</option>
+						<option value="4">습관</option>
+						<option value="5">경제</option>
+						</c:when>
+						<c:when test="${category_index eq '4' }">
+						<option value="">전체</option>
+						<option value="1">건강</option>
+						<option value="2">학습</option>
+						<option value="3">교양</option>
+						<option value="4" selected="selected">습관</option>
+						<option value="5">경제</option>
+						</c:when>
+						<c:when test="${category_index eq '5' }">
+						<option value="">전체</option>
+						<option value="1">건강</option>
+						<option value="2">학습</option>
+						<option value="3">교양</option>
+						<option value="4">습관</option>
+						<option value="5" selected="selected">경제</option>
+						</c:when>
+						<c:otherwise>
+						<option value="" selected="selected">전체</option>
+						<option value="1">건강</option>
+						<option value="2">학습</option>
+						<option value="3">교양</option>
+						<option value="4">습관</option>
+						<option value="5">경제</option>
+						</c:otherwise>
+					</c:choose>
+					</select>
+					
+					
+					<select name="criteria_key">
+						<c:choose>
+							<c:when test="${criteria_key eq 'dg_index' }">
+								<option value="dg_index" selected="selected">만든 날짜</option>
+								<option value="dg_member_cnt">회원 수</option>
+								<option value="dg_hits">조회 수</option>
+							</c:when>
+							<c:when test="${criteria_key eq 'dg_member_cnt' }">
+								<option value="dg_index">만든 날짜</option>
+								<option value="dg_member_cnt" selected="selected">회원 수</option>
+								<option value="dg_hits">조회 수</option>
+							</c:when>
+							<c:otherwise>
+								<option value="dg_index">만든 날짜</option>
+								<option value="dg_member_cnt">회원 수</option>
+								<option value="dg_hits" selected="selected">조회 수</option>
+							</c:otherwise>
+						</c:choose>
+					</select>
+					
+					
+					<select name="align">
+					<c:choose>
+						<c:when test="${align eq 'desc' }">
+						<option value="desc" selected="selected">내림차순</option>
+						<option value="asc">오름차순</option>
+						</c:when>
+						<c:otherwise>
+						<option value="desc">내림차순</option>
+						<option value="asc"  selected="selected">오름차순</option>
+						</c:otherwise>
+					</c:choose>
+					</select>
+					<input type="hidden" value="${dg_page }" name="dg_page"/>
+					<input type="submit" value="검색">
+					</div>
+					</form>
 			<div id="dogathermain_mould">
 				<c:choose>
-					<c:when test="${list.size()>1 and list!=null }">
-						<c:set var="i" value="${0 }"/>
+					<c:when test="${list.size()>0 and list!=null }">
+						<c:set var="i" value="${0}"/>
 						<c:forEach var="dg" items="${list}">
 							<c:choose>
 								<c:when test="${i<5}">
@@ -100,7 +193,9 @@
 							
 						<c:set var="i" value="${i+1}"/>
 						</c:forEach>
-						<button class="addlist" type="button">더보기</button>
+						<c:if test="${i>4 }">
+							<button class="addlist" type="button">더보기</button>
+						</c:if>
 						<div class="page-btns" style="display: none">
 							<div>
 								<c:if test="${dg_startPage!=1 }">

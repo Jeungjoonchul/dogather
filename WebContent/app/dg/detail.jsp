@@ -29,14 +29,14 @@
 <div style="display: none;">
 <input type="hidden" value="${dg_index }" id="dg_index">
 <input type="hidden" value="${dp_page }" id="dp_page">
-<input type="hidden" value="${loginUser.user_index }"/>
+<input type="hidden" value="${dp_type }" id="dp_type">
+<input type="hidden" value="${dp_align }" id="dp_align">
+<input type="hidden" value="${dp_mine }" id="dp_mine">
 <input type="hidden" id="loginUser_nickname" value="${loginUser.user_nickname }">
 </div>
 
 <div id="modal"></div>
 
-	<%-- 	로그인 후 이용해야할 때 사용
-	<%@include file="/loginCheck.jsp" %> --%>
 	<%@include file="/header.jsp"%>
 	<main>
 		<div id="main">
@@ -186,20 +186,18 @@
 							<c:choose>
 								<c:when test="${dp_mine == null or dp_mine=='off'}">
 								<li>
-									<label class="filter_unchecked">내가 쓴글<input type="checkbox" value="on" id="dp_mine"/></label>
+									<label class="filter_unchecked">내가 쓴글<input type="checkbox" value="on" id="dp_mine" name="dp_mine"/></label>
 								</li>
 								</c:when>
 								<c:otherwise>
 								<li >
-									<label class="filter_checked">내가 쓴글<input type="checkbox" value="on" id="dp_mine" checked/></label>
+									<label class="filter_checked">내가 쓴글<input type="checkbox" value="on" id="dp_mine" name="dp_mine" checked="checked"/></label>
 								</li>
 								</c:otherwise>
 							</c:choose>
 						</c:if>
 						</ul>
 					</div>
-					
-					
 					<div id="dg_comm_bulletin">
 					<div id="dp_contents">
 					<c:choose>
