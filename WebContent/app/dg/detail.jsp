@@ -19,7 +19,12 @@
 <!-- include libraries(jQuery, bootstrap) -->
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"
+/>
 
+<script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
 <title>Doːgather</title>
 <link rel="stylesheet" href="${cp }/resources/css/include.css" />
 <link rel="stylesheet" href="${cp }/resources/css/dogatherDetail.css" />
@@ -200,13 +205,15 @@
 					</div>
 					
 					
-					<div id="dg_comm_bulletin">
+					<div id="dg_comm_bulletin" class="swiper mySwiper">
+					<div class="swiper-wrapper" >
+					
 					<c:choose>
 						<c:when test="${dpList.size()>0 and dpList != null }">
 							<c:forEach items="${dpList }" var="dp">
 								<c:choose>
 									<c:when test="${dp.dp_type eq 'feed' }">
-										<div class="dg_comm_feed">
+										<div class="dg_comm_feed swiper-slide">
 										<a href="javascript:viewPost(${dp.dp_index })">
 											<table>
 												<tr>
@@ -226,7 +233,7 @@
 									</c:when>
 									<c:otherwise>
 									
-										<div class="dg_comm_cert">
+										<div class="dg_comm_cert swiper-slide">
 										<a href="javascript:viewPost(${dp.dp_index },'${dp.dp_type }')">
 											<table>
 												<tr>
@@ -251,7 +258,7 @@
 									</c:otherwise>
 								</c:choose>
 							</c:forEach>
-							
+							</div>
 						<div class="page-btns">
 							<div>
 								<c:if test="${dp_startPage!=1 }">
@@ -285,6 +292,13 @@
 	<%@include file="/footer.jsp"%>
 </body>
 <script src="${cp }/resources/js/dg.js">
-
+</script>
+<script>
+var swiper = new Swiper(".mySwiper", {
+direction : 'vertical',
+slidesPerView: 'auto',
+spaceBetween: 10,
+freeMode: true,
+});
 </script>
 </html>

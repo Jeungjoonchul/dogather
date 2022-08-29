@@ -130,7 +130,7 @@ table tbody tr {
 .writing {
   margin-top: 10px;
   border: 0px;
-  width: 950px;
+  width: 1000px;
 }
 .writing tr a {
   padding: 10px 20px;
@@ -160,6 +160,7 @@ table tbody tr {
   border-radius: 3px;
   border: none;
   color: #ffffff;
+  margin-left: 5px
 }
 .search_area [type="button"]:hover {
   background-color: #8757de;
