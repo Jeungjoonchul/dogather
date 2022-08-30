@@ -131,7 +131,7 @@
 				<div id="dg_comm_mould">
 					<div class="dg_comm_header">
 						<ul class="dp_filter">
-						
+						<div id="feedorcert">
 						<c:choose>
 							<c:when test="${dp_type eq 'feed' }">
 								<li >
@@ -167,7 +167,8 @@
 								</li>
 							</c:otherwise>
 						</c:choose>
-						
+						</div>
+						<div id="likeordate">
 						<c:choose>
 							<c:when test="${dp_align eq 'dp_like_cnt' }">
 							<li >
@@ -186,6 +187,7 @@
 								</li>
 							</c:otherwise>
 						</c:choose>
+						</div>
 						
 						<c:if test="${doneLoop}">
 							<c:choose>
