@@ -42,21 +42,21 @@
           <div class="slidewrap">
             <ul class="slidelist">
               <li>
-                <a href="#">
+                <a href="${cp}/board/event_board/post_view.bo?b_index=1">
                   <label for="slide3" class="s-left">&lt;</label>
                   <img src="${cp }/resources/images/event_banner1.png" alt="이미지1" />
                   <label for="slide2" class="s-right">&gt;</label>
                 </a>
               </li>
               <li>
-                <a href="#">
+                <a href="${cp}/board/event_board/post_view.bo?b_index=2">
                   <label for="slide1" class="s-left">&lt;</label>
                   <img src="${cp }/resources/images/event_banner2.png" height="215.2px" alt="이미지2" />
                   <label for="slide3 class=s-right">&gt;</label>
                 </a>
               </li>
               <li>
-                <a href="#">
+                <a href="${cp}/board/event_board/post_view.bo?b_index=3">
                   <label for="slide2" class="s-left">&lt;</label>
                   <img src="${cp }/resources/images/event_banner3.png" alt="이미지3" />
                   <label for="slide1" class="s-right">&gt;</label>

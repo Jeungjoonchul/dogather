@@ -61,7 +61,7 @@ li {
   font-weight: 700;
 }
 </style>
-  
+  <%@include file="loginCheck.jsp" %>
         <div id="side_menu">
               <ul>
                 <li>

@@ -40,6 +40,11 @@
 
 </style>
 <body>
+<c:if test="${empty myInfor}">
+    <script>
+            location.replace("${cp}/user/myPage.us");
+    </script>
+</c:if>
 		<c:if test="${loginUser == null }">
 			<script>
 				let cp = "${pageContext.request.contextPath}";
