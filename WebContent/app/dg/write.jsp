@@ -42,7 +42,7 @@
 						<tr>
 							<td>
 								<h2>
-									<span class="purple">두개더</span><span> 새글 쓰기</span>
+									<span class="purple">두게더</span><span> 새글 쓰기</span>
 								</h2>
 							</td>
 						</tr>

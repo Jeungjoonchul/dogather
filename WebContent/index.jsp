@@ -151,7 +151,7 @@
               <br>
               
                <form method="post" action="${cp}/main">
-					<input type="submit" value="두개더 시작하기"/>
+					<input type="submit" value="두게더 시작하기"/>
 					<label style="display: block">다음부터는 이창 보지 않기<input type="checkbox" name="skip_index"/></label>
 					
 				</form>

@@ -220,9 +220,9 @@
 					</c:when>
 					<c:otherwise>
 						<div class="dogathermain_list">
-							<p style="font-size: 40px; font-weight: bold;">두개더가 없습니다 ㅠㅠ</p>
-							<p style="font-size: 40px; font-weight: bold;">첫번째 두개더의 주인공이 되어 주세요!!</p>
-							<a href="${cp }/dg/create.dg" style="font-size: 40px; font-weight: bold; color:#621ae5">두개더 만들기</a>
+							<p style="font-size: 40px; font-weight: bold;">두게더가 없습니다 ㅠㅠ</p>
+							<p style="font-size: 40px; font-weight: bold;">첫번째 두게더의 주인공이 되어 주세요!!</p>
+							<a href="${cp }/dg/create.dg" style="font-size: 40px; font-weight: bold; color:#621ae5">두게더 만들기</a>
 						</div>
 					</c:otherwise>
 				</c:choose>

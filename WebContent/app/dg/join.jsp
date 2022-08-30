@@ -120,7 +120,7 @@ background-color: #8757de;
 			<table>
 				<thead>
 					<tr>
-						<td colspan="2"><h2><span class="purple">두개더</span><span> 가입하기</span></h2></td>
+						<td colspan="2"><h2><span class="purple">두게더</span><span> 가입하기</span></h2></td>
 					</tr>
 				</thead>
 				<tbody>

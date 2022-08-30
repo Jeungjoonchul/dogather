@@ -37,7 +37,7 @@
 				<table>
 					<thead>
 						<tr>
-							<td colspan="2"><h2>두개더 만들기</h2></td>
+							<td colspan="2"><h2><span class="purple">두게더</span> 만들기</h2></td>
 						</tr>
 					</thead>
 					<tbody>
@@ -52,12 +52,12 @@
 							</select></td>
 						</tr>
 						<tr>
-							<th><label for="dg_title">두개더 이름(필수)</label></th>
+							<th><label for="dg_title">두게더 이름(필수)</label></th>
 							<td><input type="text" name="dg_title" id="dg_title"
 								maxlength="10" /></td>
 						</tr>
 						<tr>
-							<th><label for="dg_intro">두개더 설명(필수)</label></th>
+							<th><label for="dg_intro">두게더 설명(필수)</label></th>
 							<td><textarea name="dg_intro" id="dg_intro"
 									spellcheck="false" maxlength="400"></textarea><span
 								id="counter">(0 / 최대 400자)</span></td>
@@ -100,7 +100,7 @@
 					</tbody>
 					<tfoot>
 						<tr>
-							<td colspan="2"><input type="submit" value="두개더 만들기"></td>
+							<td colspan="2"><input type="submit" value="두게더 만들기"></td>
 						</tr>
 					</tfoot>
 				</table>

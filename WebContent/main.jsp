@@ -116,7 +116,7 @@
               		</ul>
             </c:when>
             <c:otherwise>
-				<div style="line-height: 300px; font-size: 49px;font-weight: bold">두개더가 없습니다 ㅠㅠ</div>
+				<div style="line-height: 300px; font-size: 49px;font-weight: bold">두게더가 없습니다 ㅠㅠ</div>
             </c:otherwise>
            </c:choose>
             </div>
@@ -167,7 +167,7 @@
               		</ul>
             </c:when>
             <c:otherwise>
-				<div style="line-height: 300px; font-size: 49px;font-weight: bold">두개더가 없습니다 ㅠㅠ</div>
+				<div style="line-height: 300px; font-size: 49px;font-weight: bold">두게더가 없습니다 ㅠㅠ</div>
             </c:otherwise>
            </c:choose>
             </div>
@@ -218,7 +218,7 @@
               		</ul>
             </c:when>
             <c:otherwise>
-				<div style="line-height: 300px; font-size: 49px;font-weight: bold">두개더가 없습니다 ㅠㅠ</div>
+				<div style="line-height: 300px; font-size: 49px;font-weight: bold">두게더가 없습니다 ㅠㅠ</div>
             </c:otherwise>
            </c:choose>
             </div>
