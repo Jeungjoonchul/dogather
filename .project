@@ -28,4 +28,26 @@
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>org.eclipse.wst.jsdt.core.jsNature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>WebContent/resources/images/dogather_after.jpg</name>
+			<type>1</type>
+			<location>C:/Users/younghun/Desktop/dogather_after.jpg</location>
+		</link>
+		<link>
+			<name>WebContent/resources/images/dogather_end.jpg</name>
+			<type>1</type>
+			<location>C:/Users/younghun/Desktop/dogather_end.jpg</location>
+		</link>
+		<link>
+			<name>WebContent/resources/images/dogather_ing.jpg</name>
+			<type>1</type>
+			<location>C:/Users/younghun/Desktop/dogather_ing.jpg</location>
+		</link>
+		<link>
+			<name>WebContent/resources/images/dogather_start.jpg</name>
+			<type>1</type>
+			<location>C:/Users/younghun/Desktop/dogather_start.jpg</location>
+		</link>
+	</linkedResources>
 </projectDescription>
