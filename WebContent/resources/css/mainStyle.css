@@ -44,20 +44,23 @@ li {
 .section input[id="slide"] {
   display: none;
 }
+.section input[type=radio]{
+display: none;
+}
 .section .slidewrap {
-  width: 100%;
-  margin: 0 auto;
-  overflow: hidden;
+  width:1400px;
+    margin:0 auto;
+    overflow:hidden;
 }
 .section .slidelist {
-  white-space: nowrap;
-  font-size: 0;
+  white-space:nowrap;
+    font-size:0;
 }
 .section .slidelist > li {
-  display: inline-block;
-  vertical-align: middle;
-  width: 100%;
-  transition: all 0.5s;
+  display:inline-block;
+    vertical-align:middle;
+    width:1400px;
+    transition:all .5s;
 }
 .section .slidelist > li > a {
   display: block;

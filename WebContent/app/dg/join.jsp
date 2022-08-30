@@ -25,29 +25,90 @@
     <link rel="stylesheet" href="${cp }/resources/css/include.css" />
 </head>
 <style>
-  .purple {
+.purple {
   color: #621ae5;
 }
-	main{
-		width: 100%;
-		min-height:600px;
-	}
-	main *{
-		box-sizing: border-box;
-	}
-	#main{
-		width: 80%;
-		margin: 0 auto;
-	}
-	#dg_user_target{
-		width: 500px;
-		height: 200px;
-		resize: none;
-	}
-				#counter{
-			display: block;
-			color:#aaa;
-			}
+    main{
+        width: 100%;
+        min-height:600px;
+    }
+    main *{
+        box-sizing: border-box;
+    }
+    #main{
+        width: 80%;
+        margin: 0 auto;
+    }
+    #dg_user_target{
+        width: 500px;
+        height: 200px;
+        resize: none;
+    }
+                #counter{
+            display: block;
+            color:#aaa;
+            }
+            #main table td{
+    text-align: center;
+}
+#main h2{
+    font-size:36px;
+    width: 850px;
+    margin: 20px auto;
+    text-align: center;
+}
+
+#dp_contents {
+    width: 539px;
+    height: 206px;
+    resize: none;
+}
+
+#counter {
+    display: block;
+    color: #aaa;
+    width: 120px;
+    margin-left: 65%;
+}
+
+#cert_images {
+    display: flex;
+    justify-content: flex-start;
+}
+#main table tr td textarea{
+width: 500px;
+height:200px;
+background-color: #eee;
+border-radius: 1px;
+ border: none;
+ overflow:auto;
+}
+#main table {
+    border: 1px solid #eee;
+    margin: 0 auto;
+    width :850px;
+
+}
+#main table tfoot tr td{
+ text-align: center;
+}
+#main table tfoot input[type="submit"]{
+    padding: 10px 20px;
+    border: none;
+    color: #ffffff;
+    border-radius: 3px;
+    margin:10px;
+    cursor: pointer;
+      background-color: #621ae5;
+}
+#main table tfoot input[type="submit"]:hover{
+background-color: #8757de;
+}
+#main table input[type="date"]{
+ width: 200px;
+ padding:5px;
+ margin:10px 0;
+}
 </style>
 <body>
  	<!-- 로그인 후 이용해야할 때 사용 -->
@@ -64,15 +125,15 @@
 				</thead>
 				<tbody>
 
-				
-					<tr><th>두개더 목표</th><td><textarea spellcheck="false" name="dg_user_target" id="dg_user_target" maxlength="300"></textarea><span id="counter">(0 / 최대 300자)</span></td></tr>
-					<tr><th>목표 달성 날짜</th><td><input type="date" name="dg_user_target_date" id="dg_user_target_date"/></td></tr>
-					
-					<tr style="display: none;"><td colspan="2">
-					<input type="hidden" name="dg_index" value="${dg_index }"/>
-					<input type="hidden" name="dg_user_join_record" value="${dg_user_join_record }"/>
-					</td></tr>
-				</tbody>
+
+                    <tr><td><h4>목표</h4><textarea spellcheck="false" name="dg_user_target" id="dg_user_target" maxlength="300"></textarea><span id="counter">(0 / 최대 300자)</span></td></tr>
+                    <tr><td><h4>달성 날짜</h4><input type="date" name="dg_user_target_date" id="dg_user_target_date"/></td></tr>
+
+                    <tr style="display: none;"><td colspan="2">
+                    <input type="hidden" name="dg_index" value="${dg_index }"/>
+                    <input type="hidden" name="dg_user_join_record" value="${dg_user_join_record }"/>
+                    </td></tr>
+                </tbody>
 				<tfoot>
 					<tr><td colspan="2"><input type="submit"/></td></tr>
 				</tfoot>

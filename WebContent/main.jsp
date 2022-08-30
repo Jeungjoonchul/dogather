@@ -406,5 +406,14 @@
 			prevEl : ".swiper-button-prev",
 		},
 	});
+    setInterval(function(){
+    	$('.slidewrap > .slidelist').delay(2500);
+    	$('.slidewrap > .slidelist').animate({marginLeft:"-1400px"})
+    	$('.slidewrap > .slidelist').delay(2500);
+    	$('.slidewrap > .slidelist').animate({marginLeft:"-2800px"})
+    	$('.slidewrap > .slidelist').delay(2500);
+    	$('.slidewrap > .slidelist').animate({marginLeft:"0px"})
+
+    	});
 </script>
 </html>
