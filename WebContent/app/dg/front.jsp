@@ -50,16 +50,45 @@
 	.hover{
 		background-color: #eeeeee;
 	}
+	#main div{
+	 position: relative;
+	}
+	#main div img{
+	opacity: 0.7;
+	width:100%;
+	height:100%;
+	z-index:1;
+	border-radius: 10px;
+	}
+	#main div span{
+	color:#1414147c;
+	position: absolute;
+	z-index:10;
+	width: 100%;
+	display:inline-block;
+	text-align: center;
+	top:10%;
+	left:0;
+	font-size:24px;
+	}
+	#main div:hover img{
+	opacity: 1.0;
+	}
+	#main div:hover span{
+	color:#141414;
+	font-size:30px;
+	}
+	
 </style>
 </head>
 <body>
 <%@include file="/header.jsp" %>
 	<main>
 		<div id="main">
-			<div class="create_dg dg_box"><a href="${cp }/dg/create.dg">두개더 생성하기</a></div>
-			<div class="progress_dg dg_box"><a href="${cp }/dg/catalog.dg">진행 중 두개더 보기</a></div>
-			<div class="end_dg dg_box"><a href="#">종료된 두개더 보기</a></div>
-			<div class="epilogue_dg dg_box"><a href="#">두개더 후기 게시판</a></div>
+			<div class="create_dg dg_box"><a href="${cp }/dg/create.dg"><img src="${cp}/resources/images/dogather_start.jpg"><span>두게더 시작하기</span></a></div>
+			<div class="progress_dg dg_box"><a href="${cp }/dg/catalog.dg"><img src="${cp}/resources/images/dogather_ing.jpg"><span>진행중 두게더</span></a></div>
+			<div class="end_dg dg_box"><a href="#"><img src="${cp}/resources/images/dogather_end.jpg"><span>종료된 두게더</span></a></div>
+			<div class="epilogue_dg dg_box"><a href="#"><img src="${cp}/resources/images/dogather_after.jpg"><span>두게더 후기</span></a></div>
 		</div>
 	</main>
 	<%@include file="/footer.jsp" %>

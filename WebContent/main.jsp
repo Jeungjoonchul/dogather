@@ -19,7 +19,9 @@
       rel="stylesheet"
     />
     <link rel="shortcut icon" href="${cp}/resources/images/favicon.png" />
-
+	<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
@@ -312,34 +314,97 @@
             </div>
           </div>
         </div>
-        <!-- 후기 인증 게시판 리스트 -->
-      <div id="review_border">
-        <div class="review title">
-          <a href=""> <span class="purple">후기</span><span> 게시판</span> </a>
-        </div>
-        <div id="review_img_area">
-          <div class="review_img">
-            <a href="#">
-              <img src="${cp }/resources/images/review_img.jpg" alt="" />
-            </a>
-          </div>
-        </div>
-        <div id="review_list_area">
-          <a href="#">
-            <span class="catalog green">운동</span><br />
-            <span class="title">제목</span><br />
-            <span class="contents gray"
-              >내용 Lorem ipsum dolor sit amet consectetur adipisicing elit. In
-              obcaecati quos accusamus, unde, vero maiores quasi corrupti
-              pariatur iste excepturi veniam similique eos cum inventore
-              repellat praesentium amet placeat eveniet?
-            </span>
-          </a>
-        </div>
-      </div>  
-      </div>
-    </main>
+       <!-- 후기 인증 게시판 리스트 -->
+			<div id="review_border">
+				<div class="review title">
+					<a href=""> <span class="purple">후기</span><span> 게시판</span>
+					</a>
+				</div>
+				<div class="swiper mySwiper">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide">
+							<div id="review_img_area">
+								<div class="review_img">
+									<a href="#"> <img
+										src="${cp }/resources/images/walking.jpg" alt="" />
+									</a>
+								</div>
+							</div>
+							<div id="review_list_area">
+								<a href="#"> <span class="catalog green">운동</span><br /> <span
+									class="title">워킹다이어트 후기</span><br /> <span class="contents gray">
+									체중감량을 위해서는 격한 유산소 운동이나 힘든 근육 트레이닝이 기본이라고 생각하기 때문에 다이어트에 도전하기가 쉽지만은 않은이유인것 같아요.<br>
+									그렇지만, 우리가 평상시 하고 있는 걷기 만으로도 다이어트가 가능합니다. 저역시 가까운 거리는 정말 매일 걸어다니고 있는 이유이기도 한데요<br>
+									체력이 없어 다이어트에 도전하기가 망설여지는 분이나 격한 운동방법이 맞지 않는 분들께 추천드리는"워킹 다이어트"입니다.
+									</span>
+								</a>
+							</div>
+						</div>
+						<div class="swiper-slide">
+							<div id="review_img_area">
+								<div class="review_img">
+									<a href="#"> <img
+										src="${cp }/resources/images/study.jpg" alt="" />
+									</a>
+								</div>
+							</div>
+							<div id="review_list_area">
+								<a href="#"> <span class="catalog green">공부</span><br /> <span
+									class="title">2202 공무원 시험 성공전략!</span><br /> <span class="contents gray">
+									올해 처음 공무원 시험에 도전하는 '쌩'초시생 이라면?<br>
+									기초가 많이 부족하여 공시 준비에 '감'을 도무지 못 잡겠다면?<br>
+									기본강의 전에 듣는 입문강의 있죠?<br> 초시생분들이라면 묻지도, 따지지도 말고 반드시 입문강의부터 수강하고 오세요!</span>
+								</a>
+							</div>
+						</div>
+						<div class="swiper-slide">
+							<div id="review_img_area">
+								<div class="review_img">
+									<a href="#"> <img
+										src="${cp }/resources/images/eng_study.jpg" alt="" />
+									</a>
+								</div>
+							</div>
+							<div id="review_list_area">
+								<a href="#"> <span class="catalog green">어학</span><br /> <span
+									class="title">영어공부 두게더 후기</span><br /> <span class="contents gray"> 
+									"나 영어회화책 1권 외운지 4개월이 다 되가고. 영화보면서 딕테이션도 하고.. 말할 수 있는 표현이 많아진거 같기는 한데.. 왜 내실력은 큰 진적이 없는거 같지?"<br>
+									영화받아쓰기 총4편, 영어책 한권 외우기등 하루에 1시간~1시간 30분 정도 매일 영어에 시간 투자를 했었어요.
+									</span>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="swiper-button-next"></div>
+					<div class="swiper-button-prev"></div>
+					<!--  <div class="swiper-pagination"></div> -->
+				</div>
+			</div>
+		</div>
+	</main>
 
     <%@include file="/footer.jsp" %>
   </body>
+  <script>
+	var swiper = new Swiper(".mySwiper", {
+		slidesPerView : 1,
+		spaceBetween : 30,
+		freeMode : true,
+		allowTouchMove : false,
+		pagination : {
+			el : ".swiper-pagination",
+			clickable : true,
+		},
+		autoplay : { //자동슬라이드 (false-비활성화)
+			delay : 10000, // 시간 설정
+			disableOnInteraction : false, // false-스와이프 후 자동 재생 
+		},
+		loop : true, // 슬라이드 반복 여부
+		loopAdditionalSlides : 1,
+		navigation : {
+			nextEl : ".swiper-button-next",
+			prevEl : ".swiper-button-prev",
+		},
+	});
+</script>
 </html>

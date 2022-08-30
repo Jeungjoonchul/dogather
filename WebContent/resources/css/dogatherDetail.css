@@ -244,3 +244,30 @@ main ul {
 	border: 0.3px solid #bbbbbb;
 	display: none;
 }
+#feedorcert{
+	display: inline-block;
+}
+#feedorcert::after{
+	 content: '.';
+    color: #888;
+    background-color: #888;
+    display: inline-block;
+    width: 0.3em;
+    margin-right:5px;
+	
+	
+}
+#likeordate{
+	display:inline-block;
+	
+}
+#likeordate::after{
+	 content: '.';
+    color: #888;
+    background-color: #888;
+    display: inline-block;
+    margin-right:5px;
+    width: 0.3em;
+	
+	
+}
