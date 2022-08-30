@@ -18,7 +18,7 @@
 <link rel="shortcut icon" href="${cp}/resources/images/favicon.png" />
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 
 <title>Doːgather</title>
 <link rel="stylesheet" href="${cp }/resources/css/include.css" />
@@ -40,7 +40,6 @@
 			</div>
 <form action="${cp }/dg/catalog.dg" method="post">
 					<div id="navi">
-					<input type="text" name="keyword" value="${keyword }">
 					<select name="category_index">
 					<c:choose>
 						<c:when test="${category_index eq '1' }">
@@ -129,7 +128,9 @@
 					</c:choose>
 					</select>
 					<input type="hidden" value="${dg_page }" name="dg_page"/>
-					<input type="submit" value="검색">
+					<input type="text" name="keyword" value="${keyword }" placeholder="search">
+					<i class="fa-regular fa-magnifying-glass"></i>
+					<label for="search_txt_sBtn"><i class="xi-search purple"></i></label><input type="submit" value="제출하기" id="search_txt_sBtn" style="display: none;"/>
 					</div>
 					</form>
 			<div id="dogathermain_mould">
