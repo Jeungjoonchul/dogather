@@ -84,10 +84,11 @@ public class DogatherCreateOkAction implements Action {
 			int dg_index=ddao.getDgIndexWithDgTitle(dg_title);
 			ddao.dgJoin(dg_index,user_index);
 			out.print("alert('두개더가 개설되었습니다!');");
+			out.print("location.href='"+req.getContextPath()+"/dg/detail.dg?dg_index="+dg_index+"';");
 		}else {
 			out.print("alert('두개더가 개설에 실패했습니다');");
+			out.print("location.href='"+req.getContextPath()+"/dg/front.dg';");
 		}
-		out.print("location.href='"+req.getContextPath()+"/dg/front.dg';");
 		out.print("</script>");
 		return null;
 	}
