@@ -17,4 +17,8 @@ public class TermsDAO {
 	public List<TermsDTO> selectList() {
 		return sqlSession.selectList("Terms.selectList");
 	}
+
+	public void setTerms(TermsDTO termsDTO) {
+		sqlSession.update("Terms.setTerms",termsDTO);
+	}
 }

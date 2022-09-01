@@ -61,11 +61,6 @@
 							<button class="joinstart" type="button" onclick="next()">
 								가입하기</button>
 							<h5>지금 회원 가입하신 후 두게더의 다양한 서비스를 만나보세요.</h5>
-
-
-
-
-
 						</div>
 					</div>
 					<form name="joinForm" method="post" action="${cp}/user/join_ok.us" onsubmit="return sendit()">
@@ -75,7 +70,7 @@
 
 								<div>
 									<div class="terms_${terms.terms_index}_${terms.terms_type}">
-										<div>
+										<div class="terms_title">
 											<span>${terms.terms_title}</span>
 											<c:choose>
 												<c:when test="${terms.terms_type eq 'essential'}">
@@ -86,10 +81,10 @@
 												</c:otherwise>
 											</c:choose>
 										</div>
-										<div>${terms.terms_contents}</div>
+										<div class="terms_contents">${terms.terms_contents}</div>
 										<div>
 											<input type="checkbox"
-												name="user_terms_type${terms.terms_index}" id="user_terms_type${terms.terms_index}" value="true">
+												name="user_terms_type${terms.terms_index}" id="user_terms_type${terms.terms_index}" value="true"><span>동의합니다</span>
 										</div>
 									</div>
 								</div>
@@ -250,22 +245,6 @@
 	</div>
 	<div id="footer">
 		<div class="web_container">
-			<div class="footer_menu">
-				<ul>
-					<li><a> <span>이용약관</span>
-					</a></li>
-					<li><a> <span>개인정보취급방침</span>
-					</a></li>
-					<li><a> <span>법적고지</span>
-					</a></li>
-				</ul>
-				<div class="footer_btn">
-					<a> <span>인재채용</span>
-					</a> <a> <span>가맹점모집</span>
-					</a>
-				</div>
-			</div>
-
 			<div class="copyright">
 				<p>
 					서울 강남구 테헤란로 146 <span class="footer_line"></span>전화문의 010-5287-3610
@@ -283,6 +262,24 @@
 						src="${cp }/resources/images/small_instagram.png" alt="" /></a>
 				</div>
 			</div>
+		
+			<div class="footer_menu">
+				<ul>
+					<li><a> <span>이용약관</span>
+					</a></li>
+					<li><a> <span>개인정보취급방침</span>
+					</a></li>
+					<li><a> <span>법적고지</span>
+					</a></li>
+				</ul>
+				<div class="footer_btn">
+					<a> <span>인재채용</span>
+					</a> <a> <span>가맹점모집</span>
+					</a>
+				</div>
+			</div>
+
+			
 		</div>
 	</div>
 </body>

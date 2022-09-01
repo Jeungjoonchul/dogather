@@ -6,4 +6,9 @@
 	<select id="selectList" resultType="TermsDTO">
 		select * from t_terms
 	</select>
+	
+	
+	<update id="setTerms" parameterType="TermsDTO">
+		update t_terms set terms_title=#{terms_title}, terms_contents=#{terms_contents} where terms_index=#{terms_index}
+	</update>
  </mapper>

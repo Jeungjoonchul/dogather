@@ -52,4 +52,13 @@
 		<servlet-name>DogatherFrontController</servlet-name>
 		<url-pattern>*.dg</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>AdminFrontController</servlet-name>
+		<servlet-class>com.dogather.app.admin.AdminFrontController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AdminFrontController</servlet-name>
+		<url-pattern>*.ad</url-pattern>
+	</servlet-mapping>
 </web-app>

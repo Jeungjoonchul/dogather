@@ -114,7 +114,7 @@ display: none;
   padding: 10px 30px;
   margin-bottom: 30px;
   overflow-y: hidden;
-  overflow-x: auto;
+  overflow-x: hidden;
   white-space: nowrap;
 
 }
@@ -133,7 +133,7 @@ display: none;
   display: inline-block;
 }
 #dogather_list .list_album ul li div {
-  margin: 0 30px;
+  margin: auto;
   width: 200px;
   height: 200px;
 }
@@ -146,7 +146,7 @@ display: none;
   /* border: 1px solid #141414; */
   display: block;
   font-size: 15px;
-  margin: 0 30px;
+  margin: auto;
   color: #666666;
 }
 /* 이벤트&커뮤니티 게시판 */

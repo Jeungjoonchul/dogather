@@ -263,21 +263,9 @@
     background-color: RGB(245, 246, 247);
   }
   #footer .web_container {
-    position: relative;
     width: 80%;
     padding: 47px 0;
-  
-    clear: both;
-  }
-  .web_container {
-    margin: 0 auto;
-    clear: both;
-  }
-  .footer_menu {
-    position: absolute;
-    top: 42px;
-    right: 0;
-    clear: both;
+
   }
   .footer_menu ul {
     list-style: none;
@@ -333,4 +321,22 @@
     margin-right: 6px;
     float: left;
   }
-  
+  #join2>div{
+  	width: 80%;
+  }
+  #join2>div *{
+  text-align: left;
+  }
+  .terms_title{
+  	background-color: #cccccc;
+  }
+  .terms_contents{
+  	max-height:200px;
+  	overflow: auto;
+  }
+  .terms_contents:last-child{
+  	height: 100px;
+  }
+  #join2>div{
+  	margin-bottom:30px;
+  }

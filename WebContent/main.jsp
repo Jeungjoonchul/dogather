@@ -76,12 +76,12 @@
                 <span class="purple">인기 </span><span>두ː게더</span>
               </a>
             </div>
-            <div class="list_album">
+            <div class="list_album swiper albumswiper">
             <c:choose>
             	<c:when test="${hot_list.size()>0 and hot_list!=null }">
-              		<ul class="slides">
+              		<ul class="slides swiper-wrapper">
              		<c:forEach items="${hot_list }" var="hl">
-              			<li>
+              			<li class="swiper-slide">
               				<a href="${cp }/dg/detail.dg?dg_index=${hl.dg_index}">
                  				 <div class="album">
                   					<c:choose>
@@ -119,6 +119,8 @@
 				<div style="line-height: 300px; font-size: 49px;font-weight: bold">두게더가 없습니다 ㅠㅠ</div>
             </c:otherwise>
            </c:choose>
+           	<div class="swiper-button-next"></div>
+			<div class="swiper-button-prev"></div>
             </div>
           </div>
           <div id="new">
@@ -127,12 +129,12 @@
                 <span class="purple">최신 </span><span>두ː게더</span>
               </a>
             </div>
-            <div class="list_album">
+            <div class="list_album swiper albumswiper">
             <c:choose>
             	<c:when test="${latest_list.size()>0 and latest_list!=null }">
-              		<ul class="slides">
+              		<ul class="slides swiper-wrapper">
              		<c:forEach items="${latest_list }" var="ll">
-              			<li>
+              			<li class="swiper-slide">
               				<a href="${cp }/dg/detail.dg?dg_index=${ll.dg_index}">
                  				 <div class="album">
                   					<c:choose>
@@ -170,6 +172,8 @@
 				<div style="line-height: 300px; font-size: 49px;font-weight: bold">두게더가 없습니다 ㅠㅠ</div>
             </c:otherwise>
            </c:choose>
+           <div class="swiper-button-next"></div>
+			<div class="swiper-button-prev"></div>
             </div>
           </div>
           <div id="id="interest">
@@ -178,12 +182,12 @@
                 <span class="purple">관심 </span><span>두ː게더</span>
               </a>
             </div>
-            <div class="list_album">
+            <div class="list_album swiper albumswiper">
             <c:choose>
             	<c:when test="${mostView_list.size()>0 and mostView_list!=null }">
-              		<ul class="slides">
+              		<ul class="slides swiper-wrapper">
              		<c:forEach items="${mostView_list }" var="ml">
-              			<li>
+              			<li class="swiper-slide">
               				<a href="${cp }/dg/detail.dg?dg_index=${ml.dg_index}">
                  				 <div class="album">
                   					<c:choose>
@@ -221,6 +225,8 @@
 				<div style="line-height: 300px; font-size: 49px;font-weight: bold">두게더가 없습니다 ㅠㅠ</div>
             </c:otherwise>
            </c:choose>
+           <div class="swiper-button-next"></div>
+			<div class="swiper-button-prev"></div>
             </div>
           </div>
           
@@ -386,6 +392,21 @@
     <%@include file="/footer.jsp" %>
   </body>
   <script>
+
+  var album = new Swiper(".albumswiper", {
+	  slidesPerView : 5,
+		spaceBetween : 30,
+		freeMode : true,
+		allowTouchMove : true,
+		pagination : {
+			el : ".swiper-pagination",
+			clickable : true,
+		},
+		navigation : {
+			nextEl : ".swiper-button-next",
+			prevEl : ".swiper-button-prev",
+		},
+	});
 	var swiper = new Swiper(".mySwiper", {
 		slidesPerView : 1,
 		spaceBetween : 30,
@@ -397,7 +418,7 @@
 		},
 		autoplay : { //자동슬라이드 (false-비활성화)
 			delay : 10000, // 시간 설정
-			disableOnInteraction : false, // false-스와이프 후 자동 재생 
+			disableOnInteraction : false, // false-스와이프 후 자동 재생 
 		},
 		loop : true, // 슬라이드 반복 여부
 		loopAdditionalSlides : 1,
