@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="Dogather">
+ 	<insert id="dgCreate" parameterType="DogatherDTO">
+ 		insert into t_dogather(user_index,category_index,dg_title,dg_intro,dg_intro_short,dg_banner_org,dg_banner_sys,dg_public_scope,dg_limit_scope,dg_expire) 
+ 		values(#{user_index},#{category_index},#{dg_title},#{dg_intro},#{dg_intro_short},#{dg_banner_org},#{dg_banner_sys},#{dg_public_scope},#{dg_limit_scope},#{dg_expire})
+ 	</insert>
+ 
+ 	<insert id="dgJoin" parameterType="hashmap">
+ 		insert into t_dogather_user(dg_index,user_index) values(#{dg_index},#{user_index})
+ 	</insert>
+ 
+	<insert id="setDgUserTarget" parameterType="hashmap">
+		insert into t_dogather_user_target(dg_index,user_index,dg_user_target,dg_user_target_date) 
+		values(#{dg_index},#{user_index},#{dg_user_target},#{dg_user_target_date})
+	</insert>
+ 
+ 	<insert id="dgPostOn" parameterType="DogatherPostDTO">
+ 		insert into t_dogather_post(dg_index,user_index,dp_contents,dp_image1_org,dp_image1_sys,dp_image2_org,dp_image2_sys,dp_image3_org,dp_image3_sys,dp_type) 
+ 		values(#{dg_index},#{user_index},#{dp_contents},#{dp_image1_org},#{dp_image1_sys},#{dp_image2_org},#{dp_image2_sys},#{dp_image3_org},#{dp_image3_sys},#{dp_type})
+ 	</insert>
+ 
+ 	<insert id="dpReplyOn" parameterType="DogatherReplyDTO">
+ 		insert into t_dp_reply(dp_index,user_index,dpr_contents) 
+ 		values(#{dp_index},#{user_index},#{dpr_contents})	
+ 	</insert>
+ 
+ 
+ 
+	<select id="dgDupCheck" parameterType="string" resultType="_int">
+		select count(*) from t_dogather where dg_title=#{dg_title}
+	</select>
+	
+	<select id="getDgIndexWithDgTitle" parameterType="string" resultType="_int">
+		select dg_index from t_dogather where dg_title=#{dg_title}
+	</select>
+	
+	<select id="getDgList" parameterType="hashmap" resultType="DogatherDTO">
+		select 
+			d.dg_index,
+			u.user_index,
+			u.user_nickname,
+			d.dg_reg_date,
+			d.category_index,
+			d.dg_title,
+			d.dg_intro,
+			d.dg_intro_short,
+			d.dg_banner_org,
+			d.dg_banner_sys,
+			d.dg_public_scope,
+			d.dg_hits,
+			d.dg_capacity,
+			d.dg_limit_scope,
+			d.dg_expire,
+			d.dg_inactive,
+			du.dg_member_cnt 
+		from t_dogather d
+		join t_user u 
+		on u.user_index=d.user_index 
+		left join (select count(user_index) as dg_member_cnt, dg_index from t_dogather_user group by dg_index) as du 
+		on d.dg_index=du.dg_index 
+		where d.dg_inactive=0 and u.user_inactive=0 and d.dg_public_scope=1 and d.category_index like('%${category_index}%') and(case when d.dg_expire is not null then d.dg_expire>now() else d.dg_expire is null end) 
+			and(d.dg_title like('%${keyword}%') or d.dg_intro like('%${keyword}%') or d.dg_intro_short like('%${keyword}%') or u.user_nickname like('%${keyword}%'))  
+			order by ${criteria} ${align} limit #{dg_startRow}, #{dg_pageSize}
+	</select>
+	
+	<select id="getDgCnt" parameterType="hashmap" resultType="_int">
+		select count(*) 
+		from t_dogather d 
+		left join(select user_nickname,user_index, user_inactive from t_user) u 
+		on d.user_index=u.user_index 
+		where d.dg_inactive=0 and u.user_inactive=0 and d.dg_public_scope=1 and d.category_index like('%${category_index}%') and(case when d.dg_expire is not null then d.dg_expire>now() else d.dg_expire is null end)
+		and(d.dg_title like('%${keyword}%') or d.dg_intro like('%${keyword}%') or d.dg_intro_short like('%${keyword}%') or u.user_nickname like('%${keyword}%'))
+	</select>
+	
+	<select id="getDgListOnMain" parameterType="string" resultType="DogatherDTO">
+		select 
+			d.dg_index,
+			u.user_index,
+			u.user_nickname,
+			d.dg_reg_date,
+			d.category_index,
+			d.dg_title,
+			d.dg_intro,
+			d.dg_intro_short,
+			d.dg_banner_org,
+			d.dg_banner_sys,
+			d.dg_public_scope,
+			d.dg_hits,
+			d.dg_capacity,
+			d.dg_limit_scope,
+			d.dg_expire,
+			d.dg_inactive,
+			du.dg_member_cnt 
+		from t_dogather d
+		join t_user u 
+		on u.user_index=d.user_index 
+		left join (select count(user_index) as dg_member_cnt, dg_index from t_dogather_user group by dg_index) as du 
+		on d.dg_index=du.dg_index 
+		where d.dg_inactive=0 and u.user_inactive=0 and d.dg_public_scope=1 and(case when d.dg_expire is not null then d.dg_expire>now() else d.dg_expire is null end) 
+			order by ${criteria} desc limit 0,5
+	</select>
+	
+	<select id="getDetail" parameterType="_int" resultType="DogatherDTO">
+		select 
+			d.dg_index,
+			u.user_index,
+			u.user_nickname,
+			d.dg_reg_date,
+			d.category_index,
+			d.dg_title,
+			d.dg_intro,
+			d.dg_intro_short,
+			d.dg_banner_org,
+			d.dg_banner_sys,
+			d.dg_public_scope,
+			d.dg_hits,
+			d.dg_capacity,
+			d.dg_limit_scope,
+			d.dg_expire,
+			d.dg_inactive
+		from t_dogather d
+		join t_user u
+		on d.user_index=u.user_index
+		where d.dg_index=${dg_index}
+	</select>
+	
+	<select id="getDgMembers" parameterType="_int" resultType="_int">
+		select user_index from t_dogather_user where dg_index=#{dg_index} and dg_user_active=1
+	</select>
+	
+	<select id="getDpList" parameterType="hashmap" resultType="DogatherPostDTO">
+		select 
+			d.dp_index,
+			d.dg_index,
+			u.user_index,
+			u.user_nickname,
+			u.user_inactive,
+			du.dg_user_active,
+			d.dp_reg_date,
+			d.dp_update_date,
+			d.dp_contents,
+			d.dp_like_user_index,
+			d.dp_inactive,
+			d.dp_image1_org,
+			d.dp_image1_sys,
+			d.dp_image2_org,
+			d.dp_image2_sys,
+			d.dp_image3_org,
+			d.dp_image3_sys,
+			d.dp_type,
+			length(d.dp_like_user_index)-length(replace(d.dp_like_user_index,',',''))+1 as dp_like_cnt
+		from t_dogather_post d 
+		join t_user u 
+		on u.user_index=d.user_index 
+		left join (select user_index,dg_user_active,dg_index from t_dogather_user) du 
+		on du.dg_index=d.dg_index and du.user_index=d.user_index 
+		where u.user_inactive=0 and du.dg_user_active=1 and d.dg_index=#{dg_index} and u.user_index like('${user_index}') and d.dp_inactive=0 and d.dp_type like ('%${dp_type}%') 
+		order by ${dp_align} desc limit #{dp_startRow}, #{dp_pageSize}
+	</select>
+	
+	<select id="getDpCnt" parameterType="hashmap" resultType="_int">
+		select count(*) 
+		from t_dogather_post d
+		join t_user u
+		on d.user_index=u.user_index
+		where d.dp_inactive=0 and u.user_inactive=0 and d.dg_index = #{dg_index} and d.user_index like('${user_index}') and d.dp_type like('%${dp_type}%')
+	</select>
+	
+	<!-- <select id="getLikeUserListByDP" parameterType="_int" resultType="string">
+		select dp_like_user_index from t_dogather_post where dg_index=#{dg_index}
+	</select> -->
+		
+	<select id="getLikeUsersByDP" parameterType="_int" resultType="string">
+		select dp_like_user_index from t_dogather_post where dp_index=#{dp_index}	
+	</select>
+		
+	<select id="getDgMembersInfo" parameterType="hashmap" resultType="DogatherUserDTO">
+		select * from t_dogather_user where dg_index=#{dg_index}
+	</select>
+	
+	<select id="getPostDetail" parameterType="_int" resultType="DogatherPostDTO">
+		select 
+			d.dp_index,
+			d.dg_index,
+			u.user_index,
+			u.user_nickname,
+			d.dp_reg_date,
+			d.dp_update_date,
+			d.dp_contents,
+			d.dp_like_user_index,
+			d.dp_inactive,
+			d.dp_image1_org,
+			d.dp_image1_sys,
+			d.dp_image2_org,
+			d.dp_image2_sys,
+			d.dp_image3_org,
+			d.dp_image3_sys,
+			d.dp_type,
+			length(d.dp_like_user_index)-length(replace(d.dp_like_user_index,',',''))+1 as dp_like_cnt
+		from t_dogather_post d 
+		join t_user u 
+		on u.user_index=d.user_index 
+		where dp_index=#{dp_index}
+	</select>
+	
+	<select id="getReplyList" parameterType="hashmap" resultType="DogatherReplyDTO">
+		select
+			d.dpr_index,
+			d.dp_index,
+			u.user_index,
+			u.user_nickname,
+			d.dpr_reg_date,
+			d.dpr_update_date,
+			d.dpr_contents,
+			d.dpr_inactive 
+		from t_dp_reply d  
+			join t_user u 
+				on d.user_index=u.user_index 
+		where dp_index=#{dp_index} and dpr_inactive=0 
+		order by 1 asc limit #{startRow},#{pageSize}
+	</select>
+	
+	<select id="getReplyTotalCnt" parameterType="_int" resultType="_int">
+		select count(*) from t_dp_reply where dp_index=#{dp_index} and dpr_inactive=0
+	</select>
+	
+	<select id="getReplyLastOn" parameterType="hashmap" resultType="DogatherReplyDTO">
+		select
+			d.dpr_index,
+			d.dp_index,
+			u.user_index,
+			u.user_nickname,
+			d.dpr_reg_date,
+			d.dpr_update_date,
+			d.dpr_contents,
+			d.dpr_inactive 
+		from t_dp_reply d  
+			join t_user u 
+				on d.user_index=u.user_index 
+		where d.dp_index=#{dp_index} and u.user_index=#{user_index}
+			order by 1 desc limit 0,1
+	</select>
+	
+	<select id="getLikeCntByDP" parameterType="_int" resultType="string">
+		select length(dp_like_user_index)-length(replace(dp_like_user_index,',',''))+1 
+		from t_dogather_post where dp_index=#{dp_index}
+	</select>
+	
+	<select id="getDgUserInfo" parameterType="hashmap" resultType="DogatherUserInfoDTO">
+		select  
+			du.dg_index,du.user_index,du.dg_user_reg_date,     
+			dut.dg_user_target_date,dut.dg_user_target,     
+			c.dp_cert_cnt,f.dp_feed_cnt,r.dpr_cnt 
+		from t_dogather_user du 
+			left join t_dogather_user_target dut 
+				on dut.dg_index=du.dg_index and dut.user_index=du.user_index  
+			left join (select dg_index,user_index,count(dp_index) as dp_cert_cnt from t_dogather_post where dp_type='cert' group by dg_index,user_index) c 
+				on c.dg_index=du.dg_index and c.user_index=du.user_index  
+			left join (select dg_index,user_index,count(dp_index) as dp_feed_cnt from t_dogather_post where dp_type='feed' group by dg_index,user_index) f  
+				on f.dg_index=du.dg_index and f.user_index=du.user_index  
+			left join (select  d.dg_index,d.dp_index,r.user_index,r.dpr_cnt 
+						from t_dogather_post d 
+							left join(select dp_index,user_index,count(*) as dpr_cnt from t_dp_reply group by user_index,dp_index) r 
+								on d.dp_index=r.dp_index) r 
+				on r.dg_index=du.dg_index and r.user_index=du.user_index
+		where du.dg_index=#{dg_index} and du.user_index=#{user_index};
+	</select>
+	
+	<select id="getDgCertPostList" parameterType="hashmap" resultType="DogatherPostDTO">
+		select * from t_dogather_post where dg_index=#{dg_index} and user_index=#{user_index} and dp_type='cert' and dp_reg_date like('${year}-${month}-%');
+	</select>
+	
+	
+	
+	<update id="dgReJoin" parameterType="hashmap">
+		update t_dogather_user set dg_user_active=1, dg_user_reg_date=now() where dg_index=#{dg_index} and user_index=#{user_index}
+	</update>
+	
+	<update id="updateDgUserTarget" parameterType="hashmap">
+		update t_dogather_user_target set dg_user_target_date=#{dg_user_target_date},dg_user_target=#{dg_user_target} where dg_index=#{dg_index} and user_index=#{user_index}
+	</update>
+	
+	<update id="dgHitUp" parameterType="_int">
+		update t_dogather set dg_hits=dg_hits+1 where dg_index=#{dg_index}
+	</update>
+	
+	<update id="updateReply" parameterType="hashmap">
+		update t_dp_reply set dpr_contents=#{dpr_contents}, dpr_update_date=now() where dpr_index=#{dpr_index}
+	</update>
+	
+	<update id="setLikeUserIndex" parameterType="hashmap">
+		update t_dogather_post set dp_like_user_index = #{dp_like_user_index} where dp_index=#{dp_index}
+	</update>
+	
+	
+	
+	<delete id="dgQuit" parameterType="hashmap">
+		update t_dogather_user set dg_user_active=0 ,dg_user_drop_date=now() where dg_index=#{dg_index} and user_index=#{user_index}
+	</delete>
+	
+	<delete id="deleteReply" parameterType="_int">
+		update t_dp_reply set dpr_inactive=1 where dpr_index=#{dpr_index}
+	</delete>
+	
+	<delete id="dgPostDelete" parameterType="_int">
+		update t_dogather_post set dp_inactive=1 where dp_index=#{dp_index}
+	</delete>
+ </mapper>

@@ -1,0 +1,2 @@
+220728	BoardDTO 생성
+		boolean 타입의 inactive 필드의 경우 db에는 false인 경우 0, true인 경우 1

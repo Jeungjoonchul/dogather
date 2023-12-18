@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="User">
+	<select id="checkEmail" parameterType="string" resultType="_int">
+		select count(*) from t_user where user_email=#{user_email}
+	</select>
+	
+	<select id="checkNickname" parameterType="string" resultType="_int">
+		select count(*) from t_user where user_nickname=#{user_nickname}
+	</select>
+
+	<select id="selectUserWithUserEmail" parameterType="string"
+		resultType="UserDTO">
+		select * from t_user where user_email=#{user_email}
+	</select>
+	
+	<select id="selectUserWithUserInfo" parameterType="hashmap" resultType="UserDTO">
+		select * from t_user where user_email=#{user_email} and binary(user_password)=#{user_password}
+	</select>
+		
+	<select id="loginUser" parameterType="hashmap"
+		resultType="UserDTO">
+		select * from t_user where user_email=#{user_email} and binary(user_password)=#{user_password}
+	</select>
+	
+	<select id="getUserInfor" parameterType="String" resultType="UserDTO">
+		select * from t_user where user_email=#{user_email}
+	</select>
+
+	<select id="findEmail" parameterType="hashmap" resultType="string">
+		select user_email from t_user where user_name=#{user_name} and user_phone=#{user_phone}
+	</select>
+	
+	<select id="findPassword" parameterType="hashmap" resultType="UserDTO">
+		select * from t_user where user_name=#{user_name} and user_phone=#{user_phone} and user_email=#{user_email}
+	</select>
+
+
+
+	<insert id="insertUser" parameterType="UserDTO">
+		insert into 
+		t_user(user_email,user_nickname,user_name,user_password,user_phone,user_gender,user_birth_date,user_interest,user_intro,user_term_selective1,user_term_selective2,zip_code,address_default,address_detail,address_extra) 
+		values(#{user_email},#{user_nickname},#{user_name},#{user_password},#{user_phone},#{user_gender},#{user_birth_date},#{user_interest},#{user_intro},#{user_term_selective1},#{user_term_selective2},#{zip_code},#{address_default},#{address_detail},#{address_extra})
+	</insert>
+	
+	<update id="updateUser" parameterType="UserDTO">
+		update t_user
+		set user_nickname=#{user_nickname}, user_phone=#{user_phone}, zip_code=#{zip_code}, address_default=#{address_default}, address_detail=#{address_detail}, address_extra=#{address_extra}
+		where user_email=#{user_email};
+	</update>
+	
+	<update id="updateUserPw" parameterType="UserDTO">
+		update t_user
+		set user_password=#{user_password}
+		where user_email=#{user_email};
+	</update>
+	
+	<update id="updateLastLogin" parameterType="_int">
+		update t_user set user_last_login=now() where user_index=#{user_index}
+	</update>
+	
+	<update id="resetPassword" parameterType="hashmap">
+		update t_user set user_password=#{user_password} where user_index=#{user_index}
+	</update>
+</mapper>

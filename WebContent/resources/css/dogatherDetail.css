@@ -1,0 +1,273 @@
+   
+   body{
+   position: absolute;
+   top:0;
+   left:0;
+   }
+    main{
+    width: 100%;
+    
+  	}
+  	main div{
+  	box-sizing: border-box;}
+  	#main{
+    width: 80%;
+    margin:0 auto;
+    
+  	}
+  .purple {
+  color: #621ae5;
+}
+main ul {
+    padding-inline-start: 0px;
+  }
+	main a{
+	text-decoration: none;
+    color: #141414;
+	}
+	main li{
+	display: block;
+    list-style: none;
+    text-align: center;
+	}
+  /* 두게더 커뮤니티 틀*/
+  #dg_community{
+    width: 100%;
+	max-height:1200px;
+    display: flex;
+    justify-content:space-evenly;
+  }
+
+  /* 두게더 커뮤니티 카테고리 틀 */
+  #dg_comm_category{
+    
+    width: 25%;
+    height: inherit;
+    border-radius: 20px;
+	box-shadow: 10px 10px 5px #aaaaaa;
+	border: 0.3px solid #bbbbbb;
+	padding:20px;
+  }
+  .dg_comm_photo{
+    width: 100%;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;    
+  }
+  .dg_comm_photo>img{
+  	max-height: 256px;
+  	max-width: 256px;
+  }
+  .dg_comm_information{
+    width: 100%;
+    height: 70%;
+    
+  }
+  .list_container_contents{
+  max-height:300px;
+  	overflow: hidden;
+  	text-overflow: ellipsis;
+  	word-break: break-all;
+  }
+  .dg_intro_detail{
+  	position: absolute;
+  	background-color: green;
+  	top:550px;
+  }
+  .joindg{
+  display:block;
+    background-color: #141414;
+    width: 60%;
+    height: 40px;
+    line-height:40px;
+    text-align:center;
+    color: #fff;
+    font-weight: 100;
+    font-size: 1.25rem;
+    border: 0px solid;
+    cursor: pointer;
+    border-radius: 10px;
+    margin:0 auto;
+  }
+  .joindg:hover{
+
+    background-color: #666666;
+  }
+  
+
+  /* 두게더 커뮤니티 피드 틀 */
+  #dg_comm_mould{
+    width: 50%;
+    height: inherit;
+    padding-left: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  /* 헤드 필터영역*/
+  .dg_comm_header{
+    
+    width: 100%;
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .dg_comm_header ul li{
+    display: inline-block;
+  }
+  .show{
+    opacity: 1;
+  }
+  .hide{
+    opacity: 0;
+  }
+ 
+  #dg_comm_bulletin{
+    overflow: scroll;
+    width: 100%;
+    height:100%;
+    border-radius: 20px;
+	box-shadow: 10px 10px 5px #aaaaaa;
+	border: 0.3px solid #bbbbbb;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+  }
+  #dg_comm_bulletin::-webkit-scrollbar {
+    display: none;
+}
+  /* 인증글 */
+   .dg_comm_feed,.dg_comm_cert{
+    
+    width: 80%;
+    height: auto;
+    border-radius: 10px;
+    background-color: #ede7f6;
+    margin:15px auto;
+    padding: 20px 30px;
+  }
+  .comm_board_date{
+  	text-align: right
+  }
+   .dg_comm_feed td,.dg_comm_cert td{
+   	margin: 10px 0;
+   }
+  .dg_comm_cert{
+    background-color: #f9fbe7;
+  }
+  .dg_comm_feed table,.dg_comm_cert table{
+  width:90%;
+  margin:0 auto;
+    text-align: left;
+  }
+  .comm_user_nickname{
+    width: 70px;
+  }
+
+  #dg_comm_category nav ul li{
+    font-size: 1.75rem;
+    padding: 20px;
+    text-align: left;
+  }
+  
+  .page-btns{
+  	width: 100%;
+  	display: flex;
+  	justify-content: center;
+  	margin-bottom:10px;
+  }
+  
+.page-btns a{
+	color : black;
+	margin: 0 2px;
+	padding: 1px;
+	padding: 0 3px;
+}
+.page-btns a:hover{
+	color:red;
+}
+.nowPage{
+	background-color:#dddddd;
+	border-radius: 3px;
+	margin: 0 2px;
+	padding: 1px;
+	padding: 0 3px;
+}
+.dp_filter input{
+	display: none;
+}
+
+.dp_filter label{
+	padding : 4px;
+	margin-right:10px;
+	border:1px solid #621ae5;
+	border-radius: 10px;
+	cursor: pointer;
+	
+}
+.filter_checked{
+	color:white;
+	background-color: #621ae5;
+}
+
+.filter_unchecked{
+	color:#141414;
+	background-color: white;
+}
+
+.align_leg{
+	padding : 4px;
+	margin-right:10px;
+	border:1px solid #621ae5;
+	border-radius: 10px;	
+}
+.comm_board_date > span:first-child{
+	color:red;
+}
+#modal{
+	  position: fixed;
+ 	 	top: 0;
+  		bottom: 0;
+  		left: 0;
+  		right: 0;
+  		margin: auto;
+ 	 width: 1200px;  
+  	height: 800px;
+	background-color: #ffffff;
+        opacity: 0.95;
+	z-index: 1000;
+	border-radius: 20px;
+	box-shadow: 10px 10px 5px #aaaaaa;
+	border: 0.3px solid #bbbbbb;
+	display: none;
+}
+#feedorcert{
+	display: inline-block;
+}
+#feedorcert::after{
+	 content: '.';
+    color: #888;
+    background-color: #888;
+    display: inline-block;
+    width: 0.3em;
+    margin-right:5px;
+	
+	
+}
+#likeordate{
+	display:inline-block;
+	
+}
+#likeordate::after{
+	 content: '.';
+    color: #888;
+    background-color: #888;
+    display: inline-block;
+    margin-right:5px;
+    width: 0.3em;
+	
+	
+}

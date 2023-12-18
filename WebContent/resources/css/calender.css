@@ -1,0 +1,158 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+#main {
+	display: flex;
+	min-width:1100px;
+	width: 80%;
+	margin: 0 auto;
+}
+main h2{
+	width:80%;
+	min-width:1100px;
+	margin:0 auto;
+	font-size:30px;
+	text-align: center;
+	
+}
+  .calendar {
+    width: 70%;
+    margin: 50px;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .year-month {
+    font-size: 35px;
+  }
+  
+  .nav {
+    display: flex;
+    border: 1px solid #333333;
+    border-radius: 5px;
+  }
+  
+  .nav-btn {
+    width: 28px;
+    height: 30px;
+    border: none;
+    font-size: 16px;
+    line-height: 34px;
+    background-color: transparent;
+    cursor: pointer;
+  }
+  
+  .go-today {
+    width: 75px;
+    border-left: 1px solid #333333;
+    border-right: 1px solid #333333;
+  }
+  
+  .days {
+    display: flex;
+    margin: 25px 0 10px;
+  }
+  
+  .day {
+    width: calc(100% / 7);
+    text-align: center;
+  }
+  
+  .dates {
+    display: flex;
+    flex-flow: row wrap;
+    height: 500px;
+    border-top: 1px solid #333333;
+    border-right: 1px solid #333333;
+  }
+  
+  .date {
+    width: calc(100% / 7);
+    padding: 15px;
+    text-align: right;
+    border-bottom: 1px solid #333333;
+    border-left: 1px solid #333333;
+  }
+  
+  .day:nth-child(7n + 1),
+  .date:nth-child(7n + 1)>.this {
+    color: #D13E3E;
+  }
+  
+  .day:nth-child(7n),
+  .date:nth-child(7n)>.this {
+    color: #396EE2;
+  }
+  
+  .other {
+    opacity: 0.3;
+  }
+  
+  .today {
+/*     position: relative; */
+    color: #FFFFFF;
+    background-color: #621ae5;
+    border-radius: 50% ;
+    padding: 5px;
+  }
+  
+/*   .today::before {
+     position: absolute; 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+     z-index: 100;
+    width: 30px;
+    height: 30px;
+    display: block;
+    background-color: #FF0000;
+    border-radius: 50%;
+    content: '';
+  } */
+#main .on{
+	background-color: #f94b4b;
+	
+}
+  /* ------------------ */
+#myinfo{
+  margin-top:160px;
+  display:block;
+  width:30%;
+  height:500px;
+  border:1px solid #141414;  
+  }
+#myinfo h4{
+	text-align: center;
+	
+}
+#myinfo div{
+	margin:10px
+}
+#myinfo p{
+	
+  font-weight: 700;
+  display:inline;
+  }
+  
+.calendar>div:last-child>p {
+	display: flex;
+	justify-content: space-between;
+	width: 150px;
+	margin-top:10px;
+}
+.calendar>div:last-child>p>span:last-child {
+	height:24px;
+	width: 30px;
+}
+.calendar>div:last-child>p:first-child>span:last-child {
+	background-color: rgb(187, 222, 251);
+}
+.calendar>div:last-child>p:last-child>span:last-child {
+	background-color: rgb(255, 205, 210);
+}

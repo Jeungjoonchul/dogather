@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias type="com.dogather.dto.user.UserDTO" alias="UserDTO"/>
+		<typeAlias type="com.dogather.dto.terms.TermsDTO" alias="TermsDTO"/>
+		<typeAlias type="com.dogather.dto.board.BoardDTO" alias="BoardDTO"/>
+		<typeAlias type="com.dogather.dto.board.ReplyDTO" alias="ReplyDTO"/>
+		<typeAlias type="com.dogather.dto.dogather.DogatherDTO" alias="DogatherDTO"/>
+		<typeAlias type="com.dogather.dto.dogather.DogatherPostDTO" alias="DogatherPostDTO"/>
+		<typeAlias type="com.dogather.dto.dogather.DogatherReplyDTO" alias="DogatherReplyDTO"/>
+		<typeAlias type="com.dogather.dto.dogather.DogatherUserDTO" alias="DogatherUserDTO"/>
+		<typeAlias type="com.dogather.dto.dogather.DogatherUserTargetDTO" alias="DogatherUserTargetDTO"/>
+		<typeAlias type="com.dogather.dto.dogather.DogatherUserInfoDTO" alias="DogatherUserInfoDTO"/>
+	</typeAliases>
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC"/>
+			<dataSource type="POOLED">
+				<property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+				<property name="url" value="jdbc:mysql://localhost:3306/dg_db"/>
+				<property name="username" value="root"/>
+				<property name="password" value="1234"/>
+			</dataSource>
+		</environment>
+	</environments>
+	<mappers>
+	<mapper resource="com/dogather/mapper/user.xml"/>
+	<mapper resource="com/dogather/mapper/board.xml"/>
+	<mapper resource="com/dogather/mapper/terms.xml"/>
+	<mapper resource="com/dogather/mapper/reply.xml"/>
+	<mapper resource="com/dogather/mapper/dogather.xml"/>
+	</mappers>
+</configuration>

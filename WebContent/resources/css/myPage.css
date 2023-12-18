@@ -1,0 +1,363 @@
+.hidden {
+  display: none;
+}
+#mypage {
+  width: 80%;
+  margin-top: 100px;
+}
+#mypage_container {
+  box-sizing: border-box;
+  width: 1202px;
+  height: 800px;
+  margin: 0 auto;
+  margin-bottom: 50px;
+}
+/* 사이드 */
+#side_menu {
+  box-sizing: border-box;
+  /* border: 1px solid #141414; */
+  width: 300px;
+  height: 500px;
+  float: left;
+}
+#side_menu ul {
+  margin-left: -10px;
+}
+#side_menu ul li {
+  text-align: left;
+}
+#side_menu ul li a {
+  color: #141414bb;
+}
+#side_menu ul li a:hover {
+  color: #141414;
+}
+
+#side_menu ul li .cap {
+  margin-left: -10px;
+  font-size: 20px;
+  color: #141414;
+}
+#side_menu ul li .on {
+  font-weight: 700;
+}
+
+#mypage_area {
+  box-sizing: border-box;
+  box-shadow: 3px 3px 3px #141414;
+  border: 1px solid #ccc;
+  width: 900px;
+  height: 100%;
+  float: left;
+  margin-left: -130px;
+}
+#top_meun {
+  margin-bottom: 50px;
+}
+#top_meun table {
+  margin-top: 5px;
+  margin-left: 10px;
+}
+#top_meun table a {
+  display: block;
+  font-size: 14px;
+  font-weight: normal;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+#top_meun table th {
+  border-bottom: 1px solid #666666;
+}
+#top_meun table .on {
+  border-bottom: 1px solid red;
+}
+#profile {
+  width: 80%;
+  height: 400px;
+}
+#porfile_photo {
+  width: 200px;
+  height: 200px;
+  margin-bottom: 20px;
+}
+#porfile_photo img {
+  border: 1px solid #666666;
+  width: 200px;
+  height: 200px;
+  border-radius: 100px;
+}
+#profile input[type="button"] {
+  padding: 10px;
+}
+.end {
+  margin-top: 50px;
+}
+/* 자기소개 */
+#profile_open {
+  display: flex;
+}
+#profile_open p {
+  font-weight: 700;
+  width: 30%;
+  display: block;
+}
+#profile_open label {
+  display: block;
+  margin: 15px;
+}
+#intro {
+  display: flex;
+}
+#intro p {
+  font-weight: 700;
+  display: block;
+  width: 38%;
+}
+#intro textarea {
+  width: 250px;
+  height: 100px;
+  margin-top: 20px;
+}
+/* 비밀번호 체크 */
+#check_pw table {
+  margin: 30px auto;
+}
+#check_pw {
+  margin: 10px 0;
+}
+
+/* 비밀번호 변경 */
+#changpw_area {
+}
+#pw_area {
+  margin-top: 70px;
+}
+#changpw_area table input {
+  outline: none;
+  border: none;
+  border-bottom: 1px solid #141414;
+}
+#changpw_area table input:focus {
+  border-bottom: 1px solid blue;
+}
+#changpw_area table {
+  font-weight: 700;
+  margin: 50px auto;
+}
+#changpw_area table tr td {
+  text-align: left;
+}
+#pw_button {
+  margin: 30px auto;
+}
+#pw_notice {
+  width: 80%;
+  margin-top: 20px;
+}
+#pw_notice p {
+  font-weight: 700;
+  text-align: left;
+}
+#pw_notice ul li {
+  margin-top: 10px;
+  text-align: left;
+}
+/* 기본정보 변경 */
+#changeinfo_area {
+}
+#changeinfo_area table {
+  margin: 30px auto;
+  margin-top: 50px;
+}
+#changeinfo_area table tr th {
+  text-align: left;
+  cursor: default;
+}
+#changeinfo_area table input {
+  width: 150px;
+  margin: 10px 10px;
+  outline: none;
+  border: none;
+}
+#changeinfo_area table input[type="radio"] {
+  width: 30px;
+}
+#changeinfo_area table input#user_nickname,
+#changeinfo_area table input#user_phone,
+#changeinfo_area table input#zip_code,
+#changeinfo_area table input#address,
+#changeinfo_area table input#address_detail {
+  border-bottom: 1px solid #141414;
+}
+#changeinfo_area table input#user_nickname:focus,
+#changeinfo_area table input#user_phone:focus,
+#changeinfo_area table input#zip_code:focus,
+#changeinfo_area table input#address:focus,
+#changeinfo_area table input#address_detail:focus {
+  border-bottom: 1px solid blue;
+}
+/* ------------------------------------ */
+/* 두게더 */
+/* 마이 두게더 */
+#mydogether_area {
+}
+#mydogether_list {
+  width: 500px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.swiper-slide {
+  margin-bottom: 30px;
+}
+.swiper-slide img {
+  margin: 10px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+}
+.swiper-slide p {
+  margin: 0;
+  padding: 0;
+}
+/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+/* 커뮤니티 */
+/* 게시글 */
+#board_list table,
+#comment_list table {
+  width: 800px;
+  margin: 10px auto;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+#board_list table tr,
+#comment_list table tr {
+  border: 1px solid rgba(144, 144, 144, 0.25);
+  background-color: #ffffff;
+  border-left: none;
+  border-right: none;
+}
+#board_list table tr td,
+#board_list table tr td a,
+#comment_list table tr td,
+#comment_list table tr td a {
+  color: #888;
+}
+
+#board_list table tr td a:hover,
+#comment_list table tr td a:hover {
+  color: #f94b4b;
+}
+#board_list table tr:nth-child(2n),
+#comment_list table tr:nth-child(2n) {
+  background-color: #eee;
+}
+#board_list table tr:nth-child(1),
+#comment_list table tr:nth-child(1) {
+  border-bottom: 2px solid #141414;
+}
+#board_list table tr:nth-child(n + 2):hover,
+#comment_list table tr:nth-child(n + 2):hover {
+  background-color: #ccc;
+}
+#board_list table tr th {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+#board_list table .num {
+  width: 50px;
+}
+#board_list table .tit {
+  width: 250px;
+}
+#board_list table .com {
+  width: 50px;
+}
+#board_list table .date {
+  width: 100px;
+}
+#board_list table .rew {
+  width: 50px;
+}
+#board_list table .like {
+  width: 50px;
+}
+
+/* 내댓글 */
+#comment_list {
+  margin-top: 100px;
+}
+#comment_list table tr th {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+#comment_list table .num {
+  width: 50px;
+}
+#comment_list table .tit {
+  width: 200px;
+}
+#comment_list table .com {
+  width: 150px;
+}
+#comment_list table .date {
+  width: 100px;
+}
+#comment_list table .like {
+  width: 50px;
+}
+#board_list table tr td a,
+#comment_list table tr td a {
+  display: inline-block;
+  width: 150px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+/* 친구목록 */
+
+/* 쪽지함 */
+#s_notebox table,
+#r_notebox {
+  width: 800px;
+  margin: 0 auto;
+}
+/* 문의내역 */
+#myservice_area {
+}
+
+#service .selection {
+  border: 3px solid red;
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+}
+#service .selected {
+  background-color: #666666;
+}
+#service table {
+  margin: 0 auto;
+  width: 90%;
+}
+#service table tr th {
+  width: 25%;
+}
+
+#modify,#modifyOk,#cancel,#modifyPw,#check_pw input[type="submit"]{
+    border: 0px;
+    border-radius: 3px;
+
+    color: #fff;
+    font-weight: bold;
+    width: 100px;
+    height: 30px;
+    box-sizing: border-box;
+    background-color: #666666;
+    cursor: pointer;
+}
+#modify:hover,#modifyOk:hover,#cancel:hover,#modifyPw:hover,#check_pw input[type="submit"]:hover{
+    background-color:#141414;
+}

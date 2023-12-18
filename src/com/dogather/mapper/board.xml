@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Board">
+	<insert id="postOn" parameterType="BoardDTO">
+		insert into
+		${b_name}(user_index, b_title, b_contents, b_files,b_subject)
+		values(#{user_index}, #{b_title}, #{b_contents},#{b_files},#{b_subject})
+	</insert>
+	
+	
+	
+	<select id="getBoardCnt" parameterType="hashmap"
+		resultType="_int">
+		select count(*) 
+		from ${b_name} b 
+		left join(select user_nickname,user_index,user_inactive from t_user) u 
+		on b.user_index=u.user_index 
+		where b.b_inactive=0 and b.b_subject like('%${subject}%') and u.user_inactive=0 
+		and(b.b_title like('%${keyword}%') or b.b_contents like('%${keyword}%') or u.user_nickname like('%${keyword}%'))
+	</select>
+	
+	<select id="getBoard" parameterType="hashmap"
+		resultType="BoardDTO">
+		select
+		b.b_index,
+		b.b_reg_date,
+		b.b_update_date,
+		b.b_subject,
+		b.b_title,
+		b.b_contents,
+		b.b_hits,
+		b.b_like_user_index,
+		b.b_inactive,
+		u.user_index,
+		u.user_nickname,
+		r.b_reply_cnt 
+		
+		from ${b_name} b 
+		join t_user u 
+		on b.user_index=u.user_index 
+		left join(select b_index,count(r_index) as b_reply_cnt from ${r_name} where r_inactive=0 group by b_index) as r 
+		on b.b_index=r.b_index 
+		where b.b_inactive = 0 and u.user_inactive=0 
+		and (b.b_title like('%${keyword}%') or b.b_contents like('%${keyword}%') or u.user_nickname like('%${keyword}%')) 
+		and b_subject like('%${subject}%') 
+		order by 1 desc 
+		limit #{startRow}, #{pageSize}
+	</select>
+
+	<select id="getPost" parameterType="hashmap"
+		resultType="BoardDTO">
+		select b.b_index,b.b_reg_date,b.b_update_date,b.b_subject,b.b_title,b.b_contents,b.b_hits,b.b_like_user_index,b.b_inactive,b.b_files,u.user_index,u.user_nickname, r.b_reply_cnt, 
+		length(b.b_like_user_index)-length(replace(b.b_like_user_index,',',''))+1 as b_like_cnt  
+		from ${b_name} b
+		join t_user u 
+		on b.user_index=u.user_index 
+        left join (select count(*) as b_reply_cnt,b_index from ${r_name} where b_index=#{b_index} and r_inactive=0) r on r.b_index=b.b_index 
+		where b.b_index=#{b_index}
+	</select>
+	
+	<select id="getBoardListOnMain" parameterType="hashmap" resultType="BoardDTO">
+		select b.b_index,b.b_reg_date,b.b_subject,b.b_title,r.b_reply_cnt,u.user_inactive
+		from ${b_name} as b 
+		join t_user u  
+		on u.user_index=b.user_index 
+		left join(select b_index,count(r_index) as b_reply_cnt from ${r_name} where r_inactive=0 group by b_index) as r 
+		on b.b_index=r.b_index 
+		where b.b_inactive=0 and u.user_inactive=0 order by 1 desc limit 0,6
+	</select>
+	
+	<select id="getLastIndexWithUserIndex" parameterType="hashmap" resultType="_int">
+		select b_index from ${b_name} where user_index=#{user_index} order by b_reg_date desc limit 0,1
+	</select>
+	
+	<select id="getLikeUsers" parameterType="hashmap" resultType="string">
+		select b_like_user_index from ${b_name} where b_index=#{b_index}
+	</select>
+	
+	<select id="getLikeCnt" parameterType="hashmap" resultType="string">
+		select length(b_like_user_index)-length(replace(b_like_user_index,',',''))+1
+		from ${b_name} where b_index=#{b_index}
+	</select>
+	
+	
+	
+	<update id="updateHits" parameterType="hashmap">
+		update ${b_name} 
+		set b_hits=b_hits+1 
+		where b_index=#{b_index}
+	</update>
+
+	<update id="updatePost" parameterType="BoardDTO">
+		update ${b_name} 
+		set b_update_date=now(), b_subject=#{b_subject}, b_title=#{b_title},b_contents=#{b_contents},b_files=#{b_files} 
+		where b_index=#{b_index}
+	</update>
+	
+	<update id="setLikeUserIndex">
+		update ${b_name} set b_like_user_index=#{b_like_user_index} where b_index=#{b_index}
+	</update>
+	
+	
+	
+	<delete id="postOff" parameterType="hashmap">
+		update ${b_name} set b_inactive=true,b_update_date=now() 
+		where b_index=#{b_index}
+	</delete>
+</mapper>
